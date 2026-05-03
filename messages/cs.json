@@ -63,33 +63,82 @@
   },
   "Manual": {
     "title": "Uživatelská příručka",
-    "intro": "Naučte se efektivně spravovat svou školu s Edu Stack IS.",
-    "documentation": "Dokumentace",
-    "getStarted": {
-      "title": "Začínáme",
-      "description": "Pro přístup do systému potřebujete účet vytvořený administrátorem školy. Jakmile máte přihlašovací údaje, přejděte na přihlašovací stránku a zvolte preferovanou metodu (Google, GitHub nebo Microsoft)."
+    "intro": "Kompletní průvodce nastavením a provozem informačního systému Edu Stack.",
+    "sidebar": {
+      "contents": "Obsah",
+      "chapters": "Kapitoly",
+      "roles": "Uživatelské role"
+    },
+    "development": {
+      "title": "Lokální vývoj",
+      "description": "Jak nastavit vývojové prostředí na vašem počítači.",
+      "step1": "Naklonujte repozitář z GitHubu.",
+      "step2": "Nainstalujte závislosti pomocí `npm install` v kořenovém adresáři.",
+      "step3": "Nakonfigurujte proměnné prostředí v souborech `.env` pro frontend i backend.",
+      "step4": "Spusťte vývojový server příkazem `npm run dev`."
+    },
+    "setup": {
+      "title": "Nastavení systému",
+      "description": "Prvotní inicializace systému.",
+      "option1": {
+        "title": "Seedování dat (Doporučeno)",
+        "description": "Rychle naplňte systém demo školami, uživateli a rozvrhy pomocí příkazu `npm run db:seed`."
+      },
+      "option2": {
+        "title": "Od začátku (From Scratch)",
+        "description": "Začněte s prázdnou databází a vytvořte svého prvního Systémového Administrátora přes CLI."
+      }
+    },
+    "login": {
+      "title": "Autentizace uživatelů",
+      "description": "Způsoby přístupu do systému.",
+      "helper": {
+        "title": "Login Pomocník (Helper)",
+        "description": "Vývojářský nástroj na přihlašovací obrazovce pro rychlé přepínání mezi demo identitami bez hesel."
+      },
+      "credentials": {
+        "title": "E-mail a heslo",
+        "description": "Standardní zabezpečené přihlášení pomocí hashovaných hesel v databázi D1."
+      },
+      "sso": {
+        "title": "Integrace SSO",
+        "description": "Podpora podnikového přihlášení přes Google, GitHub a Microsoft účty."
+      }
     },
     "roles": {
-      "title": "Uživatelské role",
-      "admin": {
-        "title": "Administrátor",
-        "description": "Plný přístup k nastavení školy, správě matriky a impersonaci uživatelů pro technickou podporu."
+      "title": "Systémové role",
+      "systemAdmin": {
+        "title": "Systémový Administrátor",
+        "description": "Globální orchestrátor celé platformy.",
+        "functions": "Správa více škol, globální nastavení systému a monitoring celé platformy."
+      },
+      "schoolAdmin": {
+        "title": "Administrátor školy",
+        "description": "Technický správce konkrétní instance školy.",
+        "functions": "Správa školní matriky, zvání uživatelů, nastavení školních roků a konfigurace modulů školy."
+      },
+      "headmaster": {
+        "title": "Ředitel školy",
+        "description": "Pedagogický a organizační lídr školy.",
+        "functions": "Přístup k vysokoúrovňovým statistikám, hromadné zprávy celé škole a dohled nad výkonem učitelů."
+      },
+      "deputy": {
+        "title": "Zástupce ředitele",
+        "description": "Provozní manažer zaměřený na každodenní život školy.",
+        "functions": "Správa úvazků tříd, komplexní plánování rozvrhu a správa suplování."
       },
       "teacher": {
         "title": "Učitel",
-        "description": "Správa tříd, zapisování známek, plánování rozvrhu a interakce s AI asistentem."
+        "description": "Vzdělávací jádro systému.",
+        "functions": "Zapisování známek, evidence docházky, správa osobního rozvrhu a využití AI asistenta pro výuku."
       },
       "student": {
         "title": "Žák",
-        "description": "Zobrazení známek, osobního rozvrhu a školních nástěnek. Využití AI chatu pro podporu ve výuce."
+        "description": "Primární uživatel vzdělávacích služeb.",
+        "functions": "Sledování osobního pokroku, zobrazení denního rozvrhu a interakce s AI studijním partnerem."
       }
     },
-    "ai": {
-      "badge": "AI Podpora",
-      "title": "Integrace AI asistenta",
-      "description": "Systém integruje AI asistenta využívajícího Model Context Protocol (MCP). Může vám pomoci s administrativními úkoly, generovat edukační obsah nebo analyzovat data školy v reálném čase. Použijte chatovací panel na pravé straně obrazovky.",
-      "cta": "Více o MCP"
-    }
+    "screenshot": "Snímek rozhraní"
   },
   "Footer": {
     "description": "Moderní informační systém navržený pro transformaci výuky informatiky prostřednictvím interaktivní simulace.",

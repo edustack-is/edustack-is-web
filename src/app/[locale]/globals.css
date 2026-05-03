@@ -8,6 +8,8 @@
   --brand-pink: #db2777;
   --brand-orange: #f59e0b;
   --brand-teal: #10b981;
+  --brand-blue: #1d4ed8;
+  --brand-slate: #0f172a;
   
   --primary: var(--brand-purple);
   --primary-foreground: #ffffff;
@@ -21,6 +23,8 @@
   --color-brand-pink: var(--brand-pink);
   --color-brand-orange: var(--brand-orange);
   --color-brand-teal: var(--brand-teal);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-slate: var(--brand-slate);
   
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
@@ -34,6 +38,7 @@
     --foreground: #f8fafc;
     
     --primary: #a78bfa;
+    --brand-slate: #f8fafc;
   }
 }
 

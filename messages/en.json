@@ -63,33 +63,82 @@
   },
   "Manual": {
     "title": "User Manual",
-    "intro": "Learn how to manage your school efficiently with Edu Stack IS.",
-    "documentation": "Documentation",
-    "getStarted": {
-      "title": "Getting Started",
-      "description": "To access the system, you need an account provided by your school administrator. Once you have your credentials, navigate to the login page and choose your preferred authentication method (Google, GitHub, or Microsoft)."
+    "intro": "Complete guide to setting up and operating the Edu Stack Information System.",
+    "sidebar": {
+      "contents": "Contents",
+      "chapters": "Chapters",
+      "roles": "Roles"
+    },
+    "development": {
+      "title": "Local Development",
+      "description": "How to set up the development environment on your local machine.",
+      "step1": "Clone the repository from GitHub.",
+      "step2": "Install dependencies using `npm install` in the root directory.",
+      "step3": "Configure environment variables in `.env` files for both frontend and backend.",
+      "step4": "Start the development server with `npm run dev`."
+    },
+    "setup": {
+      "title": "System Setup",
+      "description": "Initializing the system for the first time.",
+      "option1": {
+        "title": "Seed Data (Recommended)",
+        "description": "Quickly populate the system with demo schools, users, and schedules using the `npm run db:seed` command."
+      },
+      "option2": {
+        "title": "From Scratch",
+        "description": "Start with an empty database and create your first System Administrator through the CLI."
+      }
+    },
+    "login": {
+      "title": "User Authentication",
+      "description": "Methods to access the system.",
+      "helper": {
+        "title": "Login Helper",
+        "description": "A developer tool on the login screen to quickly switch between demo identities without passwords."
+      },
+      "credentials": {
+        "title": "Email & Password",
+        "description": "Standard secure authentication using hashed passwords in the D1 database."
+      },
+      "sso": {
+        "title": "SSO Integration",
+        "description": "Enterprise-grade login support for Google, GitHub, and Microsoft accounts."
+      }
     },
     "roles": {
-      "title": "User Roles",
-      "admin": {
-        "title": "Administrator",
-        "description": "Full access to school settings, registry management, and user impersonation for support."
+      "title": "System Roles",
+      "systemAdmin": {
+        "title": "System Administrator",
+        "description": "Global orchestrator of the entire platform.",
+        "functions": "Manage multiple schools, global system settings, and platform-wide monitoring."
+      },
+      "schoolAdmin": {
+        "title": "School Administrator",
+        "description": "Technical manager of a specific school instance.",
+        "functions": "Manage school registry, invite users, set academic years, and configure school-specific modules."
+      },
+      "headmaster": {
+        "title": "Headmaster",
+        "description": "Pedagogical and organizational leader of the school.",
+        "functions": "Access to high-level statistics, school-wide broadcasts, and teacher performance oversight."
+      },
+      "deputy": {
+        "title": "Deputy Principal",
+        "description": "Operational manager focusing on daily school life.",
+        "functions": "Manage class assignments, complex scheduling, and substitution planning."
       },
       "teacher": {
         "title": "Teacher",
-        "description": "Manage classes, assign grades, create schedule events, and interact with the AI teaching assistant."
+        "description": "The educational core of the system.",
+        "functions": "Enter grades, track attendance, manage personal schedule, and utilize AI teaching assistant."
       },
       "student": {
         "title": "Student",
-        "description": "View grades, personal schedule, and school broadcasts. Use AI chat for educational support."
+        "description": "The primary user of educational services.",
+        "functions": "Monitor personal progress, view daily schedule, and interact with the AI study partner."
       }
     },
-    "ai": {
-      "badge": "AI Powered",
-      "title": "AI Assistant Integration",
-      "description": "The system integrates an AI assistant powered by the Model Context Protocol (MCP). It can help you with administrative tasks, generate educational content, or analyze school data in real-time. Use the chat drawer on the right side of the screen to interact with the assistant.",
-      "cta": "Learn about MCP"
-    }
+    "screenshot": "Interface Screenshot"
   },
   "Footer": {
     "description": "Modern information system designed to transform informatics education through interactive simulation.",
