@@ -166,7 +166,13 @@ export default function IndexPage() {
                   <p className="text-lg font-bold text-slate-800 dark:text-slate-200 pt-1">{clause.text}</p>
                 </div>
               ))}
-              <div className="pt-12 text-center">
+              <div className="pt-12 text-center space-y-6">
+                <Link 
+                  href="/terms" 
+                  className="inline-flex items-center text-brand-purple font-bold hover:underline underline-offset-4 decoration-2"
+                >
+                  {t('rules.viewTerms')} <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
                 <p className="text-2xl font-black italic bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-brand-teal">
                   {t('rules.cta')}
                 </p>

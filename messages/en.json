@@ -27,6 +27,7 @@
       "description": "Edu Stack IS is an open-source project.",
       "clause1": "Available on GitHub for review and non-commercial educational use.",
       "clause2": "Commercial usage requires a specific agreement.",
+      "viewTerms": "View full Terms of Service",
       "cta": "Contact us for more information."
     }
   },
@@ -99,6 +100,43 @@
     "builtWith": "Built with",
     "forEducation": "for education",
     "privacy": "Privacy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "worksheets": "Working Sheets",
+    "manual": "User Manual",
+    "tech": "Technical Stack"
+  },
+  "Privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: May 2026",
+    "intro": "At Edu Stack IS, we take your privacy seriously. This presentation website is purely informational.",
+    "section1": {
+      "title": "Data Collection",
+      "content": "We do not collect any personal data from visitors of this presentation website. No cookies are used for tracking or profiling."
+    },
+    "section2": {
+      "title": "Information System Data",
+      "content": "The Edu Stack IS application itself handles data according to the configurations set by the hosting educational institution. For the sandbox version, data is handled according to our non-commercial open-source rules."
+    },
+    "section3": {
+      "title": "Third-Party Services",
+      "content": "This site is hosted on Cloudflare Pages. Cloudflare may collect standard web server logs for security and performance purposes."
+    }
+  },
+  "Terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: May 2026",
+    "intro": "By accessing this website, you agree to the following terms.",
+    "section1": {
+      "title": "Usage of Content",
+      "content": "The content on this website is for educational and presentation purposes. You may use the information here to understand the Edu Stack IS project."
+    },
+    "section2": {
+      "title": "Software License",
+      "content": "The Edu Stack IS software is open-source. Usage is restricted to non-commercial educational purposes. Any commercial usage requires a written agreement with the author."
+    },
+    "section3": {
+      "title": "Disclaimer",
+      "content": "The information provided here is 'as is' without any warranties. We are not responsible for any issues arising from the use of the information or software presented here."
+    }
   }
 }

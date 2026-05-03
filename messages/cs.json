@@ -27,6 +27,7 @@
       "description": "Edu Stack IS je open-source projekt.",
       "clause1": "Dostupný na GitHubu pro review a nekomerční vzdělávací účely.",
       "clause2": "Komerční využití vyžaduje specifickou dohodu.",
+      "viewTerms": "Zobrazit celé podmínky použití",
       "cta": "Kontaktujte nás pro více informací."
     }
   },
@@ -99,6 +100,43 @@
     "builtWith": "Vytvořeno s",
     "forEducation": "pro vzdělávání",
     "privacy": "Soukromí",
-    "terms": "Podmínky"
+    "terms": "Podmínky",
+    "worksheets": "Pracovní listy",
+    "manual": "Uživatelská příručka",
+    "tech": "Technologie"
+  },
+  "Privacy": {
+    "title": "Ochrana soukromí",
+    "lastUpdated": "Poslední aktualizace: Květen 2026",
+    "intro": "V Edu Stack IS bereme ochranu vašich údajů vážně. Tato prezentační stránka je čistě informativní.",
+    "section1": {
+      "title": "Sběr dat",
+      "content": "O návštěvnících této prezentační stránky neshromažďujeme žádné osobní údaje. Pro sledování nebo profilování se nepoužívají žádné soubory cookies."
+    },
+    "section2": {
+      "title": "Data v informačním systému",
+      "content": "Samotná aplikace Edu Stack IS nakládá s daty podle konfigurace nastavené hostitelskou vzdělávací institucí. U sandboxové verze je s daty nakládáno podle našich nekomerčních pravidel pro open-source."
+    },
+    "section3": {
+      "title": "Služby třetích stran",
+      "content": "Tyto stránky jsou hostovány na Cloudflare Pages. Cloudflare může shromažďovat standardní protokoly webového serveru pro účely bezpečnosti a výkonu."
+    }
+  },
+  "Terms": {
+    "title": "Podmínky použití",
+    "lastUpdated": "Poslední aktualizace: Květen 2026",
+    "intro": "Přístupem na tyto webové stránky souhlasíte s následujícími podmínkami.",
+    "section1": {
+      "title": "Použití obsahu",
+      "content": "Obsah na těchto webových stránkách slouží pro vzdělávací a prezentační účely. Informace zde uvedené můžete využít k pochopení projektu Edu Stack IS."
+    },
+    "section2": {
+      "title": "Licence k softwaru",
+      "content": "Software Edu Stack IS je open-source. Použití je omezeno na nekomerční vzdělávací účely. Jakékoli komerční využití vyžaduje písemnou dohodu s autorem."
+    },
+    "section3": {
+      "title": "Vyloučení odpovědnosti",
+      "content": "Zde poskytované informace jsou 'tak, jak jsou', bez jakýchkoli záruk. Neodpovídáme za žádné problémy vzniklé použitím informací nebo softwaru zde prezentovaného."
+    }
   }
 }

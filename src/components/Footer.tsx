@@ -29,13 +29,13 @@ export default function Footer() {
             <h4 className="font-bold text-slate-900 dark:text-white uppercase tracking-widest text-xs">{t('resources')}</h4>
             <ul className="space-y-4 font-medium text-sm text-slate-500 dark:text-slate-400">
               <li>
-                <Link href="/worksheets" className="hover:text-brand-purple transition-colors">Working Sheets</Link>
+                <Link href="/worksheets" className="hover:text-brand-purple transition-colors">{t('worksheets')}</Link>
               </li>
               <li>
-                <Link href="/manual" className="hover:text-brand-purple transition-colors">User Manual</Link>
+                <Link href="/manual" className="hover:text-brand-purple transition-colors">{t('manual')}</Link>
               </li>
               <li>
-                <a href="#tech" className="hover:text-brand-purple transition-colors">Technical Stack</a>
+                <a href="#tech" className="hover:text-brand-purple transition-colors">{t('tech')}</a>
               </li>
             </ul>
           </div>
@@ -74,8 +74,8 @@ export default function Footer() {
           </div>
           
           <div className="flex items-center gap-8">
-            <a href="#" className="hover:text-slate-900 dark:hover:text-white transition-colors">{t('privacy')}</a>
-            <a href="#" className="hover:text-slate-900 dark:hover:text-white transition-colors">{t('terms')}</a>
+            <Link href="/privacy" className="hover:text-slate-900 dark:hover:text-white transition-colors">{t('privacy')}</Link>
+            <Link href="/terms" className="hover:text-slate-900 dark:hover:text-white transition-colors">{t('terms')}</Link>
             <div className="flex gap-4">
                {/* Small accent dots from logo */}
                <div className="h-2 w-2 rounded-full bg-brand-purple" />
