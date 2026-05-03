@@ -5,7 +5,9 @@
     "hero": {
       "title": "Edu Stack IS",
       "subtitle": "Objevte mozek školy prostřednictvím simulace.",
-      "description": "Edu Stack IS je edukační nástroj navržený tak, aby pomohl žákům pochopit komplexitu správy školy, datové toky a bezpečnost v digitální éře."
+      "description": "Edu Stack IS je edukační nástroj navržený tak, aby pomohl žákům pochopit komplexitu správy školy, datové toky a bezpečnost v digitální éře.",
+      "explore": "Prozkoumat myšlenku",
+      "worksheets": "Pracovní listy"
     },
     "idea": {
       "title": "Myšlenka",
@@ -33,10 +35,12 @@
     "idea": "Myšlenka",
     "worksheets": "Pracovní listy",
     "tech": "Technologie",
-    "manual": "Uživatelská příručka"
+    "manual": "Uživatelská příručka",
+    "language": "Jazyk"
   },
   "Worksheets": {
     "title": "Pracovní listy",
+    "description": "Detailní scénáře a metodické pokyny extrahované z bakalářské práce.",
     "primary": {
       "title": "První stupeň ZŠ (4.–5. třída)",
       "lesson1": "Průzkumník a tajemství rolí",
@@ -58,6 +62,43 @@
   },
   "Manual": {
     "title": "Uživatelská příručka",
-    "intro": "Naučte se efektivně spravovat svou školu s Edu Stack IS."
+    "intro": "Naučte se efektivně spravovat svou školu s Edu Stack IS.",
+    "documentation": "Dokumentace",
+    "getStarted": {
+      "title": "Začínáme",
+      "description": "Pro přístup do systému potřebujete účet vytvořený administrátorem školy. Jakmile máte přihlašovací údaje, přejděte na přihlašovací stránku a zvolte preferovanou metodu (Google, GitHub nebo Microsoft)."
+    },
+    "roles": {
+      "title": "Uživatelské role",
+      "admin": {
+        "title": "Administrátor",
+        "description": "Plný přístup k nastavení školy, správě matriky a impersonaci uživatelů pro technickou podporu."
+      },
+      "teacher": {
+        "title": "Učitel",
+        "description": "Správa tříd, zapisování známek, plánování rozvrhu a interakce s AI asistentem."
+      },
+      "student": {
+        "title": "Žák",
+        "description": "Zobrazení známek, osobního rozvrhu a školních nástěnek. Využití AI chatu pro podporu ve výuce."
+      }
+    },
+    "ai": {
+      "badge": "AI Podpora",
+      "title": "Integrace AI asistenta",
+      "description": "Systém integruje AI asistenta využívajícího Model Context Protocol (MCP). Může vám pomoci s administrativními úkoly, generovat edukační obsah nebo analyzovat data školy v reálném čase. Použijte chatovací panel na pravé straně obrazovky.",
+      "cta": "Více o MCP"
+    }
+  },
+  "Footer": {
+    "description": "Moderní informační systém navržený pro transformaci výuky informatiky prostřednictvím interaktivní simulace.",
+    "resources": "Zdroje",
+    "openSource": "Open Source",
+    "github": "GitHub Projekt",
+    "documentation": "Dokumentace",
+    "builtWith": "Vytvořeno s",
+    "forEducation": "pro vzdělávání",
+    "privacy": "Soukromí",
+    "terms": "Podmínky"
   }
 }

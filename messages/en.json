@@ -5,7 +5,9 @@
     "hero": {
       "title": "Edu Stack IS",
       "subtitle": "Discover the brain of the school through simulation.",
-      "description": "Edu Stack IS is an educational tool designed to help students understand the complexity of school management, data flows, and security in the digital age."
+      "description": "Edu Stack IS is an educational tool designed to help students understand the complexity of school management, data flows, and security in the digital age.",
+      "explore": "Explore Idea",
+      "worksheets": "Working Sheets"
     },
     "idea": {
       "title": "The Idea",
@@ -33,10 +35,12 @@
     "idea": "Idea",
     "worksheets": "Working Sheets",
     "tech": "Technical",
-    "manual": "User Manual"
+    "manual": "User Manual",
+    "language": "Language"
   },
   "Worksheets": {
     "title": "Working Sheets",
+    "description": "Detailed scenarios and methodological guides extracted from the bachelor thesis.",
     "primary": {
       "title": "Primary School (4th-5th Grade)",
       "lesson1": "Explorer and the Mystery of Roles",
@@ -58,6 +62,43 @@
   },
   "Manual": {
     "title": "User Manual",
-    "intro": "Learn how to manage your school efficiently with Edu Stack IS."
+    "intro": "Learn how to manage your school efficiently with Edu Stack IS.",
+    "documentation": "Documentation",
+    "getStarted": {
+      "title": "Getting Started",
+      "description": "To access the system, you need an account provided by your school administrator. Once you have your credentials, navigate to the login page and choose your preferred authentication method (Google, GitHub, or Microsoft)."
+    },
+    "roles": {
+      "title": "User Roles",
+      "admin": {
+        "title": "Administrator",
+        "description": "Full access to school settings, registry management, and user impersonation for support."
+      },
+      "teacher": {
+        "title": "Teacher",
+        "description": "Manage classes, assign grades, create schedule events, and interact with the AI teaching assistant."
+      },
+      "student": {
+        "title": "Student",
+        "description": "View grades, personal schedule, and school broadcasts. Use AI chat for educational support."
+      }
+    },
+    "ai": {
+      "badge": "AI Powered",
+      "title": "AI Assistant Integration",
+      "description": "The system integrates an AI assistant powered by the Model Context Protocol (MCP). It can help you with administrative tasks, generate educational content, or analyze school data in real-time. Use the chat drawer on the right side of the screen to interact with the assistant.",
+      "cta": "Learn about MCP"
+    }
+  },
+  "Footer": {
+    "description": "Modern information system designed to transform informatics education through interactive simulation.",
+    "resources": "Resources",
+    "openSource": "Open Source",
+    "github": "GitHub Project",
+    "documentation": "Documentation",
+    "builtWith": "Built with",
+    "forEducation": "for education",
+    "privacy": "Privacy",
+    "terms": "Terms"
   }
 }
