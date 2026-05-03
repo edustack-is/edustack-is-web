@@ -1,0 +1,7 @@
+name = "edustack-presentation"
+compatibility_date = "2024-11-01"
+compatibility_flags = ["nodejs_compat"]
+
+[pages_build_config]
+build_command = "npm run build"
+destination_dir = ".next"

@@ -1,0 +1,63 @@
+{
+  "Index": {
+    "title": "Edu Stack IS",
+    "description": "Informační systém pro podporu výuky informatiky.",
+    "hero": {
+      "title": "Edu Stack IS",
+      "subtitle": "Objevte mozek školy prostřednictvím simulace.",
+      "description": "Edu Stack IS je edukační nástroj navržený tak, aby pomohl žákům pochopit komplexitu správy školy, datové toky a bezpečnost v digitální éře."
+    },
+    "idea": {
+      "title": "Myšlenka",
+      "description": "Posun vnímání informačních systémů od pasivních nástrojů k aktivním edukačním instrumentům.",
+      "point1": "Pochopení hierarchie rolí a oprávnění.",
+      "point2": "Simulace reálných školních procesů (matrika, klasifikace, rozvrh).",
+      "point3": "Analýza systémových dopadů administrativních rozhodnutí."
+    },
+    "tech": {
+      "title": "Technický popis",
+      "description": "Moderní, škálovatelná a globálně distribuovaná infrastruktura.",
+      "stack": "Postaveno na NestJS, React, Cloudflare D1 a MCP pro integraci AI.",
+      "architecture": "Modulární monorepo architektura s využitím edge computing."
+    },
+    "rules": {
+      "title": "Pravidla a licence",
+      "description": "Edu Stack IS je open-source projekt.",
+      "clause1": "Dostupný na GitHubu pro review a nekomerční vzdělávací účely.",
+      "clause2": "Komerční využití vyžaduje specifickou dohodu.",
+      "cta": "Kontaktujte nás pro více informací."
+    }
+  },
+  "Navigation": {
+    "about": "O systému",
+    "idea": "Myšlenka",
+    "worksheets": "Pracovní listy",
+    "tech": "Technologie",
+    "manual": "Uživatelská příručka"
+  },
+  "Worksheets": {
+    "title": "Pracovní listy",
+    "primary": {
+      "title": "První stupeň ZŠ (4.–5. třída)",
+      "lesson1": "Průzkumník a tajemství rolí",
+      "lesson2": "Den v roli učitele",
+      "lesson3": "Pan ředitel a celá škola"
+    },
+    "secondary": {
+      "title": "Druhý stupeň ZŠ (6.–9. třída)",
+      "lesson1": "Správce školní matriky",
+      "lesson2": "Architekt vzdělávání",
+      "lesson3": "Analytik a AI asistent"
+    },
+    "high": {
+      "title": "Střední škola",
+      "lesson1": "Datová vrstva a autorizace",
+      "lesson2": "AI a MCP protokol",
+      "lesson3": "Export, reporty a GDPR"
+    }
+  },
+  "Manual": {
+    "title": "Uživatelská příručka",
+    "intro": "Naučte se efektivně spravovat svou školu s Edu Stack IS."
+  }
+}

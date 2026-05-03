@@ -1,0 +1,63 @@
+{
+  "Index": {
+    "title": "Edu Stack IS",
+    "description": "Information system for supporting informatics education.",
+    "hero": {
+      "title": "Edu Stack IS",
+      "subtitle": "Discover the brain of the school through simulation.",
+      "description": "Edu Stack IS is an educational tool designed to help students understand the complexity of school management, data flows, and security in the digital age."
+    },
+    "idea": {
+      "title": "The Idea",
+      "description": "Shifting the perception of information systems from passive tools to active educational instruments.",
+      "point1": "Understand role hierarchy and permissions.",
+      "point2": "Simulate real school processes (registry, grading, schedule).",
+      "point3": "Analyze systemic impacts of administrative decisions."
+    },
+    "tech": {
+      "title": "Technical Description",
+      "description": "Modern, scalable, and globally distributed infrastructure.",
+      "stack": "Built with NestJS, React, Cloudflare D1, and MCP for AI integration.",
+      "architecture": "Modular monorepo architecture with serverless edge computing."
+    },
+    "rules": {
+      "title": "Rules & Licensing",
+      "description": "Edu Stack IS is an open-source project.",
+      "clause1": "Available on GitHub for review and non-commercial educational use.",
+      "clause2": "Commercial usage requires a specific agreement.",
+      "cta": "Contact us for more information."
+    }
+  },
+  "Navigation": {
+    "about": "About",
+    "idea": "Idea",
+    "worksheets": "Working Sheets",
+    "tech": "Technical",
+    "manual": "User Manual"
+  },
+  "Worksheets": {
+    "title": "Working Sheets",
+    "primary": {
+      "title": "Primary School (4th-5th Grade)",
+      "lesson1": "Explorer and the Mystery of Roles",
+      "lesson2": "A Day in the Teacher's Role",
+      "lesson3": "The Director and the Whole School"
+    },
+    "secondary": {
+      "title": "Secondary School (6th-9th Grade)",
+      "lesson1": "School Registry Administrator",
+      "lesson2": "Education Architect",
+      "lesson3": "Analyst and AI Assistant"
+    },
+    "high": {
+      "title": "High School",
+      "lesson1": "Data Layer and Authorization",
+      "lesson2": "AI and MCP Protocol Integration",
+      "lesson3": "Export, Reports, and GDPR"
+    }
+  },
+  "Manual": {
+    "title": "User Manual",
+    "intro": "Learn how to manage your school efficiently with Edu Stack IS."
+  }
+}
