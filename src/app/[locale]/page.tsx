@@ -40,12 +40,12 @@ export default function IndexPage() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 pt-8">
-              <a 
-                href="#idea" 
+              <Link 
+                href="/#idea" 
                 className="group inline-flex items-center justify-center rounded-full bg-brand-purple px-10 py-4 text-lg font-bold text-white shadow-[0_10px_20px_rgba(109,40,217,0.3)] transition-all hover:bg-brand-purple/90 hover:scale-105 active:scale-95"
               >
                 {t('hero.explore')} <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </a>
+              </Link>
               <Link 
                 href="/worksheets" 
                 className="inline-flex items-center justify-center rounded-full border-2 border-slate-200 dark:border-slate-800 bg-background/50 backdrop-blur-sm px-10 py-4 text-lg font-bold shadow-sm transition-all hover:bg-slate-50 dark:hover:bg-slate-900 hover:border-brand-purple/30"
