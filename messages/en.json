@@ -107,35 +107,36 @@
     },
     "roles": {
       "title": "System Roles",
+      "coreFunctions": "Core Functions",
       "systemAdmin": {
         "title": "System Administrator",
-        "description": "Global orchestrator of the entire platform.",
-        "functions": "Manage multiple schools, global system settings, and platform-wide monitoring."
+        "description": "Global orchestrator of the entire platform. Handles infrastructure and multi-tenant management.",
+        "functions": "School lifecycle management (create/suspend/delete), Global System Admin management, SSO provider configuration (Google, GitHub, MS), AI API key management (Gemini, OpenAI, Anthropic), Global AI usage monitoring and token analytics."
       },
       "schoolAdmin": {
         "title": "School Administrator",
-        "description": "Technical manager of a specific school instance.",
-        "functions": "Manage school registry, invite users, set academic years, and configure school-specific modules."
+        "description": "Technical manager of a specific school instance. Operates within the school (TENANT) context.",
+        "functions": "School registry management, User invitation and role assignments, CSV user import/export, Audit log monitoring, School-wide settings and module configuration, User impersonation for support."
       },
       "headmaster": {
         "title": "Headmaster",
-        "description": "Pedagogical and organizational leader of the school.",
-        "functions": "Access to high-level statistics, school-wide broadcasts, and teacher performance oversight."
+        "description": "Pedagogical and organizational leader of the school. Focuses on overview and school-wide communication.",
+        "functions": "Access to high-level school dashboard and statistics, School-wide event planning, Public community announcements and broadcasts, Monitoring of educational quality and teacher performance."
       },
       "deputy": {
         "title": "Deputy Principal",
-        "description": "Operational manager focusing on daily school life.",
-        "functions": "Manage class assignments, complex scheduling, and substitution planning."
+        "description": "Operational manager focusing on the technical organization of the educational process.",
+        "functions": "Academic year and semester setup, Classroom and building management, Subject and curriculum (SVP) design, Complex schedule planning and collision detection, Substitution management, Class registry oversight."
       },
       "teacher": {
         "title": "Teacher",
-        "description": "The educational core of the system.",
-        "functions": "Enter grades, track attendance, manage personal schedule, and utilize AI teaching assistant."
+        "description": "The educational core of the system. Direct interaction with students and educational data.",
+        "functions": "Grade book management (marks, categories, weights), Attendance tracking and excuse management, Class book entries and signing, Thematic plans and lesson preparations, AI Teaching Assistant (lesson generation, report card polishing)."
       },
       "student": {
         "title": "Student",
-        "description": "The primary user of educational services.",
-        "functions": "Monitor personal progress, view daily schedule, and interact with the AI study partner."
+        "description": "The primary user of educational services. Focuses on personal progress and daily organization.",
+        "functions": "Personal dashboard with grade overview, Interactive daily and weekly schedule, Community messaging and polls, Access to teaching materials, AI Study Partner for educational support."
       }
     },
     "screenshot": "Interface Screenshot"

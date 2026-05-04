@@ -107,35 +107,36 @@
     },
     "roles": {
       "title": "Systémové role",
+      "coreFunctions": "Klíčové funkce",
       "systemAdmin": {
         "title": "Systémový Administrátor",
-        "description": "Globální orchestrátor celé platformy.",
-        "functions": "Správa více škol, globální nastavení systému a monitoring celé platformy."
+        "description": "Globální orchestrátor celé platformy. Spravuje infrastrukturu a multi-tenant prostředí.",
+        "functions": "Správa životního cyklu škol (vytvoření/pozastavení/smazání), Správa globálních administrátorů, Konfigurace SSO poskytovatelů (Google, GitHub, MS), Správa API klíčů pro AI (Gemini, OpenAI, Anthropic), Globální monitoring využití AI a analýza tokenů."
       },
       "schoolAdmin": {
         "title": "Administrátor školy",
-        "description": "Technický správce konkrétní instance školy.",
-        "functions": "Správa školní matriky, zvání uživatelů, nastavení školních roků a konfigurace modulů školy."
+        "description": "Technický správce konkrétní instance školy. Operuje v kontextu školy (TENANT).",
+        "functions": "Správa školní matriky, Zvání uživatelů a přiřazování rolí, CSV import a export uživatelů, Monitoring auditního logu, Nastavení školy a konfigurace modulů, Impersonace uživatelů pro technickou podporu."
       },
       "headmaster": {
         "title": "Ředitel školy",
-        "description": "Pedagogický a organizační lídr školy.",
-        "functions": "Přístup k vysokoúrovňovým statistikám, hromadné zprávy celé škole a dohled nad výkonem učitelů."
+        "description": "Pedagogický a organizační lídr školy. Zaměřuje se na přehled a celoškolní komunikaci.",
+        "functions": "Přístup k celoškolnímu dashboardu a statistikám, Plánování celoškolních událostí, Veřejná komunitní oznámení a nástěnky, Monitoring kvality výuky a dohled nad výkonem učitelů."
       },
       "deputy": {
         "title": "Zástupce ředitele",
-        "description": "Provozní manažer zaměřený na každodenní život školy.",
-        "functions": "Správa úvazků tříd, komplexní plánování rozvrhu a správa suplování."
+        "description": "Provozní manažer zaměřený na technickou organizaci vzdělávacího procesu.",
+        "functions": "Nastavení školního roku a semestrů, Správa učeben a budov, Návrh předmětů a školního vzdělávacího programu (ŠVP), Komplexní plánování rozvrhu a detekce kolizí, Správa suplování, Dohled nad třídními výkazy."
       },
       "teacher": {
         "title": "Učitel",
-        "description": "Vzdělávací jádro systému.",
-        "functions": "Zapisování známek, evidence docházky, správa osobního rozvrhu a využití AI asistenta pro výuku."
+        "description": "Vzdělávací jádro systému. Přímá interakce se žáky a edukačními daty.",
+        "functions": "Správa klasifikace (známky, kategorie, váhy), Evidence docházky a správa omluvenek, Zápisy do třídní knihy a podepisování hodin, Tematické plány a přípravy na hodiny, AI pedagogický asistent (generování příprav, vylepšení slovního hodnocení)."
       },
       "student": {
         "title": "Žák",
-        "description": "Primární uživatel vzdělávacích služeb.",
-        "functions": "Sledování osobního pokroku, zobrazení denního rozvrhu a interakce s AI studijním partnerem."
+        "description": "Primární uživatel vzdělávacích služeb. Zaměřuje se na osobní pokrok a denní organizaci.",
+        "functions": "Osobní dashboard s přehledem prospěchu, Interaktivní denní a týdenní rozvrh, Komunitní zprávy a hlasování, Přístup k výukovým materiálům, AI studijní partner pro podporu ve výuce."
       }
     },
     "screenshot": "Snímek rozhraní"
