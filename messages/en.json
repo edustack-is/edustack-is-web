@@ -112,65 +112,36 @@
       "procedure": "Procedure",
       "systemAdmin": {
         "title": "System Administrator",
-        "description": "Global orchestrator of the entire platform. Handles infrastructure and multi-tenant management.",
-        "functions": "School lifecycle management (create/suspend/delete), Global System Admin management, SSO provider configuration (Google, GitHub, MS), AI API key management (Gemini, OpenAI, Anthropic), Global AI usage monitoring and token analytics.",
+        "description": "The ultimate orchestrator. This role encompasses both global platform infrastructure and school-specific technical management.",
+        "functions": "Multi-tenant school lifecycle (create/delete), global and local user management, SSO & AI configuration, system auditing, and administrative support through secure impersonation.",
         "workflow1": {
-          "title": "School Management",
-          "description": "Create new school tenants and manage their active/suspended status.",
-          "step1": "Navigate to the 'Schools' module in the System Sidebar.",
-          "step2": "Click 'Create New School' and fill in the school name and unique slug.",
-          "step3": "Assign at least one initial School Administrator.",
-          "step4": "Save and verify the school appears in the global list."
+          "title": "School & Infrastructure Management",
+          "description": "Create school tenants and configure their global identity (SSO) and AI resources.",
+          "step1": "Navigate to 'Schools' in the sidebar to create a new tenant.",
+          "step2": "Configure SSO providers (Google/GitHub/MS) for the school instance.",
+          "step3": "Define AI token limits and manage provider API keys.",
+          "step4": "Monitor global platform health and per-school token analytics."
         },
         "workflow2": {
-          "title": "Identity Providers",
-          "description": "Configure OAuth2/OpenID Connect settings for SSO.",
-          "step1": "Go to 'System Settings' -> 'SSO Providers'.",
-          "step2": "Select a provider (Google, GitHub, or Microsoft).",
-          "step3": "Enter Client ID, Client Secret, and Callback URL.",
-          "step4": "Enable the provider and test the login flow."
+          "title": "Registry & User Orchestration",
+          "description": "Manage the school registry and perform bulk user operations.",
+          "step1": "Use the CSV Import tool to onboard large groups of students or staff.",
+          "step2": "Assign roles and permissions within the specific school context.",
+          "step3": "Manage classroom groups and physical building structures.",
+          "step4": "Perform secure user impersonation to troubleshoot account issues."
         },
         "workflow3": {
-          "title": "AI Resource Orchestration",
-          "description": "Manage API keys and monitor token consumption.",
-          "step1": "Open 'System Settings' -> 'AI Configuration'.",
-          "step2": "Input API keys for Google Gemini or OpenAI.",
-          "step3": "Define global token limits per school to prevent cost overruns.",
-          "step4": "Review the 'AI Usage' dashboard for real-time analytics."
-        }
-      },
-      "schoolAdmin": {
-        "title": "School Administrator",
-        "description": "Technical manager of a specific school instance.",
-        "functions": "School registry management, User invitation and role assignments, CSV user import/export, Audit log monitoring, School-wide settings and module configuration, User impersonation for support.",
-        "workflow1": {
-          "title": "Bulk User Onboarding",
-          "description": "Import entire classes or staff lists using CSV.",
-          "step1": "Go to 'User Management' and select 'Import'.",
-          "step2": "Download the CSV template and populate it with user data.",
-          "step3": "Upload the file and map the columns to system fields.",
-          "step4": "Verify the import and trigger automated invitation emails."
-        },
-        "workflow2": {
-          "title": "Account Impersonation",
-          "description": "Securely log into user accounts for support.",
-          "step1": "Find the target user in the 'Users' table.",
-          "step2": "Click the 'Impersonate' button (available for management roles).",
-          "step3": "The system will reload with the user's context, marked by a top banner.",
-          "step4": "Fix the issue and click 'Leave Impersonation' to return."
-        },
-        "workflow3": {
-          "title": "System Audit",
-          "description": "Review detailed logs of all critical actions.",
-          "step1": "Open the 'Audit Log' module.",
-          "step2": "Filter by date, user, or action type (e.g., 'Grade Deleted').",
-          "step3": "Expand a log entry to see old and new values side-by-side.",
-          "step4": "Export the report for school compliance records."
+          "title": "Compliance & Security Auditing",
+          "description": "Ensure the system operates securely through detailed log analysis.",
+          "step1": "Access the 'Audit Log' to review all high-impact actions.",
+          "step2": "Filter by user or action type to investigate specific changes.",
+          "step3": "Utilize GDPR tools for data anonymization or export requests.",
+          "step4": "Manage system-wide backups and automated recovery schedules."
         }
       },
       "headmaster": {
         "title": "Headmaster",
-        "description": "Pedagogical and organizational leader of the school.",
+        "description": "Pedagogical and organizational leader of the school. Focuses on overview and school-wide communication.",
         "functions": "Access to high-level school dashboard and statistics, School-wide event planning, Public community announcements and broadcasts, Monitoring of educational quality and teacher performance.",
         "workflow1": {
           "title": "Strategic Oversight",
@@ -199,7 +170,7 @@
       },
       "deputy": {
         "title": "Deputy Principal",
-        "description": "Operational manager focusing on the technical organization.",
+        "description": "Operational manager focusing on the technical organization of the educational process.",
         "functions": "Academic year and semester setup, Classroom and building management, Subject and curriculum (SVP) design, Complex schedule planning and collision detection, Substitution management, Class registry oversight.",
         "workflow1": {
           "title": "Interactive Schedule Planning",
@@ -228,7 +199,7 @@
       },
       "teacher": {
         "title": "Teacher",
-        "description": "The educational core of the system.",
+        "description": "The educational core of the system. Direct interaction with students and educational data.",
         "functions": "Grade book management (marks, categories, weights), Attendance tracking and excuse management, Class book entries and signing, Thematic plans and lesson preparations, AI Teaching Assistant (lesson generation, report card polishing).",
         "workflow1": {
           "title": "Grade Book Management",
@@ -286,7 +257,7 @@
       },
       "student": {
         "title": "Student",
-        "description": "The primary user of educational services.",
+        "description": "The primary user of educational services. Focuses on personal progress and daily organization.",
         "functions": "Personal dashboard with grade overview, Interactive daily and weekly schedule, Community messaging and polls, Access to teaching materials, AI Study Partner for educational support.",
         "workflow1": {
           "title": "Personal Progress Tracking",

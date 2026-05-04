@@ -112,65 +112,36 @@
       "procedure": "Postup",
       "systemAdmin": {
         "title": "Systémový Administrátor",
-        "description": "Globální orchestrátor celé platformy. Spravuje infrastrukturu a multi-tenant prostředí.",
-        "functions": "Správa životního cyklu škol (vytvoření/pozastavení/smazání), Správa globálních administrátorů, Konfigurace SSO poskytovatelů (Google, GitHub, MS), Správa API klíčů pro AI (Gemini, OpenAI, Anthropic), Globální monitoring využití AI a analýza tokenů.",
+        "description": "Hlavní orchestrátor systému. Tato role zahrnuje jak globální správu infrastruktury, tak technickou správu jednotlivých škol.",
+        "functions": "Správa životního cyklu školních tenantů (vytvoření/smazání), globální i lokální správa uživatelů, konfigurace SSO a AI, auditování systému a administrativní podpora prostřednictvím zabezpečené impersonace.",
         "workflow1": {
-          "title": "Správa škol",
-          "description": "Vytváření nových školních tenantů a správa jejich stavu.",
-          "step1": "Přejděte do modulu 'Školy' v systémovém bočním panelu.",
-          "step2": "Klikněte na 'Vytvořit novou školu' a vyplňte název a unikátní identifikátor.",
-          "step3": "Přiřaďte alespoň jednoho výchozího Administrátora školy.",
-          "step4": "Uložte a ověřte, že se škola objevila v globálním seznamu."
+          "title": "Správa škol a infrastruktury",
+          "description": "Vytváření školních tenantů a konfigurace jejich globální identity (SSO) a AI zdrojů.",
+          "step1": "V bočním panelu přejděte do sekce 'Školy' pro vytvoření nového tenanta.",
+          "step2": "Nakonfigurujte SSO poskytovatele (Google/GitHub/MS) pro danou instanci školy.",
+          "step3": "Definujte limity AI tokenů a spravujte API klíče poskytovatelů.",
+          "step4": "Sledujte celkové zdraví platformy a analytiku spotřeby tokenů podle škol."
         },
         "workflow2": {
-          "title": "Poskytovatelé identit",
-          "description": "Konfigurace nastavení OAuth2/OpenID Connect pro SSO.",
-          "step1": "Jděte do 'Nastavení systému' -> 'SSO poskytovatelé'.",
-          "step2": "Vyberte poskytovatele (Google, GitHub nebo Microsoft).",
-          "step3": "Zadejte Client ID, Client Secret a návratovou URL adresu.",
-          "step4": "Aktivujte poskytovatele a otestujte přihlašovací proces."
+          "title": "Orchestrace matriky a uživatelů",
+          "description": "Správa školní matriky a provádění hromadných operací s uživateli.",
+          "step1": "Použijte nástroj pro import CSV pro hromadné nahrání žáků nebo zaměstnanců.",
+          "step2": "Přiřaďte role a oprávnění v kontextu konkrétní školy.",
+          "step3": "Spravujte skupiny tříd a fyzickou strukturu budov školy.",
+          "step4": "Využijte bezpečnou impersonaci uživatelů pro řešení technických potíží s účty."
         },
         "workflow3": {
-          "title": "Orchestrace AI zdrojů",
-          "description": "Správa API klíčů a monitoring spotřeby tokenů.",
-          "step1": "Otevřete 'Nastavení systému' -> 'Konfigurace AI'.",
-          "step2": "Zadejte API klíče pro Google Gemini nebo OpenAI.",
-          "step3": "Definujte globální limity tokenů na školu pro kontrolu nákladů.",
-          "step4": "Sledujte dashboard 'Využití AI' pro real-time analytiku."
-        }
-      },
-      "schoolAdmin": {
-        "title": "Administrátor školy",
-        "description": "Technický správce konkrétní instance školy.",
-        "functions": "Správa školní matriky, Zvání uživatelů a přiřazování rolí, CSV import a export uživatelů, Monitoring auditního logu, Nastavení školy a konfigurace modulů, Impersonace uživatelů pro technickou podporu.",
-        "workflow1": {
-          "title": "Hromadný import uživatelů",
-          "description": "Import celých tříd nebo seznamů zaměstnanců pomocí CSV.",
-          "step1": "Přejděte do 'Správy uživatelů' a zvolte 'Import'.",
-          "step2": "Stáhněte si CSV šablonu a doplňte do ní údaje uživatelů.",
-          "step3": "Nahrajte soubor a namapujte sloupce na systémová pole.",
-          "step4": "Potvrďte import a spusťte automatické odeslání pozvánek."
-        },
-        "workflow2": {
-          "title": "Impersonace účtů",
-          "description": "Zabezpečené přihlášení k uživatelským účtům pro podporu.",
-          "step1": "Najděte cílového uživatele v tabulce 'Uživatelé'.",
-          "step2": "Klikněte na tlačítko 'Impersonovat' (dostupné pro vedoucí role).",
-          "step3": "Systém se přepne do kontextu uživatele (označeno horní lištou).",
-          "step4": "Vyřešte problém a kliknutím na 'Ukončit impersonaci' se vraťte."
-        },
-        "workflow3": {
-          "title": "Audit systému",
-          "description": "Kontrola detailních záznamů o všech kritických akcích.",
-          "step1": "Otevřete modul 'Auditní log'.",
-          "step2": "Filtrujte podle data, uživatele nebo typu akce (např. 'Smazání známky').",
-          "step3": "Rozbalte záznam pro zobrazení starých a nových hodnot.",
-          "step4": "Exportujte report pro potřeby školní inspekce nebo auditu."
+          "title": "Audit a bezpečnostní shoda",
+          "description": "Zajištění bezpečného provozu systému prostřednictvím detailní analýzy logů.",
+          "step1": "Přistupte k 'Auditnímu logu' pro kontrolu všech vysokoúrovňových akcí.",
+          "step2": "Filtrujte podle uživatele nebo typu akce pro prošetření konkrétních změn.",
+          "step3": "Využívejte GDPR nástroje pro anonymizaci dat nebo požadavky na export.",
+          "step4": "Spravujte celosystémové zálohy a plány automatické obnovy dat."
         }
       },
       "headmaster": {
         "title": "Ředitel školy",
-        "description": "Pedagogický a organizační lídr školy.",
+        "description": "Pedagogický a organizační lídr školy. Zaměřuje se na přehled a celoškolní komunikaci.",
         "functions": "Přístup k celoškolnímu dashboardu a statistikám, Plánování celoškolních událostí, Veřejná komunitní oznámení a nástěnky, Monitoring kvality výuky a dohled nad výkonem učitelů.",
         "workflow1": {
           "title": "Strategický dohled",
@@ -199,7 +170,7 @@
       },
       "deputy": {
         "title": "Zástupce ředitele",
-        "description": "Provozní manažer zaměřený na každodenní život školy.",
+        "description": "Provozní manažer zaměřený na technickou organizaci vzdělávacího procesu.",
         "functions": "Nastavení školního roku a semestrů, Správa učeben a budov, Návrh předmětů a školního vzdělávacího programu (ŠVP), Komplexní plánování rozvrhu a detekce kolizí, Správa suplování, Dohled nad třídními výkazy.",
         "workflow1": {
           "title": "Interaktivní plánování rozvrhu",
