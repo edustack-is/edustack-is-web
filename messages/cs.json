@@ -199,7 +199,7 @@
       },
       "deputy": {
         "title": "Zástupce ředitele",
-        "description": "Provozní manažer zaměřený na technickou organizaci.",
+        "description": "Provozní manažer zaměřený na každodenní život školy.",
         "functions": "Nastavení školního roku a semestrů, Správa učeben a budov, Návrh předmětů a školního vzdělávacího programu (ŠVP), Komplexní plánování rozvrhu a detekce kolizí, Správa suplování, Dohled nad třídními výkazy.",
         "workflow1": {
           "title": "Interaktivní plánování rozvrhu",
@@ -228,7 +228,7 @@
       },
       "teacher": {
         "title": "Učitel",
-        "description": "Vzdělávací jádro systému.",
+        "description": "Vzdělávací jádro systému. Přímá interakce se žáky a edukačními daty.",
         "functions": "Správa klasifikace (známky, kategorie, váhy), Evidence docházky a správa omluvenek, Zápisy do třídní knihy a podepisování hodin, Tematické plány a přípravy na hodiny, AI pedagogický asistent (generování příprav, vylepšení slovního hodnocení).",
         "workflow1": {
           "title": "Správa klasifikace",
@@ -255,9 +255,38 @@
           "step4": "Použijte AI pro stylistické vylepšení slovních hodnocení na vysvědčení."
         }
       },
+      "parent": {
+        "title": "Rodič",
+        "description": "Zákonný zástupce dohlížející na vzdělávací cestu svých dětí.",
+        "functions": "Monitoring známek a prospěchu, Elektronické omlouvání absencí, Komunikace s učiteli a vedením školy, Sledování rozvrhu a změn ve výuce svých dětí.",
+        "workflow1": {
+          "title": "Přehled o prospěchu",
+          "description": "Získávání informací o studijních výsledcích dítěte.",
+          "step1": "Zvolte profil konkrétního dítěte v dashboardu.",
+          "step2": "Otevřete modul 'Známky' pro zobrazení všech hodnocení.",
+          "step3": "Zkontrolujte vážené průměry a slovní komentáře vyučujících.",
+          "step4": "Nastavte si e-mailové notifikace pro nové záznamy v klasifikaci."
+        },
+        "workflow2": {
+          "title": "Omlouvání absencí",
+          "description": "Elektronické řešení omluvenek pro zameškané hodiny.",
+          "step1": "Přejděte do modulu 'Docházka'.",
+          "step2": "Klikněte na 'Nová omluvenka' a vyberte časové rozmezí.",
+          "step3": "Uveďte důvod absence (např. 'Nemoc').",
+          "step4": "Odešlete žádost a sledujte stav schválení třídním učitelem."
+        },
+        "workflow3": {
+          "title": "Přímá komunikace",
+          "description": "Efektivní zapojení do života školy.",
+          "step1": "V modulu 'Zprávy' zahajte novou konverzaci s učitelem.",
+          "step2": "Hlasujte v anketách a potvrzujte účast na akcích (RSVP).",
+          "step3": "Sledujte důležitá oznámení na celoškolní nástěnce.",
+          "step4": "Kontrolujte rozvrh pro termíny nadcházejících třídních schůzek."
+        }
+      },
       "student": {
         "title": "Žák",
-        "description": "Primární uživatel vzdělávacích služeb.",
+        "description": "Primární uživatel vzdělávacích služeb. Zaměřuje se na osobní pokrok a denní organizaci.",
         "functions": "Osobní dashboard s přehledem prospěchu, Interaktivní denní a týdenní rozvrh, Komunitní zprávy a hlasování, Přístup k výukovým materiálům, AI studijní partner pro podporu ve výuce.",
         "workflow1": {
           "title": "Sledování osobního pokroku",

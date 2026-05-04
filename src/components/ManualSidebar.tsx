@@ -2,7 +2,7 @@
 
 import {useState} from 'react';
 import {useTranslations} from 'next-intl';
-import {ChevronLeft, ChevronRight, Book, Users, Laptop, Settings, LogIn, GraduationCap, School, ShieldCheck, UserCheck, Search} from 'lucide-react';
+import {ChevronLeft, ChevronRight, Book, Users, Laptop, Settings, LogIn, GraduationCap, School, ShieldCheck, UserCheck, Search, Heart} from 'lucide-react';
 
 interface ManualSidebarProps {
   activeSection: string;
@@ -14,6 +14,7 @@ const activeTextMap: Record<string, string> = {
   headmaster: 'text-brand-blue',
   deputy: 'text-brand-pink',
   teacher: 'text-brand-teal',
+  parent: 'text-rose-500',
   student: 'text-brand-orange',
 };
 
@@ -42,6 +43,7 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
         { id: 'headmaster', label: t('roles.headmaster.title'), icon: Search },
         { id: 'deputy', label: t('roles.deputy.title'), icon: UserCheck },
         { id: 'teacher', label: t('roles.teacher.title'), icon: GraduationCap },
+        { id: 'parent', label: t('roles.parent.title'), icon: Heart },
         { id: 'student', label: t('roles.student.title'), icon: Users },
       ]
     }

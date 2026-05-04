@@ -255,6 +255,35 @@
           "step4": "Use AI to improve the language of verbal report card evaluations."
         }
       },
+      "parent": {
+        "title": "Parent",
+        "description": "The guardian overseeing the educational journey of their children.",
+        "functions": "Monitoring grades and academic progress, Electronic absence excuse submission, Communication with teachers and school management, Viewing child's personalized schedule and substitutions.",
+        "workflow1": {
+          "title": "Academic Oversight",
+          "description": "Stay informed about your child's performance.",
+          "step1": "Select your child's profile from the dashboard switcher.",
+          "step2": "Open the 'Grades' module to see all recent assessments.",
+          "step3": "Review weighted averages and teacher comments for each subject.",
+          "step4": "Set up email notifications for new grade entries."
+        },
+        "workflow2": {
+          "title": "Absence Management",
+          "description": "Officially excuse your child's missed lessons.",
+          "step1": "Navigate to the 'Attendance' module.",
+          "step2": "Click 'New Excuse' and select the date range.",
+          "step3": "Provide the reason for the absence (e.g., 'Medical').",
+          "step4": "Submit the request and monitor its approval status by the teacher."
+        },
+        "workflow3": {
+          "title": "Direct Communication",
+          "description": "Engage with the school community effectively.",
+          "step1": "Use the 'Messages' module to start a thread with a teacher.",
+          "step2": "Participate in school polls and respond to event invitations (RSVP).",
+          "step3": "Read pinned announcements on the school bulletin board.",
+          "step4": "Check the schedule for upcoming Parent-Teacher meetings."
+        }
+      },
       "student": {
         "title": "Student",
         "description": "The primary user of educational services.",

@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ManualSidebar from '@/components/ManualSidebar';
 import ScreenshotPlaceholder from '@/components/ScreenshotPlaceholder';
-import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, Zap, CheckCircle2} from 'lucide-react';
+import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, Zap, CheckCircle2, Heart} from 'lucide-react';
 
 const roleColorMap: Record<string, string> = {
   systemAdmin: 'brand-purple',
@@ -14,6 +14,7 @@ const roleColorMap: Record<string, string> = {
   headmaster: 'brand-blue',
   deputy: 'brand-pink',
   teacher: 'brand-teal',
+  parent: 'rose-500',
   student: 'brand-orange',
 };
 
@@ -23,6 +24,7 @@ const bgLightMap: Record<string, string> = {
   'brand-blue': 'bg-brand-blue/10',
   'brand-pink': 'bg-brand-pink/10',
   'brand-teal': 'bg-brand-teal/10',
+  'rose-500': 'bg-rose-500/10',
   'brand-orange': 'bg-brand-orange/10',
 };
 
@@ -32,6 +34,7 @@ const textMap: Record<string, string> = {
   'brand-blue': 'text-brand-blue',
   'brand-pink': 'text-brand-pink',
   'brand-teal': 'text-brand-teal',
+  'rose-500': 'text-rose-500',
   'brand-orange': 'text-brand-orange',
 };
 
@@ -41,6 +44,7 @@ const borderMap: Record<string, string> = {
   'brand-blue': 'border-brand-blue',
   'brand-pink': 'border-brand-pink',
   'brand-teal': 'border-brand-teal',
+  'rose-500': 'border-rose-500',
   'brand-orange': 'border-brand-orange',
 };
 
@@ -49,7 +53,8 @@ const bgFullMap: Record<string, string> = {
   'brand-slate': 'bg-brand-slate',
   'brand-blue': 'bg-brand-blue',
   'brand-pink': 'bg-brand-pink',
-  'brand-teal': 'brand-teal', // Note: Tailwind doesn't always handle full opacity bg with variables perfectly if not set in theme
+  'brand-teal': 'brand-teal',
+  'rose-500': 'bg-rose-500',
   'brand-orange': 'bg-brand-orange',
 };
 
@@ -209,6 +214,7 @@ export default function ManualPage() {
                   { id: 'headmaster', icon: Search },
                   { id: 'deputy', icon: UserCheck },
                   { id: 'teacher', icon: GraduationCap },
+                  { id: 'parent', icon: Heart },
                   { id: 'student', icon: Users },
                 ].map((role) => {
                   const color = roleColorMap[role.id];
@@ -295,7 +301,7 @@ export default function ManualPage() {
                                 <div className="lg:col-span-3 space-y-8">
                                   <ScreenshotPlaceholder roleColor={color} className="aspect-video shadow-2xl rounded-[3rem]" />
                                   <div className="grid grid-cols-3 gap-4 h-2">
-                                     <div className={`rounded-full ${bgFullMap[color]}`} />
+                                     <div className={`rounded-full ${bgFullMap[color]} opacity-100`} />
                                      <div className={`rounded-full ${bgFullMap[color]} opacity-40`} />
                                      <div className={`rounded-full ${bgFullMap[color]} opacity-10`} />
                                   </div>
