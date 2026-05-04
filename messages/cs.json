@@ -109,106 +109,179 @@
       "title": "Systémové role",
       "coreFunctions": "Klíčové funkce",
       "workflows": "Detailní pracovní postupy",
+      "procedure": "Postup",
       "systemAdmin": {
         "title": "Systémový Administrátor",
         "description": "Globální orchestrátor celé platformy. Spravuje infrastrukturu a multi-tenant prostředí.",
         "functions": "Správa životního cyklu škol (vytvoření/pozastavení/smazání), Správa globálních administrátorů, Konfigurace SSO poskytovatelů (Google, GitHub, MS), Správa API klíčů pro AI (Gemini, OpenAI, Anthropic), Globální monitoring využití AI a analýza tokenů.",
         "workflow1": {
           "title": "Správa škol",
-          "description": "Vytváření nových školních tenantů, definice unikátních identifikátorů a správa jejich stavu z globálního dashboardu."
+          "description": "Vytváření nových školních tenantů a správa jejich stavu.",
+          "step1": "Přejděte do modulu 'Školy' v systémovém bočním panelu.",
+          "step2": "Klikněte na 'Vytvořit novou školu' a vyplňte název a unikátní identifikátor.",
+          "step3": "Přiřaďte alespoň jednoho výchozího Administrátora školy.",
+          "step4": "Uložte a ověřte, že se škola objevila v globálním seznamu."
         },
         "workflow2": {
           "title": "Poskytovatelé identit",
-          "description": "Konfigurace nastavení OAuth2/OpenID Connect pro Google, GitHub a Microsoft pro aktivaci celoškolního SSO."
+          "description": "Konfigurace nastavení OAuth2/OpenID Connect pro SSO.",
+          "step1": "Jděte do 'Nastavení systému' -> 'SSO poskytovatelé'.",
+          "step2": "Vyberte poskytovatele (Google, GitHub nebo Microsoft).",
+          "step3": "Zadejte Client ID, Client Secret a návratovou URL adresu.",
+          "step4": "Aktivujte poskytovatele a otestujte přihlašovací proces."
         },
         "workflow3": {
           "title": "Orchestrace AI zdrojů",
-          "description": "Správa API klíčů pro různé poskytovatele LLM modelů a monitoring spotřeby tokenů na školu i uživatele."
+          "description": "Správa API klíčů a monitoring spotřeby tokenů.",
+          "step1": "Otevřete 'Nastavení systému' -> 'Konfigurace AI'.",
+          "step2": "Zadejte API klíče pro Google Gemini nebo OpenAI.",
+          "step3": "Definujte globální limity tokenů na školu pro kontrolu nákladů.",
+          "step4": "Sledujte dashboard 'Využití AI' pro real-time analytiku."
         }
       },
       "schoolAdmin": {
         "title": "Administrátor školy",
-        "description": "Technický správce konkrétní instance školy. Operuje v kontextu školy (TENANT).",
+        "description": "Technický správce konkrétní instance školy.",
         "functions": "Správa školní matriky, Zvání uživatelů a přiřazování rolí, CSV import a export uživatelů, Monitoring auditního logu, Nastavení školy a konfigurace modulů, Impersonace uživatelů pro technickou podporu.",
         "workflow1": {
           "title": "Hromadný import uživatelů",
-          "description": "Import celých tříd nebo seznamů zaměstnanců pomocí nástroje pro nahrávání CSV. Automatizace generování pozvánek."
+          "description": "Import celých tříd nebo seznamů zaměstnanců pomocí CSV.",
+          "step1": "Přejděte do 'Správy uživatelů' a zvolte 'Import'.",
+          "step2": "Stáhněte si CSV šablonu a doplňte do ní údaje uživatelů.",
+          "step3": "Nahrajte soubor a namapujte sloupce na systémová pole.",
+          "step4": "Potvrďte import a spusťte automatické odeslání pozvánek."
         },
         "workflow2": {
-          "title": "Administrativní podpora (Impersonace)",
-          "description": "Zabezpečené přihlášení k uživatelským účtům pro ověření oprávnění, opravu chyb v nastavení nebo přímou podporu."
+          "title": "Impersonace účtů",
+          "description": "Zabezpečené přihlášení k uživatelským účtům pro podporu.",
+          "step1": "Najděte cílového uživatele v tabulce 'Uživatelé'.",
+          "step2": "Klikněte na tlačítko 'Impersonovat' (dostupné pro vedoucí role).",
+          "step3": "Systém se přepne do kontextu uživatele (označeno horní lištou).",
+          "step4": "Vyřešte problém a kliknutím na 'Ukončit impersonaci' se vraťte."
         },
         "workflow3": {
           "title": "Audit systému",
-          "description": "Kontrola detailních záznamů o všech kritických akcích (mazání, změny nastavení) pro zajištění bezpečnosti a shody."
+          "description": "Kontrola detailních záznamů o všech kritických akcích.",
+          "step1": "Otevřete modul 'Auditní log'.",
+          "step2": "Filtrujte podle data, uživatele nebo typu akce (např. 'Smazání známky').",
+          "step3": "Rozbalte záznam pro zobrazení starých a nových hodnot.",
+          "step4": "Exportujte report pro potřeby školní inspekce nebo auditu."
         }
       },
       "headmaster": {
         "title": "Ředitel školy",
-        "description": "Pedagogický a organizační lídr školy. Zaměřuje se na přehled a celoškolní komunikaci.",
+        "description": "Pedagogický a organizační lídr školy.",
         "functions": "Přístup k celoškolnímu dashboardu a statistikám, Plánování celoškolních událostí, Veřejná komunitní oznámení a nástěnky, Monitoring kvality výuky a dohled nad výkonem učitelů.",
         "workflow1": {
           "title": "Strategický dohled",
-          "description": "Monitoring statistik v reálném čase (průměry známek, trendy docházky, celoškolní KPI) přes Dashboard ředitele."
+          "description": "Monitoring statistik v reálném čase a celoškolních KPI.",
+          "step1": "Sledujte 'Dashboard ředitele' pro získání rychlých přehledů.",
+          "step2": "Analyzujte distribuci známek napříč různými předměty.",
+          "step3": "Kontrolujte procenta docházky za aktuální pololetí.",
+          "step4": "Identifikujte třídy nebo předměty s neobvyklými výkyvy k prověření."
         },
         "workflow2": {
           "title": "Celoškolní komunikace",
-          "description": "Zveřejňování oficiálních oznámení, hromadné zprávy všem uživatelům a správa komunitní nástěnky."
+          "description": "Zveřejňování oficiálních oznámení a správa nástěnek.",
+          "step1": "Přejděte do modulu 'Komunita'.",
+          "step2": "Klikněte na 'Nové oznámení' a zvolte cílovou skupinu.",
+          "step3": "Napište obsah a připněte důležité zprávy na začátek.",
+          "step4": "Publikujte a ověřte doručení notifikací uživatelům."
         },
         "workflow3": {
           "title": "Akademický kalendář",
-          "description": "Dohled a schvalování ročního plánu, včetně prázdnin, celoškolních akcí a plánů třídních schůzek."
+          "description": "Dohled a schvalování ročního plánu akcí.",
+          "step1": "Otevřete kalendář 'Školní události'.",
+          "step2": "Přidejte klíčové milníky (prázdniny, zkoušky, porady).",
+          "step3": "Nastavte viditelnost pro každou konkrétní událost.",
+          "step4": "Synchronizujte data s veřejným dashboardem pro rodiče."
         }
       },
       "deputy": {
         "title": "Zástupce ředitele",
-        "description": "Provozní manažer zaměřený na technickou organizaci vzdělávacího procesu.",
+        "description": "Provozní manažer zaměřený na technickou organizaci.",
         "functions": "Nastavení školního roku a semestrů, Správa učeben a budov, Návrh předmětů a školního vzdělávacího programu (ŠVP), Komplexní plánování rozvrhu a detekce kolizí, Správa suplování, Dohled nad třídními výkazy.",
         "workflow1": {
-          "title": "Strukturální architektura",
-          "description": "Definice fyzické a logické struktury školy: budovy, specializované učebny a skupiny tříd."
+          "title": "Interaktivní plánování rozvrhu",
+          "description": "Tvorba rozvrhu s automatickou detekcí kolizí.",
+          "step1": "Otevřete modul 'Plánovač rozvrhu'.",
+          "step2": "Vyberte třídu a přetahujte předměty do volných slotů.",
+          "step3": "Systém červeně označí kolize učitelů nebo učeben.",
+          "step4": "Vyřešte konflikty a publikujte finální verzi pro celou školu."
         },
         "workflow2": {
-          "title": "Interaktivní plánování rozvrhu",
-          "description": "Využití drag-and-drop plánovače rozvrhu s vestavěnou detekcí kolizí pro učitele, učebny i žáky."
+          "title": "Správa suplování",
+          "description": "Řešení denních absencí a přeorganizování výuky.",
+          "step1": "Zkontrolujte 'Seznam absencí' pro nahlášené chybějící učitele.",
+          "step2": "Přejděte do 'Suplování' a vyberte dotčené vyučovací hodiny.",
+          "step3": "Přiřaďte zastupujícího učitele nebo změňte učebnu/předmět.",
+          "step4": "Uložte změny pro okamžitou aktualizaci osobních rozvrhů uživatelů."
         },
         "workflow3": {
-          "title": "Správa suplování",
-          "description": "Řešení denních absencí přiřazováním zastupujících učitelů a učeben pro zajištění kontinuity výuky."
+          "title": "Návrh kurikula (ŠVP)",
+          "description": "Definice předmětů a výstupů vzdělávání.",
+          "step1": "Přejděte do 'Škola' -> 'Kurikulum'.",
+          "step2": "Vytvořte šablony předmětů a definujte hodinovou dotaci.",
+          "step3": "Namapujte kompetence (RVP) na konkrétní předměty.",
+          "step4": "Aktivujte verzi kurikula pro nadcházející školní rok."
         }
       },
       "teacher": {
         "title": "Učitel",
-        "description": "Vzdělávací jádro systému. Přímá interakce se žáky a edukačními daty.",
+        "description": "Vzdělávací jádro systému.",
         "functions": "Správa klasifikace (známky, kategorie, váhy), Evidence docházky a správa omluvenek, Zápisy do třídní knihy a podepisování hodin, Tematické plány a přípravy na hodiny, AI pedagogický asistent (generování příprav, vylepšení slovního hodnocení).",
         "workflow1": {
-          "title": "Mistrovství v klasifikaci",
-          "description": "Zapisování známek do vážených kategorií, správa slovního hodnocení a generování podkladů pro vysvědčení."
+          "title": "Správa klasifikace",
+          "description": "Zapisování známek a správa vážených průměrů.",
+          "step1": "Vyberte předmět ze svého 'Přehledu výuky'.",
+          "step2": "Zvolte 'Přidat známku' a definujte kategorii (např. 'Pololetní test').",
+          "step3": "Zadejte známky žákům a přidejte případné slovní komentáře.",
+          "step4": "Ověřte, že se vážený průměr automaticky přepočítal."
         },
         "workflow2": {
           "title": "Digitální třídní kniha",
-          "description": "Digitální podepisování hodin, zápis probíraného učiva a evidence docházky v reálném čase během výuky."
+          "description": "Podepisování hodin a evidence docházky.",
+          "step1": "Otevřete 'Třídní knihu' během aktivní vyučovací hodiny.",
+          "step2": "Zapište docházku žáků (Přítomen, Chybí, Pozdní příchod).",
+          "step3": "Zaznamenejte téma hodiny v souladu s tematickým plánem.",
+          "step4": "Digitálně podepište zápis pro uzavření záznamu."
         },
         "workflow3": {
           "title": "AI pedagogický asistent",
-          "description": "Využití AI pro generování plánů hodin, vylepšení formulací na vysvědčení a tvorbu výukových materiálů."
+          "description": "Využití AI pro přípravy a vylepšení hodnocení.",
+          "step1": "Otevřete 'AI asistenta' na stránce přípravy na hodinu.",
+          "step2": "Zadejte téma a cílovou třídu pro vygenerování plánu.",
+          "step3": "Zkontrolujte navrženou strukturu a exportujte ji do svých příprav.",
+          "step4": "Použijte AI pro stylistické vylepšení slovních hodnocení na vysvědčení."
         }
       },
       "student": {
         "title": "Žák",
-        "description": "Primární uživatel vzdělávacích služeb. Zaměřuje se na osobní pokrok a denní organizaci.",
+        "description": "Primární uživatel vzdělávacích služeb.",
         "functions": "Osobní dashboard s přehledem prospěchu, Interaktivní denní a týdenní rozvrh, Komunitní zprávy a hlasování, Přístup k výukovým materiálům, AI studijní partner pro podporu ve výuce.",
         "workflow1": {
           "title": "Sledování osobního pokroku",
-          "description": "Přehled o známkách v reálném čase, vážené průměry a zpětná vazba od učitelů ve všech předmětech."
+          "description": "Přehled o známkách a zpětné vazbě.",
+          "step1": "Zkontrolujte 'Dashboard' pro nejnovější známky a oznámení.",
+          "step2": "Otevřete modul 'Známky' pro detailní pohled podle předmětů.",
+          "step3": "Klikněte na konkrétní známku pro přečtení komentáře od učitele.",
+          "step4": "Sledujte svůj celkový průměr a predikci výsledné známky."
         },
         "workflow2": {
           "title": "Interaktivní rozvrh",
-          "description": "Přístup k dennímu rozvrhu, okamžité zobrazení změn v suplování a přehled nadcházejících školních akcí."
+          "description": "Přístup k aktuálnímu rozvrhu a suplování.",
+          "step1": "Přejděte do modulu 'Rozvrh'.",
+          "step2": "Přepínejte mezi denním a týdenním zobrazením.",
+          "step3": "Změny v důsledku suplování uvidíte zvýrazněné oranžovou barvou.",
+          "step4": "Klikněte na hodinu pro zobrazení učebny a jména vyučujícího."
         },
         "workflow3": {
           "title": "AI studijní partner",
-          "description": "Interakce s vestavěným AI asistentem pro pomoc s náročnými koncepty, generování shrnutí nebo dotazy k učivu."
+          "description": "Pomoc s látkou a tvorba shrnutí.",
+          "step1": "Otevřete chatovací panel 'AI studijní partner'.",
+          "step2": "Zeptejte se na nejasnosti v aktuálně probírané látce.",
+          "step3": "AI využívá kontext školy pro poskytnutí relevantních odpovědí.",
+          "step4": "Požádejte o shrnutí studijních materiálů nebo cvičné otázky."
         }
       }
     },

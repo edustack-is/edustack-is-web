@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ManualSidebar from '@/components/ManualSidebar';
 import ScreenshotPlaceholder from '@/components/ScreenshotPlaceholder';
-import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, Zap} from 'lucide-react';
+import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, Zap, CheckCircle2} from 'lucide-react';
 
 const roleColorMap: Record<string, string> = {
   systemAdmin: 'brand-purple',
@@ -49,7 +49,7 @@ const bgFullMap: Record<string, string> = {
   'brand-slate': 'bg-brand-slate',
   'brand-blue': 'bg-brand-blue',
   'brand-pink': 'bg-brand-pink',
-  'brand-teal': 'bg-brand-teal',
+  'brand-teal': 'brand-teal', // Note: Tailwind doesn't always handle full opacity bg with variables perfectly if not set in theme
   'brand-orange': 'bg-brand-orange',
 };
 
@@ -191,18 +191,18 @@ export default function ManualPage() {
             </div>
 
             {/* Roles Section */}
-            <div className="space-y-64 pt-20 border-t border-slate-100 dark:border-slate-800">
+            <div className="space-y-[64rem] pt-20 border-t border-slate-100 dark:border-slate-800">
               <div className="space-y-6 text-center md:text-left">
                 <h2 className="text-6xl md:text-9xl font-black tracking-tighter text-slate-900 dark:text-white uppercase leading-none">
                   {t('roles.title')}
                 </h2>
                 <div className="h-2 w-32 bg-brand-purple rounded-full md:mx-0 mx-auto" />
                 <p className="text-2xl md:text-4xl text-slate-500 dark:text-slate-400 font-medium max-w-[48rem]">
-                  Deep dive into specific workflows and permissions for every user identity.
+                  Comprehensive guide to specific procedures and features for each system identity.
                 </p>
               </div>
 
-              <div className="space-y-[32rem]">
+              <div className="space-y-[48rem]">
                 {[
                   { id: 'systemAdmin', icon: ShieldCheck },
                   { id: 'schoolAdmin', icon: School },
@@ -213,13 +213,13 @@ export default function ManualPage() {
                 ].map((role) => {
                   const color = roleColorMap[role.id];
                   return (
-                    <section id={role.id} key={role.id} className="scroll-mt-32 space-y-32 group">
+                    <section id={role.id} key={role.id} className="scroll-mt-32 space-y-48 group">
                       {/* Role Introduction */}
                       <div className="grid gap-16 lg:grid-cols-2 items-center">
                         <div className="space-y-10">
                           <div className="space-y-6">
                             <div className={`inline-flex p-6 rounded-[2.5rem] ${bgLightMap[color]} ${textMap[color]} transition-all group-hover:scale-110 group-hover:rotate-6 shadow-xl`}>
-                              <role.icon className="h-10 w-10" />
+                              <role.icon className="h-16 w-10" />
                             </div>
                             <h3 className={`text-6xl md:text-8xl font-black tracking-tighter ${textMap[color]} uppercase leading-none`}>
                               {translate(`roles.${role.id}.title`)}
@@ -250,35 +250,56 @@ export default function ManualPage() {
                       </div>
 
                       {/* Detailed Workflows */}
-                      <div className="space-y-20">
+                      <div className="space-y-32">
                         <div className="flex items-center gap-6">
-                           <h4 className="text-2xl font-black tracking-tight uppercase opacity-30 italic">{t('roles.workflows')}</h4>
+                           <h4 className="text-3xl font-black tracking-tight uppercase opacity-30 italic">{t('roles.workflows')}</h4>
                            <div className="h-px flex-1 bg-slate-100 dark:bg-slate-800" />
                         </div>
 
-                        <div className="grid gap-12">
+                        <div className="grid gap-48">
                           {[1, 2, 3].map((w) => (
-                            <div key={w} className="grid lg:grid-cols-2 gap-16 items-start">
-                              <div className="space-y-6 pt-4">
-                                <div className="flex items-center gap-4">
-                                  <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white dark:bg-slate-900 border-2 ${borderMap[color]} ${textMap[color]} font-black text-xl shadow-lg`}>
-                                    {w}
+                            <div key={w} className="space-y-12">
+                              <div className="grid lg:grid-cols-5 gap-16 items-start">
+                                <div className="lg:col-span-2 space-y-8">
+                                  <div className="space-y-4">
+                                    <div className="flex items-center gap-4">
+                                      <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white dark:bg-slate-900 border-2 ${borderMap[color]} ${textMap[color]} font-black text-xl shadow-lg`}>
+                                        {w}
+                                      </div>
+                                      <h5 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
+                                        {translate(`roles.${role.id}.workflow${w}.title`)}
+                                      </h5>
+                                    </div>
+                                    <p className="text-2xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed pl-16">
+                                      {translate(`roles.${role.id}.workflow${w}.description`)}
+                                    </p>
                                   </div>
-                                  <h5 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white leading-none">
-                                    {translate(`roles.${role.id}.workflow${w}.title`)}
-                                  </h5>
+
+                                  <div className="pl-16 space-y-6">
+                                    <div className="flex items-center gap-3">
+                                      <div className={`h-px w-8 ${bgFullMap[color]}`} />
+                                      <span className={`text-xs font-black uppercase tracking-widest ${textMap[color]}`}>{t('roles.procedure')}</span>
+                                    </div>
+                                    <div className="grid gap-4">
+                                      {[1, 2, 3, 4].map((s) => (
+                                        <div key={s} className="flex gap-4 group/step transition-all hover:translate-x-1">
+                                          <CheckCircle2 className={`h-6 w-6 shrink-0 ${textMap[color]} opacity-20 group-hover/step:opacity-100 transition-opacity`} />
+                                          <p className="text-lg font-bold text-slate-700 dark:text-slate-300 leading-tight">
+                                            {translate(`roles.${role.id}.workflow${w}.step${s}`)}
+                                          </p>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
                                 </div>
-                                <p className="text-xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed pl-16">
-                                  {translate(`roles.${role.id}.workflow${w}.description`)}
-                                </p>
-                                <div className="pl-16">
-                                   <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl ${bgLightMap[color]} ${textMap[color]} text-sm font-black`}>
-                                      <Zap size={14} fill="currentColor" /> Step-by-step procedure
-                                   </div>
+                                <div className="lg:col-span-3 space-y-8">
+                                  <ScreenshotPlaceholder roleColor={color} className="aspect-video shadow-2xl rounded-[3rem]" />
+                                  <div className="grid grid-cols-3 gap-4 h-2">
+                                     <div className={`rounded-full ${bgFullMap[color]}`} />
+                                     <div className={`rounded-full ${bgFullMap[color]} opacity-40`} />
+                                     <div className={`rounded-full ${bgFullMap[color]} opacity-10`} />
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="group/ss">
-                                <ScreenshotPlaceholder roleColor={color} className="aspect-video shadow-lg group-hover/ss:shadow-2xl group-hover/ss:-translate-y-2 transition-all duration-500" />
                               </div>
                             </div>
                           ))}

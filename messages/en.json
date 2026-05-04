@@ -109,106 +109,179 @@
       "title": "System Roles",
       "coreFunctions": "Core Functions",
       "workflows": "Detailed Workflows",
+      "procedure": "Procedure",
       "systemAdmin": {
         "title": "System Administrator",
         "description": "Global orchestrator of the entire platform. Handles infrastructure and multi-tenant management.",
         "functions": "School lifecycle management (create/suspend/delete), Global System Admin management, SSO provider configuration (Google, GitHub, MS), AI API key management (Gemini, OpenAI, Anthropic), Global AI usage monitoring and token analytics.",
         "workflow1": {
           "title": "School Management",
-          "description": "Create new school tenants, define unique identifiers, and manage their active/suspended status from a global dashboard."
+          "description": "Create new school tenants and manage their active/suspended status.",
+          "step1": "Navigate to the 'Schools' module in the System Sidebar.",
+          "step2": "Click 'Create New School' and fill in the school name and unique slug.",
+          "step3": "Assign at least one initial School Administrator.",
+          "step4": "Save and verify the school appears in the global list."
         },
         "workflow2": {
           "title": "Identity Providers",
-          "description": "Configure OAuth2/OpenID Connect settings for Google, GitHub, and Microsoft to enable school-wide SSO."
+          "description": "Configure OAuth2/OpenID Connect settings for SSO.",
+          "step1": "Go to 'System Settings' -> 'SSO Providers'.",
+          "step2": "Select a provider (Google, GitHub, or Microsoft).",
+          "step3": "Enter Client ID, Client Secret, and Callback URL.",
+          "step4": "Enable the provider and test the login flow."
         },
         "workflow3": {
           "title": "AI Resource Orchestration",
-          "description": "Manage API keys for different LLM providers and monitor token consumption per school and per user."
+          "description": "Manage API keys and monitor token consumption.",
+          "step1": "Open 'System Settings' -> 'AI Configuration'.",
+          "step2": "Input API keys for Google Gemini or OpenAI.",
+          "step3": "Define global token limits per school to prevent cost overruns.",
+          "step4": "Review the 'AI Usage' dashboard for real-time analytics."
         }
       },
       "schoolAdmin": {
         "title": "School Administrator",
-        "description": "Technical manager of a specific school instance. Operates within the school (TENANT) context.",
+        "description": "Technical manager of a specific school instance.",
         "functions": "School registry management, User invitation and role assignments, CSV user import/export, Audit log monitoring, School-wide settings and module configuration, User impersonation for support.",
         "workflow1": {
           "title": "Bulk User Onboarding",
-          "description": "Import entire classes or staff lists using the CSV upload tool. Automate invitation email generation."
+          "description": "Import entire classes or staff lists using CSV.",
+          "step1": "Go to 'User Management' and select 'Import'.",
+          "step2": "Download the CSV template and populate it with user data.",
+          "step3": "Upload the file and map the columns to system fields.",
+          "step4": "Verify the import and trigger automated invitation emails."
         },
         "workflow2": {
-          "title": "Administrative Support (Impersonation)",
-          "description": "Securely log into user accounts to verify permissions, fix configuration issues, or provide direct technical support."
+          "title": "Account Impersonation",
+          "description": "Securely log into user accounts for support.",
+          "step1": "Find the target user in the 'Users' table.",
+          "step2": "Click the 'Impersonate' button (available for management roles).",
+          "step3": "The system will reload with the user's context, marked by a top banner.",
+          "step4": "Fix the issue and click 'Leave Impersonation' to return."
         },
         "workflow3": {
           "title": "System Audit",
-          "description": "Review detailed logs of all critical actions (deletions, setting changes) to ensure security and compliance."
+          "description": "Review detailed logs of all critical actions.",
+          "step1": "Open the 'Audit Log' module.",
+          "step2": "Filter by date, user, or action type (e.g., 'Grade Deleted').",
+          "step3": "Expand a log entry to see old and new values side-by-side.",
+          "step4": "Export the report for school compliance records."
         }
       },
       "headmaster": {
         "title": "Headmaster",
-        "description": "Pedagogical and organizational leader of the school. Focuses on overview and school-wide communication.",
+        "description": "Pedagogical and organizational leader of the school.",
         "functions": "Access to high-level school dashboard and statistics, School-wide event planning, Public community announcements and broadcasts, Monitoring of educational quality and teacher performance.",
         "workflow1": {
           "title": "Strategic Oversight",
-          "description": "Monitor real-time statistics on grade averages, attendance trends, and school-wide KPI via the Headmaster Dashboard."
+          "description": "Monitor real-time statistics and school-wide KPI.",
+          "step1": "View the 'Principal Dashboard' for high-level summaries.",
+          "step2": "Analyze grade distributions across different departments.",
+          "step3": "Check attendance percentages for the current semester.",
+          "step4": "Identify classes or subjects with abnormal patterns for review."
         },
         "workflow2": {
           "title": "School Communications",
-          "description": "Post official announcements, broadcast messages to all users, and manage the community bulletin board."
+          "description": "Post official announcements and manage bulletins.",
+          "step1": "Navigate to the 'Community' module.",
+          "step2": "Click 'New Announcement' and select the target audience (All, Staff, or Students).",
+          "step3": "Write the content and pin critical messages to the top.",
+          "step4": "Publish and verify notification delivery."
         },
         "workflow3": {
           "title": "Academic Calendar",
-          "description": "Oversee and approve the yearly plan, including holidays, school-wide events, and parent-teacher meeting schedules."
+          "description": "Oversee and approve the yearly plan.",
+          "step1": "Open the 'School Events' calendar.",
+          "step2": "Add key milestones like holidays, exams, or meetings.",
+          "step3": "Set visibility permissions for each event.",
+          "step4": "Sync with the public school dashboard for parents and students."
         }
       },
       "deputy": {
         "title": "Deputy Principal",
-        "description": "Operational manager focusing on the technical organization of the educational process.",
+        "description": "Operational manager focusing on the technical organization.",
         "functions": "Academic year and semester setup, Classroom and building management, Subject and curriculum (SVP) design, Complex schedule planning and collision detection, Substitution management, Class registry oversight.",
         "workflow1": {
-          "title": "Structural Architecture",
-          "description": "Define the physical and logical structure of the school: buildings, specialized rooms, and classroom groups."
+          "title": "Interactive Schedule Planning",
+          "description": "Plan the timetable with collision detection.",
+          "step1": "Open the 'Schedule Planner' module.",
+          "step2": "Select a class and drag subjects into available time slots.",
+          "step3": "The system will flag red markers for teacher or room collisions.",
+          "step4": "Resolve collisions and publish the final version for the school."
         },
         "workflow2": {
-          "title": "Interactive Schedule Planning",
-          "description": "Use the drag-and-drop schedule planner with built-in collision detection for teachers, rooms, and students."
+          "title": "Substitution Management",
+          "description": "Handle daily absences and reassignments.",
+          "step1": "Check the 'Absence List' for teacher notifications.",
+          "step2": "Go to 'Substitutions' and select the affected lessons.",
+          "step3": "Assign a substitute teacher or change the room/subject.",
+          "step4": "Save to instantly update the affected users' personal schedules."
         },
         "workflow3": {
-          "title": "Substitution Management",
-          "description": "Handle daily absences by assigning substitute teachers and rooms, ensuring educational continuity."
+          "title": "Curriculum Design (SVP)",
+          "description": "Define subjects and curriculum outputs.",
+          "step1": "Navigate to 'School' -> 'Curriculum'.",
+          "step2": "Create subject templates and define hours per week per grade.",
+          "step3": "Map competencies (RVP) to specific subjects.",
+          "step4": "Activate the curriculum version for the upcoming academic year."
         }
       },
       "teacher": {
         "title": "Teacher",
-        "description": "The educational core of the system. Direct interaction with students and educational data.",
+        "description": "The educational core of the system.",
         "functions": "Grade book management (marks, categories, weights), Attendance tracking and excuse management, Class book entries and signing, Thematic plans and lesson preparations, AI Teaching Assistant (lesson generation, report card polishing).",
         "workflow1": {
-          "title": "Grade Book Mastery",
-          "description": "Enter grades into weighted categories, manage verbal evaluations, and generate end-of-term reports."
+          "title": "Grade Book Management",
+          "description": "Enter grades and manage weighted averages.",
+          "step1": "Select a subject from your 'Teaching Overview'.",
+          "step2": "Choose 'Add Grade' and define the category (e.g., 'Big Test').",
+          "step3": "Input grades for the students and add optional comments.",
+          "step4": "Verify that the weighted average is calculated automatically."
         },
         "workflow2": {
           "title": "Digital Class Book",
-          "description": "Digitally sign lesson entries, record the topic of instruction, and track attendance in real-time during class."
+          "description": "Sign lessons and track attendance.",
+          "step1": "Open the 'Class Book' during your active lesson.",
+          "step2": "Mark student attendance (Present, Absent, Late).",
+          "step3": "Record the lesson topic according to the thematic plan.",
+          "step4": "Digitally sign the entry to finalize the record."
         },
         "workflow3": {
           "title": "AI Pedagogical Assistant",
-          "description": "Use AI to generate lesson plans, polish verbal evaluations on report cards, and create educational materials."
+          "description": "Use AI to generate plans and polish reports.",
+          "step1": "Open the 'AI Assistant' from the lesson preparation page.",
+          "step2": "Provide a topic and target grade for the lesson plan.",
+          "step3": "Review the generated structure and export to your preparations.",
+          "step4": "Use AI to improve the language of verbal report card evaluations."
         }
       },
       "student": {
         "title": "Student",
-        "description": "The primary user of educational services. Focuses on personal progress and daily organization.",
+        "description": "The primary user of educational services.",
         "functions": "Personal dashboard with grade overview, Interactive daily and weekly schedule, Community messaging and polls, Access to teaching materials, AI Study Partner for educational support.",
         "workflow1": {
           "title": "Personal Progress Tracking",
-          "description": "View a real-time overview of your grades, weighted averages, and teacher feedback for all subjects."
+          "description": "View grades and teacher feedback.",
+          "step1": "Check the 'Dashboard' for recent grades and announcements.",
+          "step2": "Open the 'Grades' module to see a subject-by-subject view.",
+          "step3": "Click on any grade to read specific teacher comments.",
+          "step4": "Monitor your overall average and predicted final grade."
         },
         "workflow2": {
-          "title": "Interactive Schedule",
-          "description": "Access your daily timetable, see substitution changes instantly, and view upcoming school events."
+          "title": "Interactive Timetable",
+          "description": "Access your schedule and substitution info.",
+          "step1": "Go to the 'Schedule' module.",
+          "step2": "Toggle between Daily and Weekly views.",
+          "step3": "Substitution changes will be highlighted in orange.",
+          "step4": "Click on a lesson to see the assigned room and teacher."
         },
         "workflow3": {
           "title": "AI Study Partner",
-          "description": "Interact with the built-in AI assistant to get help with difficult concepts, generate summaries, or ask subject-specific questions."
+          "description": "Get help with concepts and summaries.",
+          "step1": "Open the 'AI Study Partner' chat drawer.",
+          "step2": "Ask a question about your current subject topics.",
+          "step3": "The AI uses school context to provide relevant answers.",
+          "step4": "Request summaries of teaching materials or practice quiz questions."
         }
       }
     },
