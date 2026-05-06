@@ -139,6 +139,93 @@
           "step4": "Manage system-wide backups and automated recovery schedules."
         }
       },
+      "gallery": {
+        "dashboard": {
+          "title": "System Dashboard",
+          "description": "A high-level overview of the entire platform, showing global metrics, active schools, and recent system activities at a glance."
+        },
+        "school_management": {
+          "title": "School Management",
+          "description": "Centralized hub for managing all school tenants within the system, allowing administrators to monitor status and access specific school configurations."
+        },
+        "create_new_school": {
+          "title": "New School Tenant",
+          "description": "Step-by-step interface for onboarding new educational institutions, defining their basic identity and initial resource allocations."
+        },
+        "edit_school": {
+          "title": "School Configuration",
+          "description": "Detailed settings for existing schools, where administrators can modify metadata, contact information, and specific instance behaviors."
+        },
+        "behalf_of_mode": {
+          "title": "Secure Impersonation",
+          "description": "A powerful administrative tool that allows system admins to access the system as a specific user for troubleshooting and direct support."
+        },
+        "system_users": {
+          "title": "Global User Directory",
+          "description": "Management interface for users with system-wide privileges, ensuring only authorized personnel can access the platform core."
+        },
+        "create_new_system_user": {
+          "title": "User Provisioning",
+          "description": "Simple form for creating new system-level accounts and assigning global administrative roles."
+        },
+        "ai_management": {
+          "title": "AI Resource Orchestration",
+          "description": "Control center for AI integration, where token limits are defined and provider API keys (OpenAI, Anthropic, etc.) are securely managed."
+        },
+        "sso_setting": {
+          "title": "Identity Providers",
+          "description": "Overview of configured Single Sign-On methods, supporting enterprise authentication through major providers."
+        },
+        "set_new_sso_provider": {
+          "title": "SSO Configuration",
+          "description": "Technical setup for new identity providers, including client IDs, secrets, and endpoint mappings."
+        },
+        "monitoring": {
+          "title": "System Health & Analytics",
+          "description": "Real-time monitoring of platform performance and detailed analytics on AI resource consumption across all tenants."
+        },
+        "system_params": {
+          "title": "Global Parameters",
+          "description": "Configuration of system-wide constants and feature flags that affect the behavior of the entire Edu Stack ecosystem."
+        },
+        "generate_data": {
+          "title": "Demo Data Factory",
+          "description": "Development tool for quickly generating realistic demo data (users, classes, schedules) for testing and presentation purposes."
+        },
+        "backup_restore": {
+          "title": "Data Lifecycle Management",
+          "description": "Robust tools for manual database backups and restoring the system state to ensure data integrity and disaster recovery."
+        }
+      },
+      "schoolAdmin": {
+        "title": "School Administrator",
+        "description": "The local operational manager responsible for the technical configuration and user management of a specific school instance.",
+        "functions": "School-specific user onboarding, role assignments, classroom and building structure management, and local system configuration.",
+        "workflow1": {
+          "title": "Local User Management",
+          "description": "Onboard and manage students, teachers, and staff within the school.",
+          "step1": "Use the CSV Import tool to bulk upload student and staff records.",
+          "step2": "Assign appropriate roles (Teacher, Student, Parent) to imported users.",
+          "step3": "Manage user account status and reset passwords when necessary.",
+          "step4": "Verify user access to specific school modules."
+        },
+        "workflow2": {
+          "title": "Educational Structure",
+          "description": "Define the physical and organizational layout of the school.",
+          "step1": "Create building structures and define individual classrooms.",
+          "step2": "Set up class groups and assign students to their respective grades.",
+          "step3": "Configure school periods and lesson timings.",
+          "step4": "Maintain the registry of active subjects and departments."
+        },
+        "workflow3": {
+          "title": "Module Configuration",
+          "description": "Fine-tune system features for local school needs.",
+          "step1": "Enable or disable specific modules like 'AI Assistant' or 'Community'.",
+          "step2": "Configure local grading scales and weighting systems.",
+          "step3": "Set up school-wide notification preferences.",
+          "step4": "Review local audit logs for security and compliance."
+        }
+      },
       "headmaster": {
         "title": "Headmaster",
         "description": "Pedagogical and organizational leader of the school. Focuses on overview and school-wide communication.",

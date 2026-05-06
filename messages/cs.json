@@ -139,6 +139,93 @@
           "step4": "Spravujte celosystémové zálohy a plány automatické obnovy dat."
         }
       },
+      "gallery": {
+        "dashboard": {
+          "title": "Systémový přehled",
+          "description": "Hlavní dashboard poskytující rychlý přehled o celém systému, globálních metrikách, aktivních školách a posledních systémových aktivitách."
+        },
+        "school_management": {
+          "title": "Správa škol",
+          "description": "Centrální uzel pro správu všech školních tenantů v systému, umožňující administrátorům sledovat stav a přistupovat ke konfiguracím jednotlivých škol."
+        },
+        "create_new_school": {
+          "title": "Nový tenant školy",
+          "description": "Rozhraní pro onboarding nových vzdělávacích institucí, definování jejich základní identity a prvotní alokaci zdrojů."
+        },
+        "edit_school": {
+          "title": "Konfigurace školy",
+          "description": "Detailní nastavení pro existující školy, kde mohou administrátoři upravovat metadata, kontaktní informace a specifické chování instance."
+        },
+        "behalf_of_mode": {
+          "title": "Zabezpečená impersonace",
+          "description": "Výkonný administrátorský nástroj umožňující přistupovat do systému pod identitou konkrétního uživatele za účelem podpory a řešení potíží."
+        },
+        "system_users": {
+          "title": "Globální adresář uživatelů",
+          "description": "Rozhraní pro správu uživatelů s celosystémovými oprávněními, zajišťující přístup k jádru platformy pouze autorizovaným osobám."
+        },
+        "create_new_system_user": {
+          "title": "Zřizování uživatelů",
+          "description": "Jednoduchý formulář pro vytváření nových systémových účtů a přiřazování globálních administrátorských rolí."
+        },
+        "ai_management": {
+          "title": "Orchestrace AI zdrojů",
+          "description": "Ovládací centrum pro integraci AI, kde se definují limity tokenů a bezpečně spravují API klíče poskytovatelů (OpenAI, Anthropic atd.)."
+        },
+        "sso_setting": {
+          "title": "Poskytovatelé identity",
+          "description": "Přehled nakonfigurovaných metod Single Sign-On (SSO), podporující podnikové ověřování přes hlavní poskytovatele."
+        },
+        "set_new_sso_provider": {
+          "title": "Konfigurace SSO",
+          "description": "Technické nastavení pro nové poskytovatele identity, včetně klientských ID, tajných klíčů a mapování koncových bodů."
+        },
+        "monitoring": {
+          "title": "Zdraví systému a analytika",
+          "description": "Monitoring výkonu platformy v reálném čase a detailní analytika spotřeby AI zdrojů napříč všemi tenanty."
+        },
+        "system_params": {
+          "title": "Globální parametry",
+          "description": "Konfigurace celosystémových konstant a funkčních příznaků, které ovlivňují chování celého ekosystému Edu Stack."
+        },
+        "generate_data": {
+          "title": "Generátor demo dat",
+          "description": "Vývojářský nástroj pro rychlé generování realistických demo dat (uživatelů, tříd, rozvrhů) pro účely testování a prezentace."
+        },
+        "backup_restore": {
+          "title": "Správa životního cyklu dat",
+          "description": "Nástroje pro ruční zálohování databáze a obnovu stavu systému pro zajištění integrity dat a disaster recovery."
+        }
+      },
+      "schoolAdmin": {
+        "title": "Správce školy",
+        "description": "Lokální provozní manažer odpovědný za technickou konfiguraci a správu uživatelů konkrétní instance školy.",
+        "functions": "Onboarding uživatelů konkrétní školy, přiřazování rolí, správa tříd a struktury budov a lokální nastavení systému.",
+        "workflow1": {
+          "title": "Lokální správa uživatelů",
+          "description": "Zajištění přístupu a správa žáků, učitelů a zaměstnanců v rámci školy.",
+          "step1": "Použijte nástroj pro import CSV pro hromadné nahrání záznamů žáků a zaměstnanců.",
+          "step2": "Přiřaďte importovaným uživatelům odpovídající role (Učitel, Žák, Rodič).",
+          "step3": "Spravujte stavy uživatelských účtů a v případě potřeby resetujte hesla.",
+          "step4": "Ověřte přístup uživatelů ke konkrétním modulům školy."
+        },
+        "workflow2": {
+          "title": "Vzdělávací struktura",
+          "description": "Definice fyzického a organizačního uspořádání školy.",
+          "step1": "Vytvořte strukturu budov a definujte jednotlivé učebny.",
+          "step2": "Nastavte třídní skupiny a přiřaďte žáky do odpovídajících ročníků.",
+          "step3": "Nakonfigurujte vyučovací hodiny a časový rozvrh zvonění.",
+          "step4": "Udržujte registr aktivních předmětů a kabinetů."
+        },
+        "workflow3": {
+          "title": "Konfigurace modulů",
+          "description": "Doladění funkcí systému pro potřeby konkrétní školy.",
+          "step1": "Povolte nebo zakažte specifické moduly jako 'AI asistent' nebo 'Komunita'.",
+          "step2": "Nakonfigurujte lokální klasifikační stupnice a systémy vah známek.",
+          "step3": "Nastavte celoškolní preference pro notifikace.",
+          "step4": "Kontrolujte lokální auditní logy pro zajištění bezpečnosti."
+        }
+      },
       "headmaster": {
         "title": "Ředitel školy",
         "description": "Pedagogický a organizační lídr školy. Zaměřuje se na přehled a celoškolní komunikaci.",

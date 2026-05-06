@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ManualSidebar from '@/components/ManualSidebar';
 import ScreenshotPlaceholder from '@/components/ScreenshotPlaceholder';
-import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, Zap, CheckCircle2, Heart} from 'lucide-react';
+import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart} from 'lucide-react';
 
 const roleColorMap: Record<string, string> = {
   systemAdmin: 'brand-purple',
@@ -53,10 +53,27 @@ const bgFullMap: Record<string, string> = {
   'brand-slate': 'bg-brand-slate',
   'brand-blue': 'bg-brand-blue',
   'brand-pink': 'bg-brand-pink',
-  'brand-teal': 'brand-teal',
+  'brand-teal': 'bg-brand-teal',
   'rose-500': 'bg-rose-500',
   'brand-orange': 'bg-brand-orange',
 };
+
+const systemAdminGallery = [
+  { id: 'dashboard', src: '/images/documentation/system-admin/00_dashboard.png' },
+  { id: 'school_management', src: '/images/documentation/system-admin/01_school_management.png' },
+  { id: 'create_new_school', src: '/images/documentation/system-admin/02_create_new_school.png' },
+  { id: 'edit_school', src: '/images/documentation/system-admin/03_edit_school.png' },
+  { id: 'behalf_of_mode', src: '/images/documentation/system-admin/04_behalf_of_mode.png' },
+  { id: 'system_users', src: '/images/documentation/system-admin/05_system_users.png' },
+  { id: 'create_new_system_user', src: '/images/documentation/system-admin/06_create_new_system_user.png' },
+  { id: 'ai_management', src: '/images/documentation/system-admin/07_system_setting_ai_management.png' },
+  { id: 'sso_setting', src: '/images/documentation/system-admin/08_system_setting_sso_setting.png' },
+  { id: 'set_new_sso_provider', src: '/images/documentation/system-admin/09_system_setting_set_new_sso_provider.png' },
+  { id: 'monitoring', src: '/images/documentation/system-admin/10_system_setting_monitoring.png' },
+  { id: 'system_params', src: '/images/documentation/system-admin/11_system_setting_system_params.png' },
+  { id: 'generate_data', src: '/images/documentation/system-admin/12_system_setting_generate_data.png' },
+  { id: 'backup_restore', src: '/images/documentation/system-admin/13_system_settings_backup_restore.png' },
+];
 
 export default function ManualPage() {
   const t = useTranslations('Manual');
@@ -124,22 +141,34 @@ export default function ManualPage() {
                   </p>
                 </div>
                 
-                <div className="grid gap-12 lg:grid-cols-2">
-                  <div className="space-y-6">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div key={i} className="flex gap-6 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 transition-all hover:bg-white dark:hover:bg-slate-900 hover:shadow-xl hover:scale-[1.02]">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-purple text-white font-black text-lg shadow-lg shadow-brand-purple/20">
-                          {i}
+                <div className="space-y-12">
+                  <div className="grid gap-12 lg:grid-cols-2">
+                    <div className="space-y-6">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="flex gap-6 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 transition-all hover:bg-white dark:hover:bg-slate-900 hover:shadow-xl hover:scale-[1.02]">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-purple text-white font-black text-lg shadow-lg shadow-brand-purple/20">
+                            {i}
+                          </div>
+                          <p className="text-xl font-bold text-slate-800 dark:text-slate-200 pt-1.5 leading-snug">
+                            {translate(`development.step${i}`)}
+                          </p>
                         </div>
-                        <p className="text-xl font-bold text-slate-800 dark:text-slate-200 pt-1.5 leading-snug">
-                          {translate(`development.step${i}`)}
-                        </p>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+                    <div className="space-y-6 flex flex-col justify-center">
+                      <ScreenshotPlaceholder 
+                        src="/images/documentation/config/00_config_local.png" 
+                        alt="Local Configuration" 
+                        roleColor="brand-purple" 
+                      />
+                    </div>
                   </div>
-                  <div className="space-y-6">
-                    <ScreenshotPlaceholder roleColor="brand-purple" className="h-full" />
-                  </div>
+                  <ScreenshotPlaceholder 
+                    src="/images/documentation/config/01_startup_application.png" 
+                    alt="Application Startup" 
+                    roleColor="brand-purple"
+                    className="max-w-4xl mx-auto"
+                  />
                 </div>
               </section>
 
@@ -156,15 +185,30 @@ export default function ManualPage() {
                 </div>
 
                 <div className="grid gap-10 md:grid-cols-2">
-                  {[1, 2].map((i) => (
-                    <div key={i} className="group flex flex-col gap-8 p-10 rounded-[3rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-all hover:shadow-2xl">
-                      <div className="space-y-4">
-                        <h3 className="text-3xl font-black tracking-tight text-brand-purple">{translate(`setup.option${i}.title`)}</h3>
-                        <p className="text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed">{translate(`setup.option${i}.description`)}</p>
-                      </div>
-                      <ScreenshotPlaceholder roleColor="brand-purple" className="aspect-[4/3] group-hover:scale-[1.03] transition-transform" />
+                  <div className="group flex flex-col gap-8 p-10 rounded-[3rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-all hover:shadow-2xl">
+                    <div className="space-y-4">
+                      <h3 className="text-3xl font-black tracking-tight text-brand-purple">{translate('setup.option1.title')}</h3>
+                      <p className="text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed">{translate('setup.option1.description')}</p>
                     </div>
-                  ))}
+                    <ScreenshotPlaceholder 
+                      src="/images/documentation/system-setup/01_system_setupm_upload_bachup_file.png" 
+                      alt="Restore from Backup" 
+                      roleColor="brand-purple" 
+                      className="aspect-[4/3] group-hover:scale-[1.03] transition-transform" 
+                    />
+                  </div>
+                  <div className="group flex flex-col gap-8 p-10 rounded-[3rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-all hover:shadow-2xl">
+                    <div className="space-y-4">
+                      <h3 className="text-3xl font-black tracking-tight text-brand-purple">{translate('setup.option2.title')}</h3>
+                      <p className="text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed">{translate('setup.option2.description')}</p>
+                    </div>
+                    <ScreenshotPlaceholder 
+                      src="/images/documentation/system-setup/00_system_setup_from_scratch.png" 
+                      alt="System Setup from Scratch" 
+                      roleColor="brand-purple" 
+                      className="aspect-[4/3] group-hover:scale-[1.03] transition-transform" 
+                    />
+                  </div>
                 </div>
               </section>
 
@@ -180,16 +224,32 @@ export default function ManualPage() {
                   </p>
                 </div>
 
-                <div className="space-y-12">
-                  <div className="grid gap-8 md:grid-cols-3">
-                    {['helper', 'credentials', 'sso'].map((type) => (
-                      <div key={type} className="p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 space-y-4 hover:bg-white dark:hover:bg-slate-900 transition-colors hover:shadow-xl">
-                        <h4 className="text-xl font-black tracking-tight text-slate-900 dark:text-white">{translate(`login.${type}.title`)}</h4>
-                        <p className="text-base text-slate-500 dark:text-slate-400 font-medium leading-relaxed">{translate(`login.${type}.description`)}</p>
-                      </div>
-                    ))}
+                <div className="space-y-24">
+                  <div className="grid gap-12 lg:grid-cols-2 items-center">
+                    <div className="space-y-8">
+                      {['helper', 'credentials', 'sso'].map((type) => (
+                        <div key={type} className="p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 space-y-4 hover:bg-white dark:hover:bg-slate-900 transition-colors hover:shadow-xl group">
+                          <h4 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white group-hover:text-brand-purple transition-colors">{translate(`login.${type}.title`)}</h4>
+                          <p className="text-lg text-slate-500 dark:text-slate-400 font-medium leading-relaxed">{translate(`login.${type}.description`)}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <ScreenshotPlaceholder 
+                      src="/images/documentation/login/00_login_with_helper.png" 
+                      alt="Login with Developer Helper" 
+                      roleColor="brand-purple" 
+                      className="shadow-2xl"
+                    />
                   </div>
-                  <ScreenshotPlaceholder roleColor="brand-purple" className="shadow-2xl" />
+                  <div className="space-y-8 text-center">
+                    <h4 className="text-3xl font-black tracking-tight">Standard Secure Login</h4>
+                    <ScreenshotPlaceholder 
+                      src="/images/documentation/login/01_login_without_helper.png" 
+                      alt="Standard Login Screen" 
+                      roleColor="brand-purple" 
+                      className="max-w-3xl mx-auto shadow-2xl"
+                    />
+                  </div>
                 </div>
               </section>
 
@@ -251,7 +311,11 @@ export default function ManualPage() {
                         
                         <div className="relative">
                           <div className={`absolute -inset-4 bg-${color}/10 blur-3xl rounded-full opacity-50`} />
-                          <ScreenshotPlaceholder roleColor={color} className="relative z-10 aspect-video shadow-2xl" />
+                          <ScreenshotPlaceholder 
+                            roleColor={color} 
+                            src={role.id === 'systemAdmin' ? '/images/documentation/system-admin/00_dashboard.png' : undefined}
+                            className="relative z-10 aspect-video shadow-2xl" 
+                          />
                         </div>
                       </div>
 
@@ -299,7 +363,15 @@ export default function ManualPage() {
                                   </div>
                                 </div>
                                 <div className="lg:col-span-3 space-y-8">
-                                  <ScreenshotPlaceholder roleColor={color} className="aspect-video shadow-2xl rounded-[3rem]" />
+                                  <ScreenshotPlaceholder 
+                                    roleColor={color} 
+                                    src={role.id === 'systemAdmin' ? (
+                                      w === 1 ? '/images/documentation/system-admin/01_school_management.png' :
+                                      w === 2 ? '/images/documentation/system-admin/05_system_users.png' :
+                                      '/images/documentation/system-admin/10_system_setting_monitoring.png'
+                                    ) : undefined}
+                                    className="aspect-video shadow-2xl rounded-[3rem]" 
+                                  />
                                   <div className="grid grid-cols-3 gap-4 h-2">
                                      <div className={`rounded-full ${bgFullMap[color]} opacity-100`} />
                                      <div className={`rounded-full ${bgFullMap[color]} opacity-40`} />
@@ -311,6 +383,39 @@ export default function ManualPage() {
                           ))}
                         </div>
                       </div>
+
+                      {/* Feature Gallery (Specific for System Admin) */}
+                      {role.id === 'systemAdmin' && (
+                        <div className="space-y-32 pt-32">
+                          <div className="flex items-center gap-6">
+                            <h4 className="text-3xl font-black tracking-tight uppercase opacity-30 italic">Platform Core Gallery</h4>
+                            <div className="h-px flex-1 bg-slate-100 dark:bg-slate-800" />
+                          </div>
+                          
+                          <div className="grid gap-32">
+                            {systemAdminGallery.map((item, idx) => (
+                              <div key={item.id} className={`grid lg:grid-cols-2 gap-16 items-center ${idx % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+                                <div className={`space-y-6 ${idx % 2 === 1 ? 'lg:order-2' : ''}`}>
+                                  <h5 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white">
+                                    {translate(`gallery.${item.id}.title`)}
+                                  </h5>
+                                  <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+                                    {translate(`gallery.${item.id}.description`)}
+                                  </p>
+                                </div>
+                                <div className={idx % 2 === 1 ? 'lg:order-1' : ''}>
+                                  <ScreenshotPlaceholder 
+                                    src={item.src} 
+                                    alt={translate(`gallery.${item.id}.title`)}
+                                    roleColor={color} 
+                                    className="shadow-xl"
+                                  />
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </section>
                   );
                 })}
