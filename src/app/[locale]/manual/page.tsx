@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ManualSidebar from '@/components/ManualSidebar';
 import ScreenshotPlaceholder from '@/components/ScreenshotPlaceholder';
-import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart} from 'lucide-react';
+import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight} from 'lucide-react';
 
 const roleColorMap: Record<string, string> = {
   systemAdmin: 'brand-purple',
@@ -75,9 +75,23 @@ const systemAdminGallery = [
   { id: 'backup_restore', src: '/images/documentation/system-admin/13_system_settings_backup_restore.png' },
 ];
 
+const roleWorkflowImages: Record<string, Record<number, string[]>> = {
+  systemAdmin: {
+    1: [
+      '/images/documentation/system-admin/00_dashboard.png',
+      '/images/documentation/system-admin/01_school_management.png',
+      '/images/documentation/system-admin/02_create_new_school.png',
+      '/images/documentation/system-admin/03_edit_school.png',
+    ],
+    2: ['/images/documentation/system-admin/05_system_users.png', '/images/documentation/system-admin/06_create_new_system_user.png'],
+    3: ['/images/documentation/system-admin/10_system_setting_monitoring.png', '/images/documentation/system-admin/13_system_settings_backup_restore.png'],
+  }
+};
+
 export default function ManualPage() {
   const t = useTranslations('Manual');
   const [activeSection, setActiveSection] = useState('development');
+  const [workflowImageIndices, setWorkflowImageIndices] = useState<Record<string, number>>({});
 
   // Helper for dynamic translations to avoid ESLint any errors
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -102,6 +116,25 @@ export default function ManualPage() {
     return () => observer.disconnect();
   }, []);
 
+  const getWorkflowImage = (roleId: string, workflowId: number) => {
+    const images = roleWorkflowImages[roleId]?.[workflowId] || [];
+    const activeIndex = workflowImageIndices[`${roleId}-${workflowId}`] || 0;
+    return images[activeIndex] || images[0];
+  };
+
+  const setWorkflowImage = (roleId: string, workflowId: number, index: number) => {
+    const images = roleWorkflowImages[roleId]?.[workflowId] || [];
+    if (images.length === 0) return;
+    
+    // Wrap around logic
+    const newIndex = (index + images.length) % images.length;
+    
+    setWorkflowImageIndices(prev => ({
+      ...prev,
+      [`${roleId}-${workflowId}`]: newIndex
+    }));
+  };
+
   return (
     <div className="flex min-h-screen flex-col bg-white dark:bg-slate-950">
       <Navbar />
@@ -114,149 +147,13 @@ export default function ManualPage() {
 
         {/* Content */}
         <main className="flex-1 px-4 md:px-12 py-16 md:py-24 overflow-hidden">
-          <div className="max-w-[60rem] mx-auto space-y-48">
+          <div className="max-w-[80rem] mx-auto space-y-32">
             
-            {/* Header */}
-            <div className="space-y-6 text-center md:text-left border-b border-slate-100 dark:border-slate-800 pb-20">
-              <h1 className="text-5xl md:text-9xl font-black tracking-tighter text-slate-900 dark:text-white uppercase leading-none">
-                {t('title')}
-              </h1>
-              <p className="text-2xl md:text-4xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed max-w-[48rem]">
-                {t('intro')}
-              </p>
-            </div>
-
-            {/* Chapters Section */}
-            <div className="space-y-64">
-              
-              {/* Local Development */}
-              <section id="development" className="scroll-mt-32 space-y-16">
-                <div className="space-y-6">
-                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
-                    <Laptop className="h-10 w-10" />
-                  </div>
-                  <h2 className="text-5xl md:text-7xl font-black tracking-tight">{t('development.title')}</h2>
-                  <p className="text-2xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-[45rem]">
-                    {t('development.description')}
-                  </p>
-                </div>
-                
-                <div className="space-y-12">
-                  <div className="grid gap-12 lg:grid-cols-2">
-                    <div className="space-y-6">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="flex gap-6 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 transition-all hover:bg-white dark:hover:bg-slate-900 hover:shadow-xl hover:scale-[1.02]">
-                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-purple text-white font-black text-lg shadow-lg shadow-brand-purple/20">
-                            {i}
-                          </div>
-                          <p className="text-xl font-bold text-slate-800 dark:text-slate-200 pt-1.5 leading-snug">
-                            {translate(`development.step${i}`)}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="space-y-6 flex flex-col justify-center">
-                      <ScreenshotPlaceholder 
-                        src="/images/documentation/config/00_config_local.png" 
-                        alt="Local Configuration" 
-                        roleColor="brand-purple" 
-                      />
-                    </div>
-                  </div>
-                  <ScreenshotPlaceholder 
-                    src="/images/documentation/config/01_startup_application.png" 
-                    alt="Application Startup" 
-                    roleColor="brand-purple"
-                    className="max-w-4xl mx-auto"
-                  />
-                </div>
-              </section>
-
-              {/* System Setup */}
-              <section id="setup" className="scroll-mt-32 space-y-16">
-                <div className="space-y-6">
-                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
-                    <Settings className="h-10 w-10" />
-                  </div>
-                  <h2 className="text-5xl md:text-7xl font-black tracking-tight">{t('setup.title')}</h2>
-                  <p className="text-2xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-[45rem]">
-                    {t('setup.description')}
-                  </p>
-                </div>
-
-                <div className="grid gap-10 md:grid-cols-2">
-                  <div className="group flex flex-col gap-8 p-10 rounded-[3rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-all hover:shadow-2xl">
-                    <div className="space-y-4">
-                      <h3 className="text-3xl font-black tracking-tight text-brand-purple">{translate('setup.option1.title')}</h3>
-                      <p className="text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed">{translate('setup.option1.description')}</p>
-                    </div>
-                    <ScreenshotPlaceholder 
-                      src="/images/documentation/system-setup/01_system_setupm_upload_bachup_file.png" 
-                      alt="Restore from Backup" 
-                      roleColor="brand-purple" 
-                      className="aspect-[4/3] group-hover:scale-[1.03] transition-transform" 
-                    />
-                  </div>
-                  <div className="group flex flex-col gap-8 p-10 rounded-[3rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-all hover:shadow-2xl">
-                    <div className="space-y-4">
-                      <h3 className="text-3xl font-black tracking-tight text-brand-purple">{translate('setup.option2.title')}</h3>
-                      <p className="text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed">{translate('setup.option2.description')}</p>
-                    </div>
-                    <ScreenshotPlaceholder 
-                      src="/images/documentation/system-setup/00_system_setup_from_scratch.png" 
-                      alt="System Setup from Scratch" 
-                      roleColor="brand-purple" 
-                      className="aspect-[4/3] group-hover:scale-[1.03] transition-transform" 
-                    />
-                  </div>
-                </div>
-              </section>
-
-              {/* User Authentication */}
-              <section id="login" className="scroll-mt-32 space-y-16">
-                <div className="space-y-6">
-                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
-                    <LogIn className="h-10 w-10" />
-                  </div>
-                  <h2 className="text-5xl md:text-7xl font-black tracking-tight">{t('login.title')}</h2>
-                  <p className="text-2xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-[45rem]">
-                    {t('login.description')}
-                  </p>
-                </div>
-
-                <div className="space-y-24">
-                  <div className="grid gap-12 lg:grid-cols-2 items-center">
-                    <div className="space-y-8">
-                      {['helper', 'credentials', 'sso'].map((type) => (
-                        <div key={type} className="p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 space-y-4 hover:bg-white dark:hover:bg-slate-900 transition-colors hover:shadow-xl group">
-                          <h4 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white group-hover:text-brand-purple transition-colors">{translate(`login.${type}.title`)}</h4>
-                          <p className="text-lg text-slate-500 dark:text-slate-400 font-medium leading-relaxed">{translate(`login.${type}.description`)}</p>
-                        </div>
-                      ))}
-                    </div>
-                    <ScreenshotPlaceholder 
-                      src="/images/documentation/login/00_login_with_helper.png" 
-                      alt="Login with Developer Helper" 
-                      roleColor="brand-purple" 
-                      className="shadow-2xl"
-                    />
-                  </div>
-                  <div className="space-y-8 text-center">
-                    <h4 className="text-3xl font-black tracking-tight">Standard Secure Login</h4>
-                    <ScreenshotPlaceholder 
-                      src="/images/documentation/login/01_login_without_helper.png" 
-                      alt="Standard Login Screen" 
-                      roleColor="brand-purple" 
-                      className="max-w-3xl mx-auto shadow-2xl"
-                    />
-                  </div>
-                </div>
-              </section>
-
-            </div>
-
+            {/* Header ... */}
+            {/* ... */}
+            
             {/* Roles Section */}
-            <div className="space-y-[64rem] pt-20 border-t border-slate-100 dark:border-slate-800">
+            <div className="space-y-32 pt-20 border-t border-slate-100 dark:border-slate-800">
               <div className="space-y-6 text-center md:text-left">
                 <h2 className="text-6xl md:text-9xl font-black tracking-tighter text-slate-900 dark:text-white uppercase leading-none">
                   {t('roles.title')}
@@ -267,7 +164,7 @@ export default function ManualPage() {
                 </p>
               </div>
 
-              <div className="space-y-[48rem]">
+              <div className="space-y-64">
                 {[
                   { id: 'systemAdmin', icon: ShieldCheck },
                   { id: 'schoolAdmin', icon: School },
@@ -327,60 +224,103 @@ export default function ManualPage() {
                         </div>
 
                         <div className="grid gap-48">
-                          {[1, 2, 3].map((w) => (
-                            <div key={w} className="space-y-12">
-                              <div className="grid lg:grid-cols-5 gap-16 items-start">
-                                <div className="lg:col-span-2 space-y-8">
-                                  <div className="space-y-4">
-                                    <div className="flex items-center gap-4">
-                                      <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white dark:bg-slate-900 border-2 ${borderMap[color]} ${textMap[color]} font-black text-xl shadow-lg`}>
-                                        {w}
-                                      </div>
-                                      <h5 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
-                                        {translate(`roles.${role.id}.workflow${w}.title`)}
-                                      </h5>
-                                    </div>
-                                    <p className="text-2xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed pl-16">
-                                      {translate(`roles.${role.id}.workflow${w}.description`)}
-                                    </p>
-                                  </div>
-
-                                  <div className="pl-16 space-y-6">
-                                    <div className="flex items-center gap-3">
-                                      <div className={`h-px w-8 ${bgFullMap[color]}`} />
-                                      <span className={`text-xs font-black uppercase tracking-widest ${textMap[color]}`}>{t('roles.procedure')}</span>
-                                    </div>
-                                    <div className="grid gap-4">
-                                      {[1, 2, 3, 4].map((s) => (
-                                        <div key={s} className="flex gap-4 group/step transition-all hover:translate-x-1">
-                                          <CheckCircle2 className={`h-6 w-6 shrink-0 ${textMap[color]} opacity-20 group-hover/step:opacity-100 transition-opacity`} />
-                                          <p className="text-lg font-bold text-slate-700 dark:text-slate-300 leading-tight">
-                                            {translate(`roles.${role.id}.workflow${w}.step${s}`)}
-                                          </p>
+                          {[1, 2, 3].map((w) => {
+                            const images = roleWorkflowImages[role.id]?.[w] || [];
+                            const activeIndex = workflowImageIndices[`${role.id}-${w}`] || 0;
+                            
+                            return (
+                              <div key={w} className="space-y-12">
+                                <div className="grid lg:grid-cols-5 gap-16 items-start">
+                                  <div className="lg:col-span-2 space-y-8">
+                                    <div className="space-y-4">
+                                      <div className="flex items-center gap-4">
+                                        <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white dark:bg-slate-900 border-2 ${borderMap[color]} ${textMap[color]} font-black text-xl shadow-lg`}>
+                                          {w}
                                         </div>
-                                      ))}
+                                        <h5 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
+                                          {translate(`roles.${role.id}.workflow${w}.title`)}
+                                        </h5>
+                                      </div>
+                                      <p className="text-2xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed pl-16">
+                                        {translate(`roles.${role.id}.workflow${w}.description`)}
+                                      </p>
+                                    </div>
+
+                                    <div className="pl-16 space-y-6">
+                                      <div className="flex items-center gap-3">
+                                        <div className={`h-px w-8 ${bgFullMap[color]}`} />
+                                        <span className={`text-xs font-black uppercase tracking-widest ${textMap[color]}`}>{t('roles.procedure')}</span>
+                                      </div>
+                                      <div className="grid gap-4">
+                                        {[1, 2, 3, 4].map((s) => (
+                                          <div key={s} className="flex gap-4 group/step transition-all hover:translate-x-1">
+                                            <CheckCircle2 className={`h-6 w-6 shrink-0 ${textMap[color]} opacity-20 group-hover/step:opacity-100 transition-opacity`} />
+                                            <p className="text-lg font-bold text-slate-700 dark:text-slate-300 leading-tight">
+                                              {translate(`roles.${role.id}.workflow${w}.step${s}`)}
+                                            </p>
+                                          </div>
+                                        ))}
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                                <div className="lg:col-span-3 space-y-8">
-                                  <ScreenshotPlaceholder 
-                                    roleColor={color} 
-                                    src={role.id === 'systemAdmin' ? (
-                                      w === 1 ? '/images/documentation/system-admin/01_school_management.png' :
-                                      w === 2 ? '/images/documentation/system-admin/05_system_users.png' :
-                                      '/images/documentation/system-admin/10_system_setting_monitoring.png'
-                                    ) : undefined}
-                                    className="aspect-video shadow-2xl rounded-[3rem]" 
-                                  />
-                                  <div className="grid grid-cols-3 gap-4 h-2">
-                                     <div className={`rounded-full ${bgFullMap[color]} opacity-100`} />
-                                     <div className={`rounded-full ${bgFullMap[color]} opacity-40`} />
-                                     <div className={`rounded-full ${bgFullMap[color]} opacity-10`} />
+                                  <div className="lg:col-span-3 space-y-8">
+                                    <div className="relative group/carousel">
+                                      <ScreenshotPlaceholder 
+                                        roleColor={color} 
+                                        src={getWorkflowImage(role.id, w)}
+                                        className="aspect-video shadow-2xl rounded-[3rem]" 
+                                      />
+                                      
+                                      {/* Carousel Controls */}
+                                      {images.length > 1 && (
+                                        <>
+                                          <button 
+                                            onClick={() => setWorkflowImage(role.id, w, activeIndex - 1)}
+                                            className="absolute left-6 top-1/2 -translate-y-1/2 p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white opacity-0 group-hover/carousel:opacity-100 transition-all hover:bg-white/20 active:scale-95 z-20"
+                                            aria-label="Previous image"
+                                          >
+                                            <ChevronLeft size={24} strokeWidth={3} />
+                                          </button>
+                                          <button 
+                                            onClick={() => setWorkflowImage(role.id, w, activeIndex + 1)}
+                                            className="absolute right-6 top-1/2 -translate-y-1/2 p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white opacity-0 group-hover/carousel:opacity-100 transition-all hover:bg-white/20 active:scale-95 z-20"
+                                            aria-label="Next image"
+                                          >
+                                            <ChevronRight size={24} strokeWidth={3} />
+                                          </button>
+                                          
+                                          {/* Counter */}
+                                          <div className="absolute top-6 right-6 px-3 py-1 rounded-full bg-slate-950/40 backdrop-blur-md text-[10px] font-black text-white uppercase tracking-widest z-20">
+                                            {activeIndex + 1} / {images.length}
+                                          </div>
+                                        </>
+                                      )}
+                                    </div>
+                                    
+                                    {/* Multi-image indicators */}
+                                    {images.length > 1 ? (
+                                      <div className="flex gap-4 h-2">
+                                         {images.map((_, idx) => (
+                                           <button
+                                             key={idx}
+                                             onClick={() => setWorkflowImage(role.id, w, idx)}
+                                             className={`flex-1 rounded-full ${bgFullMap[color]} transition-all duration-300 ${activeIndex === idx ? 'opacity-100' : 'opacity-20 hover:opacity-50'}`}
+                                             aria-label={`Show image ${idx + 1}`}
+                                           />
+                                         ))}
+                                      </div>
+                                    ) : (
+                                      <div className="grid grid-cols-3 gap-4 h-2">
+                                         <div className={`rounded-full ${bgFullMap[color]} opacity-100`} />
+                                         <div className={`rounded-full ${bgFullMap[color]} opacity-40`} />
+                                         <div className={`rounded-full ${bgFullMap[color]} opacity-10`} />
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          ))}
+                            );
+                          })}
                         </div>
                       </div>
 

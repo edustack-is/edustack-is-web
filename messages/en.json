@@ -139,64 +139,6 @@
           "step4": "Manage system-wide backups and automated recovery schedules."
         }
       },
-      "gallery": {
-        "dashboard": {
-          "title": "System Dashboard",
-          "description": "A high-level overview of the entire platform, showing global metrics, active schools, and recent system activities at a glance."
-        },
-        "school_management": {
-          "title": "School Management",
-          "description": "Centralized hub for managing all school tenants within the system, allowing administrators to monitor status and access specific school configurations."
-        },
-        "create_new_school": {
-          "title": "New School Tenant",
-          "description": "Step-by-step interface for onboarding new educational institutions, defining their basic identity and initial resource allocations."
-        },
-        "edit_school": {
-          "title": "School Configuration",
-          "description": "Detailed settings for existing schools, where administrators can modify metadata, contact information, and specific instance behaviors."
-        },
-        "behalf_of_mode": {
-          "title": "Secure Impersonation",
-          "description": "A powerful administrative tool that allows system admins to access the system as a specific user for troubleshooting and direct support."
-        },
-        "system_users": {
-          "title": "Global User Directory",
-          "description": "Management interface for users with system-wide privileges, ensuring only authorized personnel can access the platform core."
-        },
-        "create_new_system_user": {
-          "title": "User Provisioning",
-          "description": "Simple form for creating new system-level accounts and assigning global administrative roles."
-        },
-        "ai_management": {
-          "title": "AI Resource Orchestration",
-          "description": "Control center for AI integration, where token limits are defined and provider API keys (OpenAI, Anthropic, etc.) are securely managed."
-        },
-        "sso_setting": {
-          "title": "Identity Providers",
-          "description": "Overview of configured Single Sign-On methods, supporting enterprise authentication through major providers."
-        },
-        "set_new_sso_provider": {
-          "title": "SSO Configuration",
-          "description": "Technical setup for new identity providers, including client IDs, secrets, and endpoint mappings."
-        },
-        "monitoring": {
-          "title": "System Health & Analytics",
-          "description": "Real-time monitoring of platform performance and detailed analytics on AI resource consumption across all tenants."
-        },
-        "system_params": {
-          "title": "Global Parameters",
-          "description": "Configuration of system-wide constants and feature flags that affect the behavior of the entire Edu Stack ecosystem."
-        },
-        "generate_data": {
-          "title": "Demo Data Factory",
-          "description": "Development tool for quickly generating realistic demo data (users, classes, schedules) for testing and presentation purposes."
-        },
-        "backup_restore": {
-          "title": "Data Lifecycle Management",
-          "description": "Robust tools for manual database backups and restoring the system state to ensure data integrity and disaster recovery."
-        }
-      },
       "schoolAdmin": {
         "title": "School Administrator",
         "description": "The local operational manager responsible for the technical configuration and user management of a specific school instance.",
@@ -372,7 +314,67 @@
         }
       }
     },
-    "screenshot": "Interface Screenshot"
+    "gallery": {
+      "dashboard": {
+        "title": "System Dashboard",
+        "description": "A high-level overview of the entire platform, showing global metrics, active schools, and recent system activities at a glance."
+      },
+      "school_management": {
+        "title": "School Management",
+        "description": "Centralized hub for managing all school tenants within the system, allowing administrators to monitor status and access specific school configurations."
+      },
+      "create_new_school": {
+        "title": "New School Tenant",
+        "description": "Step-by-step interface for onboarding new educational institutions, defining their basic identity and initial resource allocations."
+      },
+      "edit_school": {
+        "title": "School Configuration",
+        "description": "Detailed settings for existing schools, where administrators can modify metadata, contact information, and specific instance behaviors."
+      },
+      "behalf_of_mode": {
+        "title": "Secure Impersonation",
+        "description": "A powerful administrative tool that allows system admins to access the system as a specific user for troubleshooting and direct support."
+      },
+      "system_users": {
+        "title": "Global User Directory",
+        "description": "Management interface for users with system-wide privileges, ensuring only authorized personnel can access the platform core."
+      },
+      "create_new_system_user": {
+        "title": "User Provisioning",
+        "description": "Simple form for creating new system-level accounts and assigning global administrative roles."
+      },
+      "ai_management": {
+        "title": "AI Resource Orchestration",
+        "description": "Control center for AI integration, where token limits are defined and provider API keys (OpenAI, Anthropic, etc.) are securely managed."
+      },
+      "sso_setting": {
+        "title": "Identity Providers",
+        "description": "Overview of configured Single Sign-On methods, supporting enterprise authentication through major providers."
+      },
+      "set_new_sso_provider": {
+        "title": "SSO Configuration",
+        "description": "Technical setup for new identity providers, including client IDs, secrets, and endpoint mappings."
+      },
+      "monitoring": {
+        "title": "System Health & Analytics",
+        "description": "Real-time monitoring of platform performance and detailed analytics on AI resource consumption across all tenants."
+      },
+      "system_params": {
+        "title": "Global Parameters",
+        "description": "Configuration of system-wide constants and feature flags that affect the behavior of the entire Edu Stack ecosystem."
+      },
+      "generate_data": {
+        "title": "Demo Data Factory",
+        "description": "Development tool for quickly generating realistic demo data (users, classes, schedules) for testing and presentation purposes."
+      },
+      "backup_restore": {
+        "title": "Data Lifecycle Management",
+        "description": "Robust tools for manual database backups and restoring the system state to ensure data integrity and disaster recovery."
+      }
+    },
+    "screenshot": "Interface Screenshot",
+    "closePreview": "Close preview",
+    "imagePreview": "Image Preview"
   },
   "Footer": {
     "description": "Modern information system designed to transform informatics education through interactive simulation.",
