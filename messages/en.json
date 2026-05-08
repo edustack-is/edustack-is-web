@@ -67,7 +67,92 @@
     "sidebar": {
       "contents": "Contents",
       "chapters": "Chapters",
-      "roles": "Roles"
+      "roles": "Roles",
+      "architecture": "Architecture"
+    },
+    "tech_stack": {
+      "title": "Technology Stack",
+      "description": "The Edu Stack IS is built on a modern, robust, and highly scalable cloud-native infrastructure.",
+      "items": {
+        "nestjs": {
+          "title": "NestJS",
+          "description": "A progressive Node.js framework for building efficient, reliable and scalable server-side applications. It uses TypeScript and combines elements of OOP, FP, and FRP.",
+          "link": "https://docs.nestjs.com/"
+        },
+        "react": {
+          "title": "React",
+          "description": "A JavaScript library for building component-based user interfaces. It enables efficient rendering and reactive state management.",
+          "link": "https://react.dev/"
+        },
+        "cloudflare_d1": {
+          "title": "Cloudflare D1",
+          "description": "A fully managed relational database based on SQLite, designed for edge computing within the Cloudflare Workers ecosystem.",
+          "link": "https://developers.cloudflare.com/d1/"
+        },
+        "mcp": {
+          "title": "Model Context Protocol (MCP)",
+          "description": "An open protocol that enables AI models to have secure and standardized access to local or remote data and tools.",
+          "link": "https://modelcontextprotocol.io/"
+        },
+        "nextjs": {
+          "title": "Next.js",
+          "description": "The React framework for the web, enabling server-side rendering and static site generation for optimal performance and SEO.",
+          "link": "https://nextjs.org/"
+        },
+        "tailwind": {
+          "title": "Tailwind CSS",
+          "description": "A utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.",
+          "link": "https://tailwindcss.com/"
+        }
+      }
+    },
+    "modules": {
+      "title": "Application Modules",
+      "description": "The system is designed as a modular platform where each component serves a specific pedagogical or administrative purpose.",
+      "list": {
+        "admin": {
+          "title": "System Administration",
+          "tech": "NestJS, Cloudflare D1, AES-256 Encryption",
+          "built": "A set of core services for multi-tenant school lifecycle management, global configuration, and security auditing.",
+          "benefit": "Enables global platform orchestration, secure tenant isolation, and centralized resource management."
+        },
+        "auth": {
+          "title": "Auth & SSO",
+          "tech": "JWT, Argon2, OAuth2",
+          "built": "Secure authentication layer with support for traditional credentials and enterprise SSO (Google, GitHub, Microsoft).",
+          "benefit": "Ensures data integrity and robust Role-Based Access Control (RBAC) across the entire platform."
+        },
+        "registry": {
+          "title": "School Registry",
+          "tech": "Cloudflare D1, Batch SQL, CSV Engine",
+          "built": "Core database module for managing students, staff, classes, and physical building structures.",
+          "benefit": "Serves as the central 'Source of Truth' for all other educational and administrative modules."
+        },
+        "schedule": {
+          "title": "Interactive Scheduling",
+          "tech": "Collision Detection Algorithms, React DnD",
+          "built": "Sophisticated engine for timetable creation with real-time conflict detection and substitution management.",
+          "benefit": "Automates the most complex school administrative tasks and eliminates scheduling human errors."
+        },
+        "grading": {
+          "title": "Grading & Evaluation",
+          "tech": "Weighted Math Engine, PDF Export",
+          "built": "Comprehensive system for tracking marks, weighted averages, and complex verbal evaluations.",
+          "benefit": "Provides immediate academic transparency for teachers, students, and parents."
+        },
+        "ai": {
+          "title": "Pedagogical AI Assistant",
+          "tech": "Google Gemini, OpenAI, Anthropic",
+          "built": "Deep integration of LLMs into teacher workflows for lesson planning, material generation, and report polishing.",
+          "benefit": "Significantly reduces administrative burden on teachers while bringing modern AI tools to the classroom."
+        },
+        "mcp": {
+          "title": "MCP API (AI Integration)",
+          "tech": "Model Context Protocol, SSE, Tool-calling",
+          "built": "A standardized bridge that connects external AI agents with live system data through a secure tool-based interface.",
+          "benefit": "Allows students and developers to experiment with building autonomous AI agents on top of school data."
+        }
+      }
     },
     "development": {
       "title": "Local Development",

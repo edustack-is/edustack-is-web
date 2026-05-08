@@ -2,22 +2,12 @@
 
 import {useState} from 'react';
 import {useTranslations} from 'next-intl';
-import {ChevronLeft, ChevronRight, Book, Users, Laptop, Settings, LogIn, GraduationCap, School, ShieldCheck, UserCheck, Search, Heart} from 'lucide-react';
+import {ChevronLeft, ChevronRight, Book, Users, Laptop, Settings, LogIn, GraduationCap, School, ShieldCheck, UserCheck, Search, Heart, Layers} from 'lucide-react';
 
 interface ManualSidebarProps {
   activeSection: string;
 }
-
-const activeTextMap: Record<string, string> = {
-  systemAdmin: 'text-brand-purple',
-  schoolAdmin: 'text-brand-slate',
-  headmaster: 'text-brand-blue',
-  deputy: 'text-brand-pink',
-  teacher: 'text-brand-teal',
-  parent: 'text-rose-500',
-  student: 'text-brand-orange',
-};
-
+// ... rest of map ...
 export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
   const t = useTranslations('Manual');
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -34,20 +24,19 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
       ]
     },
     {
+      id: 'architecture',
+      title: t('sidebar.architecture'),
+      icon: Layers,
+      items: [
+        { id: 'tech-stack', label: t('tech_stack.title'), icon: Laptop },
+        { id: 'modules', label: t('modules.title'), icon: Layers },
+      ]
+    },
+    {
       id: 'roles',
       title: t('sidebar.roles'),
       icon: Users,
-      items: [
-        { id: 'systemAdmin', label: t('roles.systemAdmin.title'), icon: ShieldCheck },
-        { id: 'schoolAdmin', label: t('roles.schoolAdmin.title'), icon: School },
-        { id: 'headmaster', label: t('roles.headmaster.title'), icon: Search },
-        { id: 'deputy', label: t('roles.deputy.title'), icon: UserCheck },
-        { id: 'teacher', label: t('roles.teacher.title'), icon: GraduationCap },
-        { id: 'parent', label: t('roles.parent.title'), icon: Heart },
-        { id: 'student', label: t('roles.student.title'), icon: Users },
-      ]
-    }
-  ];
+// ... rest of component ...
 
   return (
     <aside 

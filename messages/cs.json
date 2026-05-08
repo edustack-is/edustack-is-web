@@ -67,7 +67,92 @@
     "sidebar": {
       "contents": "Obsah",
       "chapters": "Kapitoly",
-      "roles": "Uživatelské role"
+      "roles": "Uživatelské role",
+      "architecture": "Architektura"
+    },
+    "tech_stack": {
+      "title": "Technologický stack",
+      "description": "Edu Stack IS je postaven na moderní, robustní a vysoce škálovatelné cloud-native infrastruktuře.",
+      "items": {
+        "nestjs": {
+          "title": "NestJS",
+          "description": "Progresivní Node.js framework pro budování efektivních, spolehlivých a škálovatelných aplikací na straně serveru. Využívá TypeScript a kombinuje prvky OOP, FP a FRP.",
+          "link": "https://docs.nestjs.com/"
+        },
+        "react": {
+          "title": "React",
+          "description": "JavaScriptová knihovna pro vytváření uživatelských rozhraní založená na komponentách. Umožňuje efektivní renderování a reaktivní správu stavu.",
+          "link": "https://react.dev/"
+        },
+        "cloudflare_d1": {
+          "title": "Cloudflare D1",
+          "description": "Plně spravovaná relační databáze založená na SQLite, navržená pro běh na okraji sítě (edge) v rámci ekosystému Cloudflare Workers.",
+          "link": "https://developers.cloudflare.com/d1/"
+        },
+        "mcp": {
+          "title": "Model Context Protocol (MCP)",
+          "description": "Otevřený protokol, který umožňuje AI modelům bezpečný a standardizovaný přístup k lokálním nebo vzdáleným datům a nástrojům.",
+          "link": "https://modelcontextprotocol.io/"
+        },
+        "nextjs": {
+          "title": "Next.js",
+          "description": "React framework pro web, který umožňuje server-side rendering a statické generování stránek pro optimální výkon a SEO.",
+          "link": "https://nextjs.org/"
+        },
+        "tailwind": {
+          "title": "Tailwind CSS",
+          "description": "Utility-first CSS framework pro rychlé stylování moderních webových aplikací přímo v HTML kódu.",
+          "link": "https://tailwindcss.com/"
+        }
+      }
+    },
+    "modules": {
+      "title": "Aplikační moduly",
+      "description": "Systém je navržen jako modulární platforma, kde každá část slouží specifickému pedagogickému nebo administrativnímu účelu.",
+      "list": {
+        "admin": {
+          "title": "Systémová správa",
+          "tech": "NestJS, Cloudflare D1, AES-256 šifrování",
+          "built": "Sada klíčových služeb pro správu životního cyklu školních tenantů, globální konfiguraci a auditování bezpečnosti.",
+          "benefit": "Umožňuje orchestraci celého ekosystému, bezpečnou izolaci tenantů a centralizovanou správu zdrojů."
+        },
+        "auth": {
+          "title": "Autentizace a SSO",
+          "tech": "JWT, Argon2, OAuth2",
+          "built": "Zabezpečená vrstva pro ověřování identity s podporou tradičních údajů i podnikového přihlášení (Google, GitHub, Microsoft).",
+          "benefit": "Zajišťuje integritu dat a robustní řízení přístupu na základě rolí (RBAC) napříč celou platformou."
+        },
+        "registry": {
+          "title": "Školní matrika",
+          "tech": "Cloudflare D1, Batch SQL, CSV Engine",
+          "built": "Jádrový databázový modul pro evidenci žáků, zaměstnanců, tříd a fyzické struktury budov.",
+          "benefit": "Slouží jako centrální 'zdroj pravdy' pro všechny ostatní vzdělávací a administrativní moduly."
+        },
+        "schedule": {
+          "title": "Interaktivní rozvrhování",
+          "tech": "Algoritmy pro detekci kolizí, React DnD",
+          "built": "Sofistikovaný engine pro tvorbu rozvrhů s detekcí konfliktů v reálném čase a správou suplování.",
+          "benefit": "Automatizuje nejsložitější administrativní úkoly školy a eliminuje lidské chyby při plánování."
+        },
+        "grading": {
+          "title": "Klasifikace a hodnocení",
+          "tech": "Weighted Math Engine, PDF Export",
+          "built": "Komplexní systém pro evidenci známek, vážených průměrů a pokročilého slovního hodnocení.",
+          "benefit": "Poskytuje okamžitou akademickou transparentnost pro učitele, žáky i rodiče."
+        },
+        "ai": {
+          "title": "Pedagogický AI asistent",
+          "tech": "Google Gemini, OpenAI, Anthropic",
+          "built": "Hluboká integrace LLM modelů do pracovních postupů učitele pro plánování hodin, generování materiálů a úpravu hodnocení.",
+          "benefit": "Výrazně snižuje administrativní zátěž pedagogů a přináší moderní AI nástroje přímo do výuky."
+        },
+        "mcp": {
+          "title": "MCP API (AI Integrace)",
+          "tech": "Model Context Protocol, SSE, Tool-calling",
+          "built": "Standardizované rozhraní, které propojuje externí AI agenty s živými daty systému přes zabezpečené rozhraní nástrojů.",
+          "benefit": "Umožňuje žákům i vývojářům experimentovat s budováním autonomních AI agentů nad školními daty."
+        }
+      }
     },
     "development": {
       "title": "Lokální vývoj",

@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ManualSidebar from '@/components/ManualSidebar';
 import ScreenshotPlaceholder from '@/components/ScreenshotPlaceholder';
-import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight} from 'lucide-react';
+import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, Box} from 'lucide-react';
 
 const roleColorMap: Record<string, string> = {
   systemAdmin: 'brand-purple',
@@ -149,9 +149,231 @@ export default function ManualPage() {
         <main className="flex-1 px-4 md:px-12 py-16 md:py-24 overflow-hidden">
           <div className="max-w-[80rem] mx-auto space-y-32">
             
-            {/* Header ... */}
-            {/* ... */}
-            
+            {/* Header */}
+            <div className="space-y-6 text-center md:text-left border-b border-slate-100 dark:border-slate-800 pb-20">
+              <h1 className="text-5xl md:text-9xl font-black tracking-tighter text-slate-900 dark:text-white uppercase leading-none">
+                {t('title')}
+              </h1>
+              <p className="text-2xl md:text-4xl text-slate-500 dark:text-slate-400 font-medium leading-relaxed max-w-[48rem]">
+                {t('intro')}
+              </p>
+            </div>
+
+            {/* Chapters Section */}
+            <div className="space-y-64">
+              
+              {/* Local Development */}
+              <section id="development" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <Laptop className="h-10 w-10" />
+                  </div>
+                  <h2 className="text-5xl md:text-7xl font-black tracking-tight">{t('development.title')}</h2>
+                  <p className="text-2xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-[45rem]">
+                    {t('development.description')}
+                  </p>
+                </div>
+                
+                <div className="space-y-12">
+                  <div className="grid gap-12 lg:grid-cols-2">
+                    <div className="space-y-6">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="flex gap-6 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 transition-all hover:bg-white dark:hover:bg-slate-900 hover:shadow-xl hover:scale-[1.02]">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-purple text-white font-black text-lg shadow-lg shadow-brand-purple/20">
+                            {i}
+                          </div>
+                          <p className="text-xl font-bold text-slate-800 dark:text-slate-200 pt-1.5 leading-snug">
+                            {translate(`development.step${i}`)}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="space-y-6 flex flex-col justify-center">
+                      <ScreenshotPlaceholder 
+                        src="/images/documentation/config/00_config_local.png" 
+                        alt="Local Configuration" 
+                        roleColor="brand-purple" 
+                      />
+                    </div>
+                  </div>
+                  <ScreenshotPlaceholder 
+                    src="/images/documentation/config/01_startup_application.png" 
+                    alt="Application Startup" 
+                    roleColor="brand-purple"
+                    className="max-w-4xl mx-auto"
+                  />
+                </div>
+              </section>
+
+              {/* System Setup */}
+              <section id="setup" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <Settings className="h-10 w-10" />
+                  </div>
+                  <h2 className="text-5xl md:text-7xl font-black tracking-tight">{t('setup.title')}</h2>
+                  <p className="text-2xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-[45rem]">
+                    {t('setup.description')}
+                  </p>
+                </div>
+
+                <div className="grid gap-10 md:grid-cols-2">
+                  <div className="group flex flex-col gap-8 p-10 rounded-[3rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-all hover:shadow-2xl">
+                    <div className="space-y-4">
+                      <h3 className="text-3xl font-black tracking-tight text-brand-purple">{translate('setup.option1.title')}</h3>
+                      <p className="text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed">{translate('setup.option1.description')}</p>
+                    </div>
+                    <ScreenshotPlaceholder 
+                      src="/images/documentation/system-setup/01_system_setupm_upload_bachup_file.png" 
+                      alt="Restore from Backup" 
+                      roleColor="brand-purple" 
+                      className="aspect-[4/3] group-hover:scale-[1.03] transition-transform" 
+                    />
+                  </div>
+                  <div className="group flex flex-col gap-8 p-10 rounded-[3rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-all hover:shadow-2xl">
+                    <div className="space-y-4">
+                      <h3 className="text-3xl font-black tracking-tight text-brand-purple">{translate('setup.option2.title')}</h3>
+                      <p className="text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed">{translate('setup.option2.description')}</p>
+                    </div>
+                    <ScreenshotPlaceholder 
+                      src="/images/documentation/system-setup/00_system_setup_from_scratch.png" 
+                      alt="System Setup from Scratch" 
+                      roleColor="brand-purple" 
+                      className="aspect-[4/3] group-hover:scale-[1.03] transition-transform" 
+                    />
+                  </div>
+                </div>
+              </section>
+
+              {/* User Authentication */}
+              <section id="login" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <LogIn className="h-10 w-10" />
+                  </div>
+                  <h2 className="text-5xl md:text-7xl font-black tracking-tight">{t('login.title')}</h2>
+                  <p className="text-2xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-[45rem]">
+                    {t('login.description')}
+                  </p>
+                </div>
+
+                <div className="space-y-24">
+                  <div className="grid gap-12 lg:grid-cols-2 items-center">
+                    <div className="space-y-8">
+                      {['helper', 'credentials', 'sso'].map((type) => (
+                        <div key={type} className="p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 space-y-4 hover:bg-white dark:hover:bg-slate-900 transition-colors hover:shadow-xl group">
+                          <h4 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white group-hover:text-brand-purple transition-colors">{translate(`login.${type}.title`)}</h4>
+                          <p className="text-lg text-slate-500 dark:text-slate-400 font-medium leading-relaxed">{translate(`login.${type}.description`)}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <ScreenshotPlaceholder 
+                      src="/images/documentation/login/00_login_with_helper.png" 
+                      alt="Login with Developer Helper" 
+                      roleColor="brand-purple" 
+                      className="shadow-2xl"
+                    />
+                  </div>
+                  <div className="space-y-8 text-center">
+                    <h4 className="text-3xl font-black tracking-tight">Standard Secure Login</h4>
+                    <ScreenshotPlaceholder 
+                      src="/images/documentation/login/01_login_without_helper.png" 
+                      alt="Standard Login Screen" 
+                      roleColor="brand-purple" 
+                      className="max-w-3xl mx-auto shadow-2xl"
+                    />
+                  </div>
+                </div>
+              </section>
+
+              {/* Tech Stack */}
+              <section id="tech-stack" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <Cpu className="h-10 w-10" />
+                  </div>
+                  <h2 className="text-5xl md:text-7xl font-black tracking-tight">{t('tech_stack.title')}</h2>
+                  <p className="text-2xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-[45rem]">
+                    {t('tech_stack.description')}
+                  </p>
+                </div>
+
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {['nestjs', 'react', 'cloudflare_d1', 'mcp', 'nextjs', 'tailwind'].map((key) => (
+                    <a 
+                      key={key}
+                      href={translate(`tech_stack.items.${key}.link`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl hover:border-brand-purple/30 transition-all hover:-translate-y-1"
+                    >
+                      <div className="flex justify-between items-start mb-6">
+                        <h4 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white group-hover:text-brand-purple transition-colors">
+                          {translate(`tech_stack.items.${key}.title`)}
+                        </h4>
+                        <ExternalLink size={20} className="text-slate-300 group-hover:text-brand-purple transition-colors" />
+                      </div>
+                      <p className="text-lg text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                        {translate(`tech_stack.items.${key}.description`)}
+                      </p>
+                    </a>
+                  ))}
+                </div>
+              </section>
+
+              {/* Application Modules */}
+              <section id="modules" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <Layers className="h-10 w-10" />
+                  </div>
+                  <h2 className="text-5xl md:text-7xl font-black tracking-tight">{t('modules.title')}</h2>
+                  <p className="text-2xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-[45rem]">
+                    {t('modules.description')}
+                  </p>
+                </div>
+
+                <div className="space-y-10">
+                  {['admin', 'auth', 'registry', 'schedule', 'grading', 'ai', 'mcp'].map((key) => (
+                    <div key={key} className="group p-10 rounded-[3rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl transition-all">
+                      <div className="grid lg:grid-cols-3 gap-12">
+                        <div className="space-y-4">
+                          <div className="inline-flex p-3 rounded-2xl bg-brand-purple/10 text-brand-purple mb-2">
+                             <Box size={24} />
+                          </div>
+                          <h4 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white group-hover:text-brand-purple transition-colors">
+                            {translate(`modules.list.${key}.title`)}
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {translate(`modules.list.${key}.tech`).split(', ').map((tag: string) => (
+                              <span key={tag} className="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="lg:col-span-2 grid sm:grid-cols-2 gap-10">
+                          <div className="space-y-3">
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">How it&apos;s built</span>
+                            <p className="text-lg text-slate-700 dark:text-slate-300 font-bold leading-relaxed italic">
+                              {translate(`modules.list.${key}.built`)}
+                            </p>
+                          </div>
+                          <div className="space-y-3">
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Core Benefit</span>
+                            <p className="text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+                              {translate(`modules.list.${key}.benefit`)}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+            </div>
+
             {/* Roles Section */}
             <div className="space-y-32 pt-20 border-t border-slate-100 dark:border-slate-800">
               <div className="space-y-6 text-center md:text-left">
