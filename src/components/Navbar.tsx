@@ -43,8 +43,8 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-line bg-bg/85 backdrop-blur-xl px-6 md:px-14">
-      <div className="max-w-[90rem] mx-auto flex items-center justify-between py-4 md:py-5">
+    <nav className="sticky top-0 z-50 w-full border-b border-line bg-bg/85 backdrop-blur-xl px-6 md:px-[5vw]">
+      <div className="flex items-center justify-between py-4 md:py-5">
         <Link href="/" className="flex items-center" aria-label="EduStack IS">
           <LogoWordmark scale={0.85} />
         </Link>

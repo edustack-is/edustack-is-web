@@ -18,7 +18,7 @@ export default function AudienceSection() {
           <div
             key={key}
             id={key === 'students' ? 'students' : undefined}
-            className="relative overflow-hidden px-6 md:px-14 py-16 md:py-20"
+            className="relative overflow-hidden px-6 md:px-[5vw] py-16 md:py-20"
             style={{
               background: `linear-gradient(160deg, ${c1}14, ${c2}0c)`,
               borderRight: idx === 0 ? '1px solid var(--color-line)' : undefined

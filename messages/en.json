@@ -157,7 +157,7 @@
     "contact": {
       "eyebrow": "About the author",
       "title": "If you teach CS, let's talk.",
-      "body": "EduStack IS is a master's thesis project, built by one person on purpose. If you'd like to pilot it in your school, adapt a worksheet, or just have feedback — drop a line.",
+      "body": "EduStack IS is a bachelor's thesis project, built by one person on purpose. If you'd like to pilot it in your school, adapt a worksheet, or just have feedback — drop a line.",
       "email": "hello@is-edustack.org"
     },
     "footerNote": "EduStack IS · 2026 · MIT license · is-edustack.org"
@@ -172,7 +172,7 @@
   },
   "Worksheets": {
     "title": "Working Sheets",
-    "description": "Detailed scenarios and methodological guides extracted from the bachelor thesis.",
+    "description": "Detailed scenarios and methodological guides extracted from the bachelor's thesis.",
     "primary": {
       "title": "Primary School (4th-5th Grade)",
       "lesson1": "Explorer and the Mystery of Roles",

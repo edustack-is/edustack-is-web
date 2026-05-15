@@ -13,7 +13,7 @@ export default function Hero() {
   const dots = [ROLE_COLORS.purple, ROLE_COLORS.magenta, ROLE_COLORS.green];
 
   return (
-    <section className="relative px-6 md:px-14 py-16 md:py-20 overflow-hidden">
+    <section className="relative px-6 md:px-[5vw] py-16 md:py-20 overflow-hidden">
       {/* Background blobs (full-bleed) */}
       <div
         className="hy-blob"
@@ -51,7 +51,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative max-w-[90rem] mx-auto grid md:grid-cols-[1.15fr_0.85fr] gap-10 md:gap-14 items-center">
+      <div className="relative grid md:grid-cols-[1.15fr_0.85fr] gap-10 md:gap-14 items-center">
       <div className="relative">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-line rounded-full mb-7 font-mono text-xs text-muted tracking-wider bg-card/70 backdrop-blur-sm">
           <span
