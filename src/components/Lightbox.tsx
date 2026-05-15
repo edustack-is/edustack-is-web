@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect, useState} from 'react';
+import {useEffect, useSyncExternalStore} from 'react';
 import {createPortal} from 'react-dom';
 import {X, ZoomIn} from 'lucide-react';
 import {useTranslations} from 'next-intl';
@@ -13,14 +13,13 @@ interface LightboxProps {
   onClose: () => void;
 }
 
+const noopSubscribe = () => () => {};
+const getClientMounted = () => true;
+const getServerMounted = () => false;
+
 export default function Lightbox({src, alt, isOpen, onClose}: LightboxProps) {
   const t = useTranslations('Manual');
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    return () => setMounted(false);
-  }, []);
+  const mounted = useSyncExternalStore(noopSubscribe, getClientMounted, getServerMounted);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
