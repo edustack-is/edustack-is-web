@@ -8,7 +8,7 @@ import {LogoWordmark} from '@/components/brand/Logo';
 import {LangToggle} from '@/components/LangToggle';
 import {ThemeToggle} from '@/components/ThemeToggle';
 
-const NAV_KEYS = ['idea', 'how', 'tour', 'teachers', 'students', 'method', 'downloads'] as const;
+const NAV_KEYS = ['idea', 'how', 'learn', 'tour', 'teachers', 'method', 'downloads'] as const;
 
 export default function Navbar() {
   const t = useTranslations('Index');
@@ -32,6 +32,9 @@ export default function Navbar() {
               {t(`nav.${k}`)}
             </a>
           ))}
+          <Link href="/manual" className="hover:text-text transition-colors">
+            {t('nav.manual')}
+          </Link>
         </div>
 
         <div className="flex items-center gap-2.5">
@@ -71,6 +74,13 @@ export default function Navbar() {
                 {t(`nav.${k}`)}
               </a>
             ))}
+            <Link
+              href="/manual"
+              onClick={() => setOpen(false)}
+              className="font-display text-2xl font-bold text-text"
+            >
+              {t('nav.manual')}
+            </Link>
             <a
               href="#demo"
               onClick={() => setOpen(false)}

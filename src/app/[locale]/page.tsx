@@ -3,6 +3,7 @@ import Footer from '@/components/Footer';
 import Hero from '@/components/landing/Hero';
 import IdeaSection from '@/components/landing/IdeaSection';
 import HowSection from '@/components/landing/HowSection';
+import LearnSection from '@/components/landing/LearnSection';
 import TourSection from '@/components/landing/TourSection';
 import AudienceSection from '@/components/landing/AudienceSection';
 import MethodSection from '@/components/landing/MethodSection';
@@ -19,6 +20,7 @@ export default function IndexPage() {
         <Hero />
         <IdeaSection />
         <HowSection />
+        <LearnSection />
         <TourSection />
         <AudienceSection />
         <MethodSection />

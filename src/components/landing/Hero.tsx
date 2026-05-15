@@ -1,4 +1,5 @@
 import {useTranslations} from 'next-intl';
+import {Link} from '@/i18n/routing';
 import {ROLES, ROLE_COLORS, BRAND_GRADIENT, type RoleKey} from '@/components/brand/roles';
 import {RoleIcon} from '@/components/brand/RoleIcon';
 
@@ -86,12 +87,12 @@ export default function Hero() {
           >
             {t('hero.ctaPrimary')} <span aria-hidden>→</span>
           </a>
-          <a
-            href="#source"
+          <Link
+            href="/manual"
             className="inline-flex items-center font-body text-[15px] font-semibold px-5 py-3.5 rounded-xl bg-card/70 text-text border border-line"
           >
             {t('hero.ctaSecondary')}
-          </a>
+          </Link>
         </div>
       </div>
 

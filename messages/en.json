@@ -1,24 +1,26 @@
 {
   "Index": {
     "brand": "EduStack IS",
-    "brandSub": "Information System",
+    "brandSub": "Open platform for teaching informatics",
     "nav": {
       "idea": "Idea",
-      "how": "How it works",
+      "how": "In a lesson",
+      "learn": "Learning paths",
       "tour": "Product tour",
       "teachers": "Teachers",
       "students": "Students",
       "method": "Methodology",
-      "downloads": "Downloads",
+      "downloads": "Worksheets",
+      "manual": "User manual",
       "demo": "Try the demo",
       "source": "Source"
     },
     "hero": {
-      "eyebrow": "Open-source school information system",
-      "title": "Six roles. One system. Built around how schools actually work.",
-      "sub": "EduStack IS connects administrators, principals, teachers, students and parents on shared data — each with a view shaped to their work.",
-      "ctaPrimary": "Try the testing instance",
-      "ctaSecondary": "Read the thesis"
+      "eyebrow": "Open-source teaching platform · powered by a real school IS",
+      "title": "Don't teach about systems. Teach inside one.",
+      "sub": "EduStack IS is an open-source school information system designed for the computer-science classroom. Younger students explore real data and roles; older students dig into the code and run it themselves.",
+      "ctaPrimary": "Try the live demo",
+      "ctaSecondary": "Read the user manual"
     },
     "roles": {
       "admin": "System Admin",
@@ -30,32 +32,58 @@
     },
     "idea": {
       "eyebrow": "The idea",
-      "title": "A school is a stack of overlapping roles.",
-      "body": "Most school systems pick one audience and bolt the rest on. EduStack starts the other way around: six roles, one shared database, and a UI that adapts. Headmasters get oversight, deputies get scheduling, teachers get marking, students get clarity, parents get visibility, admins get control. No spreadsheets duct-taped to email.",
+      "title": "A school IS is the best CS textbook you never wrote.",
+      "body": "A school information system is a microcosm of every topic on the computer-science curriculum: role-based access, relational data, scheduling, audit logs, integration with AI — applied to a domain students already know intimately. EduStack IS turns that into hands-on lessons your class can actually use, instead of toy examples that explain nothing.",
       "pillars": {
-        "shared": "Shared data",
-        "sharedBody": "One source of truth across roles. No exports, no copies, no Monday-morning reconciliation.",
-        "tailored": "Tailored views",
-        "tailoredBody": "Each role sees exactly what they need — and only what they need.",
+        "shared": "Real-world data",
+        "sharedBody": "Students work with the same data structures and constraints schools actually use — not contrived textbook scenarios.",
+        "tailored": "Age-aware",
+        "tailoredBody": "Lessons scale from 'click around the dashboard' for primary school to 'fork, build, deploy' for high school.",
         "open": "Open by default",
-        "openBody": "MIT-licensed. Czech-friendly. Built in public alongside a master's thesis."
+        "openBody": "MIT-licensed. Czech-friendly. The whole stack is documented and version-controlled alongside the methodology."
       }
     },
     "how": {
-      "eyebrow": "How it works",
-      "title": "From class register to report card, in five steps.",
+      "eyebrow": "In a lesson",
+      "title": "What a lesson on EduStack looks like.",
       "steps": [
-        {"title": "Set up the school", "body": "Admin imports the school structure: years, classes, subjects, rooms, staff. Once."},
-        {"title": "Compose the timetable", "body": "Deputies build the schedule with constraint-aware tools. Conflicts surface before they ship."},
-        {"title": "Teach and record", "body": "Teachers run their lessons, log attendance and grades from the same screen."},
-        {"title": "Stay in the loop", "body": "Students and parents see what's coming, what's due, and what they got — in real time."},
-        {"title": "Close the year", "body": "Headmaster signs off on reports. Archive, export, hand the next year to the admin. Repeat."}
+        {"title": "Pick a role", "body": "Admin, teacher, student, parent — sign in as one of them. Discover what they can see and do."},
+        {"title": "Follow a real workflow", "body": "Import a class, enter grades, plan a substitution. The screens and rules are the ones a real school would use."},
+        {"title": "Read the constraints", "body": "How does the system decide who can do what? Open the role matrix and trace it back to the data model."},
+        {"title": "Break something on purpose", "body": "Try an action the role isn't allowed. Watch the audit log. Learn what the system protects and why."},
+        {"title": "Compare with your own school", "body": "What's the same? What's different? What does your school's spreadsheet workflow do that this one doesn't?"}
+      ]
+    },
+    "learn": {
+      "eyebrow": "Learning paths",
+      "title": "One system, three age tiers.",
+      "sub": "Each tier ships with worksheets, lesson plans and teacher notes — written for Czech CS classrooms.",
+      "tiers": [
+        {
+          "label": "Primary",
+          "grade": "4th–5th grade",
+          "verb": "Explore",
+          "body": "Click around as different roles. Notice which screens exist for whom. Match permissions to job titles. Discover that 'data' has shape."
+        },
+        {
+          "label": "Secondary",
+          "grade": "6th–9th grade",
+          "verb": "Model",
+          "body": "Import a CSV. Read an ER diagram. Spot a permission rule. Find an audit-log entry that proves who did what."
+        },
+        {
+          "label": "High school",
+          "grade": "Gymnázium / SŠ",
+          "verb": "Build",
+          "body": "Clone the repo. Run it locally. Read the API code. Hack on a feature. Open a pull request against the real codebase."
+        }
       ]
     },
     "tour": {
       "eyebrow": "Product tour",
-      "title": "A view for every role.",
-      "sub": "Real screenshots from the working app.",
+      "title": "The demonstration tool, up close.",
+      "sub": "Real screenshots from the running app. Click any image to open it full-screen — or jump into the full user manual for context.",
+      "manualCta": "Open the full user manual",
       "labels": {
         "dashboard": "Admin · Dashboard",
         "schoolManagement": "School · Management",
@@ -66,54 +94,54 @@
       }
     },
     "teachers": {
-      "eyebrow": "For teachers",
-      "title": "Less admin. More teaching.",
+      "eyebrow": "For CS teachers",
+      "title": "Less prep. More discussion.",
       "bullets": [
-        "One screen for attendance, grading and lesson notes.",
-        "Constraint-aware substitutions when someone's out sick.",
-        "Comment threads on assignments — visible to parents only when you want.",
-        "Class register, gradebook and timetable share the same data.",
-        "Czech grading scale (1–5) and pluses/minuses out of the box."
+        "Worksheets ready for primary, secondary and high school — with answer keys.",
+        "Methodology guides for every chapter: what to ask, what to point out.",
+        "No installation needed in class — the live demo is open all week.",
+        "Czech grading scale and Czech UI built in.",
+        "Reset the demo on Monday morning and start fresh."
       ]
     },
     "students": {
       "eyebrow": "For students",
-      "title": "Know what's next. Without 12 tabs open.",
+      "title": "School software, finally on your side.",
       "bullets": [
-        "Today, this week, this term — at a glance.",
-        "Upcoming tests show up on the calendar before they ambush you.",
-        "Grades arrive with context: weight, average, what counts.",
-        "Direct messaging with teachers, scoped to the right class.",
-        "Works on the phone you already have."
+        "See exactly what data your school holds about you.",
+        "Try every role — including the headmaster's chair.",
+        "The code is open. You're allowed to read it.",
+        "Run the whole thing on your laptop if you want.",
+        "Submit issues, send pull requests, leave your mark."
       ]
     },
     "method": {
       "eyebrow": "Methodology",
-      "title": "Designed alongside a master's thesis.",
-      "body": "Every module ships with the thinking behind it — interviews with teachers, role-permission matrices, ER diagrams, user journeys. The methodology is part of the product, not a footnote.",
+      "title": "The methodology is the product.",
+      "body": "EduStack IS is the demonstration. The methodology — worksheets, role matrices, ER diagrams, teacher notes — is what your class actually uses. Everything is documented and version-controlled alongside the code.",
       "items": [
-        {"title": "Role permission matrices", "body": "6 roles × 80+ capabilities, fully spec'd."},
-        {"title": "User research notes", "body": "Interviews with Czech teachers and admins."},
-        {"title": "ER diagrams", "body": "Schema is documented, not implied."},
-        {"title": "Worksheets", "body": "Adoption checklists for new schools."}
+        {"title": "Role permission matrices", "body": "6 roles × 80+ capabilities, fully specified."},
+        {"title": "Worksheets per grade", "body": "Primary, secondary, high school — with answer keys."},
+        {"title": "ER diagrams", "body": "The schema is documented, not implied."},
+        {"title": "Teacher quickstart", "body": "30-minute prep for a 90-minute lesson."}
       ]
     },
     "downloads": {
-      "eyebrow": "Downloads",
-      "title": "Take the methodology with you.",
-      "sub": "Worksheets, role matrices and adoption guides. PDF and Google Docs.",
+      "eyebrow": "Worksheets & methodology",
+      "title": "Lesson materials. Take them to class.",
+      "sub": "Everything a CS teacher needs to run a lesson on EduStack — worksheets per age tier, role matrices, ER diagrams. PDF and Google Docs.",
       "items": [
-        {"title": "Onboarding worksheet", "kind": "PDF · 8 pages", "body": "For schools starting fresh."},
+        {"title": "Primary school worksheets", "kind": "PDF · 6 pages", "body": "4th–5th grade. Explore roles and data."},
+        {"title": "Secondary school worksheets", "kind": "PDF · 10 pages", "body": "6th–9th grade. Modelling and permissions."},
+        {"title": "High school worksheets", "kind": "PDF · 12 pages", "body": "Run it locally. Read the code. Build something."},
         {"title": "Role permission matrix", "kind": "PDF · 2 pages", "body": "6 roles, every capability."},
-        {"title": "Teacher quickstart", "kind": "PDF · 4 pages", "body": "First-week reference."},
-        {"title": "Data model overview", "kind": "PDF · 6 pages", "body": "ER diagram + notes."},
         {"title": "Methodology master folder", "kind": "Google Drive", "body": "The whole package, live."}
       ]
     },
     "demo": {
       "eyebrow": "Live demo",
-      "title": "Click around. It's really running.",
-      "sub": "A live testing instance with seed data for every role. Reset weekly.",
+      "title": "Click around. Bring it to class.",
+      "sub": "A live testing instance with seed data for every role. Reset every Monday — bring a fresh class without fixtures going stale.",
       "url": "demo.is-edustack.org"
     },
     "source": {
@@ -128,8 +156,8 @@
     },
     "contact": {
       "eyebrow": "About the author",
-      "title": "Built by one person, on purpose.",
-      "body": "EduStack IS is a master's thesis project. Have a question, want to deploy at your school, or just curious? Drop a line.",
+      "title": "If you teach CS, let's talk.",
+      "body": "EduStack IS is a master's thesis project, built by one person on purpose. If you'd like to pilot it in your school, adapt a worksheet, or just have feedback — drop a line.",
       "email": "hello@is-edustack.org"
     },
     "footerNote": "EduStack IS · 2026 · MIT license · is-edustack.org"
