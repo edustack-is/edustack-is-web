@@ -50,7 +50,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav links */}
-        <div className="hidden lg:flex items-center gap-5 xl:gap-6 font-body text-sm text-muted">
+        <div className="hidden md:flex items-center gap-4 lg:gap-5 xl:gap-6 font-body text-sm text-muted">
           {NAV_KEYS.map((k) =>
             renderAnchor(k, t(`nav.${k}`), 'hover:text-text transition-colors')
           )}
@@ -72,7 +72,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="lg:hidden p-2 rounded-xl bg-chip text-text"
+            className="md:hidden p-2 rounded-xl bg-chip text-text"
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
           >
@@ -83,7 +83,7 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       {open && (
-        <div className="lg:hidden border-t border-line bg-bg/95 backdrop-blur-xl">
+        <div className="md:hidden border-t border-line bg-bg/95 backdrop-blur-xl">
           <div className="flex flex-col p-6 gap-5">
             {NAV_KEYS.map((k) =>
               renderAnchor(

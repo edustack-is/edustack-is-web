@@ -14,8 +14,9 @@ export default function HowSection() {
       eyebrow={t('how.eyebrow')}
       eyebrowColor={ROLE_COLORS.cyan}
       title={t('how.title')}
+      center
     >
-      <div className="grid grid-cols-[64px_1fr] md:grid-cols-[80px_1fr] gap-x-6">
+      <div className="grid grid-cols-[64px_1fr] md:grid-cols-[80px_1fr] gap-x-6 max-w-[760px] mx-auto">
         {steps.map((step, i) => {
           const role = ROLES[i] ?? ROLES[0];
           const nextRole = ROLES[i + 1] ?? role;
