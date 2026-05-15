@@ -31,7 +31,7 @@ const WORDMARK_W = 1312;
 const WORDMARK_H = 651;
 
 export function LogoWordmark({scale = 1}: {scale?: number}) {
-  const height = Math.round(56 * scale);
+  const height = Math.round(80 * scale);
 
   return (
     <span className="inline-flex items-center" style={{height}}>
