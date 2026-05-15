@@ -2,113 +2,85 @@
 
 import {useState} from 'react';
 import {useTranslations} from 'next-intl';
-import {Link, usePathname} from '@/i18n/routing';
+import {Link} from '@/i18n/routing';
 import {Menu, X} from 'lucide-react';
+import {LogoWordmark} from '@/components/brand/Logo';
+import {LangToggle} from '@/components/LangToggle';
+import {ThemeToggle} from '@/components/ThemeToggle';
+
+const NAV_KEYS = ['idea', 'how', 'tour', 'teachers', 'students', 'method', 'downloads'] as const;
 
 export default function Navbar() {
-  const t = useTranslations('Navigation');
-  const pathname = usePathname();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const navLinks = [
-    {href: '/#idea', label: t('idea')},
-    {href: '/#tech', label: t('tech')},
-    {href: '/worksheets', label: t('worksheets')},
-    {href: '/manual', label: t('manual')},
-  ];
+  const t = useTranslations('Index');
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-20 items-center justify-between px-4 md:px-8 mx-auto">
-        <div className="flex items-center gap-4">
-          <Link href="/" className="flex items-center space-x-3 group">
-            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-brand-purple via-brand-pink to-brand-orange flex items-center justify-center text-white font-bold transition-transform group-hover:rotate-12">
-              S
-            </div>
-            <span className="font-black text-xl md:text-2xl tracking-tighter inline-block text-slate-900 dark:text-white">
-              EduStack <span className="text-brand-purple">IS</span>
-            </span>
-          </Link>
-        </div>
+    <nav className="sticky top-0 z-50 w-full border-b border-line bg-bg/85 backdrop-blur-xl">
+      <div className="flex items-center justify-between px-6 md:px-14 py-4 md:py-5">
+        <Link href="/" className="flex items-center" aria-label="EduStack IS">
+          <LogoWordmark scale={0.85} />
+        </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex gap-8 items-center font-bold">
-          {navLinks.map((link) => (
-            <Link 
-              key={link.href} 
-              href={link.href as Parameters<typeof Link>[0]['href']} 
-              className="text-sm tracking-tight text-slate-600 dark:text-slate-400 transition-colors hover:text-brand-purple relative group/link"
+        {/* Desktop nav links */}
+        <div className="hidden lg:flex items-center gap-5 xl:gap-6 font-body text-sm text-muted">
+          {NAV_KEYS.map((k) => (
+            <a
+              key={k}
+              href={`#${k}`}
+              className="hover:text-text transition-colors"
             >
-              {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-purple transition-all group-hover/link:w-full" />
-            </Link>
+              {t(`nav.${k}`)}
+            </a>
           ))}
-          <div className="flex items-center gap-4 ml-4 pl-8 border-l border-slate-200 dark:border-slate-800">
-            <div className="flex items-center gap-2 p-1 rounded-full bg-slate-100 dark:bg-slate-900">
-              <Link 
-                href={pathname} 
-                locale="en" 
-                className={`px-3 py-1 rounded-full text-xs transition-all ${pathname.includes('en') ? 'bg-white dark:bg-slate-800 shadow-sm text-brand-purple font-black' : 'text-slate-500 hover:text-slate-900'}`}
-              >
-                EN
-              </Link>
-              <Link 
-                href={pathname} 
-                locale="cs" 
-                className={`px-3 py-1 rounded-full text-xs transition-all ${pathname.includes('cs') ? 'bg-white dark:bg-slate-800 shadow-sm text-brand-purple font-black' : 'text-slate-500 hover:text-slate-900'}`}
-              >
-                CZ
-              </Link>
-            </div>
-          </div>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <div className="flex md:hidden items-center gap-4">
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-3 rounded-2xl bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white transition-transform active:scale-90"
+        <div className="flex items-center gap-2.5">
+          <div className="hidden md:flex items-center gap-2.5">
+            <LangToggle />
+            <ThemeToggle />
+          </div>
+          <a
+            href="#demo"
+            className="hidden md:inline-flex items-center gap-2 font-body text-sm font-bold px-4 py-2.5 rounded-full text-white bg-brand-gradient shadow-[0_6px_18px_rgba(123,63,228,0.2)]"
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {t('nav.demo')} <span aria-hidden>→</span>
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className="lg:hidden p-2 rounded-xl bg-chip text-text"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation Drawer */}
-      {isMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-20 bottom-0 bg-background/95 backdrop-blur-2xl z-40 animate-in fade-in slide-in-from-top-4 duration-300">
-          <div className="container flex flex-col p-8 gap-8">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.href} 
-                href={link.href as Parameters<typeof Link>[0]['href']} 
-                onClick={() => setIsMenuOpen(false)}
-                className="text-3xl font-black tracking-tighter text-slate-900 dark:text-white transition-colors hover:text-brand-purple"
+      {/* Mobile drawer */}
+      {open && (
+        <div className="lg:hidden border-t border-line bg-bg/95 backdrop-blur-xl">
+          <div className="flex flex-col p-6 gap-5">
+            {NAV_KEYS.map((k) => (
+              <a
+                key={k}
+                href={`#${k}`}
+                onClick={() => setOpen(false)}
+                className="font-display text-2xl font-bold text-text"
               >
-                {link.label}
-              </Link>
+                {t(`nav.${k}`)}
+              </a>
             ))}
-            
-            <div className="mt-auto flex flex-col gap-6">
-              <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">{t('language')}</p>
-              <div className="flex gap-4">
-                <Link 
-                  href={pathname} 
-                  locale="en" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`text-2xl font-black ${pathname.includes('en') ? 'text-brand-purple' : 'text-slate-400'}`}
-                >
-                  English
-                </Link>
-                <Link 
-                  href={pathname} 
-                  locale="cs" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`text-2xl font-black ${pathname.includes('cs') ? 'text-brand-purple' : 'text-slate-400'}`}
-                >
-                  Čeština
-                </Link>
-              </div>
+            <a
+              href="#demo"
+              onClick={() => setOpen(false)}
+              className="mt-2 inline-flex items-center justify-center gap-2 font-body text-base font-bold px-5 py-3 rounded-full text-white bg-brand-gradient"
+            >
+              {t('nav.demo')} <span aria-hidden>→</span>
+            </a>
+            <div className="flex items-center gap-3 pt-3 border-t border-line">
+              <LangToggle />
+              <ThemeToggle />
             </div>
           </div>
         </div>
