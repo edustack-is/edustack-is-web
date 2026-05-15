@@ -35,7 +35,7 @@ export default function AudienceSection() {
                 opacity: 0.25
               }}
             />
-            <div className="relative">
+            <div className="relative max-w-[45rem] mx-auto">
               <div
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-white font-mono text-[11px] font-bold tracking-[0.06em] uppercase mb-4"
                 style={{
