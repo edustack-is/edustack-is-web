@@ -7,8 +7,8 @@ export default function Footer() {
   const tFooter = useTranslations('Footer');
 
   return (
-    <footer className="border-t border-line">
-      <div className="flex flex-col md:flex-row justify-between items-center gap-4 px-6 md:px-14 py-8 font-mono text-xs text-muted">
+    <footer className="border-t border-line px-6 md:px-[5vw]">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4 py-8 font-mono text-xs text-muted">
         <span>{t('footerNote')}</span>
         <div className="flex items-center gap-5">
           <Link href="/privacy" className="hover:text-text transition-colors">

@@ -18,7 +18,7 @@ export default function AudienceSection() {
           <div
             key={key}
             id={key === 'students' ? 'students' : undefined}
-            className="relative overflow-hidden px-6 md:px-14 py-16 md:py-20"
+            className="relative overflow-hidden px-6 md:px-[5vw] py-16 md:py-20"
             style={{
               background: `linear-gradient(160deg, ${c1}14, ${c2}0c)`,
               borderRight: idx === 0 ? '1px solid var(--color-line)' : undefined
@@ -35,7 +35,7 @@ export default function AudienceSection() {
                 opacity: 0.25
               }}
             />
-            <div className="relative">
+            <div className="relative max-w-[45rem] mx-auto">
               <div
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-white font-mono text-[11px] font-bold tracking-[0.06em] uppercase mb-4"
                 style={{

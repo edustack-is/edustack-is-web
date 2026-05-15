@@ -24,6 +24,15 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
 
   const sections = [
     {
+      id: 'architecture',
+      title: t('sidebar.architecture'),
+      icon: Layers,
+      items: [
+        { id: 'tech-stack', label: t('tech_stack.title'), icon: Laptop },
+        { id: 'modules', label: t('modules.title'), icon: Layers },
+      ]
+    },
+    {
       id: 'chapters',
       title: t('sidebar.chapters'),
       icon: Book,
@@ -31,15 +40,6 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
         { id: 'development', label: t('development.title'), icon: Laptop },
         { id: 'setup', label: t('setup.title'), icon: Settings },
         { id: 'login', label: t('login.title'), icon: LogIn },
-      ]
-    },
-    {
-      id: 'architecture',
-      title: t('sidebar.architecture'),
-      icon: Layers,
-      items: [
-        { id: 'tech-stack', label: t('tech_stack.title'), icon: Laptop },
-        { id: 'modules', label: t('modules.title'), icon: Layers },
       ]
     },
     {
@@ -74,7 +74,7 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
         <div className={`flex flex-col gap-10 ${isCollapsed ? 'items-center' : ''}`}>
           {!isCollapsed && (
             <div className="px-4">
-              <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500 mb-2">
+              <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 dark:text-slate-500 mb-2">
                 {t('sidebar.contents')}
               </h3>
               <div className="h-1 w-8 bg-brand-purple rounded-full" />
@@ -85,7 +85,7 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
             {sections.map((section) => (
               <div key={section.id} className="space-y-6">
                 {!isCollapsed && (
-                  <h4 className="flex items-center gap-2 px-4 text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white opacity-50">
+                  <h4 className="flex items-center gap-2 px-4 text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-white opacity-50">
                     {section.title}
                   </h4>
                 )}

@@ -1,24 +1,26 @@
 {
   "Index": {
     "brand": "EduStack IS",
-    "brandSub": "Informační systém",
+    "brandSub": "Otevřená platforma pro výuku informatiky",
     "nav": {
       "idea": "Myšlenka",
-      "how": "Jak to funguje",
+      "how": "V hodině",
+      "learn": "Učební cesty",
       "tour": "Prohlídka",
       "teachers": "Učitelé",
       "students": "Studenti",
       "method": "Metodika",
-      "downloads": "Materiály",
+      "downloads": "Pracovní listy",
+      "manual": "Příručka",
       "demo": "Vyzkoušet demo",
       "source": "Zdrojový kód"
     },
     "hero": {
-      "eyebrow": "Open-source školní informační systém",
-      "title": "Šest rolí. Jeden systém. Postavený podle toho, jak školy skutečně fungují.",
-      "sub": "EduStack IS propojuje vedení, učitele, studenty i rodiče nad společnými daty — každý dostává pohled přizpůsobený své práci.",
-      "ctaPrimary": "Vyzkoušet testovací instanci",
-      "ctaSecondary": "Přečíst diplomovou práci"
+      "eyebrow": "Open-source výuková platforma · postavená na skutečném školním IS",
+      "title": "Neučte o systémech. Učte uvnitř jednoho.",
+      "sub": "EduStack IS je open-source školní informační systém navržený pro výuku informatiky. Mladší žáci zkoumají skutečná data a role; starší se ponoří do kódu a spustí ho sami.",
+      "ctaPrimary": "Vyzkoušet živé demo",
+      "ctaSecondary": "Otevřít příručku"
     },
     "roles": {
       "admin": "Správce systému",
@@ -30,32 +32,58 @@
     },
     "idea": {
       "eyebrow": "Hlavní myšlenka",
-      "title": "Škola je stack překrývajících se rolí.",
-      "body": "Většina školních systémů si vybere jedno publikum a ostatní k němu přibalí. EduStack to dělá obráceně: šest rolí, jedna sdílená databáze a UI, které se přizpůsobí. Ředitelé mají přehled, zástupci rozvrhy, učitelé známkování, studenti jasno, rodiče vhled, správci kontrolu. Žádné tabulky lepené k e-mailům.",
+      "title": "Školní IS je nejlepší učebnice informatiky, kterou jste nikdy nenapsali.",
+      "body": "Školní informační systém je mikrosvět všech témat informatiky: oprávnění rolí, relační data, rozvrhy, audit logy, integrace s AI — aplikovaná na doménu, kterou žáci důvěrně znají. EduStack IS z toho dělá praktické hodiny, které vaše třída může skutečně použít, místo umělých příkladů, které nic nevysvětlují.",
       "pillars": {
-        "shared": "Sdílená data",
-        "sharedBody": "Jeden zdroj pravdy napříč rolemi. Žádné exporty, žádné kopie, žádné pondělní dorovnávání.",
-        "tailored": "Pohledy na míru",
-        "tailoredBody": "Každá role vidí přesně to, co potřebuje — a jen to.",
+        "shared": "Skutečná data",
+        "sharedBody": "Žáci pracují se stejnými datovými strukturami a omezeními, jaké školy skutečně používají — ne s vykonstruovanými učebnicovými scénáři.",
+        "tailored": "Podle věku",
+        "tailoredBody": "Úlohy škálují od „klikejte si v dashboardu“ pro první stupeň po „forknout, sestavit, nasadit“ pro střední školu.",
         "open": "Otevřené ve výchozím nastavení",
-        "openBody": "Licence MIT. Vstřícné češtině. Vyvíjeno veřejně spolu s diplomovou prací."
+        "openBody": "Licence MIT. Vstřícné češtině. Celý stack je dokumentován a verzován spolu s metodikou."
       }
     },
     "how": {
-      "eyebrow": "Jak to funguje",
-      "title": "Od třídnice k vysvědčení, v pěti krocích.",
+      "eyebrow": "V hodině",
+      "title": "Jak vypadá hodina nad EduStackem.",
       "steps": [
-        {"title": "Nastavte školu", "body": "Správce importuje strukturu školy: ročníky, třídy, předměty, učebny, pracovníci. Jednou."},
-        {"title": "Sestavte rozvrh", "body": "Zástupci tvoří rozvrh nástroji vědomými omezení. Kolize se zobrazí dřív, než vyletí ven."},
-        {"title": "Učte a zaznamenávejte", "body": "Učitelé vedou hodiny, zapisují docházku a známky z jedné obrazovky."},
-        {"title": "Buďte v obraze", "body": "Studenti i rodiče vidí, co přijde, co je třeba odevzdat a jak dopadli — v reálném čase."},
-        {"title": "Uzavřete školní rok", "body": "Ředitel podepíše vysvědčení. Archivovat, exportovat, předat další rok správci. Opakovat."}
+        {"title": "Vyberte si roli", "body": "Správce, učitel, žák, rodič — přihlaste se jako jeden z nich. Zjistěte, co vidí a co může dělat."},
+        {"title": "Projděte skutečný workflow", "body": "Importujte třídu, zapište známky, naplánujte suplování. Obrazovky a pravidla jsou stejná, jaká by používala reálná škola."},
+        {"title": "Přečtěte si pravidla", "body": "Jak systém rozhoduje, kdo co může? Otevřete matici rolí a vystopujte to zpět do datového modelu."},
+        {"title": "Něco záměrně rozbijte", "body": "Zkuste akci, kterou role nesmí. Sledujte audit log. Pochopte, co systém chrání a proč."},
+        {"title": "Porovnejte s vlastní školou", "body": "Co je stejné? Co je jinak? Co dělá tabulka vaší školy, co tenhle systém ne?"}
+      ]
+    },
+    "learn": {
+      "eyebrow": "Učební cesty",
+      "title": "Jeden systém, tři věkové úrovně.",
+      "sub": "Každá úroveň přichází s pracovními listy, plány hodin a poznámkami pro učitele — psanými pro českou výuku informatiky.",
+      "tiers": [
+        {
+          "label": "1. stupeň",
+          "grade": "4.–5. třída",
+          "verb": "Objevuj",
+          "body": "Proklikejte různé role. Všimněte si, které obrazovky pro koho existují. Spárujte oprávnění s pracovními pozicemi. Zjistěte, že „data“ mají tvar."
+        },
+        {
+          "label": "2. stupeň",
+          "grade": "6.–9. třída",
+          "verb": "Modeluj",
+          "body": "Importujte CSV. Přečtěte ER diagram. Najděte pravidlo oprávnění. Najděte záznam v audit logu, který dokazuje, kdo co udělal."
+        },
+        {
+          "label": "Střední škola",
+          "grade": "Gymnázium / SŠ",
+          "verb": "Sestav",
+          "body": "Naklonujte repozitář. Spusťte to lokálně. Přečtěte kód API. Šáhněte si na funkci. Otevřete pull request proti reálnému kódu."
+        }
       ]
     },
     "tour": {
       "eyebrow": "Prohlídka produktu",
-      "title": "Pohled pro každou roli.",
-      "sub": "Skutečné snímky z fungující aplikace.",
+      "title": "Demonstrační nástroj zblízka.",
+      "sub": "Skutečné snímky z běžící aplikace. Klikněte na libovolný obrázek a otevře se na celou obrazovku — nebo skočte přímo do plné uživatelské příručky.",
+      "manualCta": "Otevřít celou uživatelskou příručku",
       "labels": {
         "dashboard": "Správce · Přehled",
         "schoolManagement": "Škola · Správa",
@@ -66,54 +94,54 @@
       }
     },
     "teachers": {
-      "eyebrow": "Pro učitele",
-      "title": "Méně administrativy. Více učení.",
+      "eyebrow": "Pro učitele informatiky",
+      "title": "Méně přípravy. Více diskuse.",
       "bullets": [
-        "Jedna obrazovka pro docházku, známkování i poznámky k hodině.",
-        "Návrh suplování, který respektuje omezení rozvrhu.",
-        "Komentáře k úkolům — viditelné rodičům, jen když chcete.",
-        "Třídnice, žákovská a rozvrh sdílí stejná data.",
-        "Česká stupnice 1–5 a plusy/minusy z výroby."
+        "Pracovní listy pro 1. stupeň, 2. stupeň i střední školu — i s řešením.",
+        "Metodické pokyny ke každé kapitole: na co se ptát, na co upozornit.",
+        "Ve třídě není potřeba nic instalovat — živé demo je otevřené celý týden.",
+        "Česká stupnice známek i české rozhraní z výroby.",
+        "V pondělí ráno reset demo instance a začínáte načisto."
       ]
     },
     "students": {
-      "eyebrow": "Pro studenty",
-      "title": "Vědět, co bude. Bez 12 otevřených záložek.",
+      "eyebrow": "Pro žáky a studenty",
+      "title": "Školní software, konečně na vaší straně.",
       "bullets": [
-        "Dnes, tento týden, tento pololetí — na první pohled.",
-        "Nadcházející testy se objeví v kalendáři dřív, než vás přepadnou.",
-        "Známky přichází s kontextem: váha, průměr, co se počítá.",
-        "Přímé zprávy s učiteli, omezené na správnou třídu.",
-        "Funguje na telefonu, který už máte."
+        "Uvidíte přesně, jaká data o vás škola vede.",
+        "Vyzkoušíte si všechny role — i křeslo ředitele.",
+        "Kód je otevřený. Smíte si ho prohlédnout.",
+        "Můžete si celý systém spustit na vlastním notebooku.",
+        "Otevřete issue, pošlete pull request, nechte stopu."
       ]
     },
     "method": {
       "eyebrow": "Metodika",
-      "title": "Navrženo souběžně s diplomovou prací.",
-      "body": "Každý modul má za sebou zdokumentované myšlení — rozhovory s učiteli, matice oprávnění rolí, ER diagramy, uživatelské cesty. Metodika je součástí produktu, ne poznámkou pod čarou.",
+      "title": "Metodika je produkt.",
+      "body": "EduStack IS je demonstrace. Metodika — pracovní listy, matice rolí, ER diagramy, poznámky pro učitele — je to, co vaše třída skutečně používá. Vše je dokumentováno a verzováno spolu s kódem.",
       "items": [
         {"title": "Matice oprávnění rolí", "body": "6 rolí × 80+ schopností, plně specifikováno."},
-        {"title": "Záznamy z výzkumu", "body": "Rozhovory s českými učiteli a vedením."},
+        {"title": "Pracovní listy podle ročníku", "body": "1. stupeň, 2. stupeň, střední škola — i s řešením."},
         {"title": "ER diagramy", "body": "Schéma je dokumentováno, ne naznačeno."},
-        {"title": "Pracovní listy", "body": "Checklisty pro nasazení v nové škole."}
+        {"title": "Učitelský quickstart", "body": "30 minut přípravy na 90minutovou hodinu."}
       ]
     },
     "downloads": {
-      "eyebrow": "Ke stažení",
-      "title": "Vezměte si metodiku s sebou.",
-      "sub": "Pracovní listy, matice rolí a průvodce nasazením. PDF a Google Docs.",
+      "eyebrow": "Pracovní listy a metodika",
+      "title": "Materiály do hodiny. Vezměte si je s sebou.",
+      "sub": "Vše, co učitel informatiky potřebuje k vedení hodiny nad EduStackem — pracovní listy podle věku, matice rolí, ER diagramy. PDF a Google Docs.",
       "items": [
-        {"title": "Nasazovací pracovní list", "kind": "PDF · 8 stran", "body": "Pro školy začínající od nuly."},
+        {"title": "Pracovní listy – 1. stupeň", "kind": "PDF · 6 stran", "body": "4.–5. třída. Objevování rolí a dat."},
+        {"title": "Pracovní listy – 2. stupeň", "kind": "PDF · 10 stran", "body": "6.–9. třída. Modelování a oprávnění."},
+        {"title": "Pracovní listy – střední škola", "kind": "PDF · 12 stran", "body": "Spustit lokálně. Číst kód. Něco postavit."},
         {"title": "Matice oprávnění rolí", "kind": "PDF · 2 strany", "body": "6 rolí, každá schopnost."},
-        {"title": "Učitelský quickstart", "kind": "PDF · 4 strany", "body": "Reference na první týden."},
-        {"title": "Přehled datového modelu", "kind": "PDF · 6 stran", "body": "ER diagram a poznámky."},
         {"title": "Hlavní složka metodiky", "kind": "Google Drive", "body": "Celý balík, živě."}
       ]
     },
     "demo": {
       "eyebrow": "Živé demo",
-      "title": "Proklikejte si to. Opravdu to běží.",
-      "sub": "Živá testovací instance s ukázkovými daty pro každou roli. Reset jednou týdně.",
+      "title": "Proklikejte si to. Vezměte do hodiny.",
+      "sub": "Živá testovací instance s ukázkovými daty pro každou roli. Reset každé pondělí — přiveďte novou třídu, aniž by data byla zastaralá.",
       "url": "demo.is-edustack.org"
     },
     "source": {
@@ -128,8 +156,8 @@
     },
     "contact": {
       "eyebrow": "O autorovi",
-      "title": "Postaveno jednou osobou, záměrně.",
-      "body": "EduStack IS je diplomový projekt. Máte otázku, chcete nasadit ve své škole, nebo jste jen zvědaví? Napište.",
+      "title": "Učíte informatiku? Pojďme se bavit.",
+      "body": "EduStack IS je bakalářský projekt, postavený jednou osobou záměrně. Chcete to pilotně nasadit ve své škole, upravit pracovní list, nebo máte zpětnou vazbu? Napište.",
       "email": "hello@is-edustack.org"
     },
     "footerNote": "EduStack IS · 2026 · licence MIT · is-edustack.org"
@@ -294,7 +322,7 @@
       }
     },
     "roles": {
-      "title": "Systémové role",
+      "title": "Uživatelské role",
       "coreFunctions": "Klíčové funkce",
       "workflows": "Detailní pracovní postupy",
       "procedure": "Postup",

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import {ROLE_COLORS_LIST} from './roles';
 
 export function LogoMark({
@@ -25,34 +26,33 @@ export function LogoMark({
   );
 }
 
+// Intrinsic dimensions of the wordmark PNG (mark + "EduStack IS").
+const WORDMARK_W = 1312;
+const WORDMARK_H = 651;
+
 export function LogoWordmark({scale = 1}: {scale?: number}) {
+  const height = Math.round(80 * scale);
+
   return (
-    <div
-      className="flex items-center font-display"
-      style={{gap: 10 * scale}}
-    >
-      <LogoMark size={36 * scale} />
-      <div className="flex flex-col leading-none">
-        <div
-          className="text-text font-bold tracking-tight"
-          style={{fontSize: 22 * scale}}
-        >
-          EduStack <span className="font-medium opacity-70">IS</span>
-        </div>
-        <div className="flex" style={{gap: 3 * scale, marginTop: 5 * scale}}>
-          {ROLE_COLORS_LIST.map((color) => (
-            <span
-              key={color}
-              className="rounded-full"
-              style={{
-                width: 5 * scale,
-                height: 5 * scale,
-                background: color
-              }}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
+    <span className="inline-flex items-center" style={{height}}>
+      <Image
+        src="/logo/edustack_logo_black_text_right.png"
+        alt="EduStack IS"
+        width={WORDMARK_W}
+        height={WORDMARK_H}
+        priority
+        className="block dark:hidden w-auto"
+        style={{height: '100%'}}
+      />
+      <Image
+        src="/logo/edustack_logo_white_text_right.png"
+        alt="EduStack IS"
+        width={WORDMARK_W}
+        height={WORDMARK_H}
+        priority
+        className="hidden dark:block w-auto"
+        style={{height: '100%'}}
+      />
+    </span>
   );
 }

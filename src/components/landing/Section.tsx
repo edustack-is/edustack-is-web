@@ -7,7 +7,8 @@ export function Section({
   title,
   sub,
   children,
-  className
+  className,
+  center = false
 }: {
   id?: string;
   eyebrow: string;
@@ -16,16 +17,23 @@ export function Section({
   sub?: string;
   children: React.ReactNode;
   className?: string;
+  /** When true, eyebrow + title + sub are horizontally centered. */
+  center?: boolean;
 }) {
   return (
     <section
       id={id}
       className={cn(
-        'border-t border-line px-6 md:px-14 py-16 md:py-20',
+        'border-t border-line px-6 md:px-[5vw] py-16 md:py-20',
         className
       )}
     >
-      <div className="flex items-center gap-2.5 mb-2.5">
+      <div
+        className={cn(
+          'flex items-center gap-2.5 mb-2.5',
+          center && 'justify-center'
+        )}
+      >
         <span
           className="w-2.5 h-2.5 rounded-[3px]"
           style={{
@@ -38,12 +46,22 @@ export function Section({
         </span>
       </div>
       {title && (
-        <h2 className="font-display text-3xl md:text-[46px] leading-[1.05] tracking-[-0.025em] text-text font-bold text-balance max-w-[880px] mt-1 mb-4">
+        <h2
+          className={cn(
+            'font-display text-3xl md:text-[46px] leading-[1.05] tracking-[-0.025em] text-text font-bold text-balance max-w-[880px] mt-1 mb-4',
+            center && 'mx-auto text-center'
+          )}
+        >
           {title}
         </h2>
       )}
       {sub && (
-        <p className="font-body text-[17px] leading-[1.55] text-muted max-w-[680px] mb-8">
+        <p
+          className={cn(
+            'font-body text-[17px] leading-[1.55] text-muted max-w-[680px] mb-8',
+            center && 'mx-auto text-center'
+          )}
+        >
           {sub}
         </p>
       )}
