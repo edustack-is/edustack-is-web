@@ -1,35 +1,138 @@
 {
   "Index": {
-    "title": "Edu Stack IS",
-    "description": "Information system for supporting informatics education.",
+    "brand": "EduStack IS",
+    "brandSub": "Information System",
+    "nav": {
+      "idea": "Idea",
+      "how": "How it works",
+      "tour": "Product tour",
+      "teachers": "Teachers",
+      "students": "Students",
+      "method": "Methodology",
+      "downloads": "Downloads",
+      "demo": "Try the demo",
+      "source": "Source"
+    },
     "hero": {
-      "title": "Edu Stack IS",
-      "subtitle": "Discover the brain of the school through simulation.",
-      "description": "Edu Stack IS is an educational tool designed to help students understand the complexity of school management, data flows, and security in the digital age.",
-      "explore": "Explore Idea",
-      "worksheets": "Working Sheets"
+      "eyebrow": "Open-source school information system",
+      "title": "Six roles. One system. Built around how schools actually work.",
+      "sub": "EduStack IS connects administrators, principals, teachers, students and parents on shared data — each with a view shaped to their work.",
+      "ctaPrimary": "Try the testing instance",
+      "ctaSecondary": "Read the thesis"
+    },
+    "roles": {
+      "admin": "System Admin",
+      "head": "Headmaster",
+      "deputy": "Deputy Principal",
+      "teacher": "Teacher",
+      "student": "Student",
+      "parent": "Parent"
     },
     "idea": {
-      "title": "The Idea",
-      "description": "Shifting the perception of information systems from passive tools to active educational instruments.",
-      "point1": "Understand role hierarchy and permissions.",
-      "point2": "Simulate real school processes (registry, grading, schedule).",
-      "point3": "Analyze systemic impacts of administrative decisions."
+      "eyebrow": "The idea",
+      "title": "A school is a stack of overlapping roles.",
+      "body": "Most school systems pick one audience and bolt the rest on. EduStack starts the other way around: six roles, one shared database, and a UI that adapts. Headmasters get oversight, deputies get scheduling, teachers get marking, students get clarity, parents get visibility, admins get control. No spreadsheets duct-taped to email.",
+      "pillars": {
+        "shared": "Shared data",
+        "sharedBody": "One source of truth across roles. No exports, no copies, no Monday-morning reconciliation.",
+        "tailored": "Tailored views",
+        "tailoredBody": "Each role sees exactly what they need — and only what they need.",
+        "open": "Open by default",
+        "openBody": "MIT-licensed. Czech-friendly. Built in public alongside a master's thesis."
+      }
     },
-    "tech": {
-      "title": "Technical Description",
-      "description": "Modern, scalable, and globally distributed infrastructure.",
-      "stack": "Built with NestJS, React, Cloudflare D1, and MCP for AI integration.",
-      "architecture": "Modular monorepo architecture with serverless edge computing."
+    "how": {
+      "eyebrow": "How it works",
+      "title": "From class register to report card, in five steps.",
+      "steps": [
+        {"title": "Set up the school", "body": "Admin imports the school structure: years, classes, subjects, rooms, staff. Once."},
+        {"title": "Compose the timetable", "body": "Deputies build the schedule with constraint-aware tools. Conflicts surface before they ship."},
+        {"title": "Teach and record", "body": "Teachers run their lessons, log attendance and grades from the same screen."},
+        {"title": "Stay in the loop", "body": "Students and parents see what's coming, what's due, and what they got — in real time."},
+        {"title": "Close the year", "body": "Headmaster signs off on reports. Archive, export, hand the next year to the admin. Repeat."}
+      ]
     },
-    "rules": {
-      "title": "Rules & Licensing",
-      "description": "Edu Stack IS is an open-source project.",
-      "clause1": "Available on GitHub for review and non-commercial educational use.",
-      "clause2": "Commercial usage requires a specific agreement.",
-      "viewTerms": "View full Terms of Service",
-      "cta": "Contact us for more information."
-    }
+    "tour": {
+      "eyebrow": "Product tour",
+      "title": "A view for every role.",
+      "sub": "Real screenshots from the working app.",
+      "labels": {
+        "dashboard": "Admin · Dashboard",
+        "schoolManagement": "School · Management",
+        "systemUsers": "System · Users",
+        "monitoring": "System · Monitoring",
+        "generateData": "System · Generate data",
+        "login": "Login screen"
+      }
+    },
+    "teachers": {
+      "eyebrow": "For teachers",
+      "title": "Less admin. More teaching.",
+      "bullets": [
+        "One screen for attendance, grading and lesson notes.",
+        "Constraint-aware substitutions when someone's out sick.",
+        "Comment threads on assignments — visible to parents only when you want.",
+        "Class register, gradebook and timetable share the same data.",
+        "Czech grading scale (1–5) and pluses/minuses out of the box."
+      ]
+    },
+    "students": {
+      "eyebrow": "For students",
+      "title": "Know what's next. Without 12 tabs open.",
+      "bullets": [
+        "Today, this week, this term — at a glance.",
+        "Upcoming tests show up on the calendar before they ambush you.",
+        "Grades arrive with context: weight, average, what counts.",
+        "Direct messaging with teachers, scoped to the right class.",
+        "Works on the phone you already have."
+      ]
+    },
+    "method": {
+      "eyebrow": "Methodology",
+      "title": "Designed alongside a master's thesis.",
+      "body": "Every module ships with the thinking behind it — interviews with teachers, role-permission matrices, ER diagrams, user journeys. The methodology is part of the product, not a footnote.",
+      "items": [
+        {"title": "Role permission matrices", "body": "6 roles × 80+ capabilities, fully spec'd."},
+        {"title": "User research notes", "body": "Interviews with Czech teachers and admins."},
+        {"title": "ER diagrams", "body": "Schema is documented, not implied."},
+        {"title": "Worksheets", "body": "Adoption checklists for new schools."}
+      ]
+    },
+    "downloads": {
+      "eyebrow": "Downloads",
+      "title": "Take the methodology with you.",
+      "sub": "Worksheets, role matrices and adoption guides. PDF and Google Docs.",
+      "items": [
+        {"title": "Onboarding worksheet", "kind": "PDF · 8 pages", "body": "For schools starting fresh."},
+        {"title": "Role permission matrix", "kind": "PDF · 2 pages", "body": "6 roles, every capability."},
+        {"title": "Teacher quickstart", "kind": "PDF · 4 pages", "body": "First-week reference."},
+        {"title": "Data model overview", "kind": "PDF · 6 pages", "body": "ER diagram + notes."},
+        {"title": "Methodology master folder", "kind": "Google Drive", "body": "The whole package, live."}
+      ]
+    },
+    "demo": {
+      "eyebrow": "Live demo",
+      "title": "Click around. It's really running.",
+      "sub": "A live testing instance with seed data for every role. Reset weekly.",
+      "url": "demo.is-edustack.org"
+    },
+    "source": {
+      "eyebrow": "Open source",
+      "title": "Read the code. Open an issue. Send a PR.",
+      "host": "github.com/edustack-is",
+      "repos": [
+        {"name": "edustack-is", "body": "Backend & domain model"},
+        {"name": "edustack-is-web", "body": "Web app · React + TS"},
+        {"name": "edustack-thesis", "body": "Methodology & writing"}
+      ]
+    },
+    "contact": {
+      "eyebrow": "About the author",
+      "title": "Built by one person, on purpose.",
+      "body": "EduStack IS is a master's thesis project. Have a question, want to deploy at your school, or just curious? Drop a line.",
+      "email": "hello@is-edustack.org"
+    },
+    "footerNote": "EduStack IS · 2026 · MIT license · is-edustack.org"
   },
   "Navigation": {
     "about": "About",

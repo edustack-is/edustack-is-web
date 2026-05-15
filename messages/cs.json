@@ -1,35 +1,138 @@
 {
   "Index": {
-    "title": "Edu Stack IS",
-    "description": "Informační systém pro podporu výuky informatiky.",
+    "brand": "EduStack IS",
+    "brandSub": "Informační systém",
+    "nav": {
+      "idea": "Myšlenka",
+      "how": "Jak to funguje",
+      "tour": "Prohlídka",
+      "teachers": "Učitelé",
+      "students": "Studenti",
+      "method": "Metodika",
+      "downloads": "Materiály",
+      "demo": "Vyzkoušet demo",
+      "source": "Zdrojový kód"
+    },
     "hero": {
-      "title": "Edu Stack IS",
-      "subtitle": "Objevte mozek školy prostřednictvím simulace.",
-      "description": "Edu Stack IS je edukační nástroj navržený tak, aby pomohl žákům pochopit komplexitu správy školy, datové toky a bezpečnost v digitální éře.",
-      "explore": "Prozkoumat myšlenku",
-      "worksheets": "Pracovní listy"
+      "eyebrow": "Open-source školní informační systém",
+      "title": "Šest rolí. Jeden systém. Postavený podle toho, jak školy skutečně fungují.",
+      "sub": "EduStack IS propojuje vedení, učitele, studenty i rodiče nad společnými daty — každý dostává pohled přizpůsobený své práci.",
+      "ctaPrimary": "Vyzkoušet testovací instanci",
+      "ctaSecondary": "Přečíst diplomovou práci"
+    },
+    "roles": {
+      "admin": "Správce systému",
+      "head": "Ředitel",
+      "deputy": "Zástupce ředitele",
+      "teacher": "Učitel",
+      "student": "Student",
+      "parent": "Rodič"
     },
     "idea": {
-      "title": "Myšlenka",
-      "description": "Posun vnímání informačních systémů od pasivních nástrojů k aktivním edukačním instrumentům.",
-      "point1": "Pochopení hierarchie rolí a oprávnění.",
-      "point2": "Simulace reálných školních procesů (matrika, klasifikace, rozvrh).",
-      "point3": "Analýza systémových dopadů administrativních rozhodnutí."
+      "eyebrow": "Hlavní myšlenka",
+      "title": "Škola je stack překrývajících se rolí.",
+      "body": "Většina školních systémů si vybere jedno publikum a ostatní k němu přibalí. EduStack to dělá obráceně: šest rolí, jedna sdílená databáze a UI, které se přizpůsobí. Ředitelé mají přehled, zástupci rozvrhy, učitelé známkování, studenti jasno, rodiče vhled, správci kontrolu. Žádné tabulky lepené k e-mailům.",
+      "pillars": {
+        "shared": "Sdílená data",
+        "sharedBody": "Jeden zdroj pravdy napříč rolemi. Žádné exporty, žádné kopie, žádné pondělní dorovnávání.",
+        "tailored": "Pohledy na míru",
+        "tailoredBody": "Každá role vidí přesně to, co potřebuje — a jen to.",
+        "open": "Otevřené ve výchozím nastavení",
+        "openBody": "Licence MIT. Vstřícné češtině. Vyvíjeno veřejně spolu s diplomovou prací."
+      }
     },
-    "tech": {
-      "title": "Technický popis",
-      "description": "Moderní, škálovatelná a globálně distribuovaná infrastruktura.",
-      "stack": "Postaveno na NestJS, React, Cloudflare D1 a MCP pro integraci AI.",
-      "architecture": "Modulární monorepo architektura s využitím edge computing."
+    "how": {
+      "eyebrow": "Jak to funguje",
+      "title": "Od třídnice k vysvědčení, v pěti krocích.",
+      "steps": [
+        {"title": "Nastavte školu", "body": "Správce importuje strukturu školy: ročníky, třídy, předměty, učebny, pracovníci. Jednou."},
+        {"title": "Sestavte rozvrh", "body": "Zástupci tvoří rozvrh nástroji vědomými omezení. Kolize se zobrazí dřív, než vyletí ven."},
+        {"title": "Učte a zaznamenávejte", "body": "Učitelé vedou hodiny, zapisují docházku a známky z jedné obrazovky."},
+        {"title": "Buďte v obraze", "body": "Studenti i rodiče vidí, co přijde, co je třeba odevzdat a jak dopadli — v reálném čase."},
+        {"title": "Uzavřete školní rok", "body": "Ředitel podepíše vysvědčení. Archivovat, exportovat, předat další rok správci. Opakovat."}
+      ]
     },
-    "rules": {
-      "title": "Pravidla a licence",
-      "description": "Edu Stack IS je open-source projekt.",
-      "clause1": "Dostupný na GitHubu pro review a nekomerční vzdělávací účely.",
-      "clause2": "Komerční využití vyžaduje specifickou dohodu.",
-      "viewTerms": "Zobrazit celé podmínky použití",
-      "cta": "Kontaktujte nás pro více informací."
-    }
+    "tour": {
+      "eyebrow": "Prohlídka produktu",
+      "title": "Pohled pro každou roli.",
+      "sub": "Skutečné snímky z fungující aplikace.",
+      "labels": {
+        "dashboard": "Správce · Přehled",
+        "schoolManagement": "Škola · Správa",
+        "systemUsers": "Systém · Uživatelé",
+        "monitoring": "Systém · Monitoring",
+        "generateData": "Systém · Generování dat",
+        "login": "Přihlašovací obrazovka"
+      }
+    },
+    "teachers": {
+      "eyebrow": "Pro učitele",
+      "title": "Méně administrativy. Více učení.",
+      "bullets": [
+        "Jedna obrazovka pro docházku, známkování i poznámky k hodině.",
+        "Návrh suplování, který respektuje omezení rozvrhu.",
+        "Komentáře k úkolům — viditelné rodičům, jen když chcete.",
+        "Třídnice, žákovská a rozvrh sdílí stejná data.",
+        "Česká stupnice 1–5 a plusy/minusy z výroby."
+      ]
+    },
+    "students": {
+      "eyebrow": "Pro studenty",
+      "title": "Vědět, co bude. Bez 12 otevřených záložek.",
+      "bullets": [
+        "Dnes, tento týden, tento pololetí — na první pohled.",
+        "Nadcházející testy se objeví v kalendáři dřív, než vás přepadnou.",
+        "Známky přichází s kontextem: váha, průměr, co se počítá.",
+        "Přímé zprávy s učiteli, omezené na správnou třídu.",
+        "Funguje na telefonu, který už máte."
+      ]
+    },
+    "method": {
+      "eyebrow": "Metodika",
+      "title": "Navrženo souběžně s diplomovou prací.",
+      "body": "Každý modul má za sebou zdokumentované myšlení — rozhovory s učiteli, matice oprávnění rolí, ER diagramy, uživatelské cesty. Metodika je součástí produktu, ne poznámkou pod čarou.",
+      "items": [
+        {"title": "Matice oprávnění rolí", "body": "6 rolí × 80+ schopností, plně specifikováno."},
+        {"title": "Záznamy z výzkumu", "body": "Rozhovory s českými učiteli a vedením."},
+        {"title": "ER diagramy", "body": "Schéma je dokumentováno, ne naznačeno."},
+        {"title": "Pracovní listy", "body": "Checklisty pro nasazení v nové škole."}
+      ]
+    },
+    "downloads": {
+      "eyebrow": "Ke stažení",
+      "title": "Vezměte si metodiku s sebou.",
+      "sub": "Pracovní listy, matice rolí a průvodce nasazením. PDF a Google Docs.",
+      "items": [
+        {"title": "Nasazovací pracovní list", "kind": "PDF · 8 stran", "body": "Pro školy začínající od nuly."},
+        {"title": "Matice oprávnění rolí", "kind": "PDF · 2 strany", "body": "6 rolí, každá schopnost."},
+        {"title": "Učitelský quickstart", "kind": "PDF · 4 strany", "body": "Reference na první týden."},
+        {"title": "Přehled datového modelu", "kind": "PDF · 6 stran", "body": "ER diagram a poznámky."},
+        {"title": "Hlavní složka metodiky", "kind": "Google Drive", "body": "Celý balík, živě."}
+      ]
+    },
+    "demo": {
+      "eyebrow": "Živé demo",
+      "title": "Proklikejte si to. Opravdu to běží.",
+      "sub": "Živá testovací instance s ukázkovými daty pro každou roli. Reset jednou týdně.",
+      "url": "demo.is-edustack.org"
+    },
+    "source": {
+      "eyebrow": "Open source",
+      "title": "Přečtěte si kód. Otevřete issue. Pošlete PR.",
+      "host": "github.com/edustack-is",
+      "repos": [
+        {"name": "edustack-is", "body": "Backend a doménový model"},
+        {"name": "edustack-is-web", "body": "Webová aplikace · React + TS"},
+        {"name": "edustack-thesis", "body": "Metodika a texty"}
+      ]
+    },
+    "contact": {
+      "eyebrow": "O autorovi",
+      "title": "Postaveno jednou osobou, záměrně.",
+      "body": "EduStack IS je diplomový projekt. Máte otázku, chcete nasadit ve své škole, nebo jste jen zvědaví? Napište.",
+      "email": "hello@is-edustack.org"
+    },
+    "footerNote": "EduStack IS · 2026 · licence MIT · is-edustack.org"
   },
   "Navigation": {
     "about": "O systému",
