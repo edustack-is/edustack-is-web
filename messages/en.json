@@ -198,7 +198,7 @@
     "sidebar": {
       "contents": "Contents",
       "chapters": "Chapters",
-      "roles": "Roles",
+      "roles": "User Roles",
       "architecture": "Architecture"
     },
     "tech_stack": {
@@ -322,7 +322,7 @@
       }
     },
     "roles": {
-      "title": "System Roles",
+      "title": "User Roles",
       "coreFunctions": "Core Functions",
       "workflows": "Detailed Workflows",
       "procedure": "Procedure",

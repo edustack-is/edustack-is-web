@@ -24,6 +24,15 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
 
   const sections = [
     {
+      id: 'architecture',
+      title: t('sidebar.architecture'),
+      icon: Layers,
+      items: [
+        { id: 'tech-stack', label: t('tech_stack.title'), icon: Laptop },
+        { id: 'modules', label: t('modules.title'), icon: Layers },
+      ]
+    },
+    {
       id: 'chapters',
       title: t('sidebar.chapters'),
       icon: Book,
@@ -31,15 +40,6 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
         { id: 'development', label: t('development.title'), icon: Laptop },
         { id: 'setup', label: t('setup.title'), icon: Settings },
         { id: 'login', label: t('login.title'), icon: LogIn },
-      ]
-    },
-    {
-      id: 'architecture',
-      title: t('sidebar.architecture'),
-      icon: Layers,
-      items: [
-        { id: 'tech-stack', label: t('tech_stack.title'), icon: Laptop },
-        { id: 'modules', label: t('modules.title'), icon: Layers },
       ]
     },
     {

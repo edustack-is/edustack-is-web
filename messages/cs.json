@@ -322,7 +322,7 @@
       }
     },
     "roles": {
-      "title": "Systémové role",
+      "title": "Uživatelské role",
       "coreFunctions": "Klíčové funkce",
       "workflows": "Detailní pracovní postupy",
       "procedure": "Postup",

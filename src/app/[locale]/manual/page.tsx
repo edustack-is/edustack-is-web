@@ -161,7 +161,93 @@ export default function ManualPage() {
 
             {/* Chapters Section */}
             <div className="space-y-64">
-              
+
+              {/* Tech Stack */}
+              <section id="tech-stack" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <Cpu className="h-10 w-10" />
+                  </div>
+                  <h2 className="font-display text-3xl md:text-[46px] font-bold tracking-tight leading-[1.05]">{t('tech_stack.title')}</h2>
+                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                    {t('tech_stack.description')}
+                  </p>
+                </div>
+
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {['nestjs', 'react', 'cloudflare_d1', 'mcp', 'nextjs', 'tailwind'].map((key) => (
+                    <a
+                      key={key}
+                      href={translate(`tech_stack.items.${key}.link`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl hover:border-brand-purple/30 transition-all hover:-translate-y-1"
+                    >
+                      <div className="flex justify-between items-start mb-6">
+                        <h4 className="font-display text-base md:text-lg font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-brand-purple transition-colors">
+                          {translate(`tech_stack.items.${key}.title`)}
+                        </h4>
+                        <ExternalLink size={20} className="text-slate-300 group-hover:text-brand-purple transition-colors" />
+                      </div>
+                      <p className="text-sm md:text-base text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                        {translate(`tech_stack.items.${key}.description`)}
+                      </p>
+                    </a>
+                  ))}
+                </div>
+              </section>
+
+              {/* Application Modules */}
+              <section id="modules" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <Layers className="h-10 w-10" />
+                  </div>
+                  <h2 className="font-display text-3xl md:text-[46px] font-bold tracking-tight leading-[1.05]">{t('modules.title')}</h2>
+                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                    {t('modules.description')}
+                  </p>
+                </div>
+
+                <div className="space-y-10">
+                  {['admin', 'auth', 'registry', 'schedule', 'grading', 'ai', 'mcp'].map((key) => (
+                    <div key={key} className="group p-10 rounded-[3rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl transition-all">
+                      <div className="grid lg:grid-cols-3 gap-12">
+                        <div className="space-y-4">
+                          <div className="inline-flex p-3 rounded-2xl bg-brand-purple/10 text-brand-purple mb-2">
+                             <Box size={24} />
+                          </div>
+                          <h4 className="font-display text-lg md:text-xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-brand-purple transition-colors">
+                            {translate(`modules.list.${key}.title`)}
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {translate(`modules.list.${key}.tech`).split(', ').map((tag: string) => (
+                              <span key={tag} className="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="lg:col-span-2 grid sm:grid-cols-2 gap-10">
+                          <div className="space-y-3">
+                            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">How it&apos;s built</span>
+                            <p className="text-sm md:text-base text-slate-700 dark:text-slate-300 font-medium leading-relaxed italic">
+                              {translate(`modules.list.${key}.built`)}
+                            </p>
+                          </div>
+                          <div className="space-y-3">
+                            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Core Benefit</span>
+                            <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+                              {translate(`modules.list.${key}.benefit`)}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
               {/* Local Development */}
               <section id="development" className="scroll-mt-32 space-y-16">
                 <div className="space-y-6">
@@ -283,92 +369,6 @@ export default function ManualPage() {
                       className="max-w-3xl mx-auto shadow-2xl"
                     />
                   </div>
-                </div>
-              </section>
-
-              {/* Tech Stack */}
-              <section id="tech-stack" className="scroll-mt-32 space-y-16">
-                <div className="space-y-6">
-                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
-                    <Cpu className="h-10 w-10" />
-                  </div>
-                  <h2 className="font-display text-3xl md:text-[46px] font-bold tracking-tight leading-[1.05]">{t('tech_stack.title')}</h2>
-                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
-                    {t('tech_stack.description')}
-                  </p>
-                </div>
-
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {['nestjs', 'react', 'cloudflare_d1', 'mcp', 'nextjs', 'tailwind'].map((key) => (
-                    <a 
-                      key={key}
-                      href={translate(`tech_stack.items.${key}.link`)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl hover:border-brand-purple/30 transition-all hover:-translate-y-1"
-                    >
-                      <div className="flex justify-between items-start mb-6">
-                        <h4 className="font-display text-base md:text-lg font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-brand-purple transition-colors">
-                          {translate(`tech_stack.items.${key}.title`)}
-                        </h4>
-                        <ExternalLink size={20} className="text-slate-300 group-hover:text-brand-purple transition-colors" />
-                      </div>
-                      <p className="text-sm md:text-base text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
-                        {translate(`tech_stack.items.${key}.description`)}
-                      </p>
-                    </a>
-                  ))}
-                </div>
-              </section>
-
-              {/* Application Modules */}
-              <section id="modules" className="scroll-mt-32 space-y-16">
-                <div className="space-y-6">
-                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
-                    <Layers className="h-10 w-10" />
-                  </div>
-                  <h2 className="font-display text-3xl md:text-[46px] font-bold tracking-tight leading-[1.05]">{t('modules.title')}</h2>
-                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
-                    {t('modules.description')}
-                  </p>
-                </div>
-
-                <div className="space-y-10">
-                  {['admin', 'auth', 'registry', 'schedule', 'grading', 'ai', 'mcp'].map((key) => (
-                    <div key={key} className="group p-10 rounded-[3rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl transition-all">
-                      <div className="grid lg:grid-cols-3 gap-12">
-                        <div className="space-y-4">
-                          <div className="inline-flex p-3 rounded-2xl bg-brand-purple/10 text-brand-purple mb-2">
-                             <Box size={24} />
-                          </div>
-                          <h4 className="font-display text-lg md:text-xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-brand-purple transition-colors">
-                            {translate(`modules.list.${key}.title`)}
-                          </h4>
-                          <div className="flex flex-wrap gap-2">
-                            {translate(`modules.list.${key}.tech`).split(', ').map((tag: string) => (
-                              <span key={tag} className="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                        <div className="lg:col-span-2 grid sm:grid-cols-2 gap-10">
-                          <div className="space-y-3">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">How it&apos;s built</span>
-                            <p className="text-sm md:text-base text-slate-700 dark:text-slate-300 font-medium leading-relaxed italic">
-                              {translate(`modules.list.${key}.built`)}
-                            </p>
-                          </div>
-                          <div className="space-y-3">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Core Benefit</span>
-                            <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
-                              {translate(`modules.list.${key}.benefit`)}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
                 </div>
               </section>
 
