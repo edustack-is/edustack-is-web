@@ -39,6 +39,8 @@ export default function DemoSection() {
           </p>
           <a
             href={`https://${url}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-5 md:px-7 py-3.5 md:py-4 rounded-xl bg-white text-[#171120] font-body text-base font-bold no-underline shadow-[0_12px_30px_rgba(0,0,0,0.2)]"
           >
             {url} <span aria-hidden>↗</span>

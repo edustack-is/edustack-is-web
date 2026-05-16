@@ -9,7 +9,7 @@ import ScreenshotPlaceholder from '@/components/ScreenshotPlaceholder';
 import Lightbox from '@/components/Lightbox';
 import {COMPETENCY_MATRIX, COMPETENCY_ROLES, type RoleId} from '@/lib/competencyMatrix';
 import {ENV_GROUPS, FRONTEND_URLS, type Required as EnvRequired} from '@/lib/envConfig';
-import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, ZoomIn, Box, Database, Workflow, Network, KeyRound, Check, Minus, Terminal, Globe} from 'lucide-react';
+import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, ZoomIn, Box, Database, Workflow, Network, KeyRound, Check, Minus, Terminal, Globe, CloudUpload, Server, Rocket, Lock} from 'lucide-react';
 
 const roleColorMap: Record<string, string> = {
   systemAdmin: 'brand-purple',
@@ -624,7 +624,7 @@ export default function ManualPage() {
                     {t('development.prereqsTitle')}
                   </h3>
                   <div className="grid gap-4 sm:grid-cols-3">
-                    {(['node', 'npm', 'wrangler'] as const).map((p) => (
+                    {(['node', 'npm', 'flyctl'] as const).map((p) => (
                       <div key={p} className="p-6 rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
                         <h4 className="font-display text-base font-bold text-slate-900 dark:text-white mb-2">
                           {translate(`development.prereqs.${p}.label`)}
@@ -774,6 +774,168 @@ export default function ManualPage() {
                       </div>
                     ))}
                   </div>
+                </div>
+              </section>
+
+              {/* Deployment */}
+              <section id="deployment" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <Rocket className="h-10 w-10" />
+                  </div>
+                  <h2 className="font-display text-3xl md:text-[46px] font-bold tracking-tight leading-[1.05]">
+                    {t('deployment.title')}
+                  </h2>
+                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                    {t('deployment.description')}
+                  </p>
+                </div>
+
+                {/* Topology */}
+                <div className="space-y-6">
+                  <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    {t('deployment.topologyTitle')}
+                  </h3>
+                  <div className="grid gap-4 md:grid-cols-3">
+                    {([
+                      {id: 'backend', icon: Server},
+                      {id: 'frontend', icon: CloudUpload},
+                      {id: 'domains', icon: Globe},
+                    ] as const).map(({id, icon: Icon}) => (
+                      <div key={id} className="p-6 rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+                        <Icon className="h-6 w-6 text-brand-purple mb-3" />
+                        <h4 className="font-display text-base md:text-lg font-bold text-slate-900 dark:text-white mb-2">
+                          {translate(`deployment.topology.${id}.title`)}
+                        </h4>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                          {translate(`deployment.topology.${id}.description`)}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Workflow actions */}
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                      {t('deployment.workflowTitle')}
+                    </h3>
+                    <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                      {t('deployment.workflowDescription')}
+                    </p>
+                  </div>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {(['deploy', 'delete'] as const).map((a) => (
+                      <div key={a} className="p-6 rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 space-y-3">
+                        <h4 className="font-mono text-sm font-bold text-brand-purple uppercase tracking-widest">
+                          {translate(`deployment.actions.${a}.title`)}
+                        </h4>
+                        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                          {translate(`deployment.actions.${a}.description`)}
+                        </p>
+                        <pre className="overflow-x-auto rounded-xl bg-slate-950 text-slate-100 px-4 py-3 text-xs md:text-sm font-mono leading-relaxed">
+                          <code>{translate(`deployment.actions.${a}.command`)}</code>
+                        </pre>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* GitHub secrets */}
+                <div className="space-y-6">
+                  <div className="flex items-center gap-3">
+                    <Lock className="h-6 w-6 text-brand-purple" />
+                    <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                      {t('deployment.secretsTitle')}
+                    </h3>
+                  </div>
+                  <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                    {t('deployment.secretsDescription')}
+                  </p>
+                  <div className="rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
+                    <table className="w-full text-sm">
+                      <thead className="bg-slate-50/60 dark:bg-slate-950/40">
+                        <tr>
+                          <th scope="col" className="px-4 py-3 text-left font-bold text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 min-w-[200px]">
+                            {t('development.env.columnName')}
+                          </th>
+                          <th scope="col" className="px-4 py-3 text-left font-bold text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                            {t('development.env.columnDescription')}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                        {([
+                          {id: 'fly-api-token', name: 'FLY_API_TOKEN', level: 'required'},
+                          {id: 'cloudflare-api-token', name: 'CLOUDFLARE_API_TOKEN', level: 'required'},
+                          {id: 'cloudflare-account-id', name: 'CLOUDFLARE_ACCOUNT_ID', level: 'required'},
+                          {id: 'jwt-secret', name: 'JWT_SECRET', level: 'recommended'},
+                          {id: 'encryption-key', name: 'ENCRYPTION_KEY', level: 'recommended'},
+                          {id: 'mcp-auth-token', name: 'MCP_AUTH_TOKEN', level: 'recommended'},
+                        ] as const).map((s) => {
+                          const badge: Record<string, string> = {
+                            required: 'bg-rose-500/15 text-rose-600 dark:text-rose-400',
+                            recommended: 'bg-brand-purple/15 text-brand-purple',
+                          };
+                          const label = s.level === 'required' ? t('deployment.secretsRequired') : t('deployment.secretsRecommended');
+                          return (
+                            <tr key={s.id} className="align-top">
+                              <th scope="row" className="px-4 py-3 text-left">
+                                <code className="font-mono text-xs md:text-sm text-slate-900 dark:text-slate-100 break-all">
+                                  {s.name}
+                                </code>
+                                <div className="mt-1.5">
+                                  <span className={`inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-widest ${badge[s.level]}`}>
+                                    {label}
+                                  </span>
+                                </div>
+                              </th>
+                              <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                                {translate(`deployment.secrets.${s.id}`)}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* One-time prereqs */}
+                <div className="space-y-6">
+                  <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    {t('deployment.prereqsTitle')}
+                  </h3>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {(['cloudflare', 'fly'] as const).map((p) => (
+                      <div key={p} className="p-6 rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+                        <p className="text-sm md:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
+                          {translate(`deployment.prereqs.${p}`)}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Costs */}
+                <div className="rounded-[2rem] border border-brand-purple/20 bg-brand-purple/5 dark:bg-brand-purple/10 p-6 md:p-8 space-y-3">
+                  <h3 className="font-display text-base md:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Info size={18} className="text-brand-purple" />
+                    {t('deployment.costsTitle')}
+                  </h3>
+                  <p className="text-sm md:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
+                    {t('deployment.costs')}
+                  </p>
+                  <a
+                    href="https://github.com/edustack-is/edustack-is-sandbox#deployment"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-bold text-brand-purple hover:underline"
+                  >
+                    {t('deployment.readmeLink')}
+                    <ExternalLink size={14} />
+                  </a>
                 </div>
               </section>
 

@@ -141,7 +141,7 @@
       "eyebrow": "Živé demo",
       "title": "Proklikejte si to. Vezměte do hodiny.",
       "sub": "Živá testovací instance s ukázkovými daty pro každou roli. Reset každé pondělí — přiveďte novou třídu, aniž by data byla zastaralá.",
-      "url": "demo.is-edustack.org"
+      "url": "fe-sandbox-1.is-edustack.org"
     },
     "source": {
       "eyebrow": "Open source",
@@ -215,9 +215,9 @@
           "link": "https://react.dev/"
         },
         "cloudflare_d1": {
-          "title": "Cloudflare D1",
-          "description": "Plně spravovaná relační databáze založená na SQLite, navržená pro běh na okraji sítě (edge) v rámci ekosystému Cloudflare Workers.",
-          "link": "https://developers.cloudflare.com/d1/"
+          "title": "Fly.io + SQLite",
+          "description": "Backend a MCP server běží společně na jedné Fly.io mašině v každém prostředí, s SQLite databází uloženou na perzistentním 1 GB volume připojeném do /data. K přímému přístupu k souboru se používá better-sqlite3.",
+          "link": "https://fly.io/docs/"
         },
         "mcp": {
           "title": "Model Context Protocol (MCP)",
@@ -242,7 +242,7 @@
       "list": {
         "admin": {
           "title": "Systémová správa",
-          "tech": "NestJS, Cloudflare D1, AES-256 šifrování",
+          "tech": "NestJS, SQLite (Fly volume), AES-256 šifrování",
           "built": "Sada klíčových služeb pro správu životního cyklu školních tenantů, globální konfiguraci a auditování bezpečnosti.",
           "benefit": "Umožňuje orchestraci celého ekosystému, bezpečnou izolaci tenantů a centralizovanou správu zdrojů."
         },
@@ -254,7 +254,7 @@
         },
         "registry": {
           "title": "Školní matrika",
-          "tech": "Cloudflare D1, Batch SQL, CSV Engine",
+          "tech": "SQLite, Batch SQL, CSV Engine",
           "built": "Jádrový databázový modul pro evidenci žáků, zaměstnanců, tříd a fyzické struktury budov.",
           "benefit": "Slouží jako centrální 'zdroj pravdy' pro všechny ostatní vzdělávací a administrativní moduly."
         },
@@ -438,7 +438,7 @@
       "description": "Aplikační komponenty v notaci ArchiMate a pohled z perspektivy uživatele — které obrazovky a služby každá role využívá.",
       "openFull": "Otevřít plný obrázek",
       "componentsTitle": "Aplikační komponenty",
-      "componentsDescription": "Backendové moduly seskupené dle domén (Jádro platformy, Vzdělávání, Komunikace, Inteligence) nad během Cloudflare (Workers, Pages, D1, KV, R2). REST a MCP jsou dvě veřejná rozhraní; externí systémy (LLM poskytovatelé, SSO IdP, SMTP, MCP klienti) jsou zobrazeny zvlášť.",
+      "componentsDescription": "Backendové moduly seskupené dle domén (Jádro platformy, Vzdělávání, Komunikace, Inteligence). Backend a MCP server běží na Fly.io mašině s SQLite na perzistentním volume; frontend je stavěn a servírován z Cloudflare Pages. Cloudflare R2 slouží pro zálohy mimo mašinu. REST a MCP jsou dvě veřejná rozhraní; externí systémy (LLM poskytovatelé, SSO IdP, SMTP, MCP klienti) jsou zobrazeny zvlášť. Diagram stále ukazuje předchozí pouze-Cloudflare topologii — aktuální najdete v sekci Nasazení níže.",
       "actorsTitle": "Pohled uživatele",
       "actorsDescription": "Sedm uživatelských rolí plus externí vývojář MCP/API, namapováno na obrazovky či portály, které používají, a backendové služby, jež je obsluhují."
     },
@@ -484,7 +484,7 @@
       "prereqs": {
         "node": { "label": "Node.js 20+", "description": "Runtime pro backend, MCP server a build chain." },
         "npm": { "label": "npm 10+", "description": "Součást Node — slouží k instalaci workspaců v monorepu." },
-        "wrangler": { "label": "Cloudflare Wrangler", "description": "CLI pro lokální D1 databázi. Nainstalujte globálně: npm install -g wrangler." }
+        "flyctl": { "label": "flyctl (volitelné)", "description": "Fly.io CLI. Potřebné pouze pro nasazení vlastního prostředí. Instalace: brew install flyctl nebo curl -L https://fly.io/install.sh | sh." }
       },
       "stepsTitle": "Rychlý start",
       "steps": {
@@ -492,7 +492,7 @@
         "env": { "title": "Zkopírujte šablonu .env", "command": "cp .env.example .env" },
         "secrets": { "title": "Vygenerujte dvě povinné tajné hodnoty", "command": "openssl rand -base64 64  # JWT_SECRET\nopenssl rand -base64 32  # ENCRYPTION_KEY" },
         "install": { "title": "Nainstalujte workspacy", "command": "npm install" },
-        "db": { "title": "Inicializujte lokální D1 databázi", "command": "npm run db:init" },
+        "db": { "title": "Inicializujte lokální SQLite databázi", "command": "npm run db:init" },
         "dev": { "title": "Spusťte backend, frontend i MCP server", "command": "npm run dev" }
       },
       "urlsTitle": "Výchozí URL po npm run dev",
@@ -504,7 +504,7 @@
         "mcp": "MCP server (SSE endpoint)"
       },
       "frontendNoteTitle": "A co frontend?",
-      "frontendNote": "React/Vite aplikace nemá soubor .env. Ve vývoji Vite proxuje každý požadavek /api na http://127.0.0.1:3000 (viz apps/frontend/vite.config.ts), jedinou „konfigurací“ je tedy běžící backend na PORT 3000. V produkci je frontend hostován na Cloudflare Pages a API base URL se přepíše při buildu.",
+      "frontendNote": "React/Vite aplikace nemá soubor .env. Ve vývoji Vite proxuje každý požadavek /api na http://127.0.0.1:3000 (viz apps/frontend/vite.config.ts), jedinou „konfigurací“ je tedy běžící backend na PORT 3000. V produkčním buildu se base URL API čte z VITE_API_URL (nastavovaného deploy workflowem na https://be-sandbox-N.is-edustack.org) a zapeče se do bundlu, který servíruje Cloudflare Pages.",
       "env": {
         "title": "Reference .env",
         "description": "Všechny proměnné, které čte backend nebo MCP server, rozdělené podle účelu. Příklady v tabulce jsou výchozí hodnoty z .env.example; hodnoty zobrazené jako shellový příkaz nahraďte jeho výstupem.",
@@ -532,8 +532,8 @@
           "enable-login-helper": "Když je true, přihlašovací obrazovka ukazuje panel s demo uživateli pro přihlášení jedním klikem. V produkci vždy nastavte na false.",
           "login-helper-roles": "Seznam rolí (oddělený čárkou), které helper nabízí. Umožňuje skrýt STUDENT/PARENT např. pro učitelské demo.",
           "demo-password": "Heslo, které dostane každý uživatel vytvořený seederem. Používá se pouze při AUTO_SEED=true.",
-          "db-adapter": "Vybírá databázový ovladač. Pro lokální vývoj ponechte \"sqlite\" (better-sqlite3 nad Wrangler D1 souborem).",
-          "database-url": "Cesta k lokálnímu SQLite souboru. Používá Prisma CLI (introspekce, migrace); runtime čte D1 přímo přes Wrangler bindings.",
+          "db-adapter": "Vybírá databázový ovladač. Ponechte \"sqlite\" — better-sqlite3 čte lokální soubor ve vývoji a Fly volume na /data/edustack.db v produkci.",
+          "database-url": "Cesta k lokálnímu SQLite souboru. Používá Prisma CLI (introspekce, migrace); runtime otevírá soubor přímo přes better-sqlite3.",
           "smtp-host": "Hostname SMTP serveru. V lokálním vývoji je to bundled MailDev (spouští se přes npm run dev na portu 1025).",
           "smtp-port": "Port SMTP serveru. 1025 pro MailDev, 587/465 pro produkční providery.",
           "smtp-user": "SMTP uživatelské jméno. Prázdné pro MailDev; vyžadováno pro SendGrid / SES.",
@@ -554,7 +554,7 @@
           "openai-api-key": "OpenAI API klíč. Použije se, když je v systémových nastaveních zvolen OpenAI poskytovatel.",
           "anthropic-api-key": "Anthropic API klíč. Použije se, když je zvolen Anthropic poskytovatel.",
           "r2-endpoint": "S3-kompatibilní URL endpointu Cloudflare R2. Prázdná hodnota zapne fallback na lokální soubory v BACKUP_DIR.",
-          "r2-access-key-id": "R2 access key. Považujte za tajné (v produkci přes wrangler secret).",
+          "r2-access-key-id": "R2 access key. Považujte za tajné (v produkci nastavujte přes flyctl secrets set R2_ACCESS_KEY_ID=… --app edustack-sandbox-N).",
           "r2-secret-access-key": "R2 secret key. Považujte za tajné.",
           "r2-bucket-name": "Název R2 bucketu, do kterého se zapisují zálohy.",
           "backup-dir": "Cesta k adresáři, který se použije, když jsou R2_* prázdné. Vytvoří se při první záloze.",
@@ -568,6 +568,59 @@
           "seed-admin-password": "Počáteční heslo automaticky vytvořeného systémového administrátora."
         }
       }
+    },
+    "deployment": {
+      "title": "Nasazení",
+      "description": "Sandboxovaná nasazení po prostředích. Každé env_id vytvoří svou Fly.io mašinu (backend + MCP) s 1 GB perzistentním SQLite volume a vlastní Cloudflare Pages projekt (frontend), provázané se subdoménami is-edustack.org.",
+      "topologyTitle": "Topologie jednoho prostředí",
+      "topology": {
+        "backend": {
+          "title": "Backend a MCP server",
+          "description": "Jedna Fly.io aplikace na prostředí (edustack-sandbox-N) běží oba Node procesy v jednom kontejneru. 1 GB volume připojený do /data drží SQLite databázi. MCP server poslouchá na 127.0.0.1:3001 uvnitř kontejneru — dosáhne na něj jen backend."
+        },
+        "frontend": {
+          "title": "Frontend",
+          "description": "Jeden Cloudflare Pages projekt na prostředí (edustack-frontend-sandbox-N), buildovaný z apps/frontend s VITE_API_URL ukazujícím na odpovídající backend."
+        },
+        "domains": {
+          "title": "Vlastní domény",
+          "description": "Obě strany žijí pod is-edustack.org: fe-sandbox-N.is-edustack.org → Cloudflare Pages, be-sandbox-N.is-edustack.org → Fly.io (CNAME na edustack-sandbox-N.fly.dev, TLS přes Fly Let's Encrypt)."
+        }
+      },
+      "workflowTitle": "GitHub Actions workflow",
+      "workflowDescription": "Provisioning řídí .github/workflows/deploy-env.yml. Spusťte z GitHub → Actions → Deploy Environment → Run workflow. Vyberte env_id (např. 1) a jednu z akcí níže. Každý krok deploye je idempotentní — můžete bezpečně opakovat na stejném env_id.",
+      "actions": {
+        "deploy": {
+          "title": "deploy",
+          "description": "Plné nasazení: vytvoří Fly app + volume, nastaví secrets, flyctl deploy, připojí DNS + TLS, buildne a nasadí frontend. Použijte poprvé i při každém dalším pushi.",
+          "command": "Run workflow → action: deploy, env_id: 1"
+        },
+        "delete": {
+          "title": "delete",
+          "description": "Zničí Fly app (mašiny + volume), smaže CNAME záznamy, smaže Pages projekt. Použijte při bourání prostředí.",
+          "command": "Run workflow → action: delete, env_id: 1"
+        }
+      },
+      "secretsTitle": "GitHub repository secrets",
+      "secretsDescription": "Přidejte pod Settings → Secrets and variables → Actions → New repository secret. Povinné musí být nastaveny před prvním během; doporučené dostanou rozumný náhodný fallback, ale v produkci je vždy nastavte.",
+      "secretsRequired": "Povinné",
+      "secretsRecommended": "Doporučené",
+      "secrets": {
+        "fly-api-token": "Fly.io API token (account-wide, aby mohl vytvářet aplikace). flyctl auth login, pak flyctl auth token.",
+        "cloudflare-api-token": "API token pro Pages deploye a editaci DNS. Cloudflare → My Profile → API Tokens → Create Token s oprávněními: Account → Cloudflare Pages: Edit, Account → Account Settings: Read, Zone → Zone: Read (is-edustack.org), Zone → DNS: Edit (is-edustack.org), User → User Details: Read.",
+        "cloudflare-account-id": "Cloudflare account ID. Najdete v pravém sloupci na libovolném Workers / domain přehledu v dashboardu.",
+        "jwt-secret": "Náhodný řetězec (≥ 32 znaků) pro podepisování JWT cookies. Při každém deployi se přenáší do Fly přes flyctl secrets set.",
+        "encryption-key": "AES-256 klíč — přesně 32 hex znaků. Šifruje API klíče poskytovatelů v tabulce SystemSecret. Jeho ztrátou se tyto záznamy stanou nečitelnými.",
+        "mcp-auth-token": "Sdílený bearer token mezi backendem a MCP serverem. Generujte přes openssl rand -hex 32."
+      },
+      "prereqsTitle": "Jednorázové předpoklady",
+      "prereqs": {
+        "cloudflare": "Přidejte zónu is-edustack.org (Websites → Add a site) a přesměrujte na Cloudflare nameservery u registrátora.",
+        "fly": "Založte Fly.io účet (flyctl auth signup) a ověřte, že váš org slug je personal (výchozí pro osobní účty). Pro vlastní org upravte FLY_ORG v deploy-env.yml."
+      },
+      "costsTitle": "Náklady",
+      "costs": "Každé prostředí je jedna Fly.io mašina (shared-cpu-1x, 512 MB), která se v nečinnosti vypíná, plus 1 GB volume (~$0,15/měsíc), který naskakuje i ve vypnutém stavu. Fly.io nabízí 7denní trial; pak je vyžadována platební metoda. Pro úplnou nulu mezi demy spusťte akci delete a později znovu deploy. Reálná cena při demo / nízkém provozu je zhruba $1–2 za prostředí měsíčně. Cloudflare Pages se pohodlně vejde do free tieru.",
+      "readmeLink": "Kompletní postup v README v repozitáři"
     },
     "setup": {
       "title": "Nastavení systému",
@@ -590,7 +643,7 @@
       },
       "credentials": {
         "title": "E-mail a heslo",
-        "description": "Standardní zabezpečené přihlášení pomocí hashovaných hesel v databázi D1."
+        "description": "Standardní zabezpečené přihlášení pomocí hashovaných hesel (Argon2) uložených v SQLite databázi."
       },
       "sso": {
         "title": "Integrace SSO",

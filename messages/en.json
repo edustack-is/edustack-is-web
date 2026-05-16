@@ -141,7 +141,7 @@
       "eyebrow": "Live demo",
       "title": "Click around. Bring it to class.",
       "sub": "A live testing instance with seed data for every role. Reset every Monday — bring a fresh class without fixtures going stale.",
-      "url": "demo.is-edustack.org"
+      "url": "fe-sandbox-1.is-edustack.org"
     },
     "source": {
       "eyebrow": "Open source",
@@ -215,9 +215,9 @@
           "link": "https://react.dev/"
         },
         "cloudflare_d1": {
-          "title": "Cloudflare D1",
-          "description": "A fully managed relational database based on SQLite, designed for edge computing within the Cloudflare Workers ecosystem.",
-          "link": "https://developers.cloudflare.com/d1/"
+          "title": "Fly.io + SQLite",
+          "description": "The backend and MCP server run together on a single Fly.io machine per environment, with the SQLite database stored on a persistent 1 GB volume mounted at /data. better-sqlite3 is used for direct file access.",
+          "link": "https://fly.io/docs/"
         },
         "mcp": {
           "title": "Model Context Protocol (MCP)",
@@ -242,7 +242,7 @@
       "list": {
         "admin": {
           "title": "System Administration",
-          "tech": "NestJS, Cloudflare D1, AES-256 Encryption",
+          "tech": "NestJS, SQLite (Fly volume), AES-256 Encryption",
           "built": "A set of core services for multi-tenant school lifecycle management, global configuration, and security auditing.",
           "benefit": "Enables global platform orchestration, secure tenant isolation, and centralized resource management."
         },
@@ -254,7 +254,7 @@
         },
         "registry": {
           "title": "School Registry",
-          "tech": "Cloudflare D1, Batch SQL, CSV Engine",
+          "tech": "SQLite, Batch SQL, CSV Engine",
           "built": "Core database module for managing students, staff, classes, and physical building structures.",
           "benefit": "Serves as the central 'Source of Truth' for all other educational and administrative modules."
         },
@@ -438,7 +438,7 @@
       "description": "Application components in ArchiMate notation and a user-perspective view showing which screens and services each role touches.",
       "openFull": "Open full image",
       "componentsTitle": "Application components",
-      "componentsDescription": "Backend modules grouped by domain (Core platform, Education, Communication, Intelligence) on top of the Cloudflare runtime (Workers, Pages, D1, KV, R2). REST + MCP are the two public service surfaces; external systems (LLM providers, SSO IdPs, SMTP, MCP clients) are shown separately.",
+      "componentsDescription": "Backend modules grouped by domain (Core platform, Education, Communication, Intelligence). The backend + MCP server run on a Fly.io machine with SQLite on a persistent volume; the frontend is built and served from Cloudflare Pages. Cloudflare R2 is used for off-machine backups. REST + MCP are the two public service surfaces; external systems (LLM providers, SSO IdPs, SMTP, MCP clients) are shown separately. The diagram still shows the previous Cloudflare-only layout — see the Deployment section below for the current topology.",
       "actorsTitle": "User perspective",
       "actorsDescription": "Seven user roles plus an external MCP/API developer, mapped to the screens or portals they use and the backend services that serve them."
     },
@@ -484,7 +484,7 @@
       "prereqs": {
         "node": { "label": "Node.js 20+", "description": "Runtime for backend, MCP server and the build chain." },
         "npm": { "label": "npm 10+", "description": "Bundled with Node — used to install monorepo workspaces." },
-        "wrangler": { "label": "Cloudflare Wrangler", "description": "CLI for the local D1 database. Install globally: npm install -g wrangler." }
+        "flyctl": { "label": "flyctl (optional)", "description": "Fly.io CLI. Only needed to deploy your own environment. Install: brew install flyctl or curl -L https://fly.io/install.sh | sh." }
       },
       "stepsTitle": "Quick start",
       "steps": {
@@ -492,7 +492,7 @@
         "env": { "title": "Copy the env template", "command": "cp .env.example .env" },
         "secrets": { "title": "Generate the two required secrets", "command": "openssl rand -base64 64  # JWT_SECRET\nopenssl rand -base64 32  # ENCRYPTION_KEY" },
         "install": { "title": "Install workspaces", "command": "npm install" },
-        "db": { "title": "Initialise the local D1 database", "command": "npm run db:init" },
+        "db": { "title": "Initialise the local SQLite database", "command": "npm run db:init" },
         "dev": { "title": "Start backend, frontend and MCP server", "command": "npm run dev" }
       },
       "urlsTitle": "Default URLs after npm run dev",
@@ -504,7 +504,7 @@
         "mcp": "MCP server (SSE endpoint)"
       },
       "frontendNoteTitle": "What about the frontend?",
-      "frontendNote": "The React/Vite app has no .env file. In dev, Vite proxies every /api request to http://127.0.0.1:3000 (see apps/frontend/vite.config.ts), so the only \"config\" it needs is the backend running on PORT 3000. In production, the frontend is served from Cloudflare Pages and the API base URL is rewritten at build time.",
+      "frontendNote": "The React/Vite app has no .env file. In dev, Vite proxies every /api request to http://127.0.0.1:3000 (see apps/frontend/vite.config.ts), so the only \"config\" it needs is the backend running on PORT 3000. In production builds the API base URL is read from VITE_API_URL (set by the deploy workflow to https://be-sandbox-N.is-edustack.org) and baked into the bundle Cloudflare Pages serves.",
       "env": {
         "title": ".env reference",
         "description": "Every variable consumed by the backend or MCP server, grouped by concern. Examples in the table are the .env.example defaults; values shown as a shell command should be replaced with the command's output.",
@@ -532,8 +532,8 @@
           "enable-login-helper": "When true, the login screen shows a panel with one-click demo users. Always set to false in production.",
           "login-helper-roles": "Comma-separated allow-list of roles the helper surfaces. Lets you hide STUDENT/PARENT in a teacher-only demo, for example.",
           "demo-password": "Password every seeded demo user is given. Used by the seeder; only relevant when AUTO_SEED is on.",
-          "db-adapter": "Selects the database driver. Keep \"sqlite\" for local development (better-sqlite3 against the Wrangler D1 file).",
-          "database-url": "Path to the local SQLite file. Used by Prisma CLI tools (introspection, migrations); the runtime reads D1 directly via Wrangler bindings.",
+          "db-adapter": "Selects the database driver. Keep \"sqlite\" — better-sqlite3 reads a local file in dev and the Fly volume at /data/edustack.db in production.",
+          "database-url": "Path to the local SQLite file. Used by Prisma CLI tools (introspection, migrations); the runtime opens the file directly via better-sqlite3.",
           "smtp-host": "Hostname of the SMTP server. In local dev this is the bundled MailDev (npm run dev starts it on 1025).",
           "smtp-port": "Port of the SMTP server. 1025 for MailDev, 587/465 for production providers.",
           "smtp-user": "SMTP username. Empty for MailDev; required for SendGrid / SES.",
@@ -554,7 +554,7 @@
           "openai-api-key": "OpenAI API key. Used when the OpenAI provider is selected in system settings.",
           "anthropic-api-key": "Anthropic API key. Used when the Anthropic provider is selected.",
           "r2-endpoint": "Cloudflare R2 S3-compatible endpoint URL. Leave empty to fall back to local file backups in BACKUP_DIR.",
-          "r2-access-key-id": "R2 access key. Treat as a secret (use wrangler secret in production).",
+          "r2-access-key-id": "R2 access key. Treat as a secret (in production set via flyctl secrets set R2_ACCESS_KEY_ID=… --app edustack-sandbox-N).",
           "r2-secret-access-key": "R2 secret key. Treat as a secret.",
           "r2-bucket-name": "Name of the R2 bucket to write backups to.",
           "backup-dir": "Filesystem path used when R2_* variables are empty. Created on first backup.",
@@ -568,6 +568,59 @@
           "seed-admin-password": "Initial password for the auto-created System Admin."
         }
       }
+    },
+    "deployment": {
+      "title": "Deployment",
+      "description": "Sandboxed, per-environment deployments. Each env_id provisions its own Fly.io machine (backend + MCP) with a 1 GB persistent SQLite volume and its own Cloudflare Pages project (frontend), wired to is-edustack.org subdomains.",
+      "topologyTitle": "Topology per environment",
+      "topology": {
+        "backend": {
+          "title": "Backend + MCP server",
+          "description": "One Fly.io app per environment (edustack-sandbox-N) runs both Node processes in a single container. A 1 GB volume mounted at /data persists the SQLite database. The MCP server listens on 127.0.0.1:3001 inside the container — only the backend can reach it."
+        },
+        "frontend": {
+          "title": "Frontend",
+          "description": "One Cloudflare Pages project per environment (edustack-frontend-sandbox-N), built from apps/frontend with VITE_API_URL pointing at the matching backend."
+        },
+        "domains": {
+          "title": "Custom domains",
+          "description": "Both ends live under is-edustack.org: fe-sandbox-N.is-edustack.org → Cloudflare Pages, be-sandbox-N.is-edustack.org → Fly.io (CNAME to edustack-sandbox-N.fly.dev, TLS via Fly Let's Encrypt)."
+        }
+      },
+      "workflowTitle": "GitHub Actions workflow",
+      "workflowDescription": "Provisioning is driven by .github/workflows/deploy-env.yml. Trigger it from GitHub → Actions → Deploy Environment → Run workflow. Pick an env_id (e.g. 1) and one of the actions below. Every deploy step is idempotent — you can re-run on the same env_id safely.",
+      "actions": {
+        "deploy": {
+          "title": "deploy",
+          "description": "Full provision: create Fly app + volume, stage secrets, flyctl deploy, attach DNS + TLS, build + push the frontend. Use for the first run and every subsequent push.",
+          "command": "Run workflow → action: deploy, env_id: 1"
+        },
+        "delete": {
+          "title": "delete",
+          "description": "Destroys the Fly app (machines + volume), removes the CNAMEs, deletes the Pages project. Use when tearing an environment down.",
+          "command": "Run workflow → action: delete, env_id: 1"
+        }
+      },
+      "secretsTitle": "GitHub repository secrets",
+      "secretsDescription": "Add these under Settings → Secrets and variables → Actions → New repository secret. The required ones must be present before the first run; the recommended ones get sensible random fallbacks but you should always set them in production.",
+      "secretsRequired": "Required",
+      "secretsRecommended": "Recommended",
+      "secrets": {
+        "fly-api-token": "Fly.io API token (account-wide so it can create apps). flyctl auth login, then flyctl auth token.",
+        "cloudflare-api-token": "API token for Pages deploys + DNS edits. Cloudflare → My Profile → API Tokens → Create Token with: Account → Cloudflare Pages: Edit, Account → Account Settings: Read, Zone → Zone: Read (is-edustack.org), Zone → DNS: Edit (is-edustack.org), User → User Details: Read.",
+        "cloudflare-account-id": "Cloudflare account ID. Found in the right sidebar of any Workers / domain overview in the dashboard.",
+        "jwt-secret": "Random string (≥ 32 chars) used to sign JWT cookies. Pushed into Fly via flyctl secrets set on every deploy.",
+        "encryption-key": "AES-256 key — exactly 32 hex characters. Encrypts provider API keys in the SystemSecret table. Losing it makes those rows unreadable.",
+        "mcp-auth-token": "Shared bearer token between the backend and MCP server. Generated with openssl rand -hex 32."
+      },
+      "prereqsTitle": "One-time prerequisites",
+      "prereqs": {
+        "cloudflare": "Add the zone is-edustack.org (Websites → Add a site) and point your registrar's nameservers to Cloudflare.",
+        "fly": "Create a Fly.io account (flyctl auth signup) and confirm your org slug is personal (default for personal accounts). Override FLY_ORG in deploy-env.yml if you use a custom org."
+      },
+      "costsTitle": "Costs",
+      "costs": "Each environment is one Fly.io machine (shared-cpu-1x, 512 MB) that auto-stops when idle, plus a 1 GB volume (~$0.15/month) that accrues even while stopped. Fly.io offers a 7-day trial; afterwards a payment method is required. To drop to zero between demos, run the delete action and deploy again later. Realistic cost at demo / low-traffic usage is roughly $1–2 per environment per month. Cloudflare Pages stays on the free tier comfortably.",
+      "readmeLink": "Full step-by-step in the repository README"
     },
     "setup": {
       "title": "System Setup",
@@ -590,7 +643,7 @@
       },
       "credentials": {
         "title": "Email & Password",
-        "description": "Standard secure authentication using hashed passwords in the D1 database."
+        "description": "Standard secure authentication using hashed passwords (Argon2) stored in the SQLite database."
       },
       "sso": {
         "title": "SSO Integration",
