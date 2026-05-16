@@ -149,9 +149,9 @@
       "title": "Přečtěte si kód. Otevřete issue. Pošlete PR.",
       "host": "github.com/edustack-is",
       "repos": [
-        {"name": "edustack-is", "body": "Backend a doménový model"},
-        {"name": "edustack-is-web", "body": "Webová aplikace · React + TS"},
-        {"name": "edustack-thesis", "body": "Metodika a texty"}
+        {"name": "edustack-is-sandbox", "body": "Backend a doménový model", "href": "https://github.com/edustack-is/edustack-is-sandbox"},
+        {"name": "edustack-is-web", "body": "Webová aplikace · React + TS", "href": "https://github.com/edustack-is/edustack-is-web"},
+        {"name": "edustack-thesis", "body": "Finální materiály a bakalářská práce sem budou doplněny po obhajobě.", "placeholder": true}
       ]
     },
     "contact": {
@@ -480,11 +480,95 @@
     },
     "development": {
       "title": "Lokální vývoj",
-      "description": "Jak nastavit vývojové prostředí na vašem počítači.",
-      "step1": "Naklonujte repozitář z GitHubu.",
-      "step2": "Nainstalujte závislosti pomocí `npm install` v kořenovém adresáři.",
-      "step3": "Nakonfigurujte proměnné prostředí v souborech `.env` pro frontend i backend.",
-      "step4": "Spusťte vývojový server příkazem `npm run dev`."
+      "description": "Kompletní postup zprovoznění monorepa na vašem počítači. Frontend nemá vlastní .env — používá proxy ve Vite, která přesměrovává /api na backend. Veškerá konfigurace je v jediném souboru .env v kořenu projektu a využívá ji jak NestJS backend, tak MCP server.",
+      "prereqsTitle": "Předpoklady",
+      "prereqs": {
+        "node": { "label": "Node.js 20+", "description": "Runtime pro backend, MCP server a build chain." },
+        "npm": { "label": "npm 10+", "description": "Součást Node — slouží k instalaci workspaců v monorepu." },
+        "wrangler": { "label": "Cloudflare Wrangler", "description": "CLI pro lokální D1 databázi. Nainstalujte globálně: npm install -g wrangler." }
+      },
+      "stepsTitle": "Rychlý start",
+      "steps": {
+        "clone": { "title": "Naklonujte repozitář", "command": "git clone <repo> && cd edu-stack-is-sandbox" },
+        "env": { "title": "Zkopírujte šablonu .env", "command": "cp .env.example .env" },
+        "secrets": { "title": "Vygenerujte dvě povinné tajné hodnoty", "command": "openssl rand -base64 64  # JWT_SECRET\nopenssl rand -base64 32  # ENCRYPTION_KEY" },
+        "install": { "title": "Nainstalujte workspacy", "command": "npm install" },
+        "db": { "title": "Inicializujte lokální D1 databázi", "command": "npm run db:init" },
+        "dev": { "title": "Spusťte backend, frontend i MCP server", "command": "npm run dev" }
+      },
+      "urlsTitle": "Výchozí URL po npm run dev",
+      "urls": {
+        "app": "Webová aplikace",
+        "backend": "Backend REST API",
+        "swagger": "Swagger / OpenAPI",
+        "maildev": "MailDev (testovací schránka)",
+        "mcp": "MCP server (SSE endpoint)"
+      },
+      "frontendNoteTitle": "A co frontend?",
+      "frontendNote": "React/Vite aplikace nemá soubor .env. Ve vývoji Vite proxuje každý požadavek /api na http://127.0.0.1:3000 (viz apps/frontend/vite.config.ts), jedinou „konfigurací“ je tedy běžící backend na PORT 3000. V produkci je frontend hostován na Cloudflare Pages a API base URL se přepíše při buildu.",
+      "env": {
+        "title": "Reference .env",
+        "description": "Všechny proměnné, které čte backend nebo MCP server, rozdělené podle účelu. Příklady v tabulce jsou výchozí hodnoty z .env.example; hodnoty zobrazené jako shellový příkaz nahraďte jeho výstupem.",
+        "required": "povinné",
+        "recommended": "doporučené",
+        "optional": "volitelné",
+        "columnName": "Proměnná",
+        "columnExample": "Výchozí / příklad",
+        "columnDescription": "Účel",
+        "groups": {
+          "security": "Bezpečnost (povinné)",
+          "login-helper": "Přihlašovací helper (jen vývoj)",
+          "database": "Databáze",
+          "smtp": "E-mail / SMTP",
+          "services": "Služby a síť",
+          "mcp": "Zpevnění MCP serveru",
+          "ai": "AI poskytovatelé",
+          "r2": "Zálohování (Cloudflare R2)",
+          "dev": "Vývoj a seedování"
+        },
+        "vars": {
+          "jwt-secret": "Symetrický klíč pro podepisování a ověřování JWT cookies vydaných při přihlášení. Jeho rotací odhlásíte všechny uživatele. MUSÍ být unikátní pro každé nasazení.",
+          "encryption-key": "AES-256 klíč pro šifrování citlivých sloupců (API klíče poskytovatelů v SystemSecret apod.). Jeho ztrátou se zašifrované záznamy stanou nečitelnými.",
+          "settings-encryption-key": "Volitelný samostatný klíč pro starší tabulku SystemSettings. Pokud je prázdný, používá se ENCRYPTION_KEY.",
+          "enable-login-helper": "Když je true, přihlašovací obrazovka ukazuje panel s demo uživateli pro přihlášení jedním klikem. V produkci vždy nastavte na false.",
+          "login-helper-roles": "Seznam rolí (oddělený čárkou), které helper nabízí. Umožňuje skrýt STUDENT/PARENT např. pro učitelské demo.",
+          "demo-password": "Heslo, které dostane každý uživatel vytvořený seederem. Používá se pouze při AUTO_SEED=true.",
+          "db-adapter": "Vybírá databázový ovladač. Pro lokální vývoj ponechte \"sqlite\" (better-sqlite3 nad Wrangler D1 souborem).",
+          "database-url": "Cesta k lokálnímu SQLite souboru. Používá Prisma CLI (introspekce, migrace); runtime čte D1 přímo přes Wrangler bindings.",
+          "smtp-host": "Hostname SMTP serveru. V lokálním vývoji je to bundled MailDev (spouští se přes npm run dev na portu 1025).",
+          "smtp-port": "Port SMTP serveru. 1025 pro MailDev, 587/465 pro produkční providery.",
+          "smtp-user": "SMTP uživatelské jméno. Prázdné pro MailDev; vyžadováno pro SendGrid / SES.",
+          "smtp-pass": "SMTP heslo / API klíč. V produkci vždy předávejte přes secret manager.",
+          "mail-from": "Adresa odesílatele použitá u všech transakčních e-mailů (pozvánky, reset hesla, notifikace).",
+          "port": "Port, na kterém naslouchá NestJS backend.",
+          "mcp-port": "Port, na kterém naslouchá MCP server.",
+          "cors-origin": "Povolený origin pro REST API. Nastavte na URL frontendu.",
+          "frontend-url": "Veřejná URL frontendu. Používá se pro odkazy v e-mailech (pozvánky, reset hesla).",
+          "mcp-server-url": "Kde backend hledá MCP server. Přípona /sse je endpoint MCP transportu.",
+          "mcp-host": "Bind adresa MCP serveru. Výchozí 127.0.0.1 (loopback) znamená, že není dostupný ze sítě — 0.0.0.0 nastavte pouze, pokud je za reverzní proxy A je nastaven MCP_AUTH_TOKEN.",
+          "mcp-auth-token": "Sdílený bearer token. Pokud je nastaven, endpointy /sse, /message a /v1/chat/completions vyžadují Authorization: Bearer <token>. Backend ho posílá automaticky.",
+          "mcp-cors-origin": "CORS allow-list oddělený čárkou. Ponechte prázdný pro vypnutí CORS (správné pro loopback-only nasazení).",
+          "opencode-base-url": "Base URL OpenAI-kompatibilního OpenCode poskytovatele. Výchozí je lokální MCP server; v produkci MUSÍ být https://.",
+          "opencode-api-key": "Bearer token pro OpenCode poskytovatele (pokud je MCP autentizovaný).",
+          "google-ai-api-key": "API klíč pro Google Gemini. Backend akceptuje buď GOOGLE_AI_API_KEY, nebo GEMINI_API_KEY.",
+          "gemini-api-key": "Alias pro GOOGLE_AI_API_KEY z historických důvodů.",
+          "openai-api-key": "OpenAI API klíč. Použije se, když je v systémových nastaveních zvolen OpenAI poskytovatel.",
+          "anthropic-api-key": "Anthropic API klíč. Použije se, když je zvolen Anthropic poskytovatel.",
+          "r2-endpoint": "S3-kompatibilní URL endpointu Cloudflare R2. Prázdná hodnota zapne fallback na lokální soubory v BACKUP_DIR.",
+          "r2-access-key-id": "R2 access key. Považujte za tajné (v produkci přes wrangler secret).",
+          "r2-secret-access-key": "R2 secret key. Považujte za tajné.",
+          "r2-bucket-name": "Název R2 bucketu, do kterého se zapisují zálohy.",
+          "backup-dir": "Cesta k adresáři, který se použije, když jsou R2_* prázdné. Vytvoří se při první záloze.",
+          "auto-backup": "Pokud je true, BackupScheduler automaticky vytváří noční zálohu.",
+          "node-env": "Standardní Node prostředí. Mimo lokální vývoj nastavte na \"production\".",
+          "auto-seed": "Pokud je true, seeder se spustí při prvním startu nové databáze. Vytvoří demo školu a výchozího systémového administrátora.",
+          "seed-file": "Cesta k alternativnímu seed JSON. Prázdné použije přibalený výchozí scénář.",
+          "seed-admin-email": "E-mail automaticky vytvořeného systémového administrátora.",
+          "seed-admin-first-name": "Křestní jméno automaticky vytvořeného systémového administrátora.",
+          "seed-admin-last-name": "Příjmení automaticky vytvořeného systémového administrátora.",
+          "seed-admin-password": "Počáteční heslo automaticky vytvořeného systémového administrátora."
+        }
+      }
     },
     "setup": {
       "title": "Nastavení systému",

@@ -8,7 +8,8 @@ import ManualSidebar from '@/components/ManualSidebar';
 import ScreenshotPlaceholder from '@/components/ScreenshotPlaceholder';
 import Lightbox from '@/components/Lightbox';
 import {COMPETENCY_MATRIX, COMPETENCY_ROLES, type RoleId} from '@/lib/competencyMatrix';
-import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, ZoomIn, Box, Database, Workflow, Network, KeyRound, Check, Minus} from 'lucide-react';
+import {ENV_GROUPS, FRONTEND_URLS, type Required as EnvRequired} from '@/lib/envConfig';
+import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, ZoomIn, Box, Database, Workflow, Network, KeyRound, Check, Minus, Terminal, Globe} from 'lucide-react';
 
 const roleColorMap: Record<string, string> = {
   systemAdmin: 'brand-purple',
@@ -607,35 +608,163 @@ export default function ManualPage() {
                     {t('development.description')}
                   </p>
                 </div>
-                
-                <div className="space-y-12">
-                  <div className="grid gap-12 lg:grid-cols-2">
-                    <div className="space-y-6">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="flex gap-6 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 transition-all hover:bg-white dark:hover:bg-slate-900 hover:shadow-xl hover:scale-[1.02]">
-                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-purple text-white font-bold text-lg shadow-lg shadow-brand-purple/20">
-                            {i}
-                          </div>
-                          <p className="text-base md:text-lg font-semibold text-slate-800 dark:text-slate-200 pt-1.5 leading-snug">
-                            {translate(`development.step${i}`)}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="space-y-6 flex flex-col justify-center">
-                      <ScreenshotPlaceholder 
-                        src="/images/documentation/config/00_config_local.png" 
-                        alt="Local Configuration" 
-                        roleColor="brand-purple" 
-                      />
-                    </div>
+
+                {/* Prerequisites */}
+                <div className="space-y-6">
+                  <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    {t('development.prereqsTitle')}
+                  </h3>
+                  <div className="grid gap-4 sm:grid-cols-3">
+                    {(['node', 'npm', 'wrangler'] as const).map((p) => (
+                      <div key={p} className="p-6 rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+                        <h4 className="font-display text-base font-bold text-slate-900 dark:text-white mb-2">
+                          {translate(`development.prereqs.${p}.label`)}
+                        </h4>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                          {translate(`development.prereqs.${p}.description`)}
+                        </p>
+                      </div>
+                    ))}
                   </div>
-                  <ScreenshotPlaceholder 
-                    src="/images/documentation/config/01_startup_application.png" 
-                    alt="Application Startup" 
-                    roleColor="brand-purple"
-                    className="max-w-4xl mx-auto"
-                  />
+                </div>
+
+                {/* Quick start steps */}
+                <div className="space-y-6">
+                  <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    {t('development.stepsTitle')}
+                  </h3>
+                  <div className="space-y-4">
+                    {(['clone', 'env', 'secrets', 'install', 'db', 'dev'] as const).map((s, idx) => (
+                      <div key={s} className="flex gap-4 p-5 rounded-[1.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-purple/10 text-brand-purple font-bold text-sm">
+                          {idx + 1}
+                        </div>
+                        <div className="flex-1 min-w-0 space-y-2">
+                          <h4 className="font-display text-base font-bold text-slate-900 dark:text-white">
+                            {translate(`development.steps.${s}.title`)}
+                          </h4>
+                          <pre className="overflow-x-auto rounded-xl bg-slate-950 text-slate-100 px-4 py-3 text-xs md:text-sm font-mono leading-relaxed">
+                            <code>{translate(`development.steps.${s}.command`)}</code>
+                          </pre>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Default URLs */}
+                <div className="space-y-6">
+                  <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    {t('development.urlsTitle')}
+                  </h3>
+                  <div className="rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                        {FRONTEND_URLS.map((u) => (
+                          <tr key={u.id}>
+                            <th scope="row" className="px-6 py-3 text-left font-medium text-slate-700 dark:text-slate-300 inline-flex items-center gap-2">
+                              <Globe size={14} className="text-slate-400" />
+                              {translate(`development.urls.${u.id}`)}
+                            </th>
+                            <td className="px-6 py-3 font-mono text-xs md:text-sm text-brand-purple">
+                              {u.url}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Frontend note */}
+                <div className="rounded-[2rem] border border-brand-purple/20 bg-brand-purple/5 dark:bg-brand-purple/10 p-6 md:p-8 space-y-3">
+                  <h4 className="font-display text-base md:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Info size={18} className="text-brand-purple" />
+                    {t('development.frontendNoteTitle')}
+                  </h4>
+                  <p className="text-sm md:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
+                    {t('development.frontendNote')}
+                  </p>
+                </div>
+
+                {/* .env reference */}
+                <div className="space-y-6 pt-8 border-t border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center gap-3">
+                    <Terminal className="h-6 w-6 text-brand-purple" />
+                    <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                      {t('development.env.title')}
+                    </h3>
+                  </div>
+                  <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                    {t('development.env.description')}
+                  </p>
+
+                  <div className="space-y-8">
+                    {ENV_GROUPS.map((g, gIdx) => (
+                      <div key={g.id} className="rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
+                        <div className="flex items-center gap-3 px-6 pt-5 pb-3">
+                          <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-brand-purple/10 text-brand-purple font-bold text-xs">
+                            {gIdx + 1}
+                          </span>
+                          <h4 className="font-display text-base md:text-lg font-bold text-slate-900 dark:text-white">
+                            {translate(`development.env.groups.${g.id}`)}
+                          </h4>
+                        </div>
+                        <div className="overflow-x-auto border-t border-slate-100 dark:border-slate-800">
+                          <table className="w-full text-sm">
+                            <thead className="bg-slate-50/60 dark:bg-slate-950/40">
+                              <tr>
+                                <th scope="col" className="px-4 py-3 text-left font-bold text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 min-w-[180px]">
+                                  {t('development.env.columnName')}
+                                </th>
+                                <th scope="col" className="px-4 py-3 text-left font-bold text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 min-w-[180px]">
+                                  {t('development.env.columnExample')}
+                                </th>
+                                <th scope="col" className="px-4 py-3 text-left font-bold text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                                  {t('development.env.columnDescription')}
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                              {g.vars.map((v) => {
+                                const badge: Record<EnvRequired, string> = {
+                                  required: 'bg-rose-500/15 text-rose-600 dark:text-rose-400',
+                                  recommended: 'bg-brand-purple/15 text-brand-purple',
+                                  optional: 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300',
+                                };
+                                return (
+                                  <tr key={v.id} className="align-top">
+                                    <th scope="row" className="px-4 py-3 text-left">
+                                      <code className="font-mono text-xs md:text-sm text-slate-900 dark:text-slate-100 break-all">
+                                        {v.name}
+                                      </code>
+                                      <div className="mt-1.5">
+                                        <span className={`inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-widest ${badge[v.required]}`}>
+                                          {t(`development.env.${v.required}`)}
+                                        </span>
+                                      </div>
+                                    </th>
+                                    <td className="px-4 py-3">
+                                      {v.example ? (
+                                        <code className="font-mono text-xs text-slate-600 dark:text-slate-400 break-all whitespace-pre-wrap">
+                                          {v.example}
+                                        </code>
+                                      ) : (
+                                        <span className="text-slate-300 dark:text-slate-600">—</span>
+                                      )}
+                                    </td>
+                                    <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                                      {translate(`development.env.vars.${v.id}`)}
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </section>
 

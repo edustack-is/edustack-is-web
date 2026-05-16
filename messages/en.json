@@ -149,9 +149,9 @@
       "title": "Read the code. Open an issue. Send a PR.",
       "host": "github.com/edustack-is",
       "repos": [
-        {"name": "edustack-is", "body": "Backend & domain model"},
-        {"name": "edustack-is-web", "body": "Web app · React + TS"},
-        {"name": "edustack-thesis", "body": "Methodology & writing"}
+        {"name": "edustack-is-sandbox", "body": "Backend & domain model", "href": "https://github.com/edustack-is/edustack-is-sandbox"},
+        {"name": "edustack-is-web", "body": "Web app · React + TS", "href": "https://github.com/edustack-is/edustack-is-web"},
+        {"name": "edustack-thesis", "body": "Final materials and the bachelor's thesis will be linked here after the defense.", "placeholder": true}
       ]
     },
     "contact": {
@@ -480,11 +480,95 @@
     },
     "development": {
       "title": "Local Development",
-      "description": "How to set up the development environment on your local machine.",
-      "step1": "Clone the repository from GitHub.",
-      "step2": "Install dependencies using `npm install` in the root directory.",
-      "step3": "Configure environment variables in `.env` files for both frontend and backend.",
-      "step4": "Start the development server with `npm run dev`."
+      "description": "End-to-end setup of the monorepo on your machine. The frontend has no custom .env — it uses Vite's proxy to forward /api to the backend. All configuration lives in a single .env file at the repo root, consumed by both the NestJS backend and the MCP server.",
+      "prereqsTitle": "Prerequisites",
+      "prereqs": {
+        "node": { "label": "Node.js 20+", "description": "Runtime for backend, MCP server and the build chain." },
+        "npm": { "label": "npm 10+", "description": "Bundled with Node — used to install monorepo workspaces." },
+        "wrangler": { "label": "Cloudflare Wrangler", "description": "CLI for the local D1 database. Install globally: npm install -g wrangler." }
+      },
+      "stepsTitle": "Quick start",
+      "steps": {
+        "clone": { "title": "Clone the repository", "command": "git clone <repo> && cd edu-stack-is-sandbox" },
+        "env": { "title": "Copy the env template", "command": "cp .env.example .env" },
+        "secrets": { "title": "Generate the two required secrets", "command": "openssl rand -base64 64  # JWT_SECRET\nopenssl rand -base64 32  # ENCRYPTION_KEY" },
+        "install": { "title": "Install workspaces", "command": "npm install" },
+        "db": { "title": "Initialise the local D1 database", "command": "npm run db:init" },
+        "dev": { "title": "Start backend, frontend and MCP server", "command": "npm run dev" }
+      },
+      "urlsTitle": "Default URLs after npm run dev",
+      "urls": {
+        "app": "Web application",
+        "backend": "Backend REST API",
+        "swagger": "Swagger / OpenAPI",
+        "maildev": "MailDev web UI (test inbox)",
+        "mcp": "MCP server (SSE endpoint)"
+      },
+      "frontendNoteTitle": "What about the frontend?",
+      "frontendNote": "The React/Vite app has no .env file. In dev, Vite proxies every /api request to http://127.0.0.1:3000 (see apps/frontend/vite.config.ts), so the only \"config\" it needs is the backend running on PORT 3000. In production, the frontend is served from Cloudflare Pages and the API base URL is rewritten at build time.",
+      "env": {
+        "title": ".env reference",
+        "description": "Every variable consumed by the backend or MCP server, grouped by concern. Examples in the table are the .env.example defaults; values shown as a shell command should be replaced with the command's output.",
+        "required": "required",
+        "recommended": "recommended",
+        "optional": "optional",
+        "columnName": "Variable",
+        "columnExample": "Default / example",
+        "columnDescription": "Purpose",
+        "groups": {
+          "security": "Security (required)",
+          "login-helper": "Login helper (dev only)",
+          "database": "Database",
+          "smtp": "Email / SMTP",
+          "services": "Services and networking",
+          "mcp": "MCP server hardening",
+          "ai": "AI providers",
+          "r2": "Backups (Cloudflare R2)",
+          "dev": "Development and seeding"
+        },
+        "vars": {
+          "jwt-secret": "Symmetric key used to sign and verify the JWT cookies issued at login. Rotating it logs everyone out. MUST be unique per deployment.",
+          "encryption-key": "AES-256 key used to encrypt sensitive columns (provider API keys in SystemSecret, etc.). Losing it makes encrypted rows unreadable.",
+          "settings-encryption-key": "Optional separate key used by the legacy SystemSettings table. Falls back to ENCRYPTION_KEY when empty.",
+          "enable-login-helper": "When true, the login screen shows a panel with one-click demo users. Always set to false in production.",
+          "login-helper-roles": "Comma-separated allow-list of roles the helper surfaces. Lets you hide STUDENT/PARENT in a teacher-only demo, for example.",
+          "demo-password": "Password every seeded demo user is given. Used by the seeder; only relevant when AUTO_SEED is on.",
+          "db-adapter": "Selects the database driver. Keep \"sqlite\" for local development (better-sqlite3 against the Wrangler D1 file).",
+          "database-url": "Path to the local SQLite file. Used by Prisma CLI tools (introspection, migrations); the runtime reads D1 directly via Wrangler bindings.",
+          "smtp-host": "Hostname of the SMTP server. In local dev this is the bundled MailDev (npm run dev starts it on 1025).",
+          "smtp-port": "Port of the SMTP server. 1025 for MailDev, 587/465 for production providers.",
+          "smtp-user": "SMTP username. Empty for MailDev; required for SendGrid / SES.",
+          "smtp-pass": "SMTP password / API key. Always pass via secret manager in production.",
+          "mail-from": "From: address used on every transactional email (invites, password resets, notifications).",
+          "port": "Port the NestJS backend listens on.",
+          "mcp-port": "Port the MCP server listens on.",
+          "cors-origin": "Allowed origin for the REST API. Set to the frontend URL.",
+          "frontend-url": "Public URL of the frontend. Used to build links inside emails (invites, password reset).",
+          "mcp-server-url": "Where the backend looks for the MCP server. The /sse suffix is the MCP transport endpoint.",
+          "mcp-host": "Bind address for the MCP server. Default 127.0.0.1 (loopback) means it's unreachable from the network — set to 0.0.0.0 only when fronted by a reverse proxy AND when MCP_AUTH_TOKEN is set.",
+          "mcp-auth-token": "Shared bearer token. When set, /sse, /message and /v1/chat/completions require Authorization: Bearer <token>. The backend forwards it automatically.",
+          "mcp-cors-origin": "Comma-separated CORS allow-list. Leave empty to disable CORS (correct for loopback-only deployments).",
+          "opencode-base-url": "Base URL of the OpenAI-compatible OpenCode provider. Defaults to the local MCP server; in production MUST be https://.",
+          "opencode-api-key": "Bearer token for the OpenCode provider (when fronted by an authenticated MCP).",
+          "google-ai-api-key": "Google Gemini API key. Either GOOGLE_AI_API_KEY or GEMINI_API_KEY is accepted.",
+          "gemini-api-key": "Alias of GOOGLE_AI_API_KEY for historical reasons.",
+          "openai-api-key": "OpenAI API key. Used when the OpenAI provider is selected in system settings.",
+          "anthropic-api-key": "Anthropic API key. Used when the Anthropic provider is selected.",
+          "r2-endpoint": "Cloudflare R2 S3-compatible endpoint URL. Leave empty to fall back to local file backups in BACKUP_DIR.",
+          "r2-access-key-id": "R2 access key. Treat as a secret (use wrangler secret in production).",
+          "r2-secret-access-key": "R2 secret key. Treat as a secret.",
+          "r2-bucket-name": "Name of the R2 bucket to write backups to.",
+          "backup-dir": "Filesystem path used when R2_* variables are empty. Created on first backup.",
+          "auto-backup": "If true, the BackupScheduler creates a nightly backup automatically.",
+          "node-env": "Standard Node environment. Set to \"production\" outside of local dev.",
+          "auto-seed": "If true, the seeder runs on the first start of a fresh database. Creates the demo school and the default System Admin.",
+          "seed-file": "Path to an alternative seed JSON. Empty uses the bundled default scenario.",
+          "seed-admin-email": "Email of the auto-created System Admin.",
+          "seed-admin-first-name": "First name of the auto-created System Admin.",
+          "seed-admin-last-name": "Last name of the auto-created System Admin.",
+          "seed-admin-password": "Initial password for the auto-created System Admin."
+        }
+      }
     },
     "setup": {
       "title": "System Setup",
