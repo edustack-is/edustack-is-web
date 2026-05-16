@@ -38,6 +38,9 @@ next-env.d.ts
 *.swp
 *.swo
 
+# Claude Code local agent state
+.claude/
+
 # Cloudflare
 .wrangler/
 .dev.vars
