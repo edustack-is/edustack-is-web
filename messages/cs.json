@@ -285,6 +285,49 @@
         }
       }
     },
+    "data_model": {
+      "title": "Datový model",
+      "description": "ER diagramy odvozené přímo ze schématu produkční databáze. Schéma je rozděleno do osmi domén tak, aby se každý diagram vešel na jednu obrazovku. Klikněte na náhled pro otevření plného obrázku.",
+      "caption": "Vygenerováno ze souboru apps/backend/src/database/schema.sql pomocí Mermaidu.",
+      "openFull": "Otevřít plný obrázek",
+      "fullTitle": "Kompletní pohled",
+      "fullDescription": "Všech přibližně 40 tabulek, atributů a vazeb na jednom plátně. Posunem v rámu prozkoumáte celý diagram, nebo kliknutím otevřete plný obrázek na nové kartě.",
+      "fullScrollHint": "Posuňte se pro prozkoumání",
+      "domains": {
+        "tenancy": {
+          "title": "Multitenancy a identita",
+          "description": "Multitenance škol, uživatelé, role, vazby rodič–žák, SSO identity a auditní záznamy."
+        },
+        "academic": {
+          "title": "Akademická struktura a kurikulum",
+          "description": "Školní roky, pololetí, ročníky, zápisy žáků, verze kurikula, šablony a instance předmětů, klíčové kompetence RVP."
+        },
+        "workload": {
+          "title": "Úvazky a prostory",
+          "description": "Úvazky učitelů a personálu, přiřazení k předmětům, budovy, místnosti a sdílení místností mezi školami."
+        },
+        "schedule": {
+          "title": "Rozvrh a třídní kniha",
+          "description": "Rozvrh hodin, suplování, opakované akce, snapshoty rozvrhu a elektronická třídní kniha s podpisy učitelů."
+        },
+        "grading": {
+          "title": "Docházka, absence a klasifikace",
+          "description": "Záznamy docházky, omluvenky rodičů, známky, vysvědčení, hodnocení chování a kompetencí, výchovná opatření, komisionální zkoušky a klasifikační uzávěrky."
+        },
+        "planning": {
+          "title": "Plánování a výukové materiály",
+          "description": "Tematické plány rozdělené po týdnech, přípravy hodin a nahrané výukové materiály k předmětům a ročníkům."
+        },
+        "communication": {
+          "title": "Komunikace a komunita",
+          "description": "Konverzace, zprávy a přílohy, notifikace, příspěvky na nástěnku, ankety s možnostmi a hlasy, kalendářní akce s RSVP a školní události."
+        },
+        "system": {
+          "title": "Systém, AI a ostatní",
+          "description": "Systémová nastavení, šifrovaná tajemství API klíčů, využití tokenů AI, globální konfigurace a uživatelské úkoly."
+        }
+      }
+    },
     "development": {
       "title": "Lokální vývoj",
       "description": "Jak nastavit vývojové prostředí na vašem počítači.",

@@ -285,6 +285,49 @@
         }
       }
     },
+    "data_model": {
+      "title": "Data Model",
+      "description": "Entity-relationship diagrams derived directly from the production database schema. The schema is split into eight bounded contexts so each diagram fits on one screen. Click any thumbnail to open the full-resolution image.",
+      "caption": "Generated from apps/backend/src/database/schema.sql via Mermaid.",
+      "openFull": "Open full image",
+      "fullTitle": "The full picture",
+      "fullDescription": "All ~40 tables, attributes and relationships on a single canvas. Scroll inside the frame to pan, or click to open the full-resolution image in a new tab.",
+      "fullScrollHint": "Scroll to explore",
+      "domains": {
+        "tenancy": {
+          "title": "Tenancy & Identity",
+          "description": "Multi-school tenancy, users, roles, parent-student links, SSO identities, and audit log."
+        },
+        "academic": {
+          "title": "Academic Structure & Curriculum",
+          "description": "Academic years, semesters, grade levels, student enrollment, curriculum versions, subject templates and instances, RVP competencies."
+        },
+        "workload": {
+          "title": "Workload & Physical Space",
+          "description": "Teacher and staff workload, subject assignments, buildings, rooms and room sharing between schools."
+        },
+        "schedule": {
+          "title": "Schedule & Class Book",
+          "description": "Lesson timetable, substitutions, recurring events, snapshots, and the digital class book with teacher signatures."
+        },
+        "grading": {
+          "title": "Attendance, Absences & Grading",
+          "description": "Attendance records, parent absence excuses, grades, report cards, behavior and competency grades, educational measures, commission exams and classification deadlines."
+        },
+        "planning": {
+          "title": "Planning & Teaching Materials",
+          "description": "Thematic plans split by week, lesson preparations and uploaded teaching materials linked to subjects and grade levels."
+        },
+        "communication": {
+          "title": "Communication & Community",
+          "description": "Conversations, messages and attachments, notifications, bulletin posts, polls with options and votes, calendar events with RSVPs, and school-wide events."
+        },
+        "system": {
+          "title": "System, AI & Misc",
+          "description": "System settings, API key secrets, AI token usage, global config, and ad-hoc user tasks."
+        }
+      }
+    },
     "development": {
       "title": "Local Development",
       "description": "How to set up the development environment on your local machine.",

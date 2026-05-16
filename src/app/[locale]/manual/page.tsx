@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ManualSidebar from '@/components/ManualSidebar';
 import ScreenshotPlaceholder from '@/components/ScreenshotPlaceholder';
-import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, Box} from 'lucide-react';
+import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, Box, Database} from 'lucide-react';
 
 const roleColorMap: Record<string, string> = {
   systemAdmin: 'brand-purple',
@@ -245,6 +245,110 @@ export default function ManualPage() {
                       </div>
                     </div>
                   ))}
+                </div>
+              </section>
+
+              {/* Data Model */}
+              <section id="data-model" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <Database className="h-10 w-10" />
+                  </div>
+                  <h2 className="font-display text-3xl md:text-[46px] font-bold tracking-tight leading-[1.05]">{t('data_model.title')}</h2>
+                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                    {t('data_model.description')}
+                  </p>
+                </div>
+
+                <div className="grid gap-10 md:grid-cols-2">
+                  {[
+                    { id: 'tenancy', file: '01-tenancy-identity' },
+                    { id: 'academic', file: '02-academic-structure' },
+                    { id: 'workload', file: '03-workload-space' },
+                    { id: 'schedule', file: '04-schedule' },
+                    { id: 'grading', file: '05-attendance-grading' },
+                    { id: 'planning', file: '06-planning-materials' },
+                    { id: 'communication', file: '07-communication' },
+                    { id: 'system', file: '08-system-ai' },
+                  ].map((d, idx) => {
+                    const base = `/images/documentation/architecture/er-domains/${d.file}`;
+                    return (
+                      <figure key={d.id} className="group flex flex-col rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl hover:border-brand-purple/30 transition-all overflow-hidden">
+                        <div className="flex items-center gap-3 px-8 pt-7 pb-4">
+                          <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-brand-purple/10 text-brand-purple font-bold text-sm">
+                            {idx + 1}
+                          </span>
+                          <h3 className="font-display text-lg md:text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                            {translate(`data_model.domains.${d.id}.title`)}
+                          </h3>
+                        </div>
+                        <p className="px-8 pb-5 text-sm md:text-base text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                          {translate(`data_model.domains.${d.id}.description`)}
+                        </p>
+                        <a
+                          href={`${base}.png`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={t('data_model.openFull')}
+                          className="relative block border-t border-slate-100 dark:border-slate-800 bg-white overflow-hidden"
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={`${base}.png`}
+                            alt={translate(`data_model.domains.${d.id}.title`)}
+                            className="block w-full h-auto bg-white transition-transform duration-500 group-hover:scale-[1.02]"
+                            loading="lazy"
+                          />
+                          <span className="absolute top-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                            {t('data_model.openFull')}
+                            <ExternalLink size={12} />
+                          </span>
+                        </a>
+                      </figure>
+                    );
+                  })}
+                </div>
+
+                <p className="text-sm text-slate-500 dark:text-slate-400 italic">
+                  {t('data_model.caption')}
+                </p>
+
+                {/* Full consolidated diagram */}
+                <div className="space-y-8 pt-12 border-t border-slate-100 dark:border-slate-800">
+                  <div className="space-y-4">
+                    <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                      {t('data_model.fullTitle')}
+                    </h3>
+                    <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                      {t('data_model.fullDescription')}
+                    </p>
+                  </div>
+
+                  <a
+                    href="/images/documentation/architecture/er-diagram.png"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t('data_model.openFull')}
+                    className="group relative block rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl hover:border-brand-purple/30 transition-all overflow-hidden"
+                  >
+                    <div className="overflow-auto max-h-[80vh]">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src="/images/documentation/architecture/er-diagram.png"
+                        alt={t('data_model.fullTitle')}
+                        className="block h-auto max-w-none bg-white"
+                        style={{ width: '6000px' }}
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="pointer-events-none absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-widest">
+                      {t('data_model.fullScrollHint')}
+                    </div>
+                    <span className="absolute top-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                      {t('data_model.openFull')}
+                      <ExternalLink size={12} />
+                    </span>
+                  </a>
                 </div>
               </section>
 
