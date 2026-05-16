@@ -131,9 +131,9 @@
       "title": "Lesson materials. Take them to class.",
       "sub": "Everything a CS teacher needs to run a lesson on EduStack — worksheets per age tier, role matrices, ER diagrams. PDF and Google Docs.",
       "items": [
-        {"title": "Primary school worksheets", "kind": "PDF · 6 pages", "body": "4th–5th grade. Explore roles and data.", "href": "/worksheets/První stupeň ZŠ (4.–5. třída).pdf"},
-        {"title": "Secondary school worksheets", "kind": "PDF · 10 pages", "body": "6th–9th grade. Modelling and permissions.", "href": "/worksheets/Druhý stupeň ZŠ (6.–9. třída).pdf"},
-        {"title": "High school worksheets", "kind": "PDF · 12 pages", "body": "High school (Informatics, Programming). Run it locally. Read the code. Build something.", "href": "/worksheets/Střední škola (Informatika, Programování).pdf"},
+        {"title": "Primary school worksheets", "kind": "PDF", "body": "4th–5th grade. Explore roles and data.", "href": "/worksheets/První stupeň ZŠ (4.–5. třída).pdf"},
+        {"title": "Secondary school worksheets", "kind": "PDF", "body": "6th–9th grade. Modelling and permissions.", "href": "/worksheets/Druhý stupeň ZŠ (6.–9. třída).pdf"},
+        {"title": "High school worksheets", "kind": "PDF", "body": "High school (Informatics, Programming). Run it locally. Read the code. Build something.", "href": "/worksheets/Střední škola (Informatika, Programování).pdf"},
         {"title": "Methodology master folder", "kind": "Google Drive", "body": "The whole package, live.", "href": "https://drive.google.com/drive/folders/1H7ahXOrmOcwE9OWiukjAND_1L6hAUsTQ?usp=drive_link", "external": true}
       ]
     },

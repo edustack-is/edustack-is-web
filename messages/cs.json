@@ -131,9 +131,9 @@
       "title": "Materiály do hodiny. Vezměte si je s sebou.",
       "sub": "Vše, co učitel informatiky potřebuje k vedení hodiny nad EduStackem — pracovní listy podle věku, matice rolí, ER diagramy. PDF a Google Docs.",
       "items": [
-        {"title": "Pracovní listy – 1. stupeň", "kind": "PDF · 6 stran", "body": "4.–5. třída. Objevování rolí a dat.", "href": "/worksheets/První stupeň ZŠ (4.–5. třída).pdf"},
-        {"title": "Pracovní listy – 2. stupeň", "kind": "PDF · 10 stran", "body": "6.–9. třída. Modelování a oprávnění.", "href": "/worksheets/Druhý stupeň ZŠ (6.–9. třída).pdf"},
-        {"title": "Pracovní listy – střední škola", "kind": "PDF · 12 stran", "body": "Střední škola (Informatika, Programování). Spustit lokálně. Číst kód. Něco postavit.", "href": "/worksheets/Střední škola (Informatika, Programování).pdf"},
+        {"title": "Pracovní listy – 1. stupeň", "kind": "PDF", "body": "4.–5. třída. Objevování rolí a dat.", "href": "/worksheets/První stupeň ZŠ (4.–5. třída).pdf"},
+        {"title": "Pracovní listy – 2. stupeň", "kind": "PDF", "body": "6.–9. třída. Modelování a oprávnění.", "href": "/worksheets/Druhý stupeň ZŠ (6.–9. třída).pdf"},
+        {"title": "Pracovní listy – střední škola", "kind": "PDF", "body": "Střední škola (Informatika, Programování). Spustit lokálně. Číst kód. Něco postavit.", "href": "/worksheets/Střední škola (Informatika, Programování).pdf"},
         {"title": "Hlavní složka metodiky", "kind": "Google Drive", "body": "Celý balík, živě.", "href": "https://drive.google.com/drive/folders/1H7ahXOrmOcwE9OWiukjAND_1L6hAUsTQ?usp=drive_link", "external": true}
       ]
     },
