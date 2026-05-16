@@ -328,6 +328,50 @@
         }
       }
     },
+    "system_architecture": {
+      "title": "Architektura systému",
+      "description": "Aplikační komponenty v notaci ArchiMate a pohled z perspektivy uživatele — které obrazovky a služby každá role využívá.",
+      "openFull": "Otevřít plný obrázek",
+      "componentsTitle": "Aplikační komponenty",
+      "componentsDescription": "Backendové moduly seskupené dle domén (Jádro platformy, Vzdělávání, Komunikace, Inteligence) nad během Cloudflare (Workers, Pages, D1, KV, R2). REST a MCP jsou dvě veřejná rozhraní; externí systémy (LLM poskytovatelé, SSO IdP, SMTP, MCP klienti) jsou zobrazeny zvlášť.",
+      "actorsTitle": "Pohled uživatele",
+      "actorsDescription": "Sedm uživatelských rolí plus externí vývojář MCP/API, namapováno na obrazovky či portály, které používají, a backendové služby, jež je obsluhují."
+    },
+    "processes": {
+      "title": "Klíčové procesy",
+      "description": "Sekvenční diagramy reprezentativních toků v systému — administrace, autentizace, AI orchestrace a běžné školní procesy.",
+      "openFull": "Otevřít plný obrázek",
+      "list": {
+        "init-setup": {
+          "title": "Prvotní nastavení systému",
+          "description": "Průvodce prvním spuštěním: vytvoření prvního systémového administrátora od nuly, nebo obnovení systému ze SQLite zálohy."
+        },
+        "login": {
+          "title": "Přihlášení (heslo + SSO)",
+          "description": "Lokální autentizace (Argon2 + JWT cookie) a SSO přes Google / GitHub / Microsoft s pravidlem shody e-mailu."
+        },
+        "generate-data": {
+          "title": "Generování testovacích dat",
+          "description": "Systémový administrátor naplní celou školu — třídy, uživatelé, rozvrh, známky, docházka — volitelně s pomocí AI pro názvy škol a žáků."
+        },
+        "backup-restore": {
+          "title": "Zálohování a obnova",
+          "description": "Tři toky v jednom diagramu: noční cron záloha, ad-hoc administrátorská záloha a obnova databáze z R2."
+        },
+        "ai-generation": {
+          "title": "Generování s AI",
+          "description": "Učitel požaduje tematický plán nebo úpravu vysvědčení; backend dešifruje klíč poskytovatele, volá LLM a loguje spotřebu tokenů."
+        },
+        "substitution": {
+          "title": "Suplování",
+          "description": "Zástupce přidělí suplujícího učitele/místnost; detektor kolizí ověří proti rozvrhu před uložením a notifikací dotčených uživatelů."
+        },
+        "absence-excuse": {
+          "title": "Omluvenka",
+          "description": "Rodič podá omluvenku; třídní učitel ji schválí (docházka srovnána) nebo zamítne s odůvodněním."
+        }
+      }
+    },
     "development": {
       "title": "Lokální vývoj",
       "description": "Jak nastavit vývojové prostředí na vašem počítači.",

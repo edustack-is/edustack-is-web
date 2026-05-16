@@ -328,6 +328,50 @@
         }
       }
     },
+    "system_architecture": {
+      "title": "System Architecture",
+      "description": "Application components in ArchiMate notation and a user-perspective view showing which screens and services each role touches.",
+      "openFull": "Open full image",
+      "componentsTitle": "Application components",
+      "componentsDescription": "Backend modules grouped by domain (Core platform, Education, Communication, Intelligence) on top of the Cloudflare runtime (Workers, Pages, D1, KV, R2). REST + MCP are the two public service surfaces; external systems (LLM providers, SSO IdPs, SMTP, MCP clients) are shown separately.",
+      "actorsTitle": "User perspective",
+      "actorsDescription": "Seven user roles plus an external MCP/API developer, mapped to the screens or portals they use and the backend services that serve them."
+    },
+    "processes": {
+      "title": "Key processes",
+      "description": "Sequence diagrams for representative flows across the system — administration, authentication, AI orchestration, and day-to-day school operations.",
+      "openFull": "Open full image",
+      "list": {
+        "init-setup": {
+          "title": "Initial system setup",
+          "description": "First-run wizard: create the first system admin from scratch, or restore the system from a SQLite backup."
+        },
+        "login": {
+          "title": "Login (credentials + SSO)",
+          "description": "Local credential authentication (Argon2 + JWT cookie) and SSO via Google / GitHub / Microsoft with email-match policy."
+        },
+        "generate-data": {
+          "title": "Generate test data",
+          "description": "System admin seeds an entire school — classes, users, schedule, grades, attendance — optionally using AI for school and student names."
+        },
+        "backup-restore": {
+          "title": "Backup and restore",
+          "description": "Three flows in one diagram: the nightly cron backup, an ad-hoc admin backup, and restoring the database from R2."
+        },
+        "ai-generation": {
+          "title": "AI-assisted generation",
+          "description": "Teacher requests a thematic plan or report-card polish; backend decrypts the provider key, calls the LLM, and logs token usage."
+        },
+        "substitution": {
+          "title": "Schedule substitution",
+          "description": "Deputy assigns a substitute teacher/room; collision detector validates against existing schedule before persisting and notifying affected users."
+        },
+        "absence-excuse": {
+          "title": "Absence excuse",
+          "description": "Parent submits an excuse; homeroom teacher reviews and either approves (attendance reconciled) or rejects with a reason."
+        }
+      }
+    },
     "development": {
       "title": "Local Development",
       "description": "How to set up the development environment on your local machine.",

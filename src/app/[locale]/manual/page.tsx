@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ManualSidebar from '@/components/ManualSidebar';
 import ScreenshotPlaceholder from '@/components/ScreenshotPlaceholder';
-import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, Box, Database} from 'lucide-react';
+import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, Box, Database, Workflow, Network} from 'lucide-react';
 
 const roleColorMap: Record<string, string> = {
   systemAdmin: 'brand-purple',
@@ -349,6 +349,126 @@ export default function ManualPage() {
                       <ExternalLink size={12} />
                     </span>
                   </a>
+                </div>
+              </section>
+
+              {/* System Architecture */}
+              <section id="system-architecture" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <Network className="h-10 w-10" />
+                  </div>
+                  <h2 className="font-display text-3xl md:text-[46px] font-bold tracking-tight leading-[1.05]">{t('system_architecture.title')}</h2>
+                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                    {t('system_architecture.description')}
+                  </p>
+                </div>
+
+                <div className="space-y-12">
+                  {[
+                    { id: 'components', title: t('system_architecture.componentsTitle'), description: t('system_architecture.componentsDescription'), file: 'components' },
+                    { id: 'actors', title: t('system_architecture.actorsTitle'), description: t('system_architecture.actorsDescription'), file: 'actors' },
+                  ].map((d) => {
+                    const src = `/images/documentation/architecture/components/${d.file}.png`;
+                    return (
+                      <figure key={d.id} className="group flex flex-col rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl hover:border-brand-purple/30 transition-all overflow-hidden">
+                        <div className="px-8 pt-7 pb-3 space-y-3">
+                          <h3 className="font-display text-lg md:text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                            {d.title}
+                          </h3>
+                          <p className="text-sm md:text-base text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                            {d.description}
+                          </p>
+                        </div>
+                        <a
+                          href={src}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={t('system_architecture.openFull')}
+                          className="relative block border-t border-slate-100 dark:border-slate-800 bg-white overflow-hidden"
+                        >
+                          <div className="overflow-x-auto">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={src}
+                              alt={d.title}
+                              className="block h-auto max-w-none bg-white transition-transform duration-500 group-hover:scale-[1.01]"
+                              style={{ width: '100%', minWidth: d.id === 'components' ? '1800px' : '900px' }}
+                              loading="lazy"
+                            />
+                          </div>
+                          <span className="absolute top-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                            {t('system_architecture.openFull')}
+                            <ExternalLink size={12} />
+                          </span>
+                        </a>
+                      </figure>
+                    );
+                  })}
+                </div>
+              </section>
+
+              {/* Key Processes (sequence diagrams) */}
+              <section id="processes" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <Workflow className="h-10 w-10" />
+                  </div>
+                  <h2 className="font-display text-3xl md:text-[46px] font-bold tracking-tight leading-[1.05]">{t('processes.title')}</h2>
+                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                    {t('processes.description')}
+                  </p>
+                </div>
+
+                <div className="space-y-10">
+                  {[
+                    { id: 'init-setup', file: 'seq-init-setup' },
+                    { id: 'login', file: 'seq-login' },
+                    { id: 'generate-data', file: 'seq-generate-data' },
+                    { id: 'backup-restore', file: 'seq-backup-restore' },
+                    { id: 'ai-generation', file: 'seq-ai-generation' },
+                    { id: 'substitution', file: 'seq-substitution' },
+                    { id: 'absence-excuse', file: 'seq-absence-excuse' },
+                  ].map((d, idx) => {
+                    const src = `/images/documentation/architecture/sequences/${d.file}.png`;
+                    return (
+                      <figure key={d.id} className="group flex flex-col rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl hover:border-brand-purple/30 transition-all overflow-hidden">
+                        <div className="flex items-center gap-3 px-8 pt-7 pb-3">
+                          <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-brand-purple/10 text-brand-purple font-bold text-sm">
+                            {idx + 1}
+                          </span>
+                          <h3 className="font-display text-lg md:text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                            {translate(`processes.list.${d.id}.title`)}
+                          </h3>
+                        </div>
+                        <p className="px-8 pb-5 pl-20 text-sm md:text-base text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                          {translate(`processes.list.${d.id}.description`)}
+                        </p>
+                        <a
+                          href={src}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={t('processes.openFull')}
+                          className="relative block border-t border-slate-100 dark:border-slate-800 bg-white overflow-hidden"
+                        >
+                          <div className="overflow-x-auto">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={src}
+                              alt={translate(`processes.list.${d.id}.title`)}
+                              className="block h-auto max-w-none bg-white"
+                              style={{ width: '100%', minWidth: '1600px' }}
+                              loading="lazy"
+                            />
+                          </div>
+                          <span className="absolute top-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                            {t('processes.openFull')}
+                            <ExternalLink size={12} />
+                          </span>
+                        </a>
+                      </figure>
+                    );
+                  })}
                 </div>
               </section>
 
