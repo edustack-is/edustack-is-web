@@ -2,7 +2,7 @@
 
 import {useState} from 'react';
 import {useTranslations} from 'next-intl';
-import {ChevronLeft, ChevronRight, Book, Users, Laptop, Settings, LogIn, GraduationCap, School, ShieldCheck, UserCheck, Search, Heart, Layers, Database, Workflow, Network, KeyRound} from 'lucide-react';
+import {ChevronLeft, ChevronRight, Book, Users, Laptop, Settings, LogIn, GraduationCap, School, ShieldCheck, UserCheck, Search, Heart, Layers, Database, Workflow, Network, KeyRound, Rocket} from 'lucide-react';
 
 interface ManualSidebarProps {
   activeSection: string;
@@ -42,6 +42,7 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
       icon: Book,
       items: [
         { id: 'development', label: t('development.title'), icon: Laptop },
+        { id: 'deployment', label: t('deployment.title'), icon: Rocket },
         { id: 'setup', label: t('setup.title'), icon: Settings },
         { id: 'login', label: t('login.title'), icon: LogIn },
       ]
