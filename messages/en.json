@@ -141,7 +141,7 @@
       "eyebrow": "Live demo",
       "title": "Click around. Bring it to class.",
       "sub": "A live testing instance with seed data for every role. Reset every Monday — bring a fresh class without fixtures going stale.",
-      "url": "fe-sandbox-1.is-edustack.org"
+      "url": "sandbox-1.is-edustack.org"
     },
     "source": {
       "eyebrow": "Open source",
