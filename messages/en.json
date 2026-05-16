@@ -489,7 +489,7 @@
       },
       "stepsTitle": "Quick start",
       "steps": {
-        "clone": { "title": "Clone the repository", "command": "git clone <repo> && cd edu-stack-is-sandbox" },
+        "clone": { "title": "Clone the repository", "command": "git clone '<repo>' && cd edu-stack-is-sandbox" },
         "env": { "title": "Copy the env template", "command": "cp .env.example .env" },
         "secrets": { "title": "Generate the two required secrets", "command": "openssl rand -base64 64  # JWT_SECRET\nopenssl rand -base64 32  # ENCRYPTION_KEY" },
         "install": { "title": "Install workspaces", "command": "npm install" },
@@ -546,7 +546,7 @@
           "frontend-url": "Public URL of the frontend. Used to build links inside emails (invites, password reset).",
           "mcp-server-url": "Where the backend looks for the MCP server. The /sse suffix is the MCP transport endpoint.",
           "mcp-host": "Bind address for the MCP server. Default 127.0.0.1 (loopback) means it's unreachable from the network — set to 0.0.0.0 only when fronted by a reverse proxy AND when MCP_AUTH_TOKEN is set.",
-          "mcp-auth-token": "Shared bearer token. When set, /sse, /message and /v1/chat/completions require Authorization: Bearer <token>. The backend forwards it automatically.",
+          "mcp-auth-token": "Shared bearer token. When set, /sse, /message and /v1/chat/completions require Authorization: Bearer '<token>'. The backend forwards it automatically.",
           "mcp-cors-origin": "Comma-separated CORS allow-list. Leave empty to disable CORS (correct for loopback-only deployments).",
           "opencode-base-url": "Base URL of the OpenAI-compatible OpenCode provider. Defaults to the local MCP server; in production MUST be https://.",
           "opencode-api-key": "Bearer token for the OpenCode provider (when fronted by an authenticated MCP).",

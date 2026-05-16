@@ -489,7 +489,7 @@
       },
       "stepsTitle": "Rychlý start",
       "steps": {
-        "clone": { "title": "Naklonujte repozitář", "command": "git clone <repo> && cd edu-stack-is-sandbox" },
+        "clone": { "title": "Naklonujte repozitář", "command": "git clone '<repo>' && cd edu-stack-is-sandbox" },
         "env": { "title": "Zkopírujte šablonu .env", "command": "cp .env.example .env" },
         "secrets": { "title": "Vygenerujte dvě povinné tajné hodnoty", "command": "openssl rand -base64 64  # JWT_SECRET\nopenssl rand -base64 32  # ENCRYPTION_KEY" },
         "install": { "title": "Nainstalujte workspacy", "command": "npm install" },
@@ -546,7 +546,7 @@
           "frontend-url": "Veřejná URL frontendu. Používá se pro odkazy v e-mailech (pozvánky, reset hesla).",
           "mcp-server-url": "Kde backend hledá MCP server. Přípona /sse je endpoint MCP transportu.",
           "mcp-host": "Bind adresa MCP serveru. Výchozí 127.0.0.1 (loopback) znamená, že není dostupný ze sítě — 0.0.0.0 nastavte pouze, pokud je za reverzní proxy A je nastaven MCP_AUTH_TOKEN.",
-          "mcp-auth-token": "Sdílený bearer token. Pokud je nastaven, endpointy /sse, /message a /v1/chat/completions vyžadují Authorization: Bearer <token>. Backend ho posílá automaticky.",
+          "mcp-auth-token": "Sdílený bearer token. Pokud je nastaven, endpointy /sse, /message a /v1/chat/completions vyžadují Authorization: Bearer '<token>'. Backend ho posílá automaticky.",
           "mcp-cors-origin": "CORS allow-list oddělený čárkou. Ponechte prázdný pro vypnutí CORS (správné pro loopback-only nasazení).",
           "opencode-base-url": "Base URL OpenAI-kompatibilního OpenCode poskytovatele. Výchozí je lokální MCP server; v produkci MUSÍ být https://.",
           "opencode-api-key": "Bearer token pro OpenCode poskytovatele (pokud je MCP autentizovaný).",
