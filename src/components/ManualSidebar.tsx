@@ -2,7 +2,7 @@
 
 import {useState} from 'react';
 import {useTranslations} from 'next-intl';
-import {ChevronLeft, ChevronRight, Book, Users, Laptop, Settings, LogIn, GraduationCap, School, ShieldCheck, UserCheck, Search, Heart, Layers, Database} from 'lucide-react';
+import {ChevronLeft, ChevronRight, Book, Users, Laptop, Settings, LogIn, GraduationCap, School, ShieldCheck, UserCheck, Search, Heart, Layers, Database, Workflow, Network, KeyRound} from 'lucide-react';
 
 interface ManualSidebarProps {
   activeSection: string;
@@ -31,6 +31,9 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
         { id: 'tech-stack', label: t('tech_stack.title'), icon: Laptop },
         { id: 'modules', label: t('modules.title'), icon: Layers },
         { id: 'data-model', label: t('data_model.title'), icon: Database },
+        { id: 'competency-matrix', label: t('competency_matrix.title'), icon: KeyRound },
+        { id: 'system-architecture', label: t('system_architecture.title'), icon: Network },
+        { id: 'processes', label: t('processes.title'), icon: Workflow },
       ]
     },
     {
@@ -61,7 +64,7 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
 
   return (
     <aside
-      className={`sticky top-20 h-[calc(100vh-5rem)] transition-all duration-500 border-r border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-950/50 backdrop-blur-xl z-30 ${isCollapsed ? 'w-24' : 'w-80'}`}
+      className={`sticky top-[7.5rem] h-[calc(100vh-7.5rem)] transition-all duration-500 border-r border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-950/50 backdrop-blur-xl z-30 ${isCollapsed ? 'w-24' : 'w-80'}`}
     >
       <div className="flex flex-col h-full p-6 relative">
         {/* Toggle Button */}

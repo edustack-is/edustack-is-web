@@ -6,7 +6,10 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ManualSidebar from '@/components/ManualSidebar';
 import ScreenshotPlaceholder from '@/components/ScreenshotPlaceholder';
-import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, Box, Database} from 'lucide-react';
+import Lightbox from '@/components/Lightbox';
+import {COMPETENCY_MATRIX, COMPETENCY_ROLES, type RoleId} from '@/lib/competencyMatrix';
+import {ENV_GROUPS, FRONTEND_URLS, type Required as EnvRequired} from '@/lib/envConfig';
+import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, ZoomIn, Box, Database, Workflow, Network, KeyRound, Check, Minus, Terminal, Globe} from 'lucide-react';
 
 const roleColorMap: Record<string, string> = {
   systemAdmin: 'brand-purple',
@@ -92,19 +95,41 @@ export default function ManualPage() {
   const t = useTranslations('Manual');
   const [activeSection, setActiveSection] = useState('development');
   const [workflowImageIndices, setWorkflowImageIndices] = useState<Record<string, number>>({});
+  const [diagramLightbox, setDiagramLightbox] = useState<{src: string; alt: string} | null>(null);
+
+  const openDiagram = (src: string, alt: string) => setDiagramLightbox({src, alt});
 
   // Helper for dynamic translations to avoid ESLint any errors
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const translate = (key: string) => t(key as any);
 
+  // Sync the sidebar highlight with the URL hash on mount (and whenever
+  // it changes), so deep-linking from outside the page (e.g. the landing
+  // methodology cards) marks the right item before the first scroll event.
+  useEffect(() => {
+    const applyHash = () => {
+      const id = typeof window !== 'undefined' ? window.location.hash.slice(1) : '';
+      if (id && document.getElementById(id)) {
+        setActiveSection(id);
+      }
+    };
+    applyHash();
+    window.addEventListener('hashchange', applyHash);
+    return () => window.removeEventListener('hashchange', applyHash);
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
+        // Pick the section closest to the top of the viewport so the
+        // highlight is deterministic when several sections intersect at
+        // once (e.g. right after a hash navigation).
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length > 0) {
+          setActiveSection(visible[0].target.id);
+        }
       },
       { threshold: 0.1, rootMargin: '-100px 0px -70% 0px' }
     );
@@ -285,12 +310,11 @@ export default function ManualPage() {
                         <p className="px-8 pb-5 text-sm md:text-base text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
                           {translate(`data_model.domains.${d.id}.description`)}
                         </p>
-                        <a
-                          href={`${base}.png`}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <button
+                          type="button"
+                          onClick={() => openDiagram(`${base}.png`, translate(`data_model.domains.${d.id}.title`))}
                           aria-label={t('data_model.openFull')}
-                          className="relative block border-t border-slate-100 dark:border-slate-800 bg-white overflow-hidden"
+                          className="relative block w-full text-left border-t border-slate-100 dark:border-slate-800 bg-white overflow-hidden cursor-zoom-in"
                         >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
@@ -301,9 +325,9 @@ export default function ManualPage() {
                           />
                           <span className="absolute top-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
                             {t('data_model.openFull')}
-                            <ExternalLink size={12} />
+                            <ZoomIn size={12} />
                           </span>
-                        </a>
+                        </button>
                       </figure>
                     );
                   })}
@@ -324,12 +348,11 @@ export default function ManualPage() {
                     </p>
                   </div>
 
-                  <a
-                    href="/images/documentation/architecture/er-diagram.png"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => openDiagram('/images/documentation/architecture/er-diagram.png', t('data_model.fullTitle'))}
                     aria-label={t('data_model.openFull')}
-                    className="group relative block rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl hover:border-brand-purple/30 transition-all overflow-hidden"
+                    className="group relative block w-full text-left rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl hover:border-brand-purple/30 transition-all overflow-hidden cursor-zoom-in"
                   >
                     <div className="overflow-auto max-h-[80vh]">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -346,9 +369,231 @@ export default function ManualPage() {
                     </div>
                     <span className="absolute top-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
                       {t('data_model.openFull')}
-                      <ExternalLink size={12} />
+                      <ZoomIn size={12} />
                     </span>
-                  </a>
+                  </button>
+                </div>
+              </section>
+
+              {/* Competency Matrix */}
+              <section id="competency-matrix" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <KeyRound className="h-10 w-10" />
+                  </div>
+                  <h2 className="font-display text-3xl md:text-[46px] font-bold tracking-tight leading-[1.05]">{t('competency_matrix.title')}</h2>
+                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                    {t('competency_matrix.description')}
+                  </p>
+                  <div className="flex flex-wrap gap-6 text-sm text-slate-600 dark:text-slate-400">
+                    <span className="inline-flex items-center gap-2">
+                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-md bg-brand-purple/15 text-brand-purple">
+                        <Check size={14} strokeWidth={3} />
+                      </span>
+                      {t('competency_matrix.legend.allowed')}
+                    </span>
+                    <span className="inline-flex items-center gap-2">
+                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-md bg-slate-100 dark:bg-slate-800 text-slate-400">
+                        <Minus size={14} strokeWidth={3} />
+                      </span>
+                      {t('competency_matrix.legend.denied')}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-10">
+                  {COMPETENCY_MATRIX.map((domain, dIdx) => (
+                    <div
+                      key={domain.id}
+                      className="rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden"
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-3 px-8 pt-7 pb-4">
+                        <div className="flex items-center gap-3">
+                          <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-brand-purple/10 text-brand-purple font-bold text-sm">
+                            {dIdx + 1}
+                          </span>
+                          <h3 className="font-display text-lg md:text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                            {translate(`competency_matrix.domains.${domain.id}`)}
+                          </h3>
+                        </div>
+                        <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
+                          {domain.operations.length} {t('competency_matrix.legend.domainOps')}
+                        </span>
+                      </div>
+
+                      <div className="overflow-x-auto border-t border-slate-100 dark:border-slate-800">
+                        <table className="w-full text-sm">
+                          <thead className="bg-slate-50/60 dark:bg-slate-950/40">
+                            <tr>
+                              <th
+                                scope="col"
+                                className="sticky left-0 z-10 bg-slate-50/60 dark:bg-slate-950/40 px-6 py-4 text-left font-bold text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 min-w-[300px]"
+                              >
+                                Operation
+                              </th>
+                              {COMPETENCY_ROLES.map((r) => (
+                                <th
+                                  key={r}
+                                  scope="col"
+                                  className="px-2 py-4 text-center font-bold text-[11px] uppercase tracking-widest text-slate-500 dark:text-slate-400 whitespace-nowrap"
+                                  title={translate(`competency_matrix.roles.${r}`)}
+                                >
+                                  <span className="hidden md:inline">{translate(`competency_matrix.roles.${r}`)}</span>
+                                  <span className="md:hidden">{translate(`competency_matrix.rolesShort.${r}`)}</span>
+                                </th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                            {domain.operations.map((op, opIdx) => (
+                              <tr
+                                key={op.id}
+                                className={opIdx % 2 === 0 ? 'bg-white dark:bg-slate-900' : 'bg-slate-50/30 dark:bg-slate-950/20'}
+                              >
+                                <th
+                                  scope="row"
+                                  className="sticky left-0 z-[5] bg-inherit px-6 py-3 text-left font-medium text-slate-700 dark:text-slate-300"
+                                >
+                                  {translate(`competency_matrix.ops.${op.id}`)}
+                                </th>
+                                {COMPETENCY_ROLES.map((r: RoleId) => {
+                                  const allowed = op.roles.includes(r);
+                                  return (
+                                    <td key={r} className="px-2 py-3 text-center">
+                                      <span
+                                        className={`inline-flex h-7 w-7 items-center justify-center rounded-lg ${allowed ? 'bg-brand-purple/15 text-brand-purple' : 'bg-slate-100 dark:bg-slate-800 text-slate-300 dark:text-slate-600'}`}
+                                        aria-label={allowed ? t('competency_matrix.legend.allowed') : t('competency_matrix.legend.denied')}
+                                      >
+                                        {allowed ? <Check size={14} strokeWidth={3} /> : <Minus size={14} strokeWidth={3} />}
+                                      </span>
+                                    </td>
+                                  );
+                                })}
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* System Architecture */}
+              <section id="system-architecture" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <Network className="h-10 w-10" />
+                  </div>
+                  <h2 className="font-display text-3xl md:text-[46px] font-bold tracking-tight leading-[1.05]">{t('system_architecture.title')}</h2>
+                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                    {t('system_architecture.description')}
+                  </p>
+                </div>
+
+                <div className="space-y-12">
+                  {[
+                    { id: 'components', title: t('system_architecture.componentsTitle'), description: t('system_architecture.componentsDescription'), file: 'components' },
+                    { id: 'actors', title: t('system_architecture.actorsTitle'), description: t('system_architecture.actorsDescription'), file: 'actors' },
+                  ].map((d) => {
+                    const src = `/images/documentation/architecture/components/${d.file}.png`;
+                    return (
+                      <figure key={d.id} className="group flex flex-col rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl hover:border-brand-purple/30 transition-all overflow-hidden">
+                        <div className="px-8 pt-7 pb-3 space-y-3">
+                          <h3 className="font-display text-lg md:text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                            {d.title}
+                          </h3>
+                          <p className="text-sm md:text-base text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                            {d.description}
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => openDiagram(src, d.title)}
+                          aria-label={t('system_architecture.openFull')}
+                          className="relative block w-full text-left border-t border-slate-100 dark:border-slate-800 bg-white overflow-hidden cursor-zoom-in"
+                        >
+                          <div className="overflow-x-auto">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={src}
+                              alt={d.title}
+                              className="block h-auto max-w-none bg-white transition-transform duration-500 group-hover:scale-[1.01]"
+                              style={{ width: '100%', minWidth: d.id === 'components' ? '1800px' : '900px' }}
+                              loading="lazy"
+                            />
+                          </div>
+                          <span className="absolute top-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                            {t('system_architecture.openFull')}
+                            <ZoomIn size={12} />
+                          </span>
+                        </button>
+                      </figure>
+                    );
+                  })}
+                </div>
+              </section>
+
+              {/* Key Processes (sequence diagrams) */}
+              <section id="processes" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <Workflow className="h-10 w-10" />
+                  </div>
+                  <h2 className="font-display text-3xl md:text-[46px] font-bold tracking-tight leading-[1.05]">{t('processes.title')}</h2>
+                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                    {t('processes.description')}
+                  </p>
+                </div>
+
+                <div className="space-y-10">
+                  {[
+                    { id: 'init-setup', file: 'seq-init-setup' },
+                    { id: 'login', file: 'seq-login' },
+                    { id: 'generate-data', file: 'seq-generate-data' },
+                    { id: 'backup-restore', file: 'seq-backup-restore' },
+                    { id: 'ai-generation', file: 'seq-ai-generation' },
+                    { id: 'substitution', file: 'seq-substitution' },
+                    { id: 'absence-excuse', file: 'seq-absence-excuse' },
+                  ].map((d, idx) => {
+                    const src = `/images/documentation/architecture/sequences/${d.file}.png`;
+                    return (
+                      <figure key={d.id} className="group flex flex-col rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl hover:border-brand-purple/30 transition-all overflow-hidden">
+                        <div className="flex items-center gap-3 px-8 pt-7 pb-3">
+                          <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-brand-purple/10 text-brand-purple font-bold text-sm">
+                            {idx + 1}
+                          </span>
+                          <h3 className="font-display text-lg md:text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                            {translate(`processes.list.${d.id}.title`)}
+                          </h3>
+                        </div>
+                        <p className="px-8 pb-5 pl-20 text-sm md:text-base text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
+                          {translate(`processes.list.${d.id}.description`)}
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => openDiagram(src, translate(`processes.list.${d.id}.title`))}
+                          aria-label={t('processes.openFull')}
+                          className="relative block w-full text-left border-t border-slate-100 dark:border-slate-800 bg-white overflow-hidden cursor-zoom-in"
+                        >
+                          <div className="overflow-x-auto">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={src}
+                              alt={translate(`processes.list.${d.id}.title`)}
+                              className="block h-auto max-w-none bg-white"
+                              style={{ width: '100%', minWidth: '1600px' }}
+                              loading="lazy"
+                            />
+                          </div>
+                          <span className="absolute top-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                            {t('processes.openFull')}
+                            <ZoomIn size={12} />
+                          </span>
+                        </button>
+                      </figure>
+                    );
+                  })}
                 </div>
               </section>
 
@@ -363,35 +608,163 @@ export default function ManualPage() {
                     {t('development.description')}
                   </p>
                 </div>
-                
-                <div className="space-y-12">
-                  <div className="grid gap-12 lg:grid-cols-2">
-                    <div className="space-y-6">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="flex gap-6 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 transition-all hover:bg-white dark:hover:bg-slate-900 hover:shadow-xl hover:scale-[1.02]">
-                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-purple text-white font-bold text-lg shadow-lg shadow-brand-purple/20">
-                            {i}
-                          </div>
-                          <p className="text-base md:text-lg font-semibold text-slate-800 dark:text-slate-200 pt-1.5 leading-snug">
-                            {translate(`development.step${i}`)}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="space-y-6 flex flex-col justify-center">
-                      <ScreenshotPlaceholder 
-                        src="/images/documentation/config/00_config_local.png" 
-                        alt="Local Configuration" 
-                        roleColor="brand-purple" 
-                      />
-                    </div>
+
+                {/* Prerequisites */}
+                <div className="space-y-6">
+                  <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    {t('development.prereqsTitle')}
+                  </h3>
+                  <div className="grid gap-4 sm:grid-cols-3">
+                    {(['node', 'npm', 'wrangler'] as const).map((p) => (
+                      <div key={p} className="p-6 rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+                        <h4 className="font-display text-base font-bold text-slate-900 dark:text-white mb-2">
+                          {translate(`development.prereqs.${p}.label`)}
+                        </h4>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                          {translate(`development.prereqs.${p}.description`)}
+                        </p>
+                      </div>
+                    ))}
                   </div>
-                  <ScreenshotPlaceholder 
-                    src="/images/documentation/config/01_startup_application.png" 
-                    alt="Application Startup" 
-                    roleColor="brand-purple"
-                    className="max-w-4xl mx-auto"
-                  />
+                </div>
+
+                {/* Quick start steps */}
+                <div className="space-y-6">
+                  <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    {t('development.stepsTitle')}
+                  </h3>
+                  <div className="space-y-4">
+                    {(['clone', 'env', 'secrets', 'install', 'db', 'dev'] as const).map((s, idx) => (
+                      <div key={s} className="flex gap-4 p-5 rounded-[1.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-purple/10 text-brand-purple font-bold text-sm">
+                          {idx + 1}
+                        </div>
+                        <div className="flex-1 min-w-0 space-y-2">
+                          <h4 className="font-display text-base font-bold text-slate-900 dark:text-white">
+                            {translate(`development.steps.${s}.title`)}
+                          </h4>
+                          <pre className="overflow-x-auto rounded-xl bg-slate-950 text-slate-100 px-4 py-3 text-xs md:text-sm font-mono leading-relaxed">
+                            <code>{translate(`development.steps.${s}.command`)}</code>
+                          </pre>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Default URLs */}
+                <div className="space-y-6">
+                  <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    {t('development.urlsTitle')}
+                  </h3>
+                  <div className="rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                        {FRONTEND_URLS.map((u) => (
+                          <tr key={u.id}>
+                            <th scope="row" className="px-6 py-3 text-left font-medium text-slate-700 dark:text-slate-300 inline-flex items-center gap-2">
+                              <Globe size={14} className="text-slate-400" />
+                              {translate(`development.urls.${u.id}`)}
+                            </th>
+                            <td className="px-6 py-3 font-mono text-xs md:text-sm text-brand-purple">
+                              {u.url}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Frontend note */}
+                <div className="rounded-[2rem] border border-brand-purple/20 bg-brand-purple/5 dark:bg-brand-purple/10 p-6 md:p-8 space-y-3">
+                  <h4 className="font-display text-base md:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Info size={18} className="text-brand-purple" />
+                    {t('development.frontendNoteTitle')}
+                  </h4>
+                  <p className="text-sm md:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
+                    {t('development.frontendNote')}
+                  </p>
+                </div>
+
+                {/* .env reference */}
+                <div className="space-y-6 pt-8 border-t border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center gap-3">
+                    <Terminal className="h-6 w-6 text-brand-purple" />
+                    <h3 className="font-display text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                      {t('development.env.title')}
+                    </h3>
+                  </div>
+                  <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                    {t('development.env.description')}
+                  </p>
+
+                  <div className="space-y-8">
+                    {ENV_GROUPS.map((g, gIdx) => (
+                      <div key={g.id} className="rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden">
+                        <div className="flex items-center gap-3 px-6 pt-5 pb-3">
+                          <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-brand-purple/10 text-brand-purple font-bold text-xs">
+                            {gIdx + 1}
+                          </span>
+                          <h4 className="font-display text-base md:text-lg font-bold text-slate-900 dark:text-white">
+                            {translate(`development.env.groups.${g.id}`)}
+                          </h4>
+                        </div>
+                        <div className="overflow-x-auto border-t border-slate-100 dark:border-slate-800">
+                          <table className="w-full text-sm">
+                            <thead className="bg-slate-50/60 dark:bg-slate-950/40">
+                              <tr>
+                                <th scope="col" className="px-4 py-3 text-left font-bold text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 min-w-[180px]">
+                                  {t('development.env.columnName')}
+                                </th>
+                                <th scope="col" className="px-4 py-3 text-left font-bold text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 min-w-[180px]">
+                                  {t('development.env.columnExample')}
+                                </th>
+                                <th scope="col" className="px-4 py-3 text-left font-bold text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                                  {t('development.env.columnDescription')}
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                              {g.vars.map((v) => {
+                                const badge: Record<EnvRequired, string> = {
+                                  required: 'bg-rose-500/15 text-rose-600 dark:text-rose-400',
+                                  recommended: 'bg-brand-purple/15 text-brand-purple',
+                                  optional: 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300',
+                                };
+                                return (
+                                  <tr key={v.id} className="align-top">
+                                    <th scope="row" className="px-4 py-3 text-left">
+                                      <code className="font-mono text-xs md:text-sm text-slate-900 dark:text-slate-100 break-all">
+                                        {v.name}
+                                      </code>
+                                      <div className="mt-1.5">
+                                        <span className={`inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-widest ${badge[v.required]}`}>
+                                          {t(`development.env.${v.required}`)}
+                                        </span>
+                                      </div>
+                                    </th>
+                                    <td className="px-4 py-3">
+                                      {v.example ? (
+                                        <code className="font-mono text-xs text-slate-600 dark:text-slate-400 break-all whitespace-pre-wrap">
+                                          {v.example}
+                                        </code>
+                                      ) : (
+                                        <span className="text-slate-300 dark:text-slate-600">—</span>
+                                      )}
+                                    </td>
+                                    <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                                      {translate(`development.env.vars.${v.id}`)}
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </section>
 
@@ -693,6 +1066,14 @@ export default function ManualPage() {
       </div>
 
       <Footer />
+
+      <Lightbox
+        src={diagramLightbox?.src ?? ''}
+        alt={diagramLightbox?.alt ?? ''}
+        isOpen={diagramLightbox !== null}
+        onClose={() => setDiagramLightbox(null)}
+        fit="native"
+      />
     </div>
   );
 }

@@ -11,13 +11,20 @@ interface LightboxProps {
   alt: string;
   isOpen: boolean;
   onClose: () => void;
+  /**
+   * 'contain' (default) scales the image to fit the viewport using Next.js
+   * <Image fill>. 'native' renders the raw image at its intrinsic size inside
+   * a scrollable container — better for wide technical diagrams where shrinking
+   * to fit would make text unreadable.
+   */
+  fit?: 'contain' | 'native';
 }
 
 const noopSubscribe = () => () => {};
 const getClientMounted = () => true;
 const getServerMounted = () => false;
 
-export default function Lightbox({src, alt, isOpen, onClose}: LightboxProps) {
+export default function Lightbox({src, alt, isOpen, onClose, fit = 'contain'}: LightboxProps) {
   const t = useTranslations('Manual');
   const mounted = useSyncExternalStore(noopSubscribe, getClientMounted, getServerMounted);
 
@@ -55,19 +62,32 @@ export default function Lightbox({src, alt, isOpen, onClose}: LightboxProps) {
         <X size={32} strokeWidth={3} />
       </button>
 
-      <div 
+      <div
         className="relative w-full h-full p-4 md:p-8 flex items-center justify-center"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative w-[95vw] h-[85vh] animate-in zoom-in-95 duration-300">
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            className="object-contain"
-            priority
-          />
-        </div>
+        {fit === 'native' ? (
+          <div className="w-[95vw] h-[85vh] overflow-auto rounded-2xl bg-white animate-in zoom-in-95 duration-300">
+            {/* Diagrams render at intrinsic pixel size — pan inside the modal
+                to keep every label legible. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt={alt}
+              className="block max-w-none h-auto"
+            />
+          </div>
+        ) : (
+          <div className="relative w-[95vw] h-[85vh] animate-in zoom-in-95 duration-300">
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+        )}
       </div>
       
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold tracking-tight flex items-center gap-3">
