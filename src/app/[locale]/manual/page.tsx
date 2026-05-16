@@ -102,14 +102,33 @@ export default function ManualPage() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const translate = (key: string) => t(key as any);
 
+  // Sync the sidebar highlight with the URL hash on mount (and whenever
+  // it changes), so deep-linking from outside the page (e.g. the landing
+  // methodology cards) marks the right item before the first scroll event.
+  useEffect(() => {
+    const applyHash = () => {
+      const id = typeof window !== 'undefined' ? window.location.hash.slice(1) : '';
+      if (id && document.getElementById(id)) {
+        setActiveSection(id);
+      }
+    };
+    applyHash();
+    window.addEventListener('hashchange', applyHash);
+    return () => window.removeEventListener('hashchange', applyHash);
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
+        // Pick the section closest to the top of the viewport so the
+        // highlight is deterministic when several sections intersect at
+        // once (e.g. right after a hash navigation).
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length > 0) {
+          setActiveSection(visible[0].target.id);
+        }
       },
       { threshold: 0.1, rootMargin: '-100px 0px -70% 0px' }
     );
