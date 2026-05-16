@@ -14,9 +14,9 @@ import ContactSection from '@/components/landing/ContactSection';
 
 export default function IndexPage() {
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden bg-bg text-text font-body">
+    <div className="flex min-h-screen flex-col bg-bg text-text font-body">
       <Navbar />
-      <main className="flex-1">
+      <main className="flex-1 overflow-x-hidden">
         <Hero />
         <IdeaSection />
         <HowSection />
