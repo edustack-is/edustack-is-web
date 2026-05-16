@@ -64,7 +64,7 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
 
   return (
     <aside
-      className={`sticky top-20 h-[calc(100vh-5rem)] transition-all duration-500 border-r border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-950/50 backdrop-blur-xl z-30 ${isCollapsed ? 'w-24' : 'w-80'}`}
+      className={`sticky top-[7.5rem] h-[calc(100vh-7.5rem)] transition-all duration-500 border-r border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-950/50 backdrop-blur-xl z-30 ${isCollapsed ? 'w-24' : 'w-80'}`}
     >
       <div className="flex flex-col h-full p-6 relative">
         {/* Toggle Button */}
