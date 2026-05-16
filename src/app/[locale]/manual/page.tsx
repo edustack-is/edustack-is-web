@@ -93,7 +93,7 @@ const roleWorkflowImages: Record<string, Record<number, string[]>> = {
 
 export default function ManualPage() {
   const t = useTranslations('Manual');
-  const [activeSection, setActiveSection] = useState('development');
+  const [activeSection, setActiveSection] = useState('tech-stack');
   const [workflowImageIndices, setWorkflowImageIndices] = useState<Record<string, number>>({});
   const [diagramLightbox, setDiagramLightbox] = useState<{src: string; alt: string} | null>(null);
 
@@ -118,27 +118,36 @@ export default function ManualPage() {
     return () => window.removeEventListener('hashchange', applyHash);
   }, []);
 
+  // Track the active section via scroll position: pick the last section
+  // whose top is above the navbar bottom. This is more reliable than an
+  // IntersectionObserver band at the page edges — at scrollY=0 the header
+  // would occupy the band and no section would intersect, leaving the
+  // default highlight stale.
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Pick the section closest to the top of the viewport so the
-        // highlight is deterministic when several sections intersect at
-        // once (e.g. right after a hash navigation).
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible.length > 0) {
-          setActiveSection(visible[0].target.id);
-        }
-      },
-      { threshold: 0.1, rootMargin: '-100px 0px -70% 0px' }
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>('section[id]'),
     );
+    if (sections.length === 0) return;
 
-    document.querySelectorAll('section[id]').forEach((section) => {
-      observer.observe(section);
-    });
+    // Navbar + a small buffer; matches the scroll-mt-32 on each section.
+    const offset = 140;
 
-    return () => observer.disconnect();
+    const update = () => {
+      const scrollY = window.scrollY;
+      let current = sections[0].id;
+      for (const s of sections) {
+        if (s.offsetTop - offset <= scrollY) {
+          current = s.id;
+        } else {
+          break;
+        }
+      }
+      setActiveSection(current);
+    };
+
+    update();
+    window.addEventListener('scroll', update, {passive: true});
+    return () => window.removeEventListener('scroll', update);
   }, []);
 
   const getWorkflowImage = (roleId: string, workflowId: number) => {
