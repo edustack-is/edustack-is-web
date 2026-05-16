@@ -6,7 +6,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ManualSidebar from '@/components/ManualSidebar';
 import ScreenshotPlaceholder from '@/components/ScreenshotPlaceholder';
-import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, Box, Database, Workflow, Network} from 'lucide-react';
+import Lightbox from '@/components/Lightbox';
+import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, ZoomIn, Box, Database, Workflow, Network} from 'lucide-react';
 
 const roleColorMap: Record<string, string> = {
   systemAdmin: 'brand-purple',
@@ -92,6 +93,9 @@ export default function ManualPage() {
   const t = useTranslations('Manual');
   const [activeSection, setActiveSection] = useState('development');
   const [workflowImageIndices, setWorkflowImageIndices] = useState<Record<string, number>>({});
+  const [diagramLightbox, setDiagramLightbox] = useState<{src: string; alt: string} | null>(null);
+
+  const openDiagram = (src: string, alt: string) => setDiagramLightbox({src, alt});
 
   // Helper for dynamic translations to avoid ESLint any errors
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -285,12 +289,11 @@ export default function ManualPage() {
                         <p className="px-8 pb-5 text-sm md:text-base text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
                           {translate(`data_model.domains.${d.id}.description`)}
                         </p>
-                        <a
-                          href={`${base}.png`}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <button
+                          type="button"
+                          onClick={() => openDiagram(`${base}.png`, translate(`data_model.domains.${d.id}.title`))}
                           aria-label={t('data_model.openFull')}
-                          className="relative block border-t border-slate-100 dark:border-slate-800 bg-white overflow-hidden"
+                          className="relative block w-full text-left border-t border-slate-100 dark:border-slate-800 bg-white overflow-hidden cursor-zoom-in"
                         >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
@@ -301,9 +304,9 @@ export default function ManualPage() {
                           />
                           <span className="absolute top-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
                             {t('data_model.openFull')}
-                            <ExternalLink size={12} />
+                            <ZoomIn size={12} />
                           </span>
-                        </a>
+                        </button>
                       </figure>
                     );
                   })}
@@ -324,12 +327,11 @@ export default function ManualPage() {
                     </p>
                   </div>
 
-                  <a
-                    href="/images/documentation/architecture/er-diagram.png"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => openDiagram('/images/documentation/architecture/er-diagram.png', t('data_model.fullTitle'))}
                     aria-label={t('data_model.openFull')}
-                    className="group relative block rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl hover:border-brand-purple/30 transition-all overflow-hidden"
+                    className="group relative block w-full text-left rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-2xl hover:border-brand-purple/30 transition-all overflow-hidden cursor-zoom-in"
                   >
                     <div className="overflow-auto max-h-[80vh]">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -346,9 +348,9 @@ export default function ManualPage() {
                     </div>
                     <span className="absolute top-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
                       {t('data_model.openFull')}
-                      <ExternalLink size={12} />
+                      <ZoomIn size={12} />
                     </span>
-                  </a>
+                  </button>
                 </div>
               </section>
 
@@ -380,12 +382,11 @@ export default function ManualPage() {
                             {d.description}
                           </p>
                         </div>
-                        <a
-                          href={src}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <button
+                          type="button"
+                          onClick={() => openDiagram(src, d.title)}
                           aria-label={t('system_architecture.openFull')}
-                          className="relative block border-t border-slate-100 dark:border-slate-800 bg-white overflow-hidden"
+                          className="relative block w-full text-left border-t border-slate-100 dark:border-slate-800 bg-white overflow-hidden cursor-zoom-in"
                         >
                           <div className="overflow-x-auto">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -399,9 +400,9 @@ export default function ManualPage() {
                           </div>
                           <span className="absolute top-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
                             {t('system_architecture.openFull')}
-                            <ExternalLink size={12} />
+                            <ZoomIn size={12} />
                           </span>
-                        </a>
+                        </button>
                       </figure>
                     );
                   })}
@@ -444,12 +445,11 @@ export default function ManualPage() {
                         <p className="px-8 pb-5 pl-20 text-sm md:text-base text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
                           {translate(`processes.list.${d.id}.description`)}
                         </p>
-                        <a
-                          href={src}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <button
+                          type="button"
+                          onClick={() => openDiagram(src, translate(`processes.list.${d.id}.title`))}
                           aria-label={t('processes.openFull')}
-                          className="relative block border-t border-slate-100 dark:border-slate-800 bg-white overflow-hidden"
+                          className="relative block w-full text-left border-t border-slate-100 dark:border-slate-800 bg-white overflow-hidden cursor-zoom-in"
                         >
                           <div className="overflow-x-auto">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -463,9 +463,9 @@ export default function ManualPage() {
                           </div>
                           <span className="absolute top-4 right-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/40 backdrop-blur-md text-[10px] font-bold text-white uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
                             {t('processes.openFull')}
-                            <ExternalLink size={12} />
+                            <ZoomIn size={12} />
                           </span>
-                        </a>
+                        </button>
                       </figure>
                     );
                   })}
@@ -813,6 +813,14 @@ export default function ManualPage() {
       </div>
 
       <Footer />
+
+      <Lightbox
+        src={diagramLightbox?.src ?? ''}
+        alt={diagramLightbox?.alt ?? ''}
+        isOpen={diagramLightbox !== null}
+        onClose={() => setDiagramLightbox(null)}
+        fit="native"
+      />
     </div>
   );
 }
