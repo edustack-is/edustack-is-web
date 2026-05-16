@@ -67,8 +67,10 @@ export default function Lightbox({src, alt, isOpen, onClose, fit = 'contain'}: L
         onClick={(e) => e.stopPropagation()}
       >
         {fit === 'native' ? (
-          <div className="w-[95vw] h-[85vh] overflow-auto rounded-2xl bg-white animate-in zoom-in-95 duration-300">
-            {/* Diagrams render at intrinsic pixel size — pan inside the modal
+          <div className="max-w-[95vw] max-h-[85vh] overflow-auto rounded-2xl bg-white shadow-2xl animate-in zoom-in-95 duration-300">
+            {/* Container shrinks to the image's intrinsic size for small
+                diagrams (no big empty white area) and caps at 95vw/85vh
+                for very wide ones like the full ER — pan inside the modal
                 to keep every label legible. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

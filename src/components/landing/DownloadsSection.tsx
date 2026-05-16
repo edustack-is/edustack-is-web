@@ -2,7 +2,13 @@ import {useTranslations} from 'next-intl';
 import {ROLES, ROLE_COLORS} from '@/components/brand/roles';
 import {Section} from './Section';
 
-type DownloadItem = {title: string; kind: string; body: string};
+type DownloadItem = {
+  title: string;
+  kind: string;
+  body: string;
+  href?: string;
+  external?: boolean;
+};
 
 export default function DownloadsSection() {
   const t = useTranslations('Index');
@@ -21,11 +27,18 @@ export default function DownloadsSection() {
         {items.map((item, i) => {
           const role = ROLES[i % ROLES.length];
           const badge = item.kind.startsWith('PDF') ? 'PDF' : 'GD';
+          const isExternal = item.external === true;
+          const isPdf = badge === 'PDF';
           return (
             <a
               key={i}
-              href="#"
-              className="grid grid-cols-[44px_1fr_auto] md:grid-cols-[44px_1.5fr_1fr_1fr_auto] items-center gap-4 md:gap-5 py-5 border-b border-line text-text no-underline"
+              href={item.href ?? '#'}
+              {...(isExternal
+                ? {target: '_blank', rel: 'noopener noreferrer'}
+                : isPdf
+                  ? {download: ''}
+                  : {})}
+              className="grid grid-cols-[44px_1fr_auto] md:grid-cols-[44px_1.5fr_1fr_1fr_auto] items-center gap-4 md:gap-5 py-5 border-b border-line text-text no-underline hover:bg-card/40 transition-colors"
             >
               <div
                 className="w-9 h-9 rounded-[10px] flex items-center justify-center font-mono text-[11px] font-bold text-white"
@@ -49,7 +62,7 @@ export default function DownloadsSection() {
                 className="font-body text-sm font-bold"
                 style={{color: role.color}}
               >
-                ↓
+                {isExternal ? '↗' : '↓'}
               </div>
             </a>
           );
