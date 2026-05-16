@@ -16,7 +16,10 @@ export function LangToggle() {
         <button
           key={l}
           type="button"
-          onClick={() => router.replace(pathname, {locale: l})}
+          onClick={() => {
+            const hash = typeof window !== 'undefined' ? window.location.hash : '';
+            router.replace(pathname + hash, {locale: l, scroll: false});
+          }}
           className={`px-3 py-1.5 rounded-full uppercase tracking-wider transition-colors ${
             locale === l ? 'bg-brand-gradient text-white' : 'text-muted'
           }`}
