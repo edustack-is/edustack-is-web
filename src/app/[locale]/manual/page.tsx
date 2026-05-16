@@ -7,7 +7,8 @@ import Footer from '@/components/Footer';
 import ManualSidebar from '@/components/ManualSidebar';
 import ScreenshotPlaceholder from '@/components/ScreenshotPlaceholder';
 import Lightbox from '@/components/Lightbox';
-import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, ZoomIn, Box, Database, Workflow, Network} from 'lucide-react';
+import {COMPETENCY_MATRIX, COMPETENCY_ROLES, type RoleId} from '@/lib/competencyMatrix';
+import {Info, Laptop, Settings, LogIn, ShieldCheck, School, Search, UserCheck, GraduationCap, Users, CheckCircle2, Heart, ChevronLeft, ChevronRight, Cpu, Layers, ExternalLink, ZoomIn, Box, Database, Workflow, Network, KeyRound, Check, Minus} from 'lucide-react';
 
 const roleColorMap: Record<string, string> = {
   systemAdmin: 'brand-purple',
@@ -351,6 +352,110 @@ export default function ManualPage() {
                       <ZoomIn size={12} />
                     </span>
                   </button>
+                </div>
+              </section>
+
+              {/* Competency Matrix */}
+              <section id="competency-matrix" className="scroll-mt-32 space-y-16">
+                <div className="space-y-6">
+                  <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                    <KeyRound className="h-10 w-10" />
+                  </div>
+                  <h2 className="font-display text-3xl md:text-[46px] font-bold tracking-tight leading-[1.05]">{t('competency_matrix.title')}</h2>
+                  <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                    {t('competency_matrix.description')}
+                  </p>
+                  <div className="flex flex-wrap gap-6 text-sm text-slate-600 dark:text-slate-400">
+                    <span className="inline-flex items-center gap-2">
+                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-md bg-brand-purple/15 text-brand-purple">
+                        <Check size={14} strokeWidth={3} />
+                      </span>
+                      {t('competency_matrix.legend.allowed')}
+                    </span>
+                    <span className="inline-flex items-center gap-2">
+                      <span className="inline-flex h-5 w-5 items-center justify-center rounded-md bg-slate-100 dark:bg-slate-800 text-slate-400">
+                        <Minus size={14} strokeWidth={3} />
+                      </span>
+                      {t('competency_matrix.legend.denied')}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-10">
+                  {COMPETENCY_MATRIX.map((domain, dIdx) => (
+                    <div
+                      key={domain.id}
+                      className="rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden"
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-3 px-8 pt-7 pb-4">
+                        <div className="flex items-center gap-3">
+                          <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-brand-purple/10 text-brand-purple font-bold text-sm">
+                            {dIdx + 1}
+                          </span>
+                          <h3 className="font-display text-lg md:text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                            {translate(`competency_matrix.domains.${domain.id}`)}
+                          </h3>
+                        </div>
+                        <span className="text-xs font-bold uppercase tracking-widest text-slate-400">
+                          {domain.operations.length} {t('competency_matrix.legend.domainOps')}
+                        </span>
+                      </div>
+
+                      <div className="overflow-x-auto border-t border-slate-100 dark:border-slate-800">
+                        <table className="w-full text-sm">
+                          <thead className="bg-slate-50/60 dark:bg-slate-950/40">
+                            <tr>
+                              <th
+                                scope="col"
+                                className="sticky left-0 z-10 bg-slate-50/60 dark:bg-slate-950/40 px-6 py-4 text-left font-bold text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 min-w-[300px]"
+                              >
+                                Operation
+                              </th>
+                              {COMPETENCY_ROLES.map((r) => (
+                                <th
+                                  key={r}
+                                  scope="col"
+                                  className="px-2 py-4 text-center font-bold text-[11px] uppercase tracking-widest text-slate-500 dark:text-slate-400 whitespace-nowrap"
+                                  title={translate(`competency_matrix.roles.${r}`)}
+                                >
+                                  <span className="hidden md:inline">{translate(`competency_matrix.roles.${r}`)}</span>
+                                  <span className="md:hidden">{translate(`competency_matrix.rolesShort.${r}`)}</span>
+                                </th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                            {domain.operations.map((op, opIdx) => (
+                              <tr
+                                key={op.id}
+                                className={opIdx % 2 === 0 ? 'bg-white dark:bg-slate-900' : 'bg-slate-50/30 dark:bg-slate-950/20'}
+                              >
+                                <th
+                                  scope="row"
+                                  className="sticky left-0 z-[5] bg-inherit px-6 py-3 text-left font-medium text-slate-700 dark:text-slate-300"
+                                >
+                                  {translate(`competency_matrix.ops.${op.id}`)}
+                                </th>
+                                {COMPETENCY_ROLES.map((r: RoleId) => {
+                                  const allowed = op.roles.includes(r);
+                                  return (
+                                    <td key={r} className="px-2 py-3 text-center">
+                                      <span
+                                        className={`inline-flex h-7 w-7 items-center justify-center rounded-lg ${allowed ? 'bg-brand-purple/15 text-brand-purple' : 'bg-slate-100 dark:bg-slate-800 text-slate-300 dark:text-slate-600'}`}
+                                        aria-label={allowed ? t('competency_matrix.legend.allowed') : t('competency_matrix.legend.denied')}
+                                      >
+                                        {allowed ? <Check size={14} strokeWidth={3} /> : <Minus size={14} strokeWidth={3} />}
+                                      </span>
+                                    </td>
+                                  );
+                                })}
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </section>
 
