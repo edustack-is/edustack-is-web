@@ -2,7 +2,7 @@
 
 import {useState} from 'react';
 import {useTranslations} from 'next-intl';
-import {ChevronLeft, ChevronRight, Book, Users, Laptop, Settings, LogIn, GraduationCap, School, ShieldCheck, UserCheck, Search, Heart, Layers, Database, Workflow, Network, KeyRound, Rocket, Activity} from 'lucide-react';
+import {ChevronLeft, ChevronRight, Book, Users, Laptop, Settings, LogIn, GraduationCap, School, ShieldCheck, Heart, Layers, Database, Workflow, Network, KeyRound, Rocket, Activity} from 'lucide-react';
 
 interface ManualSidebarProps {
   activeSection: string;
@@ -10,10 +10,8 @@ interface ManualSidebarProps {
 
 const activeTextMap: Record<string, string> = {
   systemAdmin: 'text-brand-purple',
-  schoolAdmin: 'text-brand-slate',
-  headmaster: 'text-brand-blue',
-  deputy: 'text-brand-pink',
-  teacher: 'text-brand-teal',
+  schoolStaff: 'text-brand-teal',
+  schoolManagement: 'text-brand-blue',
   parent: 'text-rose-500',
   student: 'text-brand-orange',
 };
@@ -54,10 +52,8 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
       icon: Users,
       items: [
         { id: 'systemAdmin', label: t('roles.systemAdmin.title'), icon: ShieldCheck },
-        { id: 'schoolAdmin', label: t('roles.schoolAdmin.title'), icon: School },
-        { id: 'headmaster', label: t('roles.headmaster.title'), icon: Search },
-        { id: 'deputy', label: t('roles.deputy.title'), icon: UserCheck },
-        { id: 'teacher', label: t('roles.teacher.title'), icon: GraduationCap },
+        { id: 'schoolStaff', label: t('roles.schoolStaff.title'), icon: GraduationCap },
+        { id: 'schoolManagement', label: t('roles.schoolManagement.title'), icon: School },
         { id: 'parent', label: t('roles.parent.title'), icon: Heart },
         { id: 'student', label: t('roles.student.title'), icon: Users },
       ]

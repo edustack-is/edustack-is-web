@@ -807,121 +807,87 @@
           }
         }
       },
-      "schoolAdmin": {
-        "title": "Správce školy",
-        "description": "Lokální provozní manažer odpovědný za technickou konfiguraci a správu uživatelů konkrétní instance školy.",
-        "functions": "Onboarding uživatelů konkrétní školy, přiřazování rolí, správa tříd a struktury budov a lokální nastavení systému.",
-        "workflow1": {
-          "title": "Lokální správa uživatelů",
-          "description": "Zajištění přístupu a správa žáků, učitelů a zaměstnanců v rámci školy.",
-          "step1": "Použijte nástroj pro import CSV pro hromadné nahrání záznamů žáků a zaměstnanců.",
-          "step2": "Přiřaďte importovaným uživatelům odpovídající role (Učitel, Žák, Rodič).",
-          "step3": "Spravujte stavy uživatelských účtů a v případě potřeby resetujte hesla.",
-          "step4": "Ověřte přístup uživatelů ke konkrétním modulům školy."
-        },
-        "workflow2": {
-          "title": "Vzdělávací struktura",
-          "description": "Definice fyzického a organizačního uspořádání školy.",
-          "step1": "Vytvořte strukturu budov a definujte jednotlivé učebny.",
-          "step2": "Nastavte třídní skupiny a přiřaďte žáky do odpovídajících ročníků.",
-          "step3": "Nakonfigurujte vyučovací hodiny a časový rozvrh zvonění.",
-          "step4": "Udržujte registr aktivních předmětů a kabinetů."
-        },
-        "workflow3": {
-          "title": "Konfigurace modulů",
-          "description": "Doladění funkcí systému pro potřeby konkrétní školy.",
-          "step1": "Povolte nebo zakažte specifické moduly jako 'AI asistent' nebo 'Komunita'.",
-          "step2": "Nakonfigurujte lokální klasifikační stupnice a systémy vah známek.",
-          "step3": "Nastavte celoškolní preference pro notifikace.",
-          "step4": "Kontrolujte lokální auditní logy pro zajištění bezpečnosti."
+      "schoolStaff": {
+        "title": "Učitel / Zástupce / Ředitel",
+        "description": "Tyto tři role sdílejí identický každodenní toolkit. V kódu jsou PRINCIPAL, DEPUTY a (když systémový administrátor vstoupí přes 'Vstoupit jako…') ADMIN zaměnitelné — každý backendový endpoint, který povoluje jednoho z nich, povoluje všechny tři, a frontend je hradí jako jednu skupinu. Rozdíly jsou pouze kosmetické (barva sidebaru, popisek role, ikona). Pozn.: 'Správce školy' není reálná role — je to pouze označení, které si systémový administrátor může vybrat při vstupu do školy, s totožnými oprávněními jako Ředitel nebo Zástupce.",
+        "functions": "Každodenní práce ve třídě: zobrazení rozvrhu pro sebe / třídu / učitele / učebnu, zápis známek a slovních hodnocení (s AI vyhlazením textu), evidence docházky a schvalování omluvenek od rodičů, podepisování záznamů ve třídní knize, posílání 1:1 zpráv či hromadných oznámení a správa komunitní nástěnky, anket a událostí.",
+        "features": {
+          "schedule": {
+            "title": "Rozvrh",
+            "description": "Pouze pro čtení. Mezi záložkami se přepínáte na svůj rozvrh, celou třídu, konkrétního učitele nebo učebnu — vše filtrovatelné podle školního roku a pololetí (nebo 'All' pro obě).",
+            "images": {
+              "my": "Můj rozvrh (výchozí záložka)",
+              "class": "Rozvrh třídy (1.A)",
+              "teacherSelect": "Výběr učitele",
+              "teacher": "Rozvrh učitele",
+              "classroomSelect": "Výběr učebny",
+              "classroom": "Rozvrh učebny",
+              "year": "Přepínač školního roku",
+              "print": "Rozvrh učebny pro tisk"
+            }
+          },
+          "grading": {
+            "title": "Klasifikace",
+            "description": "Klasifikace po třídách filtrovaná podle školního roku, třídy a pololetí. Prázdný stav ukazuje každou buňku student × předmět s rychlým '+' pro přidání známky. Modal Nová známka přijímá numerickou známku (1–5 s volitelnou váhou) plus psané slovní hodnocení; 'Polish with AI' vygeneruje tři návrhy — formální, povzbuzující a stručný — které uživatel může přijmout nebo nechat znovu vygenerovat s dodatečnými instrukcemi. Kliknutí na jméno studenta otevře jeho přehled po předmětech se všemi známkami, vahami, daty a uloženými slovními hodnoceními.",
+            "images": {
+              "empty": "Klasifikace — prázdný počáteční stav",
+              "list": "Klasifikace se zapsanými známkami",
+              "classSelect": "Výběr jiné třídy",
+              "newEmpty": "Nová známka — prázdný formulář",
+              "newFilled": "Nová známka — vyplněná se slovním hodnocením",
+              "aiGenerating": "AI návrhy — generování",
+              "aiDrafts": "AI návrhy — formální / povzbuzující / stručný",
+              "gradingOverview": "Přehled studenta — známky podle předmětů"
+            }
+          },
+          "attendance": {
+            "title": "Docházka",
+            "description": "Záznam přítomnosti podle třídy a data, statistiky jednotlivých studentů, správa rodičovských omluvenek (schválit / zamítnout) a přehled eskalací při chronických absencích. Záložka Omluvenky zobrazuje čekající žádosti s rodičem, daty a důvodem; řádek se zbarví zeleně nebo červeně podle rozhodnutí.",
+            "images": {
+              "excusesPending": "Čekající omluvenky od rodičů",
+              "excusesDecided": "Omluvenky po schválení / zamítnutí"
+            }
+          },
+          "classBook": {
+            "title": "Třídní kniha",
+            "description": "Elektronická třídní kniha propojená s rozvrhem. Vyberte třídu a datum a uvidíte, co se v každé hodině probíralo, podepište záznamy a vytiskněte denní záznamy pro zvolený rozsah dat.",
+            "images": {
+              "view": "Třídní kniha — záznamy dne"
+            }
+          },
+          "messages": {
+            "title": "Zprávy",
+            "description": "1:1 zprávy dostupné pro všechny role (student, rodič, učitel, zástupce, ředitel). Najděte příjemce podle jména nebo emailu a začněte konverzaci. Ředitel a Zástupce navíc vidí tlačítko 'Hromadná zpráva', které doručí jednu zprávu celé třídě nebo celé škole.",
+            "images": {
+              "inbox": "Prázdná schránka",
+              "new": "Nová zpráva — výběr příjemce",
+              "conversation": "Odeslaná konverzace",
+              "broadcastSchools": "Hromadná zpráva — celá škola (pouze Ř/Z)",
+              "broadcastClass": "Hromadná zpráva — jedna třída (pouze Ř/Z)",
+              "afterBroadcast": "Schránka po hromadné zprávě"
+            }
+          },
+          "community": {
+            "title": "Komunita",
+            "description": "Celoškolní nástěnka, ankety a události. Číst může každý; učitelé, zástupci a ředitelé mohou tvořit příspěvky. Ankety podporují volbu jedné nebo více odpovědí s živými procenty. Události evidují odpovědi ANO / MOŽNÁ / NE a lze je vytvořit s názvem, popisem, časem a místem — nová událost se pak ihned objeví v seznamu.",
+            "images": {
+              "bulletin": "Nástěnka",
+              "polls": "Anketa s jednou volbou",
+              "pollsMulti": "Anketa s více volbami",
+              "eventsEmpty": "Kalendář událostí — bez odpovědí",
+              "eventsResponses": "Události po odpovědích",
+              "eventsNew": "Vytvořit novou událost (modal)",
+              "eventsAfterCreate": "Seznam událostí po vytvoření nové"
+            }
+          }
         }
       },
-      "headmaster": {
-        "title": "Ředitel školy",
-        "description": "Pedagogický a organizační lídr školy. Zaměřuje se na přehled a celoškolní komunikaci.",
-        "functions": "Přístup k celoškolnímu dashboardu a statistikám, Plánování celoškolních událostí, Veřejná komunitní oznámení a nástěnky, Monitoring kvality výuky a dohled nad výkonem učitelů.",
-        "workflow1": {
-          "title": "Strategický dohled",
-          "description": "Monitoring statistik v reálném čase a celoškolních KPI.",
-          "step1": "Sledujte 'Dashboard ředitele' pro získání rychlých přehledů.",
-          "step2": "Analyzujte distribuci známek napříč různými předměty.",
-          "step3": "Kontrolujte procenta docházky za aktuální pololetí.",
-          "step4": "Identifikujte třídy nebo předměty s neobvyklými výkyvy k prověření."
-        },
-        "workflow2": {
-          "title": "Celoškolní komunikace",
-          "description": "Zveřejňování oficiálních oznámení a správa nástěnek.",
-          "step1": "Přejděte do modulu 'Komunita'.",
-          "step2": "Klikněte na 'Nové oznámení' a zvolte cílovou skupinu.",
-          "step3": "Napište obsah a připněte důležité zprávy na začátek.",
-          "step4": "Publikujte a ověřte doručení notifikací uživatelům."
-        },
-        "workflow3": {
-          "title": "Akademický kalendář",
-          "description": "Dohled a schvalování ročního plánu akcí.",
-          "step1": "Otevřete kalendář 'Školní události'.",
-          "step2": "Přidejte klíčové milníky (prázdniny, zkoušky, porady).",
-          "step3": "Nastavte viditelnost pro každou konkrétní událost.",
-          "step4": "Synchronizujte data s veřejným dashboardem pro rodiče."
-        }
-      },
-      "deputy": {
-        "title": "Zástupce ředitele",
-        "description": "Provozní manažer zaměřený na technickou organizaci vzdělávacího procesu.",
-        "functions": "Nastavení školního roku a semestrů, Správa učeben a budov, Návrh předmětů a školního vzdělávacího programu (ŠVP), Komplexní plánování rozvrhu a detekce kolizí, Správa suplování, Dohled nad třídními výkazy.",
-        "workflow1": {
-          "title": "Interaktivní plánování rozvrhu",
-          "description": "Tvorba rozvrhu s automatickou detekcí kolizí.",
-          "step1": "Otevřete modul 'Plánovač rozvrhu'.",
-          "step2": "Vyberte třídu a přetahujte předměty do volných slotů.",
-          "step3": "Systém červeně označí kolize učitelů nebo učeben.",
-          "step4": "Vyřešte konflikty a publikujte finální verzi pro celou školu."
-        },
-        "workflow2": {
-          "title": "Správa suplování",
-          "description": "Řešení denních absencí a přeorganizování výuky.",
-          "step1": "Zkontrolujte 'Seznam absencí' pro nahlášené chybějící učitele.",
-          "step2": "Přejděte do 'Suplování' a vyberte dotčené vyučovací hodiny.",
-          "step3": "Přiřaďte zastupujícího učitele nebo změňte učebnu/předmět.",
-          "step4": "Uložte změny pro okamžitou aktualizaci osobních rozvrhů uživatelů."
-        },
-        "workflow3": {
-          "title": "Návrh kurikula (ŠVP)",
-          "description": "Definice předmětů a výstupů vzdělávání.",
-          "step1": "Přejděte do 'Škola' -> 'Kurikulum'.",
-          "step2": "Vytvořte šablony předmětů a definujte hodinovou dotaci.",
-          "step3": "Namapujte kompetence (RVP) na konkrétní předměty.",
-          "step4": "Aktivujte verzi kurikula pro nadcházející školní rok."
-        }
-      },
-      "teacher": {
-        "title": "Učitel",
-        "description": "Vzdělávací jádro systému. Přímá interakce se žáky a edukačními daty.",
-        "functions": "Správa klasifikace (známky, kategorie, váhy), Evidence docházky a správa omluvenek, Zápisy do třídní knihy a podepisování hodin, Tematické plány a přípravy na hodiny, AI pedagogický asistent (generování příprav, vylepšení slovního hodnocení).",
-        "workflow1": {
-          "title": "Správa klasifikace",
-          "description": "Zapisování známek a správa vážených průměrů.",
-          "step1": "Vyberte předmět ze svého 'Přehledu výuky'.",
-          "step2": "Zvolte 'Přidat známku' a definujte kategorii (např. 'Pololetní test').",
-          "step3": "Zadejte známky žákům a přidejte případné slovní komentáře.",
-          "step4": "Ověřte, že se vážený průměr automaticky přepočítal."
-        },
-        "workflow2": {
-          "title": "Digitální třídní kniha",
-          "description": "Podepisování hodin a evidence docházky.",
-          "step1": "Otevřete 'Třídní knihu' během aktivní vyučovací hodiny.",
-          "step2": "Zapište docházku žáků (Přítomen, Chybí, Pozdní příchod).",
-          "step3": "Zaznamenejte téma hodiny v souladu s tematickým plánem.",
-          "step4": "Digitálně podepište zápis pro uzavření záznamu."
-        },
-        "workflow3": {
-          "title": "AI pedagogický asistent",
-          "description": "Využití AI pro přípravy a vylepšení hodnocení.",
-          "step1": "Otevřete 'AI asistenta' na stránce přípravy na hodinu.",
-          "step2": "Zadejte téma a cílovou třídu pro vygenerování plánu.",
-          "step3": "Zkontrolujte navrženou strukturu a exportujte ji do svých příprav.",
-          "step4": "Použijte AI pro stylistické vylepšení slovních hodnocení na vysvědčení."
-        }
+      "schoolManagement": {
+        "title": "Správa školy",
+        "description": "Další toolkit dostupný pouze Řediteli a Zástupci (a tedy i systémovému administrátorovi přes 'Vstoupit jako'). Pokrývá celoškolní konfiguraci za běžnou prací v hodinách — nastavení školního roku, třídy a předměty, plánovač rozvrhu, kurikulum, suplování a hromadné pozvánky uživatelů.",
+        "functions": "Přechod školního roku a pololetí, správa tříd a předmětů, verzování ŠVP (mapování na RVP), plánovač rozvrhu s detekcí kolizí, suplování, hromadné pozvánky uživatelů.",
+        "placeholderTitle": "Připravujeme v další iteraci",
+        "placeholderBody": "Podrobné popisy a screenshoty sekce Správa školy přidáme v další iteraci. Místo pro tuto roli je tu zatím rezervováno, aby se objevila v boční navigaci manuálu a v obsahu."
       },
       "parent": {
         "title": "Rodič",

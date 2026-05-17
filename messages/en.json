@@ -807,121 +807,87 @@
           }
         }
       },
-      "schoolAdmin": {
-        "title": "School Administrator",
-        "description": "The local operational manager responsible for the technical configuration and user management of a specific school instance.",
-        "functions": "School-specific user onboarding, role assignments, classroom and building structure management, and local system configuration.",
-        "workflow1": {
-          "title": "Local User Management",
-          "description": "Onboard and manage students, teachers, and staff within the school.",
-          "step1": "Use the CSV Import tool to bulk upload student and staff records.",
-          "step2": "Assign appropriate roles (Teacher, Student, Parent) to imported users.",
-          "step3": "Manage user account status and reset passwords when necessary.",
-          "step4": "Verify user access to specific school modules."
-        },
-        "workflow2": {
-          "title": "Educational Structure",
-          "description": "Define the physical and organizational layout of the school.",
-          "step1": "Create building structures and define individual classrooms.",
-          "step2": "Set up class groups and assign students to their respective grades.",
-          "step3": "Configure school periods and lesson timings.",
-          "step4": "Maintain the registry of active subjects and departments."
-        },
-        "workflow3": {
-          "title": "Module Configuration",
-          "description": "Fine-tune system features for local school needs.",
-          "step1": "Enable or disable specific modules like 'AI Assistant' or 'Community'.",
-          "step2": "Configure local grading scales and weighting systems.",
-          "step3": "Set up school-wide notification preferences.",
-          "step4": "Review local audit logs for security and compliance."
+      "schoolStaff": {
+        "title": "Teacher / Deputy / Headmaster",
+        "description": "These three roles share an identical day-to-day toolkit. In code, PRINCIPAL, DEPUTY, and (when a system administrator enters via 'Vstoupit jako…') ADMIN are interchangeable — every backend endpoint that admits one of them admits all three, and the frontend gates them as a single group. The only differences are cosmetic (sidebar accent color, role label, icon). Note: 'School Administrator' is not a real role — it's a label the System Administrator can pick when entering a tenant, with the same permissions as Headmaster or Deputy.",
+        "functions": "Day-to-day classroom work: viewing schedules across self / class / teacher / room, recording numeric and verbal grades (with AI-polish for verbal evaluations), tracking attendance and approving parent excuses, signing class-book entries, sending direct or broadcast messages, and running community bulletins, polls, and events.",
+        "features": {
+          "schedule": {
+            "title": "Schedule",
+            "description": "View-only timetable. Switch tabs to see your own schedule, an entire class, a specific teacher, or a classroom — all filterable by academic year and semester (or 'All' to see both halves).",
+            "images": {
+              "my": "My Schedule (default tab)",
+              "class": "Class timetable (1.A)",
+              "teacherSelect": "Pick a teacher",
+              "teacher": "Teacher timetable",
+              "classroomSelect": "Pick a classroom",
+              "classroom": "Classroom timetable",
+              "year": "Academic year switcher",
+              "print": "Print-friendly room timetable"
+            }
+          },
+          "grading": {
+            "title": "Grading",
+            "description": "Per-class grade book filterable by academic year, class, and semester. The empty state shows every student × subject cell with a quick '+' to add a grade. The New Grade modal accepts a numeric mark (1–5 with optional weight) plus a written verbal assessment; 'Polish with AI' generates three drafts — formal, encouraging, concise — that the user can accept or regenerate with extra instructions. Clicking a student's name opens their per-subject overview with all grades, weights, dates, and the saved verbal assessments.",
+            "images": {
+              "empty": "Grade book — initial empty state",
+              "list": "Grade book with entered grades",
+              "classSelect": "Pick another class",
+              "newEmpty": "New grade — empty form",
+              "newFilled": "New grade — filled with verbal text",
+              "aiGenerating": "AI suggestions — generating drafts",
+              "aiDrafts": "AI suggestions — formal / encouraging / concise",
+              "gradingOverview": "Student overview — per-subject grades"
+            }
+          },
+          "attendance": {
+            "title": "Attendance",
+            "description": "Record presence per class and date, see per-student statistics, manage parent excuses (approve / reject), and review escalations for chronic absences. The Excuses tab lists pending requests with the parent, dates, and reason; the row turns green when approved or red when rejected.",
+            "images": {
+              "excusesPending": "Pending parent excuses",
+              "excusesDecided": "Excuses after approval / rejection"
+            }
+          },
+          "classBook": {
+            "title": "Class book",
+            "description": "Electronic class book wired to the schedule. Pick a class and date to see what was taught each lesson, sign entries, and print the day's records for the chosen range of dates.",
+            "images": {
+              "view": "Class book — daily records"
+            }
+          },
+          "messages": {
+            "title": "Messages",
+            "description": "1:1 messaging accessible to every role (student, parent, teacher, deputy, headmaster). Search recipients by name or email and start a conversation. Headmaster and Deputy additionally see a 'Hromadná zpráva' (broadcast) button that delivers a single message to an entire class or the whole school.",
+            "images": {
+              "inbox": "Empty inbox",
+              "new": "New message — recipient picker",
+              "conversation": "Sent conversation",
+              "broadcastSchools": "Broadcast — entire school (H/D only)",
+              "broadcastClass": "Broadcast — single class (H/D only)",
+              "afterBroadcast": "Inbox after broadcast"
+            }
+          },
+          "community": {
+            "title": "Community",
+            "description": "School-wide bulletin, polls, and events. Anyone can read; teachers, deputies, and headmasters can create posts. Polls support single- or multi-choice voting with live percentages. Events show YES / MAYBE / NO RSVP counts and can be created with title, description, time range, and location — the new event then appears inline in the events list.",
+            "images": {
+              "bulletin": "Bulletin board",
+              "polls": "Single-choice poll",
+              "pollsMulti": "Multi-choice poll",
+              "eventsEmpty": "Events calendar — no RSVPs",
+              "eventsResponses": "Events after RSVPs",
+              "eventsNew": "Create new event (modal)",
+              "eventsAfterCreate": "Events list after creating a new event"
+            }
+          }
         }
       },
-      "headmaster": {
-        "title": "Headmaster",
-        "description": "Pedagogical and organizational leader of the school. Focuses on overview and school-wide communication.",
-        "functions": "Access to high-level school dashboard and statistics, School-wide event planning, Public community announcements and broadcasts, Monitoring of educational quality and teacher performance.",
-        "workflow1": {
-          "title": "Strategic Oversight",
-          "description": "Monitor real-time statistics and school-wide KPI.",
-          "step1": "View the 'Principal Dashboard' for high-level summaries.",
-          "step2": "Analyze grade distributions across different departments.",
-          "step3": "Check attendance percentages for the current semester.",
-          "step4": "Identify classes or subjects with abnormal patterns for review."
-        },
-        "workflow2": {
-          "title": "School Communications",
-          "description": "Post official announcements and manage bulletins.",
-          "step1": "Navigate to the 'Community' module.",
-          "step2": "Click 'New Announcement' and select the target audience (All, Staff, or Students).",
-          "step3": "Write the content and pin critical messages to the top.",
-          "step4": "Publish and verify notification delivery."
-        },
-        "workflow3": {
-          "title": "Academic Calendar",
-          "description": "Oversee and approve the yearly plan.",
-          "step1": "Open the 'School Events' calendar.",
-          "step2": "Add key milestones like holidays, exams, or meetings.",
-          "step3": "Set visibility permissions for each event.",
-          "step4": "Sync with the public school dashboard for parents and students."
-        }
-      },
-      "deputy": {
-        "title": "Deputy Principal",
-        "description": "Operational manager focusing on the technical organization of the educational process.",
-        "functions": "Academic year and semester setup, Classroom and building management, Subject and curriculum (SVP) design, Complex schedule planning and collision detection, Substitution management, Class registry oversight.",
-        "workflow1": {
-          "title": "Interactive Schedule Planning",
-          "description": "Plan the timetable with collision detection.",
-          "step1": "Open the 'Schedule Planner' module.",
-          "step2": "Select a class and drag subjects into available time slots.",
-          "step3": "The system will flag red markers for teacher or room collisions.",
-          "step4": "Resolve collisions and publish the final version for the school."
-        },
-        "workflow2": {
-          "title": "Substitution Management",
-          "description": "Handle daily absences and reassignments.",
-          "step1": "Check the 'Absence List' for teacher notifications.",
-          "step2": "Go to 'Substitutions' and select the affected lessons.",
-          "step3": "Assign a substitute teacher or change the room/subject.",
-          "step4": "Save to instantly update the affected users' personal schedules."
-        },
-        "workflow3": {
-          "title": "Curriculum Design (SVP)",
-          "description": "Define subjects and curriculum outputs.",
-          "step1": "Navigate to 'School' -> 'Curriculum'.",
-          "step2": "Create subject templates and define hours per week per grade.",
-          "step3": "Map competencies (RVP) to specific subjects.",
-          "step4": "Activate the curriculum version for the upcoming academic year."
-        }
-      },
-      "teacher": {
-        "title": "Teacher",
-        "description": "The educational core of the system. Direct interaction with students and educational data.",
-        "functions": "Grade book management (marks, categories, weights), Attendance tracking and excuse management, Class book entries and signing, Thematic plans and lesson preparations, AI Teaching Assistant (lesson generation, report card polishing).",
-        "workflow1": {
-          "title": "Grade Book Management",
-          "description": "Enter grades and manage weighted averages.",
-          "step1": "Select a subject from your 'Teaching Overview'.",
-          "step2": "Choose 'Add Grade' and define the category (e.g., 'Big Test').",
-          "step3": "Input grades for the students and add optional comments.",
-          "step4": "Verify that the weighted average is calculated automatically."
-        },
-        "workflow2": {
-          "title": "Digital Class Book",
-          "description": "Sign lessons and track attendance.",
-          "step1": "Open the 'Class Book' during your active lesson.",
-          "step2": "Mark student attendance (Present, Absent, Late).",
-          "step3": "Record the lesson topic according to the thematic plan.",
-          "step4": "Digitally sign the entry to finalize the record."
-        },
-        "workflow3": {
-          "title": "AI Pedagogical Assistant",
-          "description": "Use AI to generate plans and polish reports.",
-          "step1": "Open the 'AI Assistant' from the lesson preparation page.",
-          "step2": "Provide a topic and target grade for the lesson plan.",
-          "step3": "Review the generated structure and export to your preparations.",
-          "step4": "Use AI to improve the language of verbal report card evaluations."
-        }
+      "schoolManagement": {
+        "title": "School management",
+        "description": "Additional toolkit available only to Headmaster and Deputy (and, by extension, a System Administrator using 'Vstoupit jako'). Covers the school-wide configuration that sits behind the daily classroom work — academic year setup, classes and subjects, schedule planner, curriculum, substitutions, and bulk user invitations.",
+        "functions": "Academic year & semester rollover, class and subject management, curriculum versioning (SVP/RVP mapping), schedule planner with collision detection, substitutions, bulk user invitations.",
+        "placeholderTitle": "Coming in the next iteration",
+        "placeholderBody": "Detailed descriptions and screenshots for the School Management section will be added next. The role section is reserved here so it appears in the manual sidebar and table of contents in the meantime."
       },
       "parent": {
         "title": "Parent",
