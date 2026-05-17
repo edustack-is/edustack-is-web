@@ -716,31 +716,93 @@
       "procedure": "Postup",
       "systemAdmin": {
         "title": "Systémový Administrátor",
-        "description": "Hlavní orchestrátor systému. Tato role zahrnuje jak globální správu infrastruktury, tak technickou správu jednotlivých škol.",
-        "functions": "Správa životního cyklu školních tenantů (vytvoření/smazání), globální i lokální správa uživatelů, konfigurace SSO a AI, auditování systému a administrativní podpora prostřednictvím zabezpečené impersonace.",
-        "workflow1": {
-          "title": "Správa škol a infrastruktury",
-          "description": "Vytváření školních tenantů a konfigurace jejich globální identity (SSO) a AI zdrojů.",
-          "step1": "V bočním panelu přejděte do sekce 'Školy' pro vytvoření nového tenanta.",
-          "step2": "Nakonfigurujte SSO poskytovatele (Google/GitHub/MS) pro danou instanci školy.",
-          "step3": "Definujte limity AI tokenů a spravujte API klíče poskytovatelů.",
-          "step4": "Sledujte celkové zdraví platformy a analytiku spotřeby tokenů podle škol."
-        },
-        "workflow2": {
-          "title": "Orchestrace matriky a uživatelů",
-          "description": "Správa školní matriky a provádění hromadných operací s uživateli.",
-          "step1": "Použijte nástroj pro import CSV pro hromadné nahrání žáků nebo zaměstnanců.",
-          "step2": "Přiřaďte role a oprávnění v kontextu konkrétní školy.",
-          "step3": "Spravujte skupiny tříd a fyzickou strukturu budov školy.",
-          "step4": "Využijte bezpečnou impersonaci uživatelů pro řešení technických potíží s účty."
-        },
-        "workflow3": {
-          "title": "Audit a bezpečnostní shoda",
-          "description": "Zajištění bezpečného provozu systému prostřednictvím detailní analýzy logů.",
-          "step1": "Přistupte k 'Auditnímu logu' pro kontrolu všech vysokoúrovňových akcí.",
-          "step2": "Filtrujte podle uživatele nebo typu akce pro prošetření konkrétních změn.",
-          "step3": "Využívejte GDPR nástroje pro anonymizaci dat nebo požadavky na export.",
-          "step4": "Spravujte celosystémové zálohy a plány automatické obnovy dat."
+        "description": "Hlavní orchestrátor systému. Boční menu obsahuje pět hlavních destinací — Nástěnku, Školy, Uživatele, Nastavení systému a Systémové prompty — a každá administrativní akce platformy patří do jedné z nich.",
+        "functions": "Životní cyklus vícetenantních škol, povyšování systémových administrátorů, AI klíče poskytovatelů a analytika využití, SSO poskytovatelé identity, bezpečnostní parametry, audit log, zálohy databáze, AI-řízený generátor testovacích dat a read-only katalog všech promptů, které systém posílá AI poskytovatelům.",
+        "features": {
+          "schools": {
+            "title": "Správa škol",
+            "description": "Panel Školy je řídicí centrum vícetenantního provozu. Každý řádek představuje školu s odznaky ředitele a zástupce; akce řádku pokrývají vstup do tenanta v roli systémového administrátora, ředitele nebo zástupce kvůli supportu, úpravu metadat a nastavení vynucené shody emailu u SSO a destruktivní smazání s potvrzením přes název školy, které smaže všechna data tenanta. Vytvoření školy je jediný modal, který buď okamžitě vytvoří nového ředitele, nebo přiřadí existujícího uživatele.",
+            "images": {
+              "list": "Seznam školních tenantů",
+              "createNew": "Vytvořit školu — nový ředitel",
+              "createExisting": "Vytvořit školu — existující uživatel",
+              "edit": "Úprava údajů školy",
+              "enter": "Vstoupit jako role",
+              "delete": "Smazat školu — prázdné potvrzení",
+              "deleteFilled": "Smazat školu — název vyplněn"
+            }
+          },
+          "users": {
+            "title": "Systémoví administrátoři",
+            "description": "Vypisuje všechny uživatele s globálními systémovými právy a umožňuje povýšit nové. Přidání admina nejprve zkontroluje email — pokud uživatel existuje, je povýšen na místě; jinak formulář vyžaduje jméno a příjmení a založí nový účet. Odebrání účet deaktivuje a odebere admin práva.",
+            "images": {
+              "list": "Adresář systémových administrátorů",
+              "addNew": "Povýšit — nový uživatel",
+              "addExisting": "Povýšit — existující uživatel",
+              "remove": "Odebrat administrátora"
+            }
+          },
+          "settings": {
+            "title": "Nastavení systému",
+            "description": "Veškerá globální konfigurace žije zde pod šesti záložkami: Správa AI, SSO integrace, Systém (bezpečnost), Monitoring, Zálohy a Testovací data. Každá záložka je popsána níže."
+          },
+          "ai": {
+            "title": "Správa AI",
+            "description": "Jedna obrazovka pro klíče AI poskytovatelů (Google Gemini, OpenAI, Anthropic Claude, OpenCode.ai) plus analytika spotřeby za aktuální měsíc — celkové tokeny, rozdělení vstup/výstup, počet požadavků, nejvytíženější školy, breakdown podle poskytovatele a graf denní spotřeby. Každý řádek poskytovatele obsahuje odkaz přímo do jeho vývojářského portálu, kde admin klíč získá. Klíče jsou šifrované at-rest (AES-256) a mažou se přes potvrzovací dialog.",
+            "images": {
+              "overview": "Dashboard správy AI",
+              "deleteKey": "Potvrzení smazání API klíče"
+            }
+          },
+          "sso": {
+            "title": "SSO integrace",
+            "description": "Konfigurace OAuth poskytovatelů identity (Google, GitHub, Microsoft, Apple). Stránka ukazuje přesnou callback URL, kterou backend očekává ('{backendUrl}'/api/auth/callback/[provider]), plus přímé odkazy do vývojářských portálů jednotlivých poskytovatelů. Edit modal ukládá Client ID a Client Secret (šifrované), nabízí přepínač aktivace/deaktivace a umožňuje konfiguraci úplně smazat.",
+            "images": {
+              "overview": "Přehled SSO poskytovatelů",
+              "google": "Konfigurace Google OAuth",
+              "github": "Konfigurace GitHub OAuth",
+              "delete": "Smazání konfigurace poskytovatele"
+            }
+          },
+          "security": {
+            "title": "Bezpečnost systému",
+            "description": "Tři parametry řídí zabezpečení přihlášení: maximum neúspěšných pokusů před uzamčením, doba zámku v minutách a platnost reset tokenu v minutách.",
+            "images": {
+              "form": "Bezpečnostní parametry"
+            }
+          },
+          "monitoring": {
+            "title": "Monitoring a audit log",
+            "description": "Živý stav backendu (uptime, databáze, paměť, verze, commit, build time) sedí nad systémovým audit logem. Auditní tabulka eviduje každou významnou akci — povýšení admina, přihlášení, úpravy entit — a podporuje filtrování podle časového rozsahu, typu akce, entity a ID uživatele.",
+            "images": {
+              "dashboard": "Monitoring + audit log"
+            }
+          },
+          "backups": {
+            "title": "Zálohy databáze",
+            "description": "Vypisuje všechny zálohy Cloudflare D1 (SQLite) databáze uložené v R2 bucketu daného prostředí. Každý řádek nabízí stažení, obnovení a smazání. Manuální zálohy se pojmenovávají v create modalu; obnova přepíše živou databázi obsahem vybrané zálohy.",
+            "images": {
+              "list": "Katalog záloh",
+              "create": "Vytvoření manuální zálohy",
+              "delete": "Potvrzení smazání zálohy"
+            }
+          },
+          "testData": {
+            "title": "Generátor testovacích dat",
+            "description": "Vygeneruje kompletní školu s realistickými testovacími daty: vyberte typ školy (1. stupeň, 1. i 2. stupeň, osmileté gymnázium, čtyřleté gymnázium), nastavte počty učitelů / studentů / rodičů rozdělené na aktivní a pozvané a zapněte moduly, které se mají seedovat (předměty, rozvrh, klasifikace, zprávy, docházka, vysvědčení, komunita). AI tlačítko vygeneruje realistický český název školy. Pod tím je Nebezpečná zóna — smazání dat jedné školy nebo celého systému.",
+            "images": {
+              "form": "Formulář generování testovacích dat",
+              "schoolType": "Výběr typu školy",
+              "success": "Souhrn vygenerované školy"
+            }
+          },
+          "prompts": {
+            "title": "Systémové prompty",
+            "description": "Read-only katalog všech promptů, které backend používá pro komunikaci s AI modely — base instrukce chatu, chat pro systémové administrátory, generátor názvu školy, refinement textu, generátor tematického plánu, doporučení pro studenty, analýza výkonu třídy a další. Každá položka ukazuje identifikátor, vlastnící službu, krátký popis a celou šablonu, takže administrátoři přesně vědí, co se posílá poskytovatelům.",
+            "images": {
+              "list": "Katalog promptů"
+            }
+          }
         }
       },
       "schoolAdmin": {
@@ -916,64 +978,6 @@
           "step3": "AI využívá kontext školy pro poskytnutí relevantních odpovědí.",
           "step4": "Požádejte o shrnutí studijních materiálů nebo cvičné otázky."
         }
-      }
-    },
-    "gallery": {
-      "dashboard": {
-        "title": "Systémový přehled",
-        "description": "Hlavní dashboard poskytující rychlý přehled o celém systému, globálních metrikách, aktivních školách a posledních systémových aktivitách."
-      },
-      "school_management": {
-        "title": "Správa škol",
-        "description": "Centrální uzel pro správu všech školních tenantů v systému, umožňující administrátorům sledovat stav a přistupovat ke konfiguracím jednotlivých škol."
-      },
-      "create_new_school": {
-        "title": "Nový tenant školy",
-        "description": "Rozhraní pro onboarding nových vzdělávacích institucí, definování jejich základní identity a prvotní alokaci zdrojů."
-      },
-      "edit_school": {
-        "title": "Konfigurace školy",
-        "description": "Detailní nastavení pro existující školy, kde mohou administrátoři upravovat metadata, kontaktní informace a specifické chování instance."
-      },
-      "behalf_of_mode": {
-        "title": "Zabezpečená impersonace",
-        "description": "Výkonný administrátorský nástroj umožňující přistupovat do systému pod identitou konkrétního uživatele za účelem podpory a řešení potíží."
-      },
-      "system_users": {
-        "title": "Globální adresář uživatelů",
-        "description": "Rozhraní pro správu uživatelů s celosystémovými oprávněními, zajišťující přístup k jádru platformy pouze autorizovaným osobám."
-      },
-      "create_new_system_user": {
-        "title": "Zřizování uživatelů",
-        "description": "Jednoduchý formulář pro vytváření nových systémových účtů a přiřazování globálních administrátorských rolí."
-      },
-      "ai_management": {
-        "title": "Orchestrace AI zdrojů",
-        "description": "Ovládací centrum pro integraci AI, kde se definují limity tokenů a bezpečně spravují API klíče poskytovatelů (OpenAI, Anthropic atd.)."
-      },
-      "sso_setting": {
-        "title": "Poskytovatelé identity",
-        "description": "Přehled nakonfigurovaných metod Single Sign-On (SSO), podporující podnikové ověřování přes hlavní poskytovatele."
-      },
-      "set_new_sso_provider": {
-        "title": "Konfigurace SSO",
-        "description": "Technické nastavení pro nové poskytovatele identity, včetně klientských ID, tajných klíčů a mapování koncových bodů."
-      },
-      "monitoring": {
-        "title": "Zdraví systému a analytika",
-        "description": "Monitoring výkonu platformy v reálném čase a detailní analytika spotřeby AI zdrojů napříč všemi tenanty."
-      },
-      "system_params": {
-        "title": "Globální parametry",
-        "description": "Konfigurace celosystémových konstant a funkčních příznaků, které ovlivňují chování celého ekosystému Edu Stack."
-      },
-      "generate_data": {
-        "title": "Generátor demo dat",
-        "description": "Vývojářský nástroj pro rychlé generování realistických demo dat (uživatelů, tříd, rozvrhů) pro účely testování a prezentace."
-      },
-      "backup_restore": {
-        "title": "Správa životního cyklu dat",
-        "description": "Nástroje pro ruční zálohování databáze a obnovu stavu systému pro zajištění integrity dat a disaster recovery."
       }
     },
     "screenshot": "Snímek rozhraní",

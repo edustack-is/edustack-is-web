@@ -716,31 +716,93 @@
       "procedure": "Procedure",
       "systemAdmin": {
         "title": "System Administrator",
-        "description": "The ultimate orchestrator. This role encompasses both global platform infrastructure and school-specific technical management.",
-        "functions": "Multi-tenant school lifecycle (create/delete), global and local user management, SSO & AI configuration, system auditing, and administrative support through secure impersonation.",
-        "workflow1": {
-          "title": "School & Infrastructure Management",
-          "description": "Create school tenants and configure their global identity (SSO) and AI resources.",
-          "step1": "Navigate to 'Schools' in the sidebar to create a new tenant.",
-          "step2": "Configure SSO providers (Google/GitHub/MS) for the school instance.",
-          "step3": "Define AI token limits and manage provider API keys.",
-          "step4": "Monitor global platform health and per-school token analytics."
-        },
-        "workflow2": {
-          "title": "Registry & User Orchestration",
-          "description": "Manage the school registry and perform bulk user operations.",
-          "step1": "Use the CSV Import tool to onboard large groups of students or staff.",
-          "step2": "Assign roles and permissions within the specific school context.",
-          "step3": "Manage classroom groups and physical building structures.",
-          "step4": "Perform secure user impersonation to troubleshoot account issues."
-        },
-        "workflow3": {
-          "title": "Compliance & Security Auditing",
-          "description": "Ensure the system operates securely through detailed log analysis.",
-          "step1": "Access the 'Audit Log' to review all high-impact actions.",
-          "step2": "Filter by user or action type to investigate specific changes.",
-          "step3": "Utilize GDPR tools for data anonymization or export requests.",
-          "step4": "Manage system-wide backups and automated recovery schedules."
+        "description": "The ultimate orchestrator. The sidebar exposes five top-level destinations — Dashboard, Schools, Users, System Settings, and System Prompts — and every administrative action on the platform lives in one of them.",
+        "functions": "Multi-tenant school lifecycle, system-admin promotion, AI provider keys and usage analytics, SSO identity providers, security hardening, audit log, database backups, AI-driven test data generation, and a read-only catalogue of every prompt the system sends to AI providers.",
+        "features": {
+          "schools": {
+            "title": "School management",
+            "description": "The Schools panel is the multi-tenant control center. Each row shows a school with headmaster and deputy badges; the row actions cover entering the tenant as any role (system admin, headmaster, or deputy) for support work, editing metadata and the SSO email-match policy, and a type-to-confirm delete that wipes every record tied to the tenant. Creating a school is a single modal that either provisions a brand-new headmaster on the spot or links an existing user.",
+            "images": {
+              "list": "School tenants list",
+              "createNew": "Create school — new headmaster",
+              "createExisting": "Create school — existing user",
+              "edit": "Edit school metadata",
+              "enter": "Enter as role popover",
+              "delete": "Delete school — empty confirmation",
+              "deleteFilled": "Delete school — name typed"
+            }
+          },
+          "users": {
+            "title": "System administrators",
+            "description": "Lists every user with global system privileges and lets you promote new ones. Adding an admin checks the email — if the user already exists, they are promoted in place; otherwise the form expects first and last name and a fresh account is provisioned. Removal deactivates the account and revokes admin rights.",
+            "images": {
+              "list": "System admin directory",
+              "addNew": "Promote — new user",
+              "addExisting": "Promote — existing user",
+              "remove": "Remove administrator"
+            }
+          },
+          "settings": {
+            "title": "System settings",
+            "description": "All global configuration lives here under six tabs: AI management, SSO integration, System (security), Monitoring, Backups, and Test data. Each tab is described below."
+          },
+          "ai": {
+            "title": "AI management",
+            "description": "Single screen for AI provider keys (Google Gemini, OpenAI, Anthropic Claude, OpenCode.ai) plus current-month usage analytics — total tokens, input/output split, request count, top schools, per-provider breakdown, and daily usage chart. Each provider row links straight to its developer portal so an admin can obtain the key. Keys are encrypted at rest (AES-256) and removed via a confirmation dialog.",
+            "images": {
+              "overview": "AI management dashboard",
+              "deleteKey": "Delete API key confirmation"
+            }
+          },
+          "sso": {
+            "title": "SSO integration",
+            "description": "Configure OAuth identity providers (Google, GitHub, Microsoft, Apple). The page shows the exact callback URL the backend expects ('{backendUrl}'/api/auth/callback/[provider]) plus direct links to each provider's developer portal. The edit modal stores Client ID and Client Secret (encrypted), exposes an enable/disable toggle, and lets you delete the configuration entirely.",
+            "images": {
+              "overview": "SSO providers overview",
+              "google": "Google OAuth configuration",
+              "github": "GitHub OAuth configuration",
+              "delete": "Delete provider configuration"
+            }
+          },
+          "security": {
+            "title": "System security",
+            "description": "Three knobs control login hardening: maximum failed attempts before lockout, lockout duration in minutes, and reset-token validity in minutes.",
+            "images": {
+              "form": "Security parameters"
+            }
+          },
+          "monitoring": {
+            "title": "Monitoring & audit log",
+            "description": "Live backend status (uptime, database, memory, version, commit, build time) sits above the system audit log. The audit table records every high-impact action — admin promotion, logins, entity edits — and supports filtering by date range, action type, entity, and user id.",
+            "images": {
+              "dashboard": "Monitoring + audit log"
+            }
+          },
+          "backups": {
+            "title": "Database backups",
+            "description": "Lists every backup of the Cloudflare D1 (SQLite) database stored in the per-environment R2 bucket. Each row exposes download, restore, and delete actions. Manual backups are named via the create modal; restoring replaces the live database with the chosen snapshot.",
+            "images": {
+              "list": "Backup catalogue",
+              "create": "Create a manual backup",
+              "delete": "Delete backup confirmation"
+            }
+          },
+          "testData": {
+            "title": "Test data generator",
+            "description": "Generates a complete school with realistic test data: pick the school type (1st stage, 1st & 2nd stage, 8-year gymnázium, or 4-year gymnázium), set teacher / student / parent counts split between active and invited, and toggle which modules to seed (subjects, schedule, classification, messages, attendance, report cards, community). The AI button generates a realistic Czech school name. Below sits a Danger zone — wipe a single school's data or the entire system.",
+            "images": {
+              "form": "Test data generation form",
+              "schoolType": "School type picker",
+              "success": "Generated school summary"
+            }
+          },
+          "prompts": {
+            "title": "System prompts",
+            "description": "Read-only catalogue of every prompt the backend uses to talk to AI models — chat base instruction, chat for system admins, school-name generator, text refinement, thematic plan generator, student recommendations, class performance analysis, and the rest. Each entry shows the identifier, owning service, short description, and full template so admins know exactly what gets sent to providers.",
+            "images": {
+              "list": "Prompt catalogue"
+            }
+          }
         }
       },
       "schoolAdmin": {
@@ -916,64 +978,6 @@
           "step3": "The AI uses school context to provide relevant answers.",
           "step4": "Request summaries of teaching materials or practice quiz questions."
         }
-      }
-    },
-    "gallery": {
-      "dashboard": {
-        "title": "System Dashboard",
-        "description": "A high-level overview of the entire platform, showing global metrics, active schools, and recent system activities at a glance."
-      },
-      "school_management": {
-        "title": "School Management",
-        "description": "Centralized hub for managing all school tenants within the system, allowing administrators to monitor status and access specific school configurations."
-      },
-      "create_new_school": {
-        "title": "New School Tenant",
-        "description": "Step-by-step interface for onboarding new educational institutions, defining their basic identity and initial resource allocations."
-      },
-      "edit_school": {
-        "title": "School Configuration",
-        "description": "Detailed settings for existing schools, where administrators can modify metadata, contact information, and specific instance behaviors."
-      },
-      "behalf_of_mode": {
-        "title": "Secure Impersonation",
-        "description": "A powerful administrative tool that allows system admins to access the system as a specific user for troubleshooting and direct support."
-      },
-      "system_users": {
-        "title": "Global User Directory",
-        "description": "Management interface for users with system-wide privileges, ensuring only authorized personnel can access the platform core."
-      },
-      "create_new_system_user": {
-        "title": "User Provisioning",
-        "description": "Simple form for creating new system-level accounts and assigning global administrative roles."
-      },
-      "ai_management": {
-        "title": "AI Resource Orchestration",
-        "description": "Control center for AI integration, where token limits are defined and provider API keys (OpenAI, Anthropic, etc.) are securely managed."
-      },
-      "sso_setting": {
-        "title": "Identity Providers",
-        "description": "Overview of configured Single Sign-On methods, supporting enterprise authentication through major providers."
-      },
-      "set_new_sso_provider": {
-        "title": "SSO Configuration",
-        "description": "Technical setup for new identity providers, including client IDs, secrets, and endpoint mappings."
-      },
-      "monitoring": {
-        "title": "System Health & Analytics",
-        "description": "Real-time monitoring of platform performance and detailed analytics on AI resource consumption across all tenants."
-      },
-      "system_params": {
-        "title": "Global Parameters",
-        "description": "Configuration of system-wide constants and feature flags that affect the behavior of the entire Edu Stack ecosystem."
-      },
-      "generate_data": {
-        "title": "Demo Data Factory",
-        "description": "Development tool for quickly generating realistic demo data (users, classes, schedules) for testing and presentation purposes."
-      },
-      "backup_restore": {
-        "title": "Data Lifecycle Management",
-        "description": "Robust tools for manual database backups and restoring the system state to ensure data integrity and disaster recovery."
       }
     },
     "screenshot": "Interface Screenshot",

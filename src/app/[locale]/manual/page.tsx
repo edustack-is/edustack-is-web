@@ -47,7 +47,8 @@ import {
     HeartPulse,
     BookOpen,
     AlertTriangle,
-    ToggleRight
+    ToggleRight,
+    type LucideIcon,
 } from 'lucide-react';
 
 const roleColorMap: Record<string, string> = {
@@ -100,37 +101,146 @@ const bgFullMap: Record<string, string> = {
     'brand-orange': 'bg-brand-orange',
 };
 
-const systemAdminGallery = [
-    {id: 'dashboard', src: '/images/documentation/system-admin/00_dashboard.png'},
-    {id: 'school_management', src: '/images/documentation/system-admin/01_school_management.png'},
-    {id: 'create_new_school', src: '/images/documentation/system-admin/02_create_new_school.png'},
-    {id: 'edit_school', src: '/images/documentation/system-admin/03_edit_school.png'},
-    {id: 'behalf_of_mode', src: '/images/documentation/system-admin/04_behalf_of_mode.png'},
-    {id: 'system_users', src: '/images/documentation/system-admin/05_system_users.png'},
-    {id: 'create_new_system_user', src: '/images/documentation/system-admin/06_create_new_system_user.png'},
-    {id: 'ai_management', src: '/images/documentation/system-admin/07_system_setting_ai_management.png'},
-    {id: 'sso_setting', src: '/images/documentation/system-admin/08_system_setting_sso_setting.png'},
-    {id: 'set_new_sso_provider', src: '/images/documentation/system-admin/09_system_setting_set_new_sso_provider.png'},
-    {id: 'monitoring', src: '/images/documentation/system-admin/10_system_setting_monitoring.png'},
-    {id: 'system_params', src: '/images/documentation/system-admin/11_system_setting_system_params.png'},
-    {id: 'generate_data', src: '/images/documentation/system-admin/12_system_setting_generate_data.png'},
-    {id: 'backup_restore', src: '/images/documentation/system-admin/13_system_settings_backup_restore.png'},
-];
-
-const roleWorkflowImages: Record<string, Record<number, string[]>> = {
-    systemAdmin: {
-        1: [
-            '/images/documentation/system-admin/00_dashboard.png',
-            '/images/documentation/system-admin/01_school_management.png',
-            '/images/documentation/system-admin/02_create_new_school.png',
-            '/images/documentation/system-admin/03_edit_school.png',
-        ],
-        2: ['/images/documentation/system-admin/05_system_users.png', '/images/documentation/system-admin/06_create_new_system_user.png'],
-        3: ['/images/documentation/system-admin/10_system_setting_monitoring.png', '/images/documentation/system-admin/13_system_settings_backup_restore.png'],
-    }
+type FeatureImage = { id: string; src: string; wide?: boolean };
+type SystemAdminFeature = {
+    id: string;
+    icon: LucideIcon;
+    images: FeatureImage[];
 };
 
+const SYSTEM_ADMIN_PRIMARY: SystemAdminFeature[] = [
+    {
+        id: 'schools',
+        icon: School,
+        images: [
+            {id: 'list', src: 'schools/00_list.png'},
+            {id: 'createNew', src: 'schools/01_create_new_headmaster.png'},
+            {id: 'createExisting', src: 'schools/02_create_existing_headmaster.png'},
+            {id: 'edit', src: 'schools/03_edit.png'},
+            {id: 'enter', src: 'schools/04_enter_as_role.png'},
+            {id: 'delete', src: 'schools/05_delete.png'},
+            {id: 'deleteFilled', src: 'schools/06_delete_filled.png'},
+        ],
+    },
+    {
+        id: 'users',
+        icon: UserCheck,
+        images: [
+            {id: 'list', src: 'users/00_list.png'},
+            {id: 'addNew', src: 'users/01_add_new.png'},
+            {id: 'addExisting', src: 'users/02_add_existing.png'},
+            {id: 'remove', src: 'users/03_remove.png'},
+        ],
+    },
+];
+
+const SYSTEM_ADMIN_SETTINGS: SystemAdminFeature[] = [
+    {
+        id: 'ai',
+        icon: Cpu,
+        images: [
+            {id: 'overview', src: 'settings/ai/00_overview.png'},
+            {id: 'deleteKey', src: 'settings/ai/01_delete_key.png'},
+        ],
+    },
+    {
+        id: 'sso',
+        icon: KeyRound,
+        images: [
+            {id: 'overview', src: 'settings/sso/00_overview.png'},
+            {id: 'google', src: 'settings/sso/01_google.png'},
+            {id: 'github', src: 'settings/sso/02_github.png'},
+            {id: 'delete', src: 'settings/sso/03_delete.png'},
+        ],
+    },
+    {
+        id: 'security',
+        icon: Lock,
+        images: [
+            {id: 'form', src: 'settings/security/00_form.png'},
+        ],
+    },
+    {
+        id: 'monitoring',
+        icon: Activity,
+        images: [
+            {id: 'dashboard', src: 'settings/monitoring/00_dashboard.png'},
+        ],
+    },
+    {
+        id: 'backups',
+        icon: Archive,
+        images: [
+            {id: 'list', src: 'settings/backups/00_list.png'},
+            {id: 'create', src: 'settings/backups/01_create.png'},
+            {id: 'delete', src: 'settings/backups/02_delete.png'},
+        ],
+    },
+    {
+        id: 'testData',
+        icon: Database,
+        images: [
+            {id: 'form', src: 'settings/test-data/00_form.png'},
+            {id: 'schoolType', src: 'settings/test-data/01_school_type.png'},
+            {id: 'success', src: 'settings/test-data/02_success.png'},
+        ],
+    },
+];
+
+const SYSTEM_ADMIN_PROMPTS: SystemAdminFeature = {
+    id: 'prompts',
+    icon: Terminal,
+    images: [{id: 'list', src: 'prompts/00_list.png'}],
+};
+
+const roleWorkflowImages: Record<string, Record<number, string[]>> = {};
+
 const BACKEND_EXAMPLE_BASE = 'https://be-sandbox-1.is-edustack.org';
+
+function SystemAdminFeatureBlock({
+    feature,
+    translate,
+    nested = false,
+}: {
+    feature: SystemAdminFeature;
+    translate: (key: string) => string;
+    nested?: boolean;
+}) {
+    const HeadingTag = nested ? 'h5' : 'h4';
+    const headingClass = nested
+        ? 'font-display text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white'
+        : 'font-display text-2xl md:text-3xl font-bold tracking-tight text-slate-900 dark:text-white';
+    const Icon = feature.icon;
+
+    return (
+        <div className="space-y-6">
+            <div className="flex items-center gap-3">
+                <Icon className="h-6 w-6 text-brand-purple"/>
+                <HeadingTag className={headingClass}>
+                    {translate(`roles.systemAdmin.features.${feature.id}.title`)}
+                </HeadingTag>
+            </div>
+            <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                {translate(`roles.systemAdmin.features.${feature.id}.description`)}
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {feature.images.map((img) => (
+                    <div key={img.id} className={`space-y-2 ${img.wide ? 'col-span-2' : ''}`}>
+                        <ScreenshotPlaceholder
+                            src={`/images/documentation/system-admin/${img.src}`}
+                            alt={translate(`roles.systemAdmin.features.${feature.id}.images.${img.id}`)}
+                            roleColor="brand-purple"
+                            className="shadow-lg"
+                        />
+                        <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 text-center">
+                            {translate(`roles.systemAdmin.features.${feature.id}.images.${img.id}`)}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
 
 export default function ManualPage() {
     const t = useTranslations('Manual');
@@ -1508,7 +1618,8 @@ export default function ManualPage() {
                                                 </div>
                                             </div>
 
-                                            {/* Detailed Workflows */}
+                                            {/* Detailed Workflows (skipped for System Administrator — uses the feature blocks below) */}
+                                            {role.id !== 'systemAdmin' && (
                                             <div className="space-y-32">
                                                 <div className="flex items-center gap-6">
                                                     <h4 className="font-display text-base md:text-lg font-bold tracking-[0.08em] uppercase opacity-30 italic">{t('roles.workflows')}</h4>
@@ -1627,39 +1738,47 @@ export default function ManualPage() {
                                                 </div>
                                             </div>
 
-                                            {/* Feature Gallery (Specific for System Admin) */}
+                                            )}
+
+                                            {/* System Administrator feature blocks (replaces the carousel-based workflow tour) */}
                                             {role.id === 'systemAdmin' && (
-                                                <div className="space-y-32 pt-32">
-                                                    <div className="flex items-center gap-6">
-                                                        <h4 className="font-display text-base md:text-lg font-bold tracking-[0.08em] uppercase opacity-30 italic">Platform
-                                                            Core Gallery</h4>
-                                                        <div className="h-px flex-1 bg-slate-100 dark:bg-slate-800"/>
+                                                <div className="space-y-32 pt-16">
+                                                    {SYSTEM_ADMIN_PRIMARY.map((feature) => (
+                                                        <SystemAdminFeatureBlock
+                                                            key={feature.id}
+                                                            feature={feature}
+                                                            translate={translate}
+                                                        />
+                                                    ))}
+
+                                                    <div className="space-y-16">
+                                                        <div className="space-y-6">
+                                                            <div className="flex items-center gap-3">
+                                                                <Settings className="h-6 w-6 text-brand-purple"/>
+                                                                <h4 className="font-display text-2xl md:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                                                                    {translate('roles.systemAdmin.features.settings.title')}
+                                                                </h4>
+                                                            </div>
+                                                            <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                                                                {translate('roles.systemAdmin.features.settings.description')}
+                                                            </p>
+                                                        </div>
+                                                        <div className="space-y-24 border-l-2 border-brand-purple/20 pl-6 md:pl-10">
+                                                            {SYSTEM_ADMIN_SETTINGS.map((feature) => (
+                                                                <SystemAdminFeatureBlock
+                                                                    key={feature.id}
+                                                                    feature={feature}
+                                                                    translate={translate}
+                                                                    nested
+                                                                />
+                                                            ))}
+                                                        </div>
                                                     </div>
 
-                                                    <div className="grid gap-32">
-                                                        {systemAdminGallery.map((item, idx) => (
-                                                            <div key={item.id}
-                                                                 className={`grid lg:grid-cols-2 gap-16 items-center ${idx % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
-                                                                <div
-                                                                    className={`space-y-6 ${idx % 2 === 1 ? 'lg:order-2' : ''}`}>
-                                                                    <h5 className="font-display text-xl md:text-[23px] font-bold tracking-tight text-slate-900 dark:text-white">
-                                                                        {translate(`gallery.${item.id}.title`)}
-                                                                    </h5>
-                                                                    <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
-                                                                        {translate(`gallery.${item.id}.description`)}
-                                                                    </p>
-                                                                </div>
-                                                                <div className={idx % 2 === 1 ? 'lg:order-1' : ''}>
-                                                                    <ScreenshotPlaceholder
-                                                                        src={item.src}
-                                                                        alt={translate(`gallery.${item.id}.title`)}
-                                                                        roleColor={color}
-                                                                        className="shadow-xl"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                        ))}
-                                                    </div>
+                                                    <SystemAdminFeatureBlock
+                                                        feature={SYSTEM_ADMIN_PROMPTS}
+                                                        translate={translate}
+                                                    />
                                                 </div>
                                             )}
                                         </section>
