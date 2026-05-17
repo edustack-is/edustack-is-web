@@ -50,6 +50,13 @@ import {
     Calendar,
     ClipboardCheck,
     Megaphone,
+    Bell,
+    FileText,
+    Pencil,
+    Award,
+    Folder,
+    GitCompare,
+    ClipboardList,
     type LucideIcon,
 } from 'lucide-react';
 
@@ -261,6 +268,155 @@ const SCHOOL_STAFF_FEATURES: SystemAdminFeature[] = [
             {id: 'eventsNew', src: 'community/05_events_new.png'},
             {id: 'eventsAfterCreate', src: 'community/06_events_after_create.png'},
         ],
+    },
+];
+
+const SCHOOL_MANAGEMENT_FEATURES: SystemAdminFeature[] = [
+    {
+        id: 'yearSetup',
+        icon: Calendar,
+        images: [{id: 'view', src: 'year-setup/00_view.png'}],
+    },
+    {
+        id: 'users',
+        icon: Users,
+        images: [
+            {id: 'list', src: 'users/00_list.png'},
+            {id: 'invite', src: 'users/01_invite.png'},
+            {id: 'detail', src: 'users/02_detail.png'},
+            {id: 'classes', src: 'users/03_classes.png'},
+            {id: 'csv', src: 'users/04_csv.png'},
+            {id: 'role', src: 'users/05_role.png'},
+        ],
+    },
+    {
+        id: 'classrooms',
+        icon: School,
+        images: [
+            {id: 'list', src: 'classrooms/00_list.png'},
+            {id: 'create', src: 'classrooms/01_create.png'},
+            {id: 'buildings', src: 'classrooms/02_buildings.png'},
+            {id: 'detail', src: 'classrooms/03_detail.png'},
+        ],
+    },
+    {
+        id: 'bellSchedule',
+        icon: Bell,
+        images: [{id: 'view', src: 'bell-schedule/00_view.png'}],
+    },
+    {
+        id: 'rvp',
+        icon: BookOpen,
+        images: [
+            {id: 'overview', src: 'rvp/00_overview.png'},
+            {id: 'detail', src: 'rvp/01_detail.png'},
+        ],
+    },
+    {
+        id: 'svp',
+        icon: Layers,
+        images: [
+            {id: 'overview', src: 'svp/00_overview.png'},
+            {id: 'classes', src: 'svp/01_classes.png'},
+            {id: 'subjects', src: 'svp/02_subjects.png'},
+            {id: 'versions', src: 'svp/03_versions.png'},
+            {id: 'curriculum', src: 'svp/04_curriculum.png'},
+        ],
+    },
+    {
+        id: 'whiteBook',
+        icon: FileText,
+        images: [{id: 'view', src: 'white-book/00_view.png'}],
+    },
+    {
+        id: 'schedule',
+        icon: Network,
+        images: [{id: 'planner', src: 'schedule/00_planner.png'}],
+    },
+    {
+        id: 'substitutions',
+        icon: Workflow,
+        images: [
+            {id: 'list', src: 'substitutions/00_list.png'},
+            {id: 'detail', src: 'substitutions/01_detail.png'},
+        ],
+    },
+    {
+        id: 'scheduleComparison',
+        icon: GitCompare,
+        images: [
+            {id: 'overview', src: 'schedule-comparison/00_overview.png'},
+            {id: 'detail', src: 'schedule-comparison/01_detail.png'},
+        ],
+    },
+    {
+        id: 'thematicPlans',
+        icon: ClipboardList,
+        images: [
+            {id: 'list', src: 'thematic-plans/00_list.png'},
+            {id: 'create', src: 'thematic-plans/01_create.png'},
+            {id: 'detail', src: 'thematic-plans/02_detail.png'},
+            {id: 'progress', src: 'thematic-plans/03_progress.png'},
+        ],
+    },
+    {
+        id: 'lessonPrep',
+        icon: Pencil,
+        images: [
+            {id: 'list', src: 'lesson-prep/00_list.png'},
+            {id: 'detail', src: 'lesson-prep/01_detail.png'},
+        ],
+    },
+    {
+        id: 'materials',
+        icon: Folder,
+        images: [
+            {id: 'list', src: 'materials/00_list.png'},
+            {id: 'detail', src: 'materials/01_detail.png'},
+        ],
+    },
+    {
+        id: 'reportCards',
+        icon: Award,
+        images: [
+            {id: 'list', src: 'report-cards/00_list.png'},
+            {id: 'template', src: 'report-cards/01_template.png'},
+            {id: 'assignment', src: 'report-cards/02_assignment.png'},
+            {id: 'progress', src: 'report-cards/03_progress.png'},
+            {id: 'export', src: 'report-cards/04_export.png'},
+            {id: 'detail', src: 'report-cards/05_detail.png'},
+        ],
+    },
+    {
+        id: 'clubs',
+        icon: Heart,
+        images: [
+            {id: 'list', src: 'clubs/00_list.png'},
+            {id: 'detail', src: 'clubs/01_detail.png'},
+        ],
+    },
+    {
+        id: 'events',
+        icon: Megaphone,
+        images: [
+            {id: 'list', src: 'events/00_list.png'},
+            {id: 'create', src: 'events/01_create.png'},
+            {id: 'calendar', src: 'events/02_calendar.png'},
+            {id: 'detail', src: 'events/03_detail.png'},
+        ],
+    },
+    {
+        id: 'disciplinary',
+        icon: AlertTriangle,
+        images: [
+            {id: 'list', src: 'disciplinary/00_list.png'},
+            {id: 'detail', src: 'disciplinary/01_detail.png'},
+        ],
+    },
+    {
+        id: 'audit',
+        icon: Activity,
+        images: [{id: 'view', src: 'audit/00_view.png'}],
     },
 ];
 
@@ -1890,20 +2046,19 @@ export default function ManualPage() {
                                                 </div>
                                             )}
 
-                                            {/* School management — placeholder for the principal/deputy-only section */}
+                                            {/* School management feature blocks (Headmaster + Deputy only) */}
                                             {role.id === 'schoolManagement' && (
-                                                <div className="pt-16">
-                                                    <div className="rounded-[2rem] border-2 border-dashed border-brand-blue/40 bg-brand-blue/5 dark:bg-brand-blue/10 p-8 md:p-10 space-y-3 max-w-[56rem]">
-                                                        <div className="flex items-center gap-3">
-                                                            <Info size={18} className="text-brand-blue"/>
-                                                            <h4 className="font-display text-lg md:text-xl font-bold text-slate-900 dark:text-white">
-                                                                {translate('roles.schoolManagement.placeholderTitle')}
-                                                            </h4>
-                                                        </div>
-                                                        <p className="text-sm md:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
-                                                            {translate('roles.schoolManagement.placeholderBody')}
-                                                        </p>
-                                                    </div>
+                                                <div className="space-y-32 pt-16">
+                                                    {SCHOOL_MANAGEMENT_FEATURES.map((feature) => (
+                                                        <RoleFeatureBlock
+                                                            key={feature.id}
+                                                            roleId="schoolManagement"
+                                                            feature={feature}
+                                                            imageBasePath="/images/documentation/school-management/"
+                                                            accentClass="text-brand-blue"
+                                                            translate={translate}
+                                                        />
+                                                    ))}
                                                 </div>
                                             )}
                                         </section>

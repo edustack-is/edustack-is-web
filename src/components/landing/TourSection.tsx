@@ -17,31 +17,31 @@ export default function TourSection() {
       browser: true
     },
     {
-      src: '/images/documentation/system-admin/01_school_management.png',
+      src: '/images/documentation/system-admin/schools/00_list.png',
       label: t('tour.labels.schoolManagement'),
       role: ROLE_COLORS.magenta,
       height: 280
     },
     {
-      src: '/images/documentation/system-admin/05_system_users.png',
+      src: '/images/documentation/system-admin/users/00_list.png',
       label: t('tour.labels.systemUsers'),
       role: ROLE_COLORS.cyan,
       height: 280
     },
     {
-      src: '/images/documentation/system-admin/10_system_setting_monitoring.png',
+      src: '/images/documentation/system-admin/settings/monitoring/00_dashboard.png',
       label: t('tour.labels.monitoring'),
       role: ROLE_COLORS.orange,
       height: 220
     },
     {
-      src: '/images/documentation/system-admin/12_system_setting_generate_data.png',
+      src: '/images/documentation/system-admin/settings/test-data/00_form.png',
       label: t('tour.labels.generateData'),
       role: ROLE_COLORS.green,
       height: 220
     },
     {
-      src: '/images/documentation/login/00_login_with_helper.png',
+      src: '/images/documentation/login/00_helper_with_sso.png',
       label: t('tour.labels.login'),
       role: ROLE_COLORS.slate,
       height: 220

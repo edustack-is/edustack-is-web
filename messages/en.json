@@ -886,8 +886,154 @@
         "title": "School management",
         "description": "Additional toolkit available only to Headmaster and Deputy (and, by extension, a System Administrator using 'Vstoupit jako'). Covers the school-wide configuration that sits behind the daily classroom work — academic year setup, classes and subjects, schedule planner, curriculum, substitutions, and bulk user invitations.",
         "functions": "Academic year & semester rollover, class and subject management, curriculum versioning (SVP/RVP mapping), schedule planner with collision detection, substitutions, bulk user invitations.",
-        "placeholderTitle": "Coming in the next iteration",
-        "placeholderBody": "Detailed descriptions and screenshots for the School Management section will be added next. The role section is reserved here so it appears in the manual sidebar and table of contents in the meantime."
+        "features": {
+          "yearSetup": {
+            "title": "Academic year setup",
+            "description": "Roll the school forward: open a new academic year, define its semesters, and tick which modules should be live for the year.",
+            "images": {"view": "Academic year setup"}
+          },
+          "users": {
+            "title": "Users",
+            "description": "Local user directory. Invite teachers, students, and parents one at a time or in bulk via CSV import; open a user's detail to edit profile information, assign classes, and change roles.",
+            "images": {
+              "list": "User directory",
+              "invite": "Invite a user",
+              "detail": "User detail",
+              "classes": "Assign user to classes",
+              "csv": "Bulk CSV import",
+              "role": "Change user role"
+            }
+          },
+          "classrooms": {
+            "title": "Buildings & classrooms",
+            "description": "Define the physical layout of the school — buildings, floors, and individual classrooms. Each classroom can be edited with capacity, equipment, and the floor it sits on.",
+            "images": {
+              "list": "Classrooms list",
+              "create": "Create a classroom",
+              "buildings": "Buildings & floors",
+              "detail": "Classroom detail"
+            }
+          },
+          "bellSchedule": {
+            "title": "Bell schedule",
+            "description": "Configure lesson start and end times for the school day. Used by every timetable and class-book view.",
+            "images": {"view": "Bell schedule configuration"}
+          },
+          "rvp": {
+            "title": "Framework curriculum (RVP)",
+            "description": "Browse the national Framework Education Programme (RVP) — domains, competencies, and outputs. Used as the upstream source when building the school's ŠVP and thematic plans.",
+            "images": {
+              "overview": "RVP domains overview",
+              "detail": "RVP competency detail"
+            }
+          },
+          "svp": {
+            "title": "School curriculum (ŠVP)",
+            "description": "Define the school's own curriculum on top of RVP: which subjects each grade has, with what weekly hour allocation, mapped to RVP competencies. The ŠVP is versioned — you can publish a new version for the upcoming year while keeping the active one untouched.",
+            "images": {
+              "overview": "ŠVP overview",
+              "classes": "Per-grade subject allocation",
+              "subjects": "Subjects in the ŠVP",
+              "versions": "ŠVP versions",
+              "curriculum": "Curriculum detail"
+            }
+          },
+          "whiteBook": {
+            "title": "White Book",
+            "description": "The ministerial White Book — the strategic document underpinning the Czech educational policy. Surfaced here as reading material for staff designing the ŠVP and thematic plans.",
+            "images": {"view": "White Book viewer"}
+          },
+          "schedule": {
+            "title": "Schedule planner",
+            "description": "Build the school's weekly timetable. Drag subjects onto class / teacher / room slots; the planner flags collisions in real time. The result feeds the read-only Schedule view that every role uses day-to-day.",
+            "images": {"planner": "Schedule planner"}
+          },
+          "substitutions": {
+            "title": "Substitutions",
+            "description": "Manage daily absences and reassignments. Pick the affected lessons and assign a substitute teacher, change the room, or swap the subject — affected users see the change in their personal schedule immediately.",
+            "images": {
+              "list": "Substitutions list",
+              "detail": "Substitution detail"
+            }
+          },
+          "scheduleComparison": {
+            "title": "Schedule comparison",
+            "description": "Diff two schedule versions side-by-side. Useful when rolling a semester or applying bulk changes — see exactly what moved before publishing the new version.",
+            "images": {
+              "overview": "Schedule comparison overview",
+              "detail": "Per-class diff"
+            }
+          },
+          "thematicPlans": {
+            "title": "Thematic plans",
+            "description": "Per-subject teaching plan for the year. Define topics, hours, and which RVP outputs they cover. Teachers reference the plan from their lesson-prep screen; the progress chart shows how far the actual taught material has advanced against the plan.",
+            "images": {
+              "list": "Thematic plans list",
+              "create": "Create a thematic plan",
+              "detail": "Plan detail",
+              "progress": "Plan progress chart"
+            }
+          },
+          "lessonPrep": {
+            "title": "Lesson preparations",
+            "description": "Per-lesson teaching notes. A preparation links to a thematic-plan topic and is reused when signing the class book. Optional AI assistant generates a draft preparation from the topic and grade level.",
+            "images": {
+              "list": "Lesson prep list",
+              "detail": "Preparation detail"
+            }
+          },
+          "materials": {
+            "title": "Teaching materials",
+            "description": "Shared library of files attached to subjects, thematic plans, or individual preparations. Visible to teachers of the subject; can be exposed to students from a lesson preparation.",
+            "images": {
+              "list": "Materials library",
+              "detail": "Material detail"
+            }
+          },
+          "reportCards": {
+            "title": "Report cards (vysvědčení)",
+            "description": "End-of-semester deliverable. Pick the template, generate report cards for the chosen class, track per-student progress, and export the final PDF batch.",
+            "images": {
+              "list": "Report-card batches",
+              "template": "Choose template",
+              "assignment": "Assign to classes",
+              "progress": "Generation progress",
+              "export": "Export PDFs",
+              "detail": "Individual report card"
+            }
+          },
+          "clubs": {
+            "title": "Clubs",
+            "description": "After-school activities — name, schedule, capacity, leading teacher, and the list of enrolled students. Each club has its own attendance and announcements stream.",
+            "images": {
+              "list": "Clubs list",
+              "detail": "Club detail"
+            }
+          },
+          "events": {
+            "title": "School events",
+            "description": "School-wide calendar (trips, parent meetings, holidays). Create with title, date range, location, and audience; the event then surfaces in the community Events tab for the affected users.",
+            "images": {
+              "list": "Events list",
+              "create": "Create event",
+              "calendar": "Calendar view",
+              "detail": "Event detail"
+            }
+          },
+          "disciplinary": {
+            "title": "Disciplinary measures",
+            "description": "Record commendations, reprimands, and formal disciplinary measures issued to students. Each entry is attached to a student's profile and shows up in their parent's view.",
+            "images": {
+              "list": "Disciplinary measures list",
+              "detail": "Measure detail"
+            }
+          },
+          "audit": {
+            "title": "School audit log",
+            "description": "School-scoped audit log — every action that mutates school data is recorded with actor, timestamp, and entity. Mirrors the system-wide audit log but restricted to this tenant.",
+            "images": {"view": "School audit log"}
+          }
+        }
       },
       "parent": {
         "title": "Parent",

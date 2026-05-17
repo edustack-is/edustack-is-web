@@ -886,8 +886,154 @@
         "title": "Správa školy",
         "description": "Další toolkit dostupný pouze Řediteli a Zástupci (a tedy i systémovému administrátorovi přes 'Vstoupit jako'). Pokrývá celoškolní konfiguraci za běžnou prací v hodinách — nastavení školního roku, třídy a předměty, plánovač rozvrhu, kurikulum, suplování a hromadné pozvánky uživatelů.",
         "functions": "Přechod školního roku a pololetí, správa tříd a předmětů, verzování ŠVP (mapování na RVP), plánovač rozvrhu s detekcí kolizí, suplování, hromadné pozvánky uživatelů.",
-        "placeholderTitle": "Připravujeme v další iteraci",
-        "placeholderBody": "Podrobné popisy a screenshoty sekce Správa školy přidáme v další iteraci. Místo pro tuto roli je tu zatím rezervováno, aby se objevila v boční navigaci manuálu a v obsahu."
+        "features": {
+          "yearSetup": {
+            "title": "Příprava školního roku",
+            "description": "Posun školy do dalšího roku: otevřete nový školní rok, definujte jeho pololetí a zaškrtněte, které moduly mají pro daný rok běžet.",
+            "images": {"view": "Příprava školního roku"}
+          },
+          "users": {
+            "title": "Uživatelé",
+            "description": "Lokální adresář uživatelů. Pozvěte učitele, žáky a rodiče jednotlivě nebo hromadně přes CSV import; otevřete detail uživatele pro úpravu profilu, přiřazení do tříd a změnu role.",
+            "images": {
+              "list": "Adresář uživatelů",
+              "invite": "Pozvat uživatele",
+              "detail": "Detail uživatele",
+              "classes": "Přiřazení uživatele do tříd",
+              "csv": "Hromadný import z CSV",
+              "role": "Změna role uživatele"
+            }
+          },
+          "classrooms": {
+            "title": "Budovy a učebny",
+            "description": "Definice fyzického uspořádání školy — budovy, patra a jednotlivé učebny. Každou učebnu lze editovat — kapacita, vybavení a patro, na kterém se nachází.",
+            "images": {
+              "list": "Seznam učeben",
+              "create": "Vytvořit učebnu",
+              "buildings": "Budovy a patra",
+              "detail": "Detail učebny"
+            }
+          },
+          "bellSchedule": {
+            "title": "Zvonění",
+            "description": "Konfigurace začátků a konců vyučovacích hodin. Využívá ji každý pohled na rozvrh i třídní knihu.",
+            "images": {"view": "Konfigurace zvonění"}
+          },
+          "rvp": {
+            "title": "Rámcový vzdělávací program (RVP)",
+            "description": "Prohlížení národního Rámcového vzdělávacího programu — oblasti, kompetence a výstupy. Slouží jako zdroj při tvorbě ŠVP a tematických plánů školy.",
+            "images": {
+              "overview": "Přehled oblastí RVP",
+              "detail": "Detail RVP kompetence"
+            }
+          },
+          "svp": {
+            "title": "Školní vzdělávací program (ŠVP)",
+            "description": "Definice vlastního ŠVP nad RVP: které předměty má jednotlivý ročník, s jakou hodinovou dotací, namapováno na RVP kompetence. ŠVP je verzovaný — pro nadcházející rok lze publikovat novou verzi, aktivní verzi přitom ponechat beze změny.",
+            "images": {
+              "overview": "Přehled ŠVP",
+              "classes": "Hodinová dotace po ročnících",
+              "subjects": "Předměty v ŠVP",
+              "versions": "Verze ŠVP",
+              "curriculum": "Detail kurikula"
+            }
+          },
+          "whiteBook": {
+            "title": "Bílá kniha",
+            "description": "Ministerská Bílá kniha — strategický dokument české vzdělávací politiky. Zde dostupná jako podklad pro pracovníky tvořící ŠVP a tematické plány.",
+            "images": {"view": "Prohlížeč Bílé knihy"}
+          },
+          "schedule": {
+            "title": "Plánovač rozvrhu",
+            "description": "Tvorba týdenního rozvrhu školy. Přetahujte předměty do slotů třídy / učitele / učebny; plánovač detekuje kolize v reálném čase. Výsledek se promítne do read-only pohledu Rozvrh, který používají všechny role.",
+            "images": {"planner": "Plánovač rozvrhu"}
+          },
+          "substitutions": {
+            "title": "Suplování",
+            "description": "Správa denních absencí a přeobsazení. Vyberte dotčené hodiny a přiřaďte zastupujícího učitele, změňte učebnu nebo prohoďte předmět — dotčení uživatelé změnu vidí ve svém osobním rozvrhu okamžitě.",
+            "images": {
+              "list": "Seznam suplování",
+              "detail": "Detail suplování"
+            }
+          },
+          "scheduleComparison": {
+            "title": "Porovnání rozvrhu",
+            "description": "Diff dvou verzí rozvrhu vedle sebe. Užitečné při rolování pololetí nebo aplikaci hromadných změn — uvidíte přesně co se mění, než novou verzi publikujete.",
+            "images": {
+              "overview": "Přehled porovnání",
+              "detail": "Diff po třídách"
+            }
+          },
+          "thematicPlans": {
+            "title": "Tematické plány",
+            "description": "Roční výukový plán pro daný předmět. Definujte témata, hodinovou dotaci a které RVP výstupy téma pokrývá. Učitelé na něj odkazují z přípravy na hodinu; graf pokroku ukazuje, jak skutečně odučená látka postupuje proti plánu.",
+            "images": {
+              "list": "Seznam tematických plánů",
+              "create": "Vytvořit tematický plán",
+              "detail": "Detail plánu",
+              "progress": "Graf pokroku plánu"
+            }
+          },
+          "lessonPrep": {
+            "title": "Přípravy na hodinu",
+            "description": "Poznámky k jednotlivým hodinám. Příprava je provázaná s tématem v tematickém plánu a opakovaně se používá při podpisu v třídní knize. Volitelný AI asistent vygeneruje koncept přípravy z tématu a ročníku.",
+            "images": {
+              "list": "Seznam příprav",
+              "detail": "Detail přípravy"
+            }
+          },
+          "materials": {
+            "title": "Materiály",
+            "description": "Sdílená knihovna souborů připojená k předmětům, tematickým plánům nebo konkrétním přípravám. Viditelná pro učitele daného předmětu; lze ji zpřístupnit i žákům z přípravy na hodinu.",
+            "images": {
+              "list": "Knihovna materiálů",
+              "detail": "Detail materiálu"
+            }
+          },
+          "reportCards": {
+            "title": "Vysvědčení",
+            "description": "Pololetní výstup. Vyberte šablonu, vygenerujte vysvědčení pro zvolenou třídu, sledujte progres jednotlivých žáků a exportujte výsledný PDF balík.",
+            "images": {
+              "list": "Dávky vysvědčení",
+              "template": "Výběr šablony",
+              "assignment": "Přiřazení do tříd",
+              "progress": "Průběh generování",
+              "export": "Export PDF",
+              "detail": "Individuální vysvědčení"
+            }
+          },
+          "clubs": {
+            "title": "Kroužky",
+            "description": "Mimoškolní aktivity — název, rozvrh, kapacita, vedoucí učitel a seznam přihlášených žáků. Každý kroužek má vlastní docházku a stream oznámení.",
+            "images": {
+              "list": "Seznam kroužků",
+              "detail": "Detail kroužku"
+            }
+          },
+          "events": {
+            "title": "Školní události",
+            "description": "Celoškolní kalendář (výlety, třídní schůzky, prázdniny). Vytvořte s názvem, časovým rozsahem, místem a cílovou skupinou; událost se pak objeví v komunitní záložce Události dotčeným uživatelům.",
+            "images": {
+              "list": "Seznam událostí",
+              "create": "Vytvořit událost",
+              "calendar": "Pohled v kalendáři",
+              "detail": "Detail události"
+            }
+          },
+          "disciplinary": {
+            "title": "Výchovná opatření",
+            "description": "Evidence pochval, napomenutí a důtek udělených žákům. Každý záznam je svázán s profilem žáka a zobrazuje se i jeho rodiči.",
+            "images": {
+              "list": "Seznam výchovných opatření",
+              "detail": "Detail opatření"
+            }
+          },
+          "audit": {
+            "title": "Auditní log školy",
+            "description": "Auditní log v rozsahu jedné školy — každá akce, která mění školní data, je zaznamenána s autorem, časem a entitou. Zrcadlí systémový audit log, ale jen pro daný tenant.",
+            "images": {"view": "Auditní log školy"}
+          }
+        }
       },
       "parent": {
         "title": "Rodič",
