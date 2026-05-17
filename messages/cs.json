@@ -699,14 +699,16 @@
       },
       "reset": {
         "title": "Reset hesla",
-        "description": "Tok zapomenutého hesla dostupný z přihlašovací obrazovky. Tokenovaný reset odkaz se doručí přes nakonfigurovaný SMTP server (v sandboxech MailDev), jeho otevření přivede uživatele na formulář pro zadání nového hesla."
+        "description": "Třístupňový tok zapomenutého hesla dostupný z přihlašovací obrazovky. (1) Uživatel požádá o reset zadáním svého emailu. (2) Tokenovaný odkaz se doručí přes nakonfigurovaný SMTP server — v sandboxech MailDev. (3) Otevření odkazu zobrazí formulář Set New Password s polem pro nové heslo a potvrzení. Token je platný po dobu nastavenou v System security."
       },
       "screenshots": {
         "helperSso": "Helper + SSO",
         "helperNoSso": "Helper, bez SSO",
         "credsSso": "E-mail a heslo + SSO",
         "credsNoSso": "Pouze e-mail a heslo",
-        "reset": "Reset hesla"
+        "reset": "Žádost o reset hesla",
+        "setNewPassword": "Nastavení nového hesla",
+        "resetEmail": "Reset email (MailDev)"
       }
     },
     "roles": {

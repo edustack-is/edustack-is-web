@@ -1530,7 +1530,9 @@ export default function ManualPage() {
                                             {id: 'helperNoSso', src: '01_helper_without_sso.png', wide: false},
                                             {id: 'credsSso', src: '02_credentials_with_sso.png', wide: false},
                                             {id: 'credsNoSso', src: '03_credentials_without_sso.png', wide: false},
-                                            {id: 'reset', src: '04_reset_password.png', wide: true},
+                                            {id: 'reset', src: '04_reset_password.png', wide: false},
+                                            {id: 'setNewPassword', src: '06_set_new_password.png', wide: false},
+                                            {id: 'resetEmail', src: '05_reset_email.png', wide: true},
                                         ] as const).map(({id, src, wide}) => (
                                             <div key={id} className={`space-y-2 ${wide ? 'col-span-2' : ''}`}>
                                                 <ScreenshotPlaceholder

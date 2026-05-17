@@ -699,14 +699,16 @@
       },
       "reset": {
         "title": "Password reset",
-        "description": "Forgot-password flow accessible from the login screen. A tokenized reset link is delivered via the configured SMTP server (MailDev in sandbox environments), and following it lands the user on a form to set a new password."
+        "description": "Three-step forgot-password flow accessible from the login screen. (1) The user requests a reset by entering their email. (2) A tokenized reset link is delivered via the configured SMTP server — MailDev in sandbox environments. (3) Following the link opens a Set New Password form with a new + confirm field. The token is valid for the duration configured in System security."
       },
       "screenshots": {
         "helperSso": "Helper + SSO",
         "helperNoSso": "Helper, no SSO",
         "credsSso": "Email & password + SSO",
         "credsNoSso": "Email & password only",
-        "reset": "Password reset"
+        "reset": "Password reset request",
+        "setNewPassword": "Set new password",
+        "resetEmail": "Reset email (MailDev)"
       }
     },
     "roles": {
