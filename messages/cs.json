@@ -134,7 +134,7 @@
         {"title": "Pracovní listy – 1. stupeň", "kind": "PDF", "body": "4.–5. třída. Objevování rolí a dat.", "href": "/worksheets/pracovni-listy-1-stupen.pdf"},
         {"title": "Pracovní listy – 2. stupeň", "kind": "PDF", "body": "6.–9. třída. Modelování a oprávnění.", "href": "/worksheets/pracovni-listy-2-stupen.pdf"},
         {"title": "Pracovní listy – střední škola", "kind": "PDF", "body": "Střední škola (Informatika, Programování). Spustit lokálně. Číst kód. Něco postavit.", "href": "/worksheets/pracovni-listy-stredni-skola.pdf"},
-        {"title": "Hlavní složka metodiky", "kind": "Google Drive", "body": "Celý balík, živě.", "href": "https://drive.google.com/drive/folders/1H7ahXOrmOcwE9OWiukjAND_1L6hAUsTQ?usp=drive_link", "external": true}
+        {"title": "Hlavní složka metodiky", "kind": "Google Drive", "body": "Celý balík, živě. Obsahuje i podsložku se zálohami databáze.", "href": "https://drive.google.com/drive/folders/1H7ahXOrmOcwE9OWiukjAND_1L6hAUsTQ?usp=sharing", "external": true}
       ]
     },
     "demo": {
