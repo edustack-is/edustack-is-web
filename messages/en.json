@@ -571,7 +571,7 @@
     },
     "deployment": {
       "title": "Deployment",
-      "description": "Sandboxed, per-environment deployments. Each env_id provisions its own Fly.io machine (backend + MCP) with a 1 GB persistent SQLite volume and its own Cloudflare Pages project (frontend), wired to is-edustack.org subdomains.",
+      "description": "Sandboxed, per-environment deployments. Each env_id provisions its own Fly.io machine (backend + MCP) with a 1 GB persistent SQLite volume, a sibling Fly.io app running MailDev as the per-env mailbox, an automatically created Cloudflare R2 bucket for database backups, and its own Cloudflare Pages project (frontend) — all wired to is-edustack.org subdomains.",
       "topologyTitle": "Topology per environment",
       "topology": {
         "backend": {
@@ -582,36 +582,46 @@
           "title": "Frontend",
           "description": "One Cloudflare Pages project per environment (edustack-frontend-sandbox-N), built from apps/frontend with VITE_API_URL pointing at the matching backend."
         },
+        "maildev": {
+          "title": "MailDev mailbox",
+          "description": "A second Fly.io app per environment (mail-edustack-sandbox-N) runs MailDev. The backend connects to its SMTP on the private 6PN network (mail-edustack-sandbox-N.internal:1025); the web inbox is exposed publicly at mail-sandbox-N.is-edustack.org for demos."
+        },
+        "backups": {
+          "title": "R2 backup bucket",
+          "description": "The deploy action creates a Cloudflare R2 bucket per environment (edustack-sandbox-N-backups) and wires the S3-compatible endpoint into the backend. Database backups upload there automatically; if R2 credentials are missing the step is skipped and backups stay on the Fly volume."
+        },
         "domains": {
           "title": "Custom domains",
-          "description": "Both ends live under is-edustack.org: fe-sandbox-N.is-edustack.org → Cloudflare Pages, be-sandbox-N.is-edustack.org → Fly.io (CNAME to edustack-sandbox-N.fly.dev, TLS via Fly Let's Encrypt)."
+          "description": "Everything lives under is-edustack.org: sandbox-N.is-edustack.org → Cloudflare Pages (frontend), be-sandbox-N.is-edustack.org → Fly.io backend, mail-sandbox-N.is-edustack.org → MailDev. Backend + MailDev get TLS via Fly Let's Encrypt; the frontend is proxied through Cloudflare."
         }
       },
       "workflowTitle": "GitHub Actions workflow",
-      "workflowDescription": "Provisioning is driven by .github/workflows/deploy-env.yml. Trigger it from GitHub → Actions → Deploy Environment → Run workflow. Pick an env_id (e.g. 1) and one of the actions below. Every deploy step is idempotent — you can re-run on the same env_id safely.",
+      "workflowDescription": "Provisioning is driven by .github/workflows/deploy-env.yml. Trigger it from GitHub → Actions → Deploy Environment → Run workflow. Pick an env_id (e.g. 1) and one of the actions below. Every step — Fly apps, R2 bucket, DNS records, Pages project — is idempotent, so you can safely re-run on the same env_id.",
       "actions": {
         "deploy": {
           "title": "deploy",
-          "description": "Full provision: create Fly app + volume, stage secrets, flyctl deploy, attach DNS + TLS, build + push the frontend. Use for the first run and every subsequent push.",
+          "description": "Full provision: create the backend Fly app + 1 GB volume, the MailDev Fly app, the R2 backup bucket, stage secrets, flyctl deploy both apps, attach DNS + TLS, build and push the frontend to Cloudflare Pages. Use for the first run and every subsequent push.",
           "command": "Run workflow → action: deploy, env_id: 1"
         },
         "delete": {
           "title": "delete",
-          "description": "Destroys the Fly app (machines + volume), removes the CNAMEs, deletes the Pages project. Use when tearing an environment down.",
+          "description": "Destroys both Fly apps (backend machines + volume and MailDev), empties and removes the R2 backup bucket, deletes all three CNAMEs, and removes the Cloudflare Pages project. Use when tearing an environment down.",
           "command": "Run workflow → action: delete, env_id: 1"
         }
       },
       "secretsTitle": "GitHub repository secrets",
-      "secretsDescription": "Add these under Settings → Secrets and variables → Actions → New repository secret. The required ones must be present before the first run; the recommended ones get sensible random fallbacks but you should always set them in production.",
+      "secretsDescription": "Add these under Settings → Secrets and variables → Actions → New repository secret. The required ones must be present before the first run; the recommended ones get sensible random fallbacks but you should always set them in production. If the R2 keys are missing the deploy step skips bucket provisioning and backups stay on the Fly volume.",
       "secretsRequired": "Required",
       "secretsRecommended": "Recommended",
       "secrets": {
         "fly-api-token": "Fly.io API token (account-wide so it can create apps). flyctl auth login, then flyctl auth token.",
-        "cloudflare-api-token": "API token for Pages deploys + DNS edits. Cloudflare → My Profile → API Tokens → Create Token with: Account → Cloudflare Pages: Edit, Account → Account Settings: Read, Zone → Zone: Read (is-edustack.org), Zone → DNS: Edit (is-edustack.org), User → User Details: Read.",
+        "cloudflare-api-token": "API token for Pages deploys, DNS edits, and R2 bucket management. Cloudflare → My Profile → API Tokens → Create Token with: Account → Cloudflare Pages: Edit, Account → Workers R2 Storage: Edit, Account → Account Settings: Read, Zone → Zone: Read (is-edustack.org), Zone → DNS: Edit (is-edustack.org), User → User Details: Read.",
         "cloudflare-account-id": "Cloudflare account ID. Found in the right sidebar of any Workers / domain overview in the dashboard.",
         "jwt-secret": "Random string (≥ 32 chars) used to sign JWT cookies. Pushed into Fly via flyctl secrets set on every deploy.",
         "encryption-key": "AES-256 key — exactly 32 hex characters. Encrypts provider API keys in the SystemSecret table. Losing it makes those rows unreadable.",
-        "mcp-auth-token": "Shared bearer token between the backend and MCP server. Generated with openssl rand -hex 32."
+        "mcp-auth-token": "Shared bearer token between the backend and MCP server. Generated with openssl rand -hex 32.",
+        "r2-access-key-id": "S3-compatible access key ID for the R2 backup bucket. Cloudflare → R2 → Manage R2 API Tokens → Create API token (Object Read & Write). Separate from CLOUDFLARE_API_TOKEN.",
+        "r2-secret-access-key": "S3-compatible secret access key, returned alongside R2_ACCESS_KEY_ID when you create the R2 API token. Cloudflare shows it once — store it immediately."
       },
       "prereqsTitle": "One-time prerequisites",
       "prereqs": {
@@ -622,32 +632,81 @@
       "costs": "Each environment is one Fly.io machine (shared-cpu-1x, 512 MB) that auto-stops when idle, plus a 1 GB volume (~$0.15/month) that accrues even while stopped. Fly.io offers a 7-day trial; afterwards a payment method is required. To drop to zero between demos, run the delete action and deploy again later. Realistic cost at demo / low-traffic usage is roughly $1–2 per environment per month. Cloudflare Pages stays on the free tier comfortably.",
       "readmeLink": "Full step-by-step in the repository README"
     },
+    "backendStatus": {
+      "title": "Backend Status & Health",
+      "description": "Every backend exposes a public status page, a JSON health endpoint that gates the frontend boot, and full Swagger / OpenAPI documentation. The paths below are relative — prepend them with the backend's base URL for the environment you want to inspect.",
+      "baseUrlLabel": "Base URL (example for sandbox-1)",
+      "baseUrlHint": "Swap sandbox-1 for any other env_id, e.g. be-sandbox-2.is-edustack.org.",
+      "statusTitle": "Status page",
+      "statusDescription": "The backend root path renders a lightweight status page that confirms the API is online, names the environment, surfaces the database connection state and Node.js runtime, and links straight into the OpenAPI docs. Use it as a quick \"is it up?\" check before opening the frontend.",
+      "statusPath": "/",
+      "healthTitle": "Health check & boot gating",
+      "healthDescription": "The frontend polls GET /api/health on every load and keeps showing the EduStack IS loading screen until the response is healthy. If the backend is cold-starting, mid-migration, or unreachable, the loader stays visible — users never land on a half-booted app. The endpoint also reports uptime, memory, version, commit, and build time so monitoring can scrape it.",
+      "healthPath": "/api/health",
+      "healthSampleTitle": "Sample response",
+      "docsTitle": "OpenAPI / Swagger documentation",
+      "docsDescription": "Every backend ships with interactive Swagger UI covering all modules — auth, init, students, teachers, schools, and the rest. Endpoints are grouped by module, request and response schemas are inferred from DTOs, and you can authorize once via JWT to call live endpoints straight from the browser.",
+      "docsPath": "/api/docs"
+    },
     "setup": {
       "title": "System Setup",
-      "description": "Initializing the system for the first time.",
+      "description": "Initialization runs once per environment. Two GitHub Actions deploy toggles decide whether the system bootstraps itself with demo data and whether the login screen exposes a developer helper — the manual System Setup screen only appears when auto-seeding is disabled.",
+      "workflowToggles": {
+        "title": "Deploy workflow toggles",
+        "description": "Two checkboxes on the Deploy Environment workflow change how the first boot of a sandbox behaves. Both default to ON so a freshly created env_id deploys ready for demos. They have no effect on environments that have already been initialized — re-running the workflow with different values does not rewind the database.",
+        "helperTitle": "Enable login helper (demo-user picker on login screen) — deploy only",
+        "helperDescription": "Renders a developer-only picker on the login screen with one-click sign-in for every user.",
+        "seedTitle": "Auto-seed demo data on first boot — deploy only",
+        "seedDescription": "Skips the manual System Setup screen and provisions schools, users, schedules, and the System Administrator automatically."
+      },
+      "autoSeed": {
+        "title": "Auto-seeded demo data",
+        "description": "When auto-seed is on, the backend bypasses the System Setup screen entirely on first boot and inserts the full demo dataset. A System Administrator account is created automatically and used to bring the rest of the schools online.",
+        "credentialsLabel": "Default seed credentials",
+        "adminEmail": "admin@demo.test",
+        "adminPassword": "Demo1234!",
+        "securityNote": "Every account generated by the seeder shares the same Demo1234! password. Rotate it (or disable the accounts you don't need) before exposing the environment to real users."
+      },
+      "loginHelper": {
+        "title": "Login helper",
+        "description": "While the login helper toggle is on, the login screen renders a picker of every user in the system; clicking a card signs in immediately, no password needed. The shortcut deactivates per-user the moment that user changes their password from their profile — newly hardened accounts fall back to the standard email + password form, even while the helper stays available for everyone else."
+      },
+      "manualTitle": "Manual first-boot setup",
+      "manualDescription": "When auto-seed is off, the first request to the frontend lands on the System Setup screen. Pick between a fresh install (create the first System Administrator now) or restoring an existing .sqlite backup.",
       "option1": {
-        "title": "Seed Data (Recommended)",
-        "description": "Quickly populate the system with demo schools, users, and schedules using the `npm run db:seed` command."
+        "title": "Fresh install",
+        "description": "Create the first System Administrator through the in-app form: name, surname, admin email, password, and confirmation. After submission the system goes live with an empty database — schools and users are then added through the System Administrator console."
       },
       "option2": {
-        "title": "From Scratch",
-        "description": "Start with an empty database and create your first System Administrator through the CLI."
+        "title": "Restore from backup",
+        "description": "Pick the \"Restore from backup\" tile and upload a previously exported .sqlite file. The current database is replaced with the contents of the backup; the upload button stays disabled until a file is selected."
       }
     },
     "login": {
       "title": "User Authentication",
-      "description": "Methods to access the system.",
+      "description": "The login screen renders four variants — login helper on/off crossed with SSO available or not — plus a password reset flow. Which variant a user sees depends on the deploy-time login helper toggle and on whether the System Administrator has registered any SSO providers.",
       "helper": {
-        "title": "Login Helper",
-        "description": "A developer tool on the login screen to quickly switch between demo identities without passwords."
+        "title": "Login helper",
+        "description": "Developer-only picker on the login screen for one-click sign-in as any user. Controlled by the auto-deploy toggle and self-deactivates per user once that user changes their password from their profile."
       },
       "credentials": {
-        "title": "Email & Password",
-        "description": "Standard secure authentication using hashed passwords (Argon2) stored in the SQLite database."
+        "title": "Email & password",
+        "description": "Standard secure authentication using hashed passwords (Argon2) stored in the SQLite database. Always available — even when the helper is on, users can switch to the regular form."
       },
       "sso": {
-        "title": "SSO Integration",
-        "description": "Enterprise-grade login support for Google, GitHub, and Microsoft accounts."
+        "title": "SSO integration",
+        "description": "Enterprise-grade login via Google, GitHub, and Microsoft. SSO buttons only appear when the System Administrator has configured at least one provider; otherwise the screen shows email + password only."
+      },
+      "reset": {
+        "title": "Password reset",
+        "description": "Forgot-password flow accessible from the login screen. A tokenized reset link is delivered via the configured SMTP server (MailDev in sandbox environments), and following it lands the user on a form to set a new password."
+      },
+      "screenshots": {
+        "helperSso": "Helper + SSO",
+        "helperNoSso": "Helper, no SSO",
+        "credsSso": "Email & password + SSO",
+        "credsNoSso": "Email & password only",
+        "reset": "Password reset"
       }
     },
     "roles": {

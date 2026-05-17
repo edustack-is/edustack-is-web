@@ -571,7 +571,7 @@
     },
     "deployment": {
       "title": "Nasazení",
-      "description": "Sandboxovaná nasazení po prostředích. Každé env_id vytvoří svou Fly.io mašinu (backend + MCP) s 1 GB perzistentním SQLite volume a vlastní Cloudflare Pages projekt (frontend), provázané se subdoménami is-edustack.org.",
+      "description": "Sandboxovaná nasazení po prostředích. Každé env_id vytvoří vlastní Fly.io mašinu (backend + MCP) s 1 GB perzistentním SQLite volume, sesterskou Fly.io aplikaci s MailDev jako poštovní schránkou prostředí, automaticky založený Cloudflare R2 bucket pro zálohy databáze a vlastní Cloudflare Pages projekt (frontend) — vše provázané se subdoménami is-edustack.org.",
       "topologyTitle": "Topologie jednoho prostředí",
       "topology": {
         "backend": {
@@ -582,36 +582,46 @@
           "title": "Frontend",
           "description": "Jeden Cloudflare Pages projekt na prostředí (edustack-frontend-sandbox-N), buildovaný z apps/frontend s VITE_API_URL ukazujícím na odpovídající backend."
         },
+        "maildev": {
+          "title": "MailDev schránka",
+          "description": "Druhá Fly.io aplikace na prostředí (mail-edustack-sandbox-N) běží MailDev. Backend se připojuje na jeho SMTP přes privátní 6PN síť (mail-edustack-sandbox-N.internal:1025); webová schránka je pro účely dema veřejně dostupná na mail-sandbox-N.is-edustack.org."
+        },
+        "backups": {
+          "title": "R2 bucket pro zálohy",
+          "description": "Akce deploy vytvoří Cloudflare R2 bucket pro každé prostředí (edustack-sandbox-N-backups) a propojí S3-kompatibilní endpoint s backendem. Zálohy databáze se sem ukládají automaticky; pokud R2 přihlašovací údaje chybí, krok se přeskočí a zálohy zůstanou na Fly volume."
+        },
         "domains": {
           "title": "Vlastní domény",
-          "description": "Obě strany žijí pod is-edustack.org: fe-sandbox-N.is-edustack.org → Cloudflare Pages, be-sandbox-N.is-edustack.org → Fly.io (CNAME na edustack-sandbox-N.fly.dev, TLS přes Fly Let's Encrypt)."
+          "description": "Vše žije pod is-edustack.org: sandbox-N.is-edustack.org → Cloudflare Pages (frontend), be-sandbox-N.is-edustack.org → Fly.io backend, mail-sandbox-N.is-edustack.org → MailDev. Backend a MailDev získají TLS přes Fly Let's Encrypt, frontend je proxován přes Cloudflare."
         }
       },
       "workflowTitle": "GitHub Actions workflow",
-      "workflowDescription": "Provisioning řídí .github/workflows/deploy-env.yml. Spusťte z GitHub → Actions → Deploy Environment → Run workflow. Vyberte env_id (např. 1) a jednu z akcí níže. Každý krok deploye je idempotentní — můžete bezpečně opakovat na stejném env_id.",
+      "workflowDescription": "Provisioning řídí .github/workflows/deploy-env.yml. Spusťte z GitHub → Actions → Deploy Environment → Run workflow. Vyberte env_id (např. 1) a jednu z akcí níže. Každý krok — Fly aplikace, R2 bucket, DNS záznamy, Pages projekt — je idempotentní, takže můžete bezpečně opakovat na stejném env_id.",
       "actions": {
         "deploy": {
           "title": "deploy",
-          "description": "Plné nasazení: vytvoří Fly app + volume, nastaví secrets, flyctl deploy, připojí DNS + TLS, buildne a nasadí frontend. Použijte poprvé i při každém dalším pushi.",
+          "description": "Plné nasazení: vytvoří Fly aplikaci pro backend + 1 GB volume, Fly aplikaci pro MailDev, R2 bucket pro zálohy, nastaví secrets, flyctl deploy obou aplikací, připojí DNS + TLS, buildne a nasadí frontend na Cloudflare Pages. Použijte poprvé i při každém dalším pushi.",
           "command": "Run workflow → action: deploy, env_id: 1"
         },
         "delete": {
           "title": "delete",
-          "description": "Zničí Fly app (mašiny + volume), smaže CNAME záznamy, smaže Pages projekt. Použijte při bourání prostředí.",
+          "description": "Zničí obě Fly aplikace (backend mašiny + volume a MailDev), vyprázdní a smaže R2 bucket, smaže všechny tři CNAME záznamy a odebere Cloudflare Pages projekt. Použijte při bourání prostředí.",
           "command": "Run workflow → action: delete, env_id: 1"
         }
       },
       "secretsTitle": "GitHub repository secrets",
-      "secretsDescription": "Přidejte pod Settings → Secrets and variables → Actions → New repository secret. Povinné musí být nastaveny před prvním během; doporučené dostanou rozumný náhodný fallback, ale v produkci je vždy nastavte.",
+      "secretsDescription": "Přidejte pod Settings → Secrets and variables → Actions → New repository secret. Povinné musí být nastaveny před prvním během; doporučené dostanou rozumný náhodný fallback, ale v produkci je vždy nastavte. Pokud R2 klíče chybí, krok deploye přeskočí vytvoření bucketu a zálohy zůstanou na Fly volume.",
       "secretsRequired": "Povinné",
       "secretsRecommended": "Doporučené",
       "secrets": {
         "fly-api-token": "Fly.io API token (account-wide, aby mohl vytvářet aplikace). flyctl auth login, pak flyctl auth token.",
-        "cloudflare-api-token": "API token pro Pages deploye a editaci DNS. Cloudflare → My Profile → API Tokens → Create Token s oprávněními: Account → Cloudflare Pages: Edit, Account → Account Settings: Read, Zone → Zone: Read (is-edustack.org), Zone → DNS: Edit (is-edustack.org), User → User Details: Read.",
+        "cloudflare-api-token": "API token pro Pages deploye, editaci DNS a správu R2 bucketů. Cloudflare → My Profile → API Tokens → Create Token s oprávněními: Account → Cloudflare Pages: Edit, Account → Workers R2 Storage: Edit, Account → Account Settings: Read, Zone → Zone: Read (is-edustack.org), Zone → DNS: Edit (is-edustack.org), User → User Details: Read.",
         "cloudflare-account-id": "Cloudflare account ID. Najdete v pravém sloupci na libovolném Workers / domain přehledu v dashboardu.",
         "jwt-secret": "Náhodný řetězec (≥ 32 znaků) pro podepisování JWT cookies. Při každém deployi se přenáší do Fly přes flyctl secrets set.",
         "encryption-key": "AES-256 klíč — přesně 32 hex znaků. Šifruje API klíče poskytovatelů v tabulce SystemSecret. Jeho ztrátou se tyto záznamy stanou nečitelnými.",
-        "mcp-auth-token": "Sdílený bearer token mezi backendem a MCP serverem. Generujte přes openssl rand -hex 32."
+        "mcp-auth-token": "Sdílený bearer token mezi backendem a MCP serverem. Generujte přes openssl rand -hex 32.",
+        "r2-access-key-id": "S3-kompatibilní access key ID pro R2 bucket se zálohami. Cloudflare → R2 → Manage R2 API Tokens → Create API token (Object Read & Write). Oddělené od CLOUDFLARE_API_TOKEN.",
+        "r2-secret-access-key": "S3-kompatibilní secret access key, vrácený spolu s R2_ACCESS_KEY_ID při vytvoření R2 API tokenu. Cloudflare jej zobrazí jen jednou — uložte si jej hned."
       },
       "prereqsTitle": "Jednorázové předpoklady",
       "prereqs": {
@@ -622,32 +632,81 @@
       "costs": "Každé prostředí je jedna Fly.io mašina (shared-cpu-1x, 512 MB), která se v nečinnosti vypíná, plus 1 GB volume (~$0,15/měsíc), který naskakuje i ve vypnutém stavu. Fly.io nabízí 7denní trial; pak je vyžadována platební metoda. Pro úplnou nulu mezi demy spusťte akci delete a později znovu deploy. Reálná cena při demo / nízkém provozu je zhruba $1–2 za prostředí měsíčně. Cloudflare Pages se pohodlně vejde do free tieru.",
       "readmeLink": "Kompletní postup v README v repozitáři"
     },
+    "backendStatus": {
+      "title": "Stav a zdraví backendu",
+      "description": "Každý backend zveřejňuje veřejnou status stránku, JSON endpoint pro health check, který hlídá načítání frontendu, a kompletní Swagger / OpenAPI dokumentaci. Cesty níže jsou relativní — přidejte je za base URL backendu prostředí, které chcete zkontrolovat.",
+      "baseUrlLabel": "Base URL (příklad pro sandbox-1)",
+      "baseUrlHint": "Místo sandbox-1 použijte libovolné env_id, např. be-sandbox-2.is-edustack.org.",
+      "statusTitle": "Status stránka",
+      "statusDescription": "Kořenová cesta backendu vykresluje jednoduchou status stránku, která potvrdí, že API běží, ukáže název prostředí, stav připojení k databázi a verzi Node.js runtime, a nabídne odkaz přímo do OpenAPI dokumentace. Slouží jako rychlá kontrola \"běží to?\" před otevřením frontendu.",
+      "statusPath": "/",
+      "healthTitle": "Health check a hlídání startu",
+      "healthDescription": "Frontend při každém načtení dotazuje GET /api/health a drží uživatele na loading obrazovce EduStack IS, dokud odpověď není healthy. Pokud backend startuje za studena, právě migruje databázi nebo je nedostupný, loader zůstává — uživatel se nikdy neocitne v napůl naběhlé aplikaci. Endpoint vrací i uptime, paměť, verzi, commit a build time, takže ho může scrapovat monitoring.",
+      "healthPath": "/api/health",
+      "healthSampleTitle": "Ukázková odpověď",
+      "docsTitle": "OpenAPI / Swagger dokumentace",
+      "docsDescription": "Každý backend obsahuje interaktivní Swagger UI pokrývající všechny moduly — auth, init, studenty, učitele, školy a další. Endpointy jsou seskupené podle modulů, schémata requestů a response jsou odvozená z DTO a po jednorázové autorizaci přes JWT lze živé endpointy volat přímo z prohlížeče.",
+      "docsPath": "/api/docs"
+    },
     "setup": {
       "title": "Nastavení systému",
-      "description": "Prvotní inicializace systému.",
+      "description": "Inicializace proběhne pro každé prostředí jednou. Dva přepínače v Deploy Environment workflow rozhodují, zda se systém sám naplní demo daty a zda přihlašovací obrazovka nabídne vývojářský helper — manuální obrazovka System Setup se objeví jen tehdy, když je auto-seed vypnutý.",
+      "workflowToggles": {
+        "title": "Přepínače deploy workflow",
+        "description": "Dvě zaškrtávací políčka v Deploy Environment workflow mění chování prvního startu sandboxu. Obě jsou ve výchozím stavu zapnutá, aby nově vytvořené env_id naběhlo rovnou s demo daty. Na již inicializovaná prostředí nemají žádný vliv — opakované spuštění s jinými hodnotami databázi nevrátí zpět.",
+        "helperTitle": "Enable login helper (demo-user picker on login screen) — deploy only",
+        "helperDescription": "Na přihlašovací obrazovce zobrazí vývojářský výběr uživatelů s přihlášením na jeden klik pro kohokoliv.",
+        "seedTitle": "Auto-seed demo data on first boot — deploy only",
+        "seedDescription": "Přeskočí manuální obrazovku System Setup a automaticky vytvoří školy, uživatele, rozvrhy a systémového administrátora."
+      },
+      "autoSeed": {
+        "title": "Automaticky naseedovaná demo data",
+        "description": "Když je auto-seed zapnutý, backend při prvním startu zcela přeskočí obrazovku System Setup a vloží kompletní demo dataset. Účet systémového administrátora se vytvoří automaticky a použije se k dohrání zbytku škol.",
+        "credentialsLabel": "Výchozí seed přihlašovací údaje",
+        "adminEmail": "admin@demo.test",
+        "adminPassword": "Demo1234!",
+        "securityNote": "Všechny účty vytvořené seederem sdílejí stejné heslo Demo1234!. Před zpřístupněním prostředí reálným uživatelům heslo otočte (nebo nepotřebné účty deaktivujte)."
+      },
+      "loginHelper": {
+        "title": "Login helper",
+        "description": "Dokud je login helper zapnutý, přihlašovací obrazovka vykresluje výběr všech uživatelů v systému; kliknutí na kartu přihlásí okamžitě, bez hesla. Zkratka se per-user deaktivuje ve chvíli, kdy si daný uživatel ve svém profilu změní heslo — nově zabezpečené účty pak přejdou na standardní email + heslo formulář, i když helper zůstane dostupný pro ostatní."
+      },
+      "manualTitle": "Manuální setup při prvním startu",
+      "manualDescription": "Když je auto-seed vypnutý, první request na frontend skončí na obrazovce System Setup. Vyberte mezi novou instalací (vytvoření prvního systémového administrátora hned teď) nebo obnovou z existující .sqlite zálohy.",
       "option1": {
-        "title": "Seedování dat (Doporučeno)",
-        "description": "Rychle naplňte systém demo školami, uživateli a rozvrhy pomocí příkazu `npm run db:seed`."
+        "title": "Nová instalace",
+        "description": "Vytvořte prvního systémového administrátora přes formulář v aplikaci: jméno, příjmení, admin email, heslo a potvrzení. Po odeslání běží systém s prázdnou databází — školy a uživatele přidáte následně z konzole systémového administrátora."
       },
       "option2": {
-        "title": "Od začátku (From Scratch)",
-        "description": "Začněte s prázdnou databází a vytvořte svého prvního Systémového Administrátora přes CLI."
+        "title": "Obnova ze zálohy",
+        "description": "Vyberte dlaždici \"Obnovit ze zálohy\" a nahrajte dříve exportovaný .sqlite soubor. Aktuální databáze se přepíše obsahem zálohy; tlačítko pro obnovu zůstává neaktivní, dokud není vybrán soubor."
       }
     },
     "login": {
       "title": "Autentizace uživatelů",
-      "description": "Způsoby přístupu do systému.",
+      "description": "Přihlašovací obrazovka má čtyři varianty — login helper zapnutý/vypnutý zkřížený s dostupností SSO — a navíc reset hesla. Konkrétní variantu uvidí uživatel podle deploy-time přepínače login helperu a podle toho, zda systémový administrátor nakonfiguroval nějakého SSO poskytovatele.",
       "helper": {
-        "title": "Login Pomocník (Helper)",
-        "description": "Vývojářský nástroj na přihlašovací obrazovce pro rychlé přepínání mezi demo identitami bez hesel."
+        "title": "Login helper",
+        "description": "Vývojářský picker na přihlašovací obrazovce pro přihlášení jako libovolný uživatel jedním kliknutím. Řízený deploy přepínačem; per-user se vypne, jakmile si daný uživatel ve svém profilu změní heslo."
       },
       "credentials": {
         "title": "E-mail a heslo",
-        "description": "Standardní zabezpečené přihlášení pomocí hashovaných hesel (Argon2) uložených v SQLite databázi."
+        "description": "Standardní zabezpečené přihlášení pomocí hashovaných hesel (Argon2) uložených v SQLite databázi. Vždy dostupné — i když je helper zapnutý, uživatel se může přepnout na klasický formulář."
       },
       "sso": {
         "title": "Integrace SSO",
-        "description": "Podpora podnikového přihlášení přes Google, GitHub a Microsoft účty."
+        "description": "Podnikové přihlášení přes Google, GitHub a Microsoft. Tlačítka SSO se objeví jen tehdy, když systémový administrátor nakonfiguroval alespoň jednoho poskytovatele; jinak obrazovka nabízí pouze e-mail a heslo."
+      },
+      "reset": {
+        "title": "Reset hesla",
+        "description": "Tok zapomenutého hesla dostupný z přihlašovací obrazovky. Tokenovaný reset odkaz se doručí přes nakonfigurovaný SMTP server (v sandboxech MailDev), jeho otevření přivede uživatele na formulář pro zadání nového hesla."
+      },
+      "screenshots": {
+        "helperSso": "Helper + SSO",
+        "helperNoSso": "Helper, bez SSO",
+        "credsSso": "E-mail a heslo + SSO",
+        "credsNoSso": "Pouze e-mail a heslo",
+        "reset": "Reset hesla"
       }
     },
     "roles": {
