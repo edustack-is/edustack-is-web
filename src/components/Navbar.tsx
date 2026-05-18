@@ -1,6 +1,6 @@
 'use client';
 
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {useTranslations} from 'next-intl';
 import {Link, usePathname} from '@/i18n/routing';
 import {Menu, X} from 'lucide-react';
@@ -14,8 +14,44 @@ export default function Navbar() {
   const t = useTranslations('Index');
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('');
 
   const isLanding = pathname === '/';
+
+  // Track which landing section is currently in view. Mirrors the scroll
+  // logic used by the manual sidebar: pick the last section whose top is
+  // above the navbar's bottom edge (with a small buffer).
+  useEffect(() => {
+    if (!isLanding) return;
+    const sectionIds = [...NAV_KEYS];
+    // Slightly larger than the scroll-mt value on every Section (48 = 192px)
+    // so the section is flagged as active immediately after clicking an
+    // anchor link instead of only after one more pixel of scroll.
+    const offset = 200;
+
+    const update = () => {
+      const scrollY = window.scrollY;
+      let current = '';
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.offsetTop - offset <= scrollY) {
+          current = id;
+        }
+      }
+      setActiveSection(current);
+    };
+
+    update();
+    window.addEventListener('scroll', update, {passive: true});
+    window.addEventListener('hashchange', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('hashchange', update);
+    };
+  }, [isLanding]);
+
+  const isActive = (key: string) => isLanding && activeSection === key;
 
   const renderAnchor = (
     key: string,
@@ -52,9 +88,22 @@ export default function Navbar() {
         {/* Desktop nav links */}
         <div className="hidden md:flex items-center gap-4 lg:gap-5 xl:gap-6 font-body text-sm text-muted">
           {NAV_KEYS.map((k) =>
-            renderAnchor(k, t(`nav.${k}`), 'hover:text-text transition-colors')
+            renderAnchor(
+              k,
+              t(`nav.${k}`),
+              isActive(k)
+                ? 'text-brand-purple font-semibold underline decoration-2 underline-offset-[6px] decoration-brand-purple transition-colors'
+                : 'hover:text-text transition-colors'
+            )
           )}
-          <Link href="/manual" className="hover:text-text transition-colors">
+          <Link
+            href="/manual"
+            className={
+              pathname.startsWith('/manual')
+                ? 'text-brand-purple font-semibold underline decoration-2 underline-offset-[6px] decoration-brand-purple transition-colors'
+                : 'hover:text-text transition-colors'
+            }
+          >
             {t('nav.manual')}
           </Link>
         </div>
@@ -89,7 +138,9 @@ export default function Navbar() {
               renderAnchor(
                 k,
                 t(`nav.${k}`),
-                'font-display text-2xl font-bold text-text',
+                isActive(k)
+                  ? 'font-display text-2xl font-bold text-brand-purple'
+                  : 'font-display text-2xl font-bold text-text',
                 () => setOpen(false)
               )
             )}

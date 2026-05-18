@@ -11,7 +11,7 @@ export default function AudienceSection() {
   const t = useTranslations('Index');
 
   return (
-    <section id="teachers" className="border-t border-line grid md:grid-cols-2">
+    <section id="teachers" className="border-t border-line grid md:grid-cols-2 scroll-mt-48">
       {PANELS.map(({key, c1, c2, role}, idx) => {
         const bullets = t.raw(`${key}.bullets`) as string[];
         return (

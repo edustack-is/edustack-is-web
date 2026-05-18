@@ -96,6 +96,9 @@ body {
 
 html {
   scroll-behavior: smooth;
+  /* Sticky navbar is ~120px tall (80px LogoWordmark + py-5 padding). */
+  /* This pushes every anchor-link target below the navbar with breathing room. */
+  scroll-padding-top: 11rem;
 }
 
 /* Existing background-grid utility — kept for compatibility */
