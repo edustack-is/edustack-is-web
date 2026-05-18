@@ -842,11 +842,11 @@
         "features": {
           "dashboard": {
             "title": "Barvy rolí — okamžitá identifikace",
-            "description": "Každá role školního personálu má vlastní akcentní barvu, takže okamžitě poznáte, v jaké roli je aktuální session (zvlášť užitečné, když systémový administrátor přepíná role přes 'Vstoupit jako'). Samotný layout dashboardu je pro všechny tři role identický — nepřečtené zprávy, osobní úkoly, nadcházející události. Rozdíly: Ředitel — modrá (a override 'Správce školy' dědí stejnou modrou, protože sdílí ředitelská oprávnění). Zástupce — světlejší sky. Učitel — červená. Tři screenshoty níže ukazují tutéž nástěnku vedle sebe; jediný rozdíl je barva akcentů v sidebaru, badge a primárních tlačítek.",
+            "description": "Každá role školního personálu má vlastní akcentní barvu, takže okamžitě poznáte, v jaké roli je aktuální session (zvlášť užitečné, když systémový administrátor přepíná role přes 'Vstoupit jako'). Ředitel a Zástupce vidí celoškolní dashboard — dnešní docházku, týdenní průměr, čekající omluvenky, počty žáků / tříd / učitelů / předmětů, plus nedávno přidané členy a nadcházející události. Učitel má štíhlejší osobní dashboard zaměřený na nejbližší vyučovací hodinu, chybějící zápisy v třídní knize a nepřečtené zprávy. Rozdíly: Ředitel — modrá (a override 'Správce školy' dědí stejnou modrou). Zástupce — světlejší sky. Učitel — červená.",
             "images": {
-              "headmaster": "Ředitel · modrá",
-              "deputy": "Zástupce · sky",
-              "teacher": "Učitel · červená"
+              "headmaster": "Ředitel · modrá — celoškolní přehled (docházka, průměr, žáci, třídy, učitelé, nedávno přidaní, nadcházející události)",
+              "deputy": "Zástupce · sky — stejný celoškolní přehled, liší se jen barva akcentu",
+              "teacher": "Učitel · červená — osobní pohled zaměřený na nejbližší hodinu, chybějící zápisy v třídní knize a nepřečtené zprávy"
             }
           },
           "schedule": {
@@ -926,19 +926,19 @@
         "features": {
           "tour": {
             "title": "Průvodce učitele",
-            "description": "Sekvenční průvodce pohledem učitele od přihlášení přes všechny běžné každodenní úkony. Učitel má v sidebaru méně položek než Ředitel / Zástupce — chybí 'Správa školy' — ale vše potřebné pro vedení hodin má na jeden klik.",
+            "description": "Průvodce každodenní prací učitele — rozvrh napříč pohledy, klasifikační workflow s modálem Nová známka a AI-vyhlazeným slovním hodnocením, docházka a omluvenky od rodičů, zápisy v třídní knize, zprávy a komunitní stream. Učitel má v sidebaru méně položek než Ředitel / Zástupce — chybí 'Správa školy' — ale vše potřebné pro vedení hodin má na jeden klik.",
             "images": {
-              "step1": "Krok 1",
-              "step2": "Krok 2",
-              "step3": "Krok 3",
-              "step4": "Krok 4",
-              "step5": "Krok 5",
-              "step6": "Krok 6",
-              "step7": "Krok 7",
-              "step8": "Krok 8",
-              "step9": "Krok 9",
-              "step10": "Krok 10",
-              "step11": "Krok 11"
+              "step1": "Rozvrh — vlastní týdenní rozvrh",
+              "step2": "Rozvrh — přepnutí na pohled třídy",
+              "step3": "Rozvrh — výběr jiného učitele",
+              "step4": "Rozvrh — pohled učebny",
+              "step5": "Klasifikace — žákovská kniha třídy",
+              "step6": "Klasifikace — výběr jiné třídy",
+              "step7": "Modál Nová známka — číselná známka a slovní hodnocení",
+              "step8": "AI vyhlazení — formální / povzbuzující / stručný návrh slovního hodnocení",
+              "step9": "Docházka — denní záznam přítomnosti po třídách",
+              "step10": "Třídní kniha — podepsání dnešních hodin",
+              "step11": "Zprávy — konverzace se studentem nebo rodičem"
             }
           }
         }
@@ -1103,17 +1103,17 @@
         "features": {
           "tour": {
             "title": "Průvodce rodiče",
-            "description": "Sekvenční průvodce pohledem rodiče — od přihlášení přes známky a rozvrh dítěte, komunikaci s učiteli až po proces omluvenek. Akcentní barva je zelená, takže rodič svou roli rozpozná na první pohled.",
+            "description": "Průvodce denním tokem rodiče — přehled známek a prospěchu dítěte, rozvrh včetně suplování, podávání a sledování omluvenek a komunikace se školou. Akcentní barva je zelená, takže rodič svou roli rozpozná na první pohled.",
             "images": {
-              "step1": "Krok 1",
-              "step2": "Krok 2",
-              "step3": "Krok 3",
-              "step4": "Krok 4",
-              "step5": "Krok 5",
-              "step6": "Krok 6",
-              "step7": "Krok 7",
-              "step8": "Krok 8",
-              "step9": "Krok 9"
+              "step1": "Nástěnka rodiče — přehled dítěte",
+              "step2": "Známky dítěte — klasifikace po předmětech",
+              "step3": "Rozvrh dítěte — denní / týdenní pohled",
+              "step4": "Docházka — nedávné absence a přítomné dny",
+              "step5": "Podání omluvenky — formulář nové omluvenky",
+              "step6": "Seznam omluvenek — sledování schválení učitelem",
+              "step7": "Zprávy — psaní učiteli nebo vedení školy",
+              "step8": "Komunita — nástěnka a školní oznámení",
+              "step9": "Události — RSVP na školní akce (třídní schůzky, výlety)"
             }
           }
         }
@@ -1125,16 +1125,16 @@
         "features": {
           "tour": {
             "title": "Průvodce žáka",
-            "description": "Sekvenční průvodce pohledem žáka — od přihlášení přes známky, rozvrh, zprávy a komunitu. Akcentní barva je oranžová, takže žák svou roli rozpozná na první pohled.",
+            "description": "Průvodce pohledem žáka — osobní nástěnka s nedávnými známkami a oznámeními, detailní klasifikace po předmětech s komentáři učitele, rozvrh včetně suplování, výukové materiály, zprávy a komunitní stream. Akcentní barva je oranžová, takže žák svou roli rozpozná na první pohled.",
             "images": {
-              "step1": "Krok 1",
-              "step2": "Krok 2",
-              "step3": "Krok 3",
-              "step4": "Krok 4",
-              "step5": "Krok 5",
-              "step6": "Krok 6",
-              "step7": "Krok 7",
-              "step8": "Krok 8"
+              "step1": "Nástěnka žáka — nedávné známky a oznámení",
+              "step2": "Známky — přehled po předmětech s váženými průměry",
+              "step3": "Detail známky — komentář učitele a slovní hodnocení",
+              "step4": "Rozvrh — týdenní rozvrh včetně suplování",
+              "step5": "Třídní kniha — co se v jednotlivých hodinách probíralo",
+              "step6": "Výukové materiály — soubory sdílené učiteli",
+              "step7": "Zprávy — konverzace s učitelem",
+              "step8": "Komunita — nástěnka, ankety a RSVP na události"
             }
           }
         }

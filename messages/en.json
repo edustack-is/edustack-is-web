@@ -842,11 +842,11 @@
         "features": {
           "dashboard": {
             "title": "Role colors — instant identification",
-            "description": "Every school-staff role gets its own accent color so you always know which role the current session is in (especially useful when a System Administrator hops between roles via 'Vstoupit jako'). The dashboard layout itself is identical for all three — unread messages, personal task list, upcoming events. The differences are: Headmaster — blue (and the 'School Administrator' override inherits the same blue, since it shares Headmaster's permissions). Deputy — a lighter sky. Teacher — red. The three screenshots below show the exact same dashboard side by side, with the only difference being the color of the sidebar accents, badges, and primary buttons.",
+            "description": "Every school-staff role gets its own accent color so you always know which role the current session is in (especially useful when a System Administrator hops between roles via 'Vstoupit jako'). Headmaster and Deputy see a school-wide dashboard — today's attendance, weekly average, pending excuses, total students / classes / teachers / subjects, plus recent members and upcoming events. Teacher gets a leaner, personal dashboard focused on the next lesson, missing class-book entries, and unread messages. The differences are: Headmaster — blue (and the 'School Administrator' override inherits the same blue). Deputy — a lighter sky. Teacher — red.",
             "images": {
-              "headmaster": "Headmaster · blue",
-              "deputy": "Deputy · sky",
-              "teacher": "Teacher · red"
+              "headmaster": "Headmaster · blue — school-wide overview (attendance, average, students, classes, teachers, recent members, upcoming events)",
+              "deputy": "Deputy · sky — identical school-wide overview, only the accent color differs",
+              "teacher": "Teacher · red — personal view focused on the next lesson, missing class-book entries, and unread messages"
             }
           },
           "schedule": {
@@ -926,19 +926,19 @@
         "features": {
           "tour": {
             "title": "Teacher walkthrough",
-            "description": "Sequential walkthrough of the teacher view from sign-in through every common daily action. Teachers see a leaner sidebar than Headmaster / Deputy — no 'Správa školy' submenu — but everything they need for running classes is one click away.",
+            "description": "Walkthrough of the teacher's day-to-day work — schedule across views, grading workflow with the new-grade modal and AI-polished verbal assessment, attendance and parent excuses, class-book entries, messaging, and the community feed. Teachers see a leaner sidebar than Headmaster / Deputy — no 'Správa školy' submenu — but everything they need for running classes is one click away.",
             "images": {
-              "step1": "Step 1",
-              "step2": "Step 2",
-              "step3": "Step 3",
-              "step4": "Step 4",
-              "step5": "Step 5",
-              "step6": "Step 6",
-              "step7": "Step 7",
-              "step8": "Step 8",
-              "step9": "Step 9",
-              "step10": "Step 10",
-              "step11": "Step 11"
+              "step1": "Schedule — own weekly timetable",
+              "step2": "Schedule — switch to a class view",
+              "step3": "Schedule — pick another teacher",
+              "step4": "Schedule — classroom view",
+              "step5": "Grading — class grade book",
+              "step6": "Grading — pick another class",
+              "step7": "New grade modal — numeric mark plus verbal assessment",
+              "step8": "AI polish — formal / encouraging / concise drafts for the verbal text",
+              "step9": "Attendance — daily presence record per class",
+              "step10": "Class book — sign today's lessons",
+              "step11": "Messages — write to a student or parent"
             }
           }
         }
@@ -1103,17 +1103,17 @@
         "features": {
           "tour": {
             "title": "Parent walkthrough",
-            "description": "Sequential walkthrough of the parent view — from sign-in to the child's grades and schedule, communication with teachers, and the absence-excuse flow. The accent color is green so parents instantly recognize their role.",
+            "description": "Walkthrough of the parent's daily flow — overview of the child's grades and progress, schedule with substitutions, the parental-excuse submission and tracking flow, and communication with the school. The accent color is green so parents instantly recognize their role.",
             "images": {
-              "step1": "Step 1",
-              "step2": "Step 2",
-              "step3": "Step 3",
-              "step4": "Step 4",
-              "step5": "Step 5",
-              "step6": "Step 6",
-              "step7": "Step 7",
-              "step8": "Step 8",
-              "step9": "Step 9"
+              "step1": "Parent dashboard — child overview",
+              "step2": "Child's grades — per-subject classification",
+              "step3": "Child's schedule — daily / weekly view",
+              "step4": "Attendance — recent absences and present days",
+              "step5": "Submit an excuse — new parental excuse form",
+              "step6": "Excuse list — track approval status from the teacher",
+              "step7": "Messages — write to a teacher or school management",
+              "step8": "Community — bulletin and school announcements",
+              "step9": "Events — RSVP to school events (parent meetings, trips)"
             }
           }
         }
@@ -1125,16 +1125,16 @@
         "features": {
           "tour": {
             "title": "Student walkthrough",
-            "description": "Sequential walkthrough of the student view — from sign-in to grades, schedule, messages, and community. The accent color is orange so students immediately recognize their role.",
+            "description": "Walkthrough of the student's view — personal dashboard with recent grades and announcements, per-subject classification details with teacher comments, schedule with substitutions, teaching materials, messaging, and the community feed. The accent color is orange so students instantly recognize their role.",
             "images": {
-              "step1": "Step 1",
-              "step2": "Step 2",
-              "step3": "Step 3",
-              "step4": "Step 4",
-              "step5": "Step 5",
-              "step6": "Step 6",
-              "step7": "Step 7",
-              "step8": "Step 8"
+              "step1": "Student dashboard — recent grades and announcements",
+              "step2": "Grades — overview across subjects with weighted averages",
+              "step3": "Grade detail — teacher's comment and verbal assessment",
+              "step4": "Schedule — weekly timetable with substitutions",
+              "step5": "Class book — what was taught each lesson",
+              "step6": "Teaching materials — files shared by teachers",
+              "step7": "Messages — conversation with a teacher",
+              "step8": "Community — bulletin, polls, and event RSVPs"
             }
           }
         }
