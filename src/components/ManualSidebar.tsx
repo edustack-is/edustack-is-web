@@ -2,7 +2,7 @@
 
 import {useState} from 'react';
 import {useTranslations} from 'next-intl';
-import {ChevronLeft, ChevronRight, Book, Users, Laptop, Settings, LogIn, GraduationCap, School, ShieldCheck, Heart, Layers, Database, Workflow, Network, KeyRound, Rocket, Activity} from 'lucide-react';
+import {ChevronLeft, ChevronRight, Book, Users, Laptop, Settings, LogIn, GraduationCap, School, ShieldCheck, Heart, Layers, Database, Workflow, Network, KeyRound, Rocket, Activity, Cpu} from 'lucide-react';
 
 interface ManualSidebarProps {
   activeSection: string;
@@ -10,9 +10,10 @@ interface ManualSidebarProps {
 
 const activeTextMap: Record<string, string> = {
   systemAdmin: 'text-brand-purple',
-  schoolStaff: 'text-brand-teal',
+  schoolStaff: 'text-brand-blue',
   schoolManagement: 'text-brand-blue',
-  parent: 'text-rose-500',
+  teacher: 'text-rose-500',
+  parent: 'text-emerald-500',
   student: 'text-brand-orange',
 };
 
@@ -44,6 +45,7 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
         { id: 'backend-status', label: t('backendStatus.title'), icon: Activity },
         { id: 'setup', label: t('setup.title'), icon: Settings },
         { id: 'login', label: t('login.title'), icon: LogIn },
+        { id: 'ai-tutor', label: t('aiTutor.title'), icon: Cpu },
       ]
     },
     {
@@ -52,8 +54,9 @@ export default function ManualSidebar({ activeSection }: ManualSidebarProps) {
       icon: Users,
       items: [
         { id: 'systemAdmin', label: t('roles.systemAdmin.title'), icon: ShieldCheck },
-        { id: 'schoolStaff', label: t('roles.schoolStaff.title'), icon: GraduationCap },
-        { id: 'schoolManagement', label: t('roles.schoolManagement.title'), icon: School },
+        { id: 'schoolStaff', label: t('roles.schoolStaff.title'), icon: School },
+        { id: 'schoolManagement', label: t('roles.schoolManagement.title'), icon: Settings },
+        { id: 'teacher', label: t('roles.teacher.title'), icon: GraduationCap },
         { id: 'parent', label: t('roles.parent.title'), icon: Heart },
         { id: 'student', label: t('roles.student.title'), icon: Users },
       ]

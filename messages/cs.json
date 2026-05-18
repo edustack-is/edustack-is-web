@@ -711,8 +711,36 @@
         "resetEmail": "Reset email (MailDev)"
       }
     },
+    "aiTutor": {
+      "title": "AI Tutor",
+      "description": "Konverzační AI asistent zabudovaný do každé role. Tutora ukotvují systémové prompty (Systémový Administrátor → Systémové prompty), takže zůstává v kontextu školy. Vyberte poskytovatele/model (Google Gemini, OpenAI, Anthropic Claude, OpenCode.ai — podle toho, co systémový administrátor nakonfiguroval), položte otázku a odpověď přijde streamovaně přímo do okna. Dostupné pro studenty, rodiče, učitele, zástupce, ředitele i systémové administrátory.",
+      "images": {
+        "overview": "AI Tutor — prázdná konverzace",
+        "chooseModel": "Výběr poskytovatele / modelu",
+        "ask": "Položení otázky"
+      }
+    },
     "roles": {
       "title": "Uživatelské role",
+      "intro": "Níže je projití systému po rolích. Oprávnění se v kódu z velké části překrývají, ale každá role systém používá jinak. Kartičky níže shrnují, co jednotlivé role reálně každý den dělají.",
+      "distinctions": {
+        "schoolManagement": {
+          "title": "Ředitel a Zástupce",
+          "body": "Primárně správa školy — příprava školního roku, třídy a předměty, plánovač rozvrhu, kurikulum, suplování, hromadné pozvánky uživatelů. Mají také přístup ke všemu, co dělá Učitel."
+        },
+        "teacher": {
+          "title": "Učitel",
+          "body": "Aktivní práce ve výuce — vedení hodin, klasifikace (číselná i slovní s AI vyhlazením), docházka, třídní kniha, přípravy a přímá komunikace."
+        },
+        "student": {
+          "title": "Žák",
+          "body": "Pouze pasivní konzument — vidí své známky, rozvrh, materiály, docházku, komunitní příspěvky a chatuje s AI Tutorem. Nic, co odešle, nemění stav školy."
+        },
+        "parent": {
+          "title": "Rodič",
+          "body": "Stejné jako žák (vidí známky dítěte, rozvrh, zprávy) plus jedna aktivní odpovědnost: posílá omluvenky absence ke schválení učitelem."
+        }
+      },
       "coreFunctions": "Klíčové funkce",
       "workflows": "Detailní pracovní postupy",
       "procedure": "Postup",
@@ -808,10 +836,19 @@
         }
       },
       "schoolStaff": {
-        "title": "Učitel / Zástupce / Ředitel",
-        "description": "Tyto tři role sdílejí identický každodenní toolkit. V kódu jsou PRINCIPAL, DEPUTY a (když systémový administrátor vstoupí přes 'Vstoupit jako…') ADMIN zaměnitelné — každý backendový endpoint, který povoluje jednoho z nich, povoluje všechny tři, a frontend je hradí jako jednu skupinu. Rozdíly jsou pouze kosmetické (barva sidebaru, popisek role, ikona). Pozn.: 'Správce školy' není reálná role — je to pouze označení, které si systémový administrátor může vybrat při vstupu do školy, s totožnými oprávněními jako Ředitel nebo Zástupce.",
-        "functions": "Každodenní práce ve třídě: zobrazení rozvrhu pro sebe / třídu / učitele / učebnu, zápis známek a slovních hodnocení (s AI vyhlazením textu), evidence docházky a schvalování omluvenek od rodičů, podepisování záznamů ve třídní knize, posílání 1:1 zpráv či hromadných oznámení a správa komunitní nástěnky, anket a událostí.",
+        "title": "Ředitel a Zástupce",
+        "description": "Ředitel a Zástupce mají v backendu stejná oprávnění a používají stejný sdílený toolkit jako Učitel (Rozvrh, Klasifikace, Docházka, Třídní kniha, Zprávy, Komunita). Jejich primárním úkolem je ale řídit školu — příprava školního roku, třídy a předměty, plánovač rozvrhu, kurikulum, suplování — což pokrývá kapitola Správa školy. Stránky níže popisují sdílený toolkit; specifické pohledy učitele jsou v navazující kapitole Učitel. Pozn.: 'Správce školy' není reálná role — je to pouze označení, které si systémový administrátor může vybrat při vstupu do školy přes 'Vstoupit jako…', se stejnými oprávněními jako Ředitel nebo Zástupce.",
+        "functions": "Stejný toolkit jako Učitel (rozvrh, klasifikace, docházka, třídní kniha, zprávy, komunita) plus kompletní sekce Správa školy (příprava roku, uživatelé, učebny, ŠVP, plánovač rozvrhu, suplování, vysvědčení, události).",
         "features": {
+          "dashboard": {
+            "title": "Barvy rolí — okamžitá identifikace",
+            "description": "Každá role školního personálu má vlastní akcentní barvu, takže okamžitě poznáte, v jaké roli je aktuální session (zvlášť užitečné, když systémový administrátor přepíná role přes 'Vstoupit jako'). Samotný layout dashboardu je pro všechny tři role identický — nepřečtené zprávy, osobní úkoly, nadcházející události. Rozdíly: Ředitel — modrá (a override 'Správce školy' dědí stejnou modrou, protože sdílí ředitelská oprávnění). Zástupce — světlejší sky. Učitel — červená. Tři screenshoty níže ukazují tutéž nástěnku vedle sebe; jediný rozdíl je barva akcentů v sidebaru, badge a primárních tlačítek.",
+            "images": {
+              "headmaster": "Ředitel · modrá",
+              "deputy": "Zástupce · sky",
+              "teacher": "Učitel · červená"
+            }
+          },
           "schedule": {
             "title": "Rozvrh",
             "description": "Pouze pro čtení. Mezi záložkami se přepínáte na svůj rozvrh, celou třídu, konkrétního učitele nebo učebnu — vše filtrovatelné podle školního roku a pololetí (nebo 'All' pro obě).",
@@ -878,6 +915,30 @@
               "eventsResponses": "Události po odpovědích",
               "eventsNew": "Vytvořit novou událost (modal)",
               "eventsAfterCreate": "Seznam událostí po vytvoření nové"
+            }
+          }
+        }
+      },
+      "teacher": {
+        "title": "Učitel",
+        "description": "Aktivní pracovník výuky — používá stejný sdílený toolkit jako Ředitel a Zástupce (Rozvrh, Klasifikace, Docházka, Třídní kniha, Zprávy, Komunita — viz předchozí kapitola), ale soustředí se na aktivní práci s předměty a známkami, ne na celoškolní konfiguraci. Učitel má v sidebaru méně položek (chybí sekce Správa školy) a jeho akcentní barva je červená, takže aktivní session je okamžitě rozpoznatelná.",
+        "functions": "Aktivní práce ve třídě: vedení předmětů, zápis známek s AI vyhlazením slovního hodnocení, podepisování záznamů ve třídní knize, evidence docházky, komunikace se studenty a rodiči a příspěvky do komunitního streamu.",
+        "features": {
+          "tour": {
+            "title": "Průvodce učitele",
+            "description": "Sekvenční průvodce pohledem učitele od přihlášení přes všechny běžné každodenní úkony. Učitel má v sidebaru méně položek než Ředitel / Zástupce — chybí 'Správa školy' — ale vše potřebné pro vedení hodin má na jeden klik.",
+            "images": {
+              "step1": "Krok 1",
+              "step2": "Krok 2",
+              "step3": "Krok 3",
+              "step4": "Krok 4",
+              "step5": "Krok 5",
+              "step6": "Krok 6",
+              "step7": "Krok 7",
+              "step8": "Krok 8",
+              "step9": "Krok 9",
+              "step10": "Krok 10",
+              "step11": "Krok 11"
             }
           }
         }
@@ -1037,60 +1098,45 @@
       },
       "parent": {
         "title": "Rodič",
-        "description": "Zákonný zástupce dohlížející na vzdělávací cestu svých dětí.",
-        "functions": "Monitoring známek a prospěchu, Elektronické omlouvání absencí, Komunikace s učiteli a vedením školy, Sledování rozvrhu a změn ve výuce svých dětí.",
-        "workflow1": {
-          "title": "Přehled o prospěchu",
-          "description": "Získávání informací o studijních výsledcích dítěte.",
-          "step1": "Zvolte profil konkrétního dítěte v dashboardu.",
-          "step2": "Otevřete modul 'Známky' pro zobrazení všech hodnocení.",
-          "step3": "Zkontrolujte vážené průměry a slovní komentáře vyučujících.",
-          "step4": "Nastavte si e-mailové notifikace pro nové záznamy v klasifikaci."
-        },
-        "workflow2": {
-          "title": "Omlouvání absencí",
-          "description": "Elektronické řešení omluvenek pro zameškané hodiny.",
-          "step1": "Přejděte do modulu 'Docházka'.",
-          "step2": "Klikněte na 'Nová omluvenka' a vyberte časové rozmezí.",
-          "step3": "Uveďte důvod absence (např. 'Nemoc').",
-          "step4": "Odešlete žádost a sledujte stav schválení třídním učitelem."
-        },
-        "workflow3": {
-          "title": "Přímá komunikace",
-          "description": "Efektivní zapojení do života školy.",
-          "step1": "V modulu 'Zprávy' zahajte novou konverzaci s učitelem.",
-          "step2": "Hlasujte v anketách a potvrzujte účast na akcích (RSVP).",
-          "step3": "Sledujte důležitá oznámení na celoškolní nástěnce.",
-          "step4": "Kontrolujte rozvrh pro termíny nadcházejících třídních schůzek."
+        "description": "Pohled rodiče je z velké části totožný s pohledem žáka — známky, rozvrh, podrobnosti klasifikace, komunitní oznámení, AI Tutor — navíc má ale jednu aktivní odpovědnost: posílá omluvenky absencí. Učitel / Zástupce / Ředitel pak každou omluvenku schvaluje nebo zamítá v záložce Docházka.",
+        "functions": "Sledování známek a prospěchu dítěte, prohlížení osobního rozvrhu a změn ve výuce, podávání a sledování omluvenek, komunikace s učiteli a vedením školy, účast v komunitních anketách a RSVP na události.",
+        "features": {
+          "tour": {
+            "title": "Průvodce rodiče",
+            "description": "Sekvenční průvodce pohledem rodiče — od přihlášení přes známky a rozvrh dítěte, komunikaci s učiteli až po proces omluvenek. Akcentní barva je zelená, takže rodič svou roli rozpozná na první pohled.",
+            "images": {
+              "step1": "Krok 1",
+              "step2": "Krok 2",
+              "step3": "Krok 3",
+              "step4": "Krok 4",
+              "step5": "Krok 5",
+              "step6": "Krok 6",
+              "step7": "Krok 7",
+              "step8": "Krok 8",
+              "step9": "Krok 9"
+            }
+          }
         }
       },
       "student": {
         "title": "Žák",
-        "description": "Primární uživatel vzdělávacích služeb. Zaměřuje se na osobní pokrok a denní organizaci.",
-        "functions": "Osobní dashboard s přehledem prospěchu, Interaktivní denní a týdenní rozvrh, Komunitní zprávy a hlasování, Přístup k výukovým materiálům, AI studijní partner pro podporu ve výuce.",
-        "workflow1": {
-          "title": "Sledování osobního pokroku",
-          "description": "Přehled o známkách a zpětné vazbě.",
-          "step1": "Zkontrolujte 'Dashboard' pro nejnovější známky a oznámení.",
-          "step2": "Otevřete modul 'Známky' pro detailní pohled podle předmětů.",
-          "step3": "Klikněte na konkrétní známku pro přečtení komentáře od učitele.",
-          "step4": "Sledujte svůj celkový průměr a predikci výsledné známky."
-        },
-        "workflow2": {
-          "title": "Interaktivní rozvrh",
-          "description": "Přístup k aktuálnímu rozvrhu a suplování.",
-          "step1": "Přejděte do modulu 'Rozvrh'.",
-          "step2": "Přepínejte mezi denním a týdenním zobrazením.",
-          "step3": "Změny v důsledku suplování uvidíte zvýrazněné oranžovou barvou.",
-          "step4": "Klikněte na hodinu pro zobrazení učebny a jména vyučujícího."
-        },
-        "workflow3": {
-          "title": "AI studijní partner",
-          "description": "Pomoc s látkou a tvorba shrnutí.",
-          "step1": "Otevřete chatovací panel 'AI studijní partner'.",
-          "step2": "Zeptejte se na nejasnosti v aktuálně probírané látce.",
-          "step3": "AI využívá kontext školy pro poskytnutí relevantních odpovědí.",
-          "step4": "Požádejte o shrnutí studijních materiálů nebo cvičné otázky."
+        "description": "Pasivní konzument systému. Vidí své známky a klasifikaci po předmětech, osobní rozvrh včetně suplování, docházku a výchovná opatření, výukové materiály, komunitní příspěvky a RSVP na události a chatuje s AI Tutorem. Nic, co žák odešle, nemění stav na straně školy — i konverzace s AI Tutorem je lokální pro daného žáka.",
+        "functions": "Osobní nástěnka s přehledem prospěchu, interaktivní denní a týdenní rozvrh, komunitní zprávy a ankety, přístup k výukovým materiálům, AI Tutor pro podporu ve výuce.",
+        "features": {
+          "tour": {
+            "title": "Průvodce žáka",
+            "description": "Sekvenční průvodce pohledem žáka — od přihlášení přes známky, rozvrh, zprávy a komunitu. Akcentní barva je oranžová, takže žák svou roli rozpozná na první pohled.",
+            "images": {
+              "step1": "Krok 1",
+              "step2": "Krok 2",
+              "step3": "Krok 3",
+              "step4": "Krok 4",
+              "step5": "Krok 5",
+              "step6": "Krok 6",
+              "step7": "Krok 7",
+              "step8": "Krok 8"
+            }
+          }
         }
       }
     },

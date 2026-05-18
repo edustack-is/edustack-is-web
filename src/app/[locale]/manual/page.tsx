@@ -62,9 +62,10 @@ import {
 
 const roleColorMap: Record<string, string> = {
     systemAdmin: 'brand-purple',
-    schoolStaff: 'brand-teal',
+    schoolStaff: 'brand-blue',
     schoolManagement: 'brand-blue',
-    parent: 'rose-500',
+    teacher: 'rose-500',
+    parent: 'emerald-500',
     student: 'brand-orange',
 };
 
@@ -75,6 +76,7 @@ const bgLightMap: Record<string, string> = {
     'brand-pink': 'bg-brand-pink/10',
     'brand-teal': 'bg-brand-teal/10',
     'rose-500': 'bg-rose-500/10',
+    'emerald-500': 'bg-emerald-500/10',
     'brand-orange': 'bg-brand-orange/10',
 };
 
@@ -85,6 +87,7 @@ const textMap: Record<string, string> = {
     'brand-pink': 'text-brand-pink',
     'brand-teal': 'text-brand-teal',
     'rose-500': 'text-rose-500',
+    'emerald-500': 'text-emerald-500',
     'brand-orange': 'text-brand-orange',
 };
 
@@ -95,6 +98,7 @@ const borderMap: Record<string, string> = {
     'brand-pink': 'border-brand-pink',
     'brand-teal': 'border-brand-teal',
     'rose-500': 'border-rose-500',
+    'emerald-500': 'border-emerald-500',
     'brand-orange': 'border-brand-orange',
 };
 
@@ -105,6 +109,7 @@ const bgFullMap: Record<string, string> = {
     'brand-pink': 'bg-brand-pink',
     'brand-teal': 'bg-brand-teal',
     'rose-500': 'bg-rose-500',
+    'emerald-500': 'bg-emerald-500',
     'brand-orange': 'bg-brand-orange',
 };
 
@@ -202,6 +207,15 @@ const SYSTEM_ADMIN_PROMPTS: SystemAdminFeature = {
 
 const SCHOOL_STAFF_FEATURES: SystemAdminFeature[] = [
     {
+        id: 'dashboard',
+        icon: Heart,
+        images: [
+            {id: 'headmaster', src: 'dashboard/00_headmaster.png'},
+            {id: 'deputy', src: 'dashboard/01_deputy.png'},
+            {id: 'teacher', src: 'dashboard/02_teacher.png'},
+        ],
+    },
+    {
         id: 'schedule',
         icon: Calendar,
         images: [
@@ -270,6 +284,71 @@ const SCHOOL_STAFF_FEATURES: SystemAdminFeature[] = [
         ],
     },
 ];
+
+const PARENT_FEATURES: SystemAdminFeature[] = [
+    {
+        id: 'tour',
+        icon: Heart,
+        images: [
+            {id: 'step1', src: '01.png'},
+            {id: 'step2', src: '02.png'},
+            {id: 'step3', src: '03.png'},
+            {id: 'step4', src: '04.png'},
+            {id: 'step5', src: '05.png'},
+            {id: 'step6', src: '06.png'},
+            {id: 'step7', src: '07.png'},
+            {id: 'step8', src: '08.png'},
+            {id: 'step9', src: '09.png'},
+        ],
+    },
+];
+
+const TEACHER_FEATURES: SystemAdminFeature[] = [
+    {
+        id: 'tour',
+        icon: GraduationCap,
+        images: [
+            {id: 'step1', src: '01.png'},
+            {id: 'step2', src: '02.png'},
+            {id: 'step3', src: '03.png'},
+            {id: 'step4', src: '04.png'},
+            {id: 'step5', src: '05.png'},
+            {id: 'step6', src: '06.png'},
+            {id: 'step7', src: '07.png'},
+            {id: 'step8', src: '08.png'},
+            {id: 'step9', src: '09.png'},
+            {id: 'step10', src: '10.png'},
+            {id: 'step11', src: '11.png'},
+        ],
+    },
+];
+
+const STUDENT_FEATURES: SystemAdminFeature[] = [
+    {
+        id: 'tour',
+        icon: GraduationCap,
+        images: [
+            {id: 'step1', src: '01.png'},
+            {id: 'step2', src: '02.png'},
+            {id: 'step3', src: '03.png'},
+            {id: 'step4', src: '04.png'},
+            {id: 'step5', src: '05.png'},
+            {id: 'step6', src: '06.png'},
+            {id: 'step7', src: '07.png'},
+            {id: 'step8', src: '08.png'},
+        ],
+    },
+];
+
+const AI_TUTOR_FEATURE: SystemAdminFeature = {
+    id: 'aiTutor',
+    icon: Cpu,
+    images: [
+        {id: 'overview', src: '00_overview.png'},
+        {id: 'chooseModel', src: '01_choose_model.png'},
+        {id: 'ask', src: '02_ask.png'},
+    ],
+};
 
 const SCHOOL_MANAGEMENT_FEATURES: SystemAdminFeature[] = [
     {
@@ -426,13 +505,15 @@ const BACKEND_EXAMPLE_BASE = 'https://be-sandbox-1.is-edustack.org';
 
 function RoleFeatureBlock({
     roleId,
+    keyPrefix,
     feature,
     imageBasePath,
     accentClass,
     translate,
     nested = false,
 }: {
-    roleId: string;
+    roleId?: string;
+    keyPrefix?: string;
     feature: SystemAdminFeature;
     imageBasePath: string;
     accentClass: string;
@@ -444,29 +525,30 @@ function RoleFeatureBlock({
         ? 'font-display text-xl md:text-2xl font-bold tracking-tight text-slate-900 dark:text-white'
         : 'font-display text-2xl md:text-3xl font-bold tracking-tight text-slate-900 dark:text-white';
     const Icon = feature.icon;
+    const base = keyPrefix ?? `roles.${roleId}.features.${feature.id}`;
 
     return (
         <div className="space-y-6">
             <div className="flex items-center gap-3">
                 <Icon className={`h-6 w-6 ${accentClass}`}/>
                 <HeadingTag className={headingClass}>
-                    {translate(`roles.${roleId}.features.${feature.id}.title`)}
+                    {translate(`${base}.title`)}
                 </HeadingTag>
             </div>
             <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
-                {translate(`roles.${roleId}.features.${feature.id}.description`)}
+                {translate(`${base}.description`)}
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {feature.images.map((img) => (
                     <div key={img.id} className={`space-y-2 ${img.wide ? 'col-span-2' : ''}`}>
                         <ScreenshotPlaceholder
                             src={`${imageBasePath}${img.src}`}
-                            alt={translate(`roles.${roleId}.features.${feature.id}.images.${img.id}`)}
+                            alt={translate(`${base}.images.${img.id}`)}
                             roleColor="brand-purple"
                             className="shadow-lg"
                         />
                         <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 text-center">
-                            {translate(`roles.${roleId}.features.${feature.id}.images.${img.id}`)}
+                            {translate(`${base}.images.${img.id}`)}
                         </p>
                     </div>
                 ))}
@@ -1783,6 +1865,36 @@ export default function ManualPage() {
                                 </div>
                             </section>
 
+                            {/* AI Tutor — same feature for every role */}
+                            <section id="ai-tutor" className="scroll-mt-32 space-y-16">
+                                <div className="space-y-6">
+                                    <div className="inline-flex p-4 rounded-[2rem] bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-white shadow-inner">
+                                        <Cpu className="h-10 w-10"/>
+                                    </div>
+                                    <h2 className="font-display text-3xl md:text-[46px] font-bold tracking-tight leading-[1.05]">
+                                        {t('aiTutor.title')}
+                                    </h2>
+                                    <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-[56rem]">
+                                        {t('aiTutor.description')}
+                                    </p>
+                                </div>
+                                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                    {AI_TUTOR_FEATURE.images.map((img) => (
+                                        <div key={img.id} className="space-y-2">
+                                            <ScreenshotPlaceholder
+                                                src={`/images/documentation/ai-tutor/${img.src}`}
+                                                alt={translate(`aiTutor.images.${img.id}`)}
+                                                roleColor="brand-purple"
+                                                className="shadow-lg"
+                                            />
+                                            <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 text-center">
+                                                {translate(`aiTutor.images.${img.id}`)}
+                                            </p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+
                         </div>
 
                         {/* Roles Section */}
@@ -1793,15 +1905,28 @@ export default function ManualPage() {
                                 </h2>
                                 <div className="h-2 w-32 bg-brand-purple rounded-full md:mx-0 mx-auto"/>
                                 <p className="text-base md:text-[19px] text-slate-500 dark:text-slate-400 font-medium max-w-[56rem]">
-                                    Comprehensive guide to specific procedures and features for each system identity.
+                                    {t('roles.intro')}
                                 </p>
+                                <ul className="grid gap-3 md:grid-cols-2 max-w-[56rem] text-left">
+                                    {(['schoolManagement', 'teacher', 'student', 'parent'] as const).map((k) => (
+                                        <li key={k} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40 px-5 py-4">
+                                            <p className="font-display text-sm font-bold text-slate-900 dark:text-white">
+                                                {translate(`roles.distinctions.${k}.title`)}
+                                            </p>
+                                            <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mt-1">
+                                                {translate(`roles.distinctions.${k}.body`)}
+                                            </p>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
 
                             <div className="space-y-64">
                                 {[
                                     {id: 'systemAdmin', icon: ShieldCheck},
-                                    {id: 'schoolStaff', icon: GraduationCap},
-                                    {id: 'schoolManagement', icon: School},
+                                    {id: 'schoolStaff', icon: School},
+                                    {id: 'schoolManagement', icon: Settings},
+                                    {id: 'teacher', icon: GraduationCap},
                                     {id: 'parent', icon: Heart},
                                     {id: 'student', icon: Users},
                                 ].map((role) => {
@@ -1849,8 +1974,16 @@ export default function ManualPage() {
                                                             role.id === 'systemAdmin'
                                                                 ? '/images/documentation/system-admin/00_dashboard.png'
                                                                 : role.id === 'schoolStaff'
-                                                                    ? '/images/documentation/school-staff/00_dashboard.png'
-                                                                    : undefined
+                                                                    ? '/images/documentation/school-staff/dashboard/00_headmaster.png'
+                                                                    : role.id === 'teacher'
+                                                                        ? '/images/documentation/teacher/00.png'
+                                                                        : role.id === 'schoolManagement'
+                                                                            ? '/images/documentation/school-staff/dashboard/00_headmaster.png'
+                                                                            : role.id === 'student'
+                                                                                ? '/images/documentation/student/00.png'
+                                                                                : role.id === 'parent'
+                                                                                    ? '/images/documentation/parent/00.png'
+                                                                                    : undefined
                                                         }
                                                         className="relative z-10 aspect-video shadow-2xl"
                                                     />
@@ -1858,7 +1991,7 @@ export default function ManualPage() {
                                             </div>
 
                                             {/* Detailed Workflows (skipped for roles that have custom feature blocks below) */}
-                                            {!['systemAdmin', 'schoolStaff', 'schoolManagement'].includes(role.id) && (
+                                            {!['systemAdmin', 'schoolStaff', 'teacher', 'schoolManagement', 'student', 'parent'].includes(role.id) && (
                                             <div className="space-y-32">
                                                 <div className="flex items-center gap-6">
                                                     <h4 className="font-display text-base md:text-lg font-bold tracking-[0.08em] uppercase opacity-30 italic">{t('roles.workflows')}</h4>
@@ -2046,6 +2179,22 @@ export default function ManualPage() {
                                                 </div>
                                             )}
 
+                                            {/* Teacher feature blocks */}
+                                            {role.id === 'teacher' && (
+                                                <div className="space-y-32 pt-16">
+                                                    {TEACHER_FEATURES.map((feature) => (
+                                                        <RoleFeatureBlock
+                                                            key={feature.id}
+                                                            roleId="teacher"
+                                                            feature={feature}
+                                                            imageBasePath="/images/documentation/teacher/"
+                                                            accentClass="text-rose-500"
+                                                            translate={translate}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            )}
+
                                             {/* School management feature blocks (Headmaster + Deputy only) */}
                                             {role.id === 'schoolManagement' && (
                                                 <div className="space-y-32 pt-16">
@@ -2056,6 +2205,38 @@ export default function ManualPage() {
                                                             feature={feature}
                                                             imageBasePath="/images/documentation/school-management/"
                                                             accentClass="text-brand-blue"
+                                                            translate={translate}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            )}
+
+                                            {/* Student feature blocks */}
+                                            {role.id === 'student' && (
+                                                <div className="space-y-32 pt-16">
+                                                    {STUDENT_FEATURES.map((feature) => (
+                                                        <RoleFeatureBlock
+                                                            key={feature.id}
+                                                            roleId="student"
+                                                            feature={feature}
+                                                            imageBasePath="/images/documentation/student/"
+                                                            accentClass="text-brand-orange"
+                                                            translate={translate}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            )}
+
+                                            {/* Parent feature blocks */}
+                                            {role.id === 'parent' && (
+                                                <div className="space-y-32 pt-16">
+                                                    {PARENT_FEATURES.map((feature) => (
+                                                        <RoleFeatureBlock
+                                                            key={feature.id}
+                                                            roleId="parent"
+                                                            feature={feature}
+                                                            imageBasePath="/images/documentation/parent/"
+                                                            accentClass="text-emerald-500"
                                                             translate={translate}
                                                         />
                                                     ))}

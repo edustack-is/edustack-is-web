@@ -711,8 +711,36 @@
         "resetEmail": "Reset email (MailDev)"
       }
     },
+    "aiTutor": {
+      "title": "AI Tutor",
+      "description": "Conversational AI assistant embedded in every role. The tutor is grounded by the system prompts (System Administrator → System Prompts) so it stays scoped to school content. Pick a provider/model (Google Gemini, OpenAI, Anthropic Claude, OpenCode.ai — whichever the System Administrator has configured), ask a question, and the answer streams back in the same window. Available to students, parents, teachers, deputies, headmasters, and system admins.",
+      "images": {
+        "overview": "AI Tutor — empty conversation",
+        "chooseModel": "Pick a provider / model",
+        "ask": "Ask a question"
+      }
+    },
     "roles": {
       "title": "User Roles",
+      "intro": "Below is the per-role walkthrough. Permissions overlap heavily in code, but each role uses the system in a different way. The cards below summarize what each role actually does day-to-day.",
+      "distinctions": {
+        "schoolManagement": {
+          "title": "Headmaster & Deputy",
+          "body": "Primary school management — academic year setup, classes and subjects, schedule planner, curriculum, substitutions, bulk user invites. They also have access to everything Teacher does."
+        },
+        "teacher": {
+          "title": "Teacher",
+          "body": "Active work in the classroom — running lessons, grading (numeric + verbal with AI polish), attendance, class book, lesson preparations, and direct messaging."
+        },
+        "student": {
+          "title": "Student",
+          "body": "View-only consumer — sees their own grades, schedule, materials, attendance, community posts, and chats with the AI Tutor. Nothing they submit changes school state."
+        },
+        "parent": {
+          "title": "Parent",
+          "body": "Mostly view-only like the student (sees the child's grades, schedule, messages) plus one active responsibility: submitting absence excuses for the teacher to approve."
+        }
+      },
       "coreFunctions": "Core Functions",
       "workflows": "Detailed Workflows",
       "procedure": "Procedure",
@@ -808,10 +836,19 @@
         }
       },
       "schoolStaff": {
-        "title": "Teacher / Deputy / Headmaster",
-        "description": "These three roles share an identical day-to-day toolkit. In code, PRINCIPAL, DEPUTY, and (when a system administrator enters via 'Vstoupit jako…') ADMIN are interchangeable — every backend endpoint that admits one of them admits all three, and the frontend gates them as a single group. The only differences are cosmetic (sidebar accent color, role label, icon). Note: 'School Administrator' is not a real role — it's a label the System Administrator can pick when entering a tenant, with the same permissions as Headmaster or Deputy.",
-        "functions": "Day-to-day classroom work: viewing schedules across self / class / teacher / room, recording numeric and verbal grades (with AI-polish for verbal evaluations), tracking attendance and approving parent excuses, signing class-book entries, sending direct or broadcast messages, and running community bulletins, polls, and events.",
+        "title": "Headmaster & Deputy",
+        "description": "Headmaster and Deputy share the same backend permissions and use the same shared classroom toolkit as Teacher (Schedule, Grading, Attendance, Class Book, Messages, Community). Their primary job, though, is running the school — academic year setup, classes and subjects, the schedule planner, curriculum, substitutions — covered in the School Management chapter. The pages below document the shared toolkit; teacher-specific walkthroughs live in the Teacher chapter that follows. Note: 'School Administrator' is not a real role — it's a label the System Administrator can pick when entering a tenant via 'Vstoupit jako…', with the same permissions as Headmaster or Deputy.",
+        "functions": "Same toolkit as Teacher (schedule, grading, attendance, class book, messages, community) plus the full School Management section (academic year setup, users, classrooms, ŠVP, schedule planner, substitutions, report cards, events).",
         "features": {
+          "dashboard": {
+            "title": "Role colors — instant identification",
+            "description": "Every school-staff role gets its own accent color so you always know which role the current session is in (especially useful when a System Administrator hops between roles via 'Vstoupit jako'). The dashboard layout itself is identical for all three — unread messages, personal task list, upcoming events. The differences are: Headmaster — blue (and the 'School Administrator' override inherits the same blue, since it shares Headmaster's permissions). Deputy — a lighter sky. Teacher — red. The three screenshots below show the exact same dashboard side by side, with the only difference being the color of the sidebar accents, badges, and primary buttons.",
+            "images": {
+              "headmaster": "Headmaster · blue",
+              "deputy": "Deputy · sky",
+              "teacher": "Teacher · red"
+            }
+          },
           "schedule": {
             "title": "Schedule",
             "description": "View-only timetable. Switch tabs to see your own schedule, an entire class, a specific teacher, or a classroom — all filterable by academic year and semester (or 'All' to see both halves).",
@@ -878,6 +915,30 @@
               "eventsResponses": "Events after RSVPs",
               "eventsNew": "Create new event (modal)",
               "eventsAfterCreate": "Events list after creating a new event"
+            }
+          }
+        }
+      },
+      "teacher": {
+        "title": "Teacher",
+        "description": "Active classroom worker — uses the same shared toolkit as Headmaster and Deputy (Schedule, Grading, Attendance, Class Book, Messages, Community — see the previous chapter) but focuses on active subject and grade work rather than school-wide configuration. Teachers see a leaner sidebar without the School Management section, and their accent color is red so any active session is instantly recognisable.",
+        "functions": "Active classroom work: leading subjects, recording grades with AI-polished verbal assessments, signing class-book entries, tracking attendance, communicating with students and parents, contributing to the community feed.",
+        "features": {
+          "tour": {
+            "title": "Teacher walkthrough",
+            "description": "Sequential walkthrough of the teacher view from sign-in through every common daily action. Teachers see a leaner sidebar than Headmaster / Deputy — no 'Správa školy' submenu — but everything they need for running classes is one click away.",
+            "images": {
+              "step1": "Step 1",
+              "step2": "Step 2",
+              "step3": "Step 3",
+              "step4": "Step 4",
+              "step5": "Step 5",
+              "step6": "Step 6",
+              "step7": "Step 7",
+              "step8": "Step 8",
+              "step9": "Step 9",
+              "step10": "Step 10",
+              "step11": "Step 11"
             }
           }
         }
@@ -1037,60 +1098,45 @@
       },
       "parent": {
         "title": "Parent",
-        "description": "The guardian overseeing the educational journey of their children.",
-        "functions": "Monitoring grades and academic progress, Electronic absence excuse submission, Communication with teachers and school management, Viewing child's personalized schedule and substitutions.",
-        "workflow1": {
-          "title": "Academic Oversight",
-          "description": "Stay informed about your child's performance.",
-          "step1": "Select your child's profile from the dashboard switcher.",
-          "step2": "Open the 'Grades' module to see all recent assessments.",
-          "step3": "Review weighted averages and teacher comments for each subject.",
-          "step4": "Set up email notifications for new grade entries."
-        },
-        "workflow2": {
-          "title": "Absence Management",
-          "description": "Officially excuse your child's missed lessons.",
-          "step1": "Navigate to the 'Attendance' module.",
-          "step2": "Click 'New Excuse' and select the date range.",
-          "step3": "Provide the reason for the absence (e.g., 'Medical').",
-          "step4": "Submit the request and monitor its approval status by the teacher."
-        },
-        "workflow3": {
-          "title": "Direct Communication",
-          "description": "Engage with the school community effectively.",
-          "step1": "Use the 'Messages' module to start a thread with a teacher.",
-          "step2": "Participate in school polls and respond to event invitations (RSVP).",
-          "step3": "Read pinned announcements on the school bulletin board.",
-          "step4": "Check the schedule for upcoming Parent-Teacher meetings."
+        "description": "Mostly mirrors the Student view of their child — grades, schedule, classification details, community announcements, AI Tutor — but adds one active responsibility: submitting parental excuses for absences. The Teacher / Deputy / Headmaster then approves or rejects each excuse from the Attendance tab.",
+        "functions": "View child's grades and progress, view personal schedule and substitutions, submit and track parental excuses for absences, message teachers and school management, participate in community polls and event RSVPs.",
+        "features": {
+          "tour": {
+            "title": "Parent walkthrough",
+            "description": "Sequential walkthrough of the parent view — from sign-in to the child's grades and schedule, communication with teachers, and the absence-excuse flow. The accent color is green so parents instantly recognize their role.",
+            "images": {
+              "step1": "Step 1",
+              "step2": "Step 2",
+              "step3": "Step 3",
+              "step4": "Step 4",
+              "step5": "Step 5",
+              "step6": "Step 6",
+              "step7": "Step 7",
+              "step8": "Step 8",
+              "step9": "Step 9"
+            }
+          }
         }
       },
       "student": {
         "title": "Student",
-        "description": "The primary user of educational services. Focuses on personal progress and daily organization.",
-        "functions": "Personal dashboard with grade overview, Interactive daily and weekly schedule, Community messaging and polls, Access to teaching materials, AI Study Partner for educational support.",
-        "workflow1": {
-          "title": "Personal Progress Tracking",
-          "description": "View grades and teacher feedback.",
-          "step1": "Check the 'Dashboard' for recent grades and announcements.",
-          "step2": "Open the 'Grades' module to see a subject-by-subject view.",
-          "step3": "Click on any grade to read specific teacher comments.",
-          "step4": "Monitor your overall average and predicted final grade."
-        },
-        "workflow2": {
-          "title": "Interactive Timetable",
-          "description": "Access your schedule and substitution info.",
-          "step1": "Go to the 'Schedule' module.",
-          "step2": "Toggle between Daily and Weekly views.",
-          "step3": "Substitution changes will be highlighted in orange.",
-          "step4": "Click on a lesson to see the assigned room and teacher."
-        },
-        "workflow3": {
-          "title": "AI Study Partner",
-          "description": "Get help with concepts and summaries.",
-          "step1": "Open the 'AI Study Partner' chat drawer.",
-          "step2": "Ask a question about your current subject topics.",
-          "step3": "The AI uses school context to provide relevant answers.",
-          "step4": "Request summaries of teaching materials or practice quiz questions."
+        "description": "View-only consumer of the system. Sees own grades and per-subject classification, personal schedule with substitutions, attendance and disciplinary records, teaching materials, community posts and event RSVPs, and chats with the AI Tutor. Nothing the student submits changes school-side state — even the AI Tutor conversation is local to the student.",
+        "functions": "Personal dashboard with grade overview, interactive daily and weekly schedule, community messaging and polls, access to teaching materials, AI Tutor for educational support.",
+        "features": {
+          "tour": {
+            "title": "Student walkthrough",
+            "description": "Sequential walkthrough of the student view — from sign-in to grades, schedule, messages, and community. The accent color is orange so students immediately recognize their role.",
+            "images": {
+              "step1": "Step 1",
+              "step2": "Step 2",
+              "step3": "Step 3",
+              "step4": "Step 4",
+              "step5": "Step 5",
+              "step6": "Step 6",
+              "step7": "Step 7",
+              "step8": "Step 8"
+            }
+          }
         }
       }
     },
