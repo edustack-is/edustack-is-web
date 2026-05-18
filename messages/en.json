@@ -934,8 +934,8 @@
               "step4": "Schedule — classroom view",
               "step5": "Grading — class grade book",
               "step6": "Grading — pick another class",
-              "step7": "New grade modal — numeric mark plus verbal assessment",
-              "step8": "AI polish — formal / encouraging / concise drafts for the verbal text",
+              "step7": "Grades — overview for the selected student",
+              "step8": "Attendance — student presence in class",
               "step9": "Attendance — daily presence record per class",
               "step10": "Class book — sign today's lessons",
               "step11": "Messages — write to a student or parent"
@@ -1103,17 +1103,15 @@
         "features": {
           "tour": {
             "title": "Parent walkthrough",
-            "description": "Walkthrough of the parent's daily flow — overview of the child's grades and progress, schedule with substitutions, the parental-excuse submission and tracking flow, and communication with the school. The accent color is green so parents instantly recognize their role.",
+            "description": "Walkthrough of the parent's daily flow — children's and teachers' schedules, grade overview, excuse submission, class book, messaging with the school, and community events. The accent color is green so parents instantly recognize their role.",
             "images": {
-              "step1": "Parent dashboard — child overview",
-              "step2": "Child's grades — per-subject classification",
-              "step3": "Child's schedule — daily / weekly view",
-              "step4": "Attendance — recent absences and present days",
-              "step5": "Submit an excuse — new parental excuse form",
-              "step6": "Excuse list — track approval status from the teacher",
-              "step7": "Messages — write to a teacher or school management",
-              "step8": "Community — bulletin and school announcements",
-              "step9": "Events — RSVP to school events (parent meetings, trips)"
+              "step1": "Schedule — parent sees the timetable of the children they are linked to and the teachers' timetables",
+              "step2": "Schedule — teacher selection detail",
+              "step3": "Grades — overview with a picker for each child the parent is linked to",
+              "step4": "Attendance — submit a new parental excuse for the selected child",
+              "step5": "Class book — overview of activities for the selected day",
+              "step6": "Messages — module for sending and reading messages between users",
+              "step7": "Community — overview of planned events with the option to RSVP"
             }
           }
         }
@@ -1125,16 +1123,16 @@
         "features": {
           "tour": {
             "title": "Student walkthrough",
-            "description": "Walkthrough of the student's view — personal dashboard with recent grades and announcements, per-subject classification details with teacher comments, schedule with substitutions, teaching materials, messaging, and the community feed. The accent color is orange so students instantly recognize their role.",
+            "description": "Walkthrough of the student's view — personal timetable, grade overview, parental-excuse status, class book, messaging, polls, the community feed (read-only for students), and events. The accent color is orange so students instantly recognize their role.",
             "images": {
-              "step1": "Student dashboard — recent grades and announcements",
-              "step2": "Grades — overview across subjects with weighted averages",
-              "step3": "Grade detail — teacher's comment and verbal assessment",
-              "step4": "Schedule — weekly timetable with substitutions",
-              "step5": "Class book — what was taught each lesson",
-              "step6": "Teaching materials — files shared by teachers",
-              "step7": "Messages — conversation with a teacher",
-              "step8": "Community — bulletin, polls, and event RSVPs"
+              "step1": "Schedule — student's timetable with subject detail",
+              "step2": "Grades — overview of the student's academic results",
+              "step3": "Parental excuses — submitted excuses and teacher approval / rejection status",
+              "step4": "Class book",
+              "step5": "Messages — inbox overview plus chat window for talking with other users",
+              "step6": "Polls — vote and view results",
+              "step7": "Community — read-only feed of school announcements",
+              "step8": "Events — invitations with the option to RSVP"
             }
           }
         }

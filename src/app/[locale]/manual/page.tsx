@@ -297,8 +297,6 @@ const PARENT_FEATURES: SystemAdminFeature[] = [
             {id: 'step5', src: '05.png'},
             {id: 'step6', src: '06.png'},
             {id: 'step7', src: '07.png'},
-            {id: 'step8', src: '08.png'},
-            {id: 'step9', src: '09.png'},
         ],
     },
 ];

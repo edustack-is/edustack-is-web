@@ -934,8 +934,8 @@
               "step4": "Rozvrh — pohled učebny",
               "step5": "Klasifikace — žákovská kniha třídy",
               "step6": "Klasifikace — výběr jiné třídy",
-              "step7": "Modál Nová známka — číselná známka a slovní hodnocení",
-              "step8": "AI vyhlazení — formální / povzbuzující / stručný návrh slovního hodnocení",
+              "step7": "Známky — přehled známek pro zvolené dítě",
+              "step8": "Přítomnost na výuce",
               "step9": "Docházka — denní záznam přítomnosti po třídách",
               "step10": "Třídní kniha — podepsání dnešních hodin",
               "step11": "Zprávy — konverzace se studentem nebo rodičem"
@@ -1103,17 +1103,15 @@
         "features": {
           "tour": {
             "title": "Průvodce rodiče",
-            "description": "Průvodce denním tokem rodiče — přehled známek a prospěchu dítěte, rozvrh včetně suplování, podávání a sledování omluvenek a komunikace se školou. Akcentní barva je zelená, takže rodič svou roli rozpozná na první pohled.",
+            "description": "Průvodce denním tokem rodiče — rozvrh dětí i učitelů, přehled klasifikace, podávání omluvenek, třídní kniha, komunikace se školou a komunitní události. Akcentní barva je zelená, takže rodič svou roli rozpozná na první pohled.",
             "images": {
-              "step1": "Nástěnka rodiče — přehled dítěte",
-              "step2": "Známky dítěte — klasifikace po předmětech",
-              "step3": "Rozvrh dítěte — denní / týdenní pohled",
-              "step4": "Docházka — nedávné absence a přítomné dny",
-              "step5": "Podání omluvenky — formulář nové omluvenky",
-              "step6": "Seznam omluvenek — sledování schválení učitelem",
-              "step7": "Zprávy — psaní učiteli nebo vedení školy",
-              "step8": "Komunita — nástěnka a školní oznámení",
-              "step9": "Události — RSVP na školní akce (třídní schůzky, výlety)"
+              "step1": "Rozvrh hodin — rodič vidí rozvrh dětí, ke kterým má vazbu, i rozvrh hodin učitelů",
+              "step2": "Rozvrh hodin — detail výběru vyučujícího",
+              "step3": "Klasifikace — přehled známek s možností výběru dítěte, u kterého je rodič",
+              "step4": "Docházka — vložení nové omluvenky pro zvolené dítě",
+              "step5": "Třídní kniha — přehled činností pro zvolený den",
+              "step6": "Zprávy — modul pro odesílání a čtení zpráv mezi uživateli",
+              "step7": "Komunita — přehled plánovaných událostí s možností vyjádřit svou účast"
             }
           }
         }
@@ -1125,16 +1123,16 @@
         "features": {
           "tour": {
             "title": "Průvodce žáka",
-            "description": "Průvodce pohledem žáka — osobní nástěnka s nedávnými známkami a oznámeními, detailní klasifikace po předmětech s komentáři učitele, rozvrh včetně suplování, výukové materiály, zprávy a komunitní stream. Akcentní barva je oranžová, takže žák svou roli rozpozná na první pohled.",
+            "description": "Průvodce pohledem žáka — osobní rozvrh, přehled známek, stav omluvenek, třídní kniha, zprávy, ankety, komunitní stream (pro žáky pouze pro čtení) a události. Akcentní barva je oranžová, takže žák svou roli rozpozná na první pohled.",
             "images": {
-              "step1": "Nástěnka žáka — nedávné známky a oznámení",
-              "step2": "Známky — přehled po předmětech s váženými průměry",
-              "step3": "Detail známky — komentář učitele a slovní hodnocení",
-              "step4": "Rozvrh — týdenní rozvrh včetně suplování",
-              "step5": "Třídní kniha — co se v jednotlivých hodinách probíralo",
-              "step6": "Výukové materiály — soubory sdílené učiteli",
-              "step7": "Zprávy — konverzace s učitelem",
-              "step8": "Komunita — nástěnka, ankety a RSVP na události"
+              "step1": "Rozvrh hodin studenta s detailem předmětu",
+              "step2": "Známky — přehled studijních výsledků žáka",
+              "step3": "Omluvenky od rodičů a informace o schválení / zamítnutí vyučujícím",
+              "step4": "Třídní kniha",
+              "step5": "Zprávy — přehled zpráv a chatovací okno pro chatování s dalšími uživateli",
+              "step6": "Ankety — hlasování a zobrazení výsledků",
+              "step7": "Komunita — přehled komunitních sdělení (pro žáky pouze pro čtení)",
+              "step8": "Události — pozvánky na události s možností vyjádřit účast"
             }
           }
         }
