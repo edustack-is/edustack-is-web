@@ -141,7 +141,12 @@
       "eyebrow": "Live demo",
       "title": "Click around. Bring it to class.",
       "sub": "A live testing instance with seed data for every role. Reset every Monday — bring a fresh class without fixtures going stale.",
-      "url": "sandbox-1.is-edustack.org"
+      "url": "sandbox-1.is-edustack.org",
+      "feedbackTitle": "Tried it? Share your feedback.",
+      "feedbackStudent": "Student feedback form",
+      "feedbackStudentUrl": "https://forms.gle/sGXe5hTc8z1ZJqcu5",
+      "feedbackTeacher": "Teacher feedback form",
+      "feedbackTeacherUrl": "https://forms.gle/nzwLo8HLBuPfBfSD7"
     },
     "source": {
       "eyebrow": "Open source",
