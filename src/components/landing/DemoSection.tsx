@@ -45,6 +45,30 @@ export default function DemoSection() {
           >
             {url} <span aria-hidden>↗</span>
           </a>
+
+          <div className="mt-9 pt-7 border-t border-white/20">
+            <p className="font-body text-base md:text-lg font-bold mb-4">
+              {t('demo.feedbackTitle')}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href={t('demo.feedbackStudentUrl')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/15 hover:bg-white/25 text-white font-body text-sm md:text-base font-bold no-underline border border-white/25 transition-colors"
+              >
+                {t('demo.feedbackStudent')} <span aria-hidden>↗</span>
+              </a>
+              <a
+                href={t('demo.feedbackTeacherUrl')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/15 hover:bg-white/25 text-white font-body text-sm md:text-base font-bold no-underline border border-white/25 transition-colors"
+              >
+                {t('demo.feedbackTeacher')} <span aria-hidden>↗</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </Section>
