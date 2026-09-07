@@ -535,7 +535,7 @@
       },
       "stepsTitle": "Quick start",
       "steps": {
-        "clone": { "title": "Clone the repository", "command": "git clone '<repo>' && cd edu-stack-is-sandbox" },
+        "clone": { "title": "Clone the repository", "command": "git clone https://github.com/edustack-is/edustack-is-sandbox.git && cd edustack-is-sandbox" },
         "env": { "title": "Copy the env template", "command": "cp .env.example .env" },
         "secrets": { "title": "Generate the two required secrets", "command": "openssl rand -base64 64  # JWT_SECRET\nopenssl rand -base64 32  # ENCRYPTION_KEY" },
         "install": { "title": "Install workspaces", "command": "npm install" },

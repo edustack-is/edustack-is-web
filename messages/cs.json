@@ -535,7 +535,7 @@
       },
       "stepsTitle": "Rychlý start",
       "steps": {
-        "clone": { "title": "Naklonujte repozitář", "command": "git clone '<repo>' && cd edu-stack-is-sandbox" },
+        "clone": { "title": "Naklonujte repozitář", "command": "git clone https://github.com/edustack-is/edustack-is-sandbox.git && cd edustack-is-sandbox" },
         "env": { "title": "Zkopírujte šablonu .env", "command": "cp .env.example .env" },
         "secrets": { "title": "Vygenerujte dvě povinné tajné hodnoty", "command": "openssl rand -base64 64  # JWT_SECRET\nopenssl rand -base64 32  # ENCRYPTION_KEY" },
         "install": { "title": "Nainstalujte workspacy", "command": "npm install" },
