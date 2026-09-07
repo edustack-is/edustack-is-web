@@ -8,7 +8,7 @@ import {LogoWordmark} from '@/components/brand/Logo';
 import {LangToggle} from '@/components/LangToggle';
 import {ThemeToggle} from '@/components/ThemeToggle';
 
-const NAV_KEYS = ['idea', 'how', 'learn', 'tour', 'teachers', 'method', 'downloads'] as const;
+const NAV_KEYS = ['idea', 'how', 'learn', 'tour', 'teachers', 'method', 'downloads', 'thesis'] as const;
 
 export default function Navbar() {
   const t = useTranslations('Index');

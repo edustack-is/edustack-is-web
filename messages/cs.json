@@ -12,15 +12,16 @@
       "method": "Metodika",
       "downloads": "Pracovní listy",
       "manual": "Příručka",
-      "demo": "Vyzkoušet demo",
+      "thesis": "Práce",
+      "demo": "Spustit aplikaci",
       "source": "Zdrojový kód"
     },
     "hero": {
       "eyebrow": "Open-source výuková platforma · postavená na skutečném školním IS",
       "title": "Neučte o systémech. Učte uvnitř jednoho.",
       "sub": "EduStack IS je open-source školní informační systém navržený pro výuku informatiky. Mladší žáci zkoumají skutečná data a role; starší se ponoří do kódu a spustí ho sami.",
-      "ctaPrimary": "Vyzkoušet živé demo",
-      "ctaSecondary": "Otevřít příručku"
+      "ctaPrimary": "Spustit na svém počítači",
+      "ctaSecondary": "Přečíst bakalářskou práci"
     },
     "roles": {
       "admin": "Správce systému",
@@ -99,9 +100,9 @@
       "bullets": [
         "Pracovní listy pro 1. stupeň, 2. stupeň i střední školu — i s řešením.",
         "Metodické pokyny ke každé kapitole: na co se ptát, na co upozornit.",
-        "Ve třídě není potřeba nic instalovat — živé demo je otevřené celý týden.",
+        "Ve třídě stačí prohlížeč — aplikaci spustíte na učitelském počítači, nebo si na vyžádání nechte zapnout hostované demo.",
         "Česká stupnice známek i české rozhraní z výroby.",
-        "V pondělí ráno reset demo instance a začínáte načisto."
+        "Databázi kdykoli obnovíte ze zálohy a začínáte načisto."
       ]
     },
     "students": {
@@ -137,11 +138,52 @@
         {"title": "Hlavní složka metodiky", "kind": "Google Drive", "body": "Celý balík, živě. Obsahuje i podsložku se zálohami databáze.", "href": "https://drive.google.com/drive/folders/1H7ahXOrmOcwE9OWiukjAND_1L6hAUsTQ?usp=sharing", "external": true}
       ]
     },
+    "thesis": {
+      "eyebrow": "Bakalářská práce a obhajoba",
+      "title": "Práce je obhájená. Přečtěte si ji celou.",
+      "sub": "EduStack IS vznikl jako bakalářská práce na Pedagogické fakultě Univerzity Karlovy. Text práce i všechny materiály k obhajobě jsou volně k dispozici.",
+      "paper": {
+        "kind": "Bakalářská práce · PDF",
+        "title": "Informační systém pro podporu výuky informatiky",
+        "meta": [
+          "Petr Vích · Katedra informačních technologií a technické výchovy, PedF UK",
+          "Vedoucí práce: PhDr. Jakub Mazuch",
+          "Obhájeno v září 2026"
+        ],
+        "abstract": "Práce navrhuje a ověřuje edukační informační systém EduStack IS jako pedagogickou pomůcku pro výuku informatiky na základních a středních školách. Vymezuje samostatnou kategorii edukačních nástrojů odlišnou od provozních systémů, popisuje role, datové domény, klíčové procesy a tři vrstvy hloubky podle stupně vzdělávání. Metodika byla ověřena pilotáží se šestnácti žáky 2. stupně ZŠ: patnáct z nich pochopilo princip řízení přístupu a asistent s umělou inteligencí patřil k nejsilnějším motivačním prvkům.",
+        "keywords": "informační systém · výuka informatiky · simulace · RVP · sandbox · AI · MCP",
+        "download": "Stáhnout práci (PDF)",
+        "size": "229 stran · 17 MB"
+      },
+      "defense": {
+        "kind": "Obhajoba · samostatný web",
+        "title": "Prezentace a materiály k obhajobě",
+        "body": "Vše, co jsem si k obhajobě připravil, je na samostatném webu. Hodí se jako patnáctiminutové shrnutí celé práce — i jako ukázka, jak takovou obhajobu poskládat.",
+        "url": "obhajoba.is-edustack.org",
+        "items": [
+          {"title": "Webová prezentace", "body": "11 slidů a jeden doplňující k reakci na posudky. Běží v prohlížeči i offline, ovládá se klávesnicí, klávesa N ukáže poznámky řečníka."},
+          {"title": "PDF a PowerPoint", "body": "Export slidů do PDF a editovatelná verze s poznámkami řečníka."},
+          {"title": "Kartičky do ruky", "body": "16 tiskových kartiček ke slidům a k otázkám z posudků: kam mířím, opěrná fakta, přechod na další slide."},
+          {"title": "Osnova a scénář", "body": "Časování slidů, dramaturgie, postup při čtení posudků a dotazech komise, záložní plán."}
+        ],
+        "cta": "Otevřít web obhajoby",
+        "repo": "Zdrojové soubory na GitHubu",
+        "repoUrl": "https://github.com/edustack-is/is-edustack-prezentace"
+      }
+    },
     "demo": {
-      "eyebrow": "Živé demo",
-      "title": "Proklikejte si to. Vezměte do hodiny.",
-      "sub": "Živá testovací instance s ukázkovými daty pro každou roli. Reset každé pondělí — přiveďte novou třídu, aniž by data byla zastaralá.",
-      "url": "sandbox-1.is-edustack.org",
+      "eyebrow": "Demo a spuštění",
+      "title": "Spusťte si to u sebe. Demo zapnu na vyžádání.",
+      "sub": "Veřejná demo instance je po obhajobě vypnutá. Na požádání ji rád zapnu — třeba pro pilotní hodinu nebo ukázku ve sborovně. Čekat ale nemusíte: EduStack IS je open source a na vlastním počítači ho rozjedete za pár minut, i s ukázkovými daty pro všechny role.",
+      "localBadge": "Doporučeno",
+      "localTitle": "Na vlastním počítači",
+      "localBody": "Stačí Git, Node.js a příručka. Aplikace naběhne s ukázkovou školou a panelem pro přihlášení v každé roli — stejně jako demo, jen plně pod vaší kontrolou a bez závislosti na internetu.",
+      "localCta": "Návod na spuštění",
+      "requestTitle": "Hostované demo na vyžádání",
+      "requestBody": "Napište mi, k čemu demo potřebujete a na jak dlouho. Instanci zapnu a pošlu vám adresu i přihlašovací údaje.",
+      "requestCta": "Požádat o zapnutí dema",
+      "requestSubject": "Žádost o zapnutí demo instance EduStack IS",
+      "email": "hello@is-edustack.org",
       "feedbackTitle": "Vyzkoušeli jste to? Podělte se o zpětnou vazbu.",
       "feedbackStudent": "Dotazník pro studenty",
       "feedbackStudentUrl": "https://forms.gle/sGXe5hTc8z1ZJqcu5",
@@ -155,7 +197,7 @@
       "repos": [
         {"name": "edustack-is-sandbox", "body": "Backend a doménový model", "href": "https://github.com/edustack-is/edustack-is-sandbox"},
         {"name": "edustack-is-web", "body": "Webová aplikace · React + TS", "href": "https://github.com/edustack-is/edustack-is-web"},
-        {"name": "edustack-thesis", "body": "Finální materiály a bakalářská práce sem budou doplněny po obhajobě.", "placeholder": true}
+        {"name": "is-edustack-prezentace", "body": "Prezentace a materiály k obhajobě · statický web", "href": "https://github.com/edustack-is/is-edustack-prezentace"}
       ]
     },
     "contact": {
@@ -493,7 +535,7 @@
       },
       "stepsTitle": "Rychlý start",
       "steps": {
-        "clone": { "title": "Naklonujte repozitář", "command": "git clone '<repo>' && cd edu-stack-is-sandbox" },
+        "clone": { "title": "Naklonujte repozitář", "command": "git clone https://github.com/edustack-is/edustack-is-sandbox.git && cd edustack-is-sandbox" },
         "env": { "title": "Zkopírujte šablonu .env", "command": "cp .env.example .env" },
         "secrets": { "title": "Vygenerujte dvě povinné tajné hodnoty", "command": "openssl rand -base64 64  # JWT_SECRET\nopenssl rand -base64 32  # ENCRYPTION_KEY" },
         "install": { "title": "Nainstalujte workspacy", "command": "npm install" },
