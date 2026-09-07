@@ -12,15 +12,16 @@
       "method": "Methodology",
       "downloads": "Worksheets",
       "manual": "User manual",
-      "demo": "Try the demo",
+      "thesis": "Thesis",
+      "demo": "Run the app",
       "source": "Source"
     },
     "hero": {
       "eyebrow": "Open-source teaching platform · powered by a real school IS",
       "title": "Don't teach about systems. Teach inside one.",
       "sub": "EduStack IS is an open-source school information system designed for the computer-science classroom. Younger students explore real data and roles; older students dig into the code and run it themselves.",
-      "ctaPrimary": "Try the live demo",
-      "ctaSecondary": "Read the user manual"
+      "ctaPrimary": "Run it on your computer",
+      "ctaSecondary": "Read the bachelor's thesis"
     },
     "roles": {
       "admin": "System Admin",
@@ -99,9 +100,9 @@
       "bullets": [
         "Worksheets ready for primary, secondary and high school — with answer keys.",
         "Methodology guides for every chapter: what to ask, what to point out.",
-        "No installation needed in class — the live demo is open all week.",
+        "A browser is all the class needs — run the app on the teacher's computer, or ask for the hosted demo to be switched on.",
         "Czech grading scale and Czech UI built in.",
-        "Reset the demo on Monday morning and start fresh."
+        "Restore the database from a backup any time and start fresh."
       ]
     },
     "students": {
@@ -137,11 +138,52 @@
         {"title": "Methodology master folder", "kind": "Google Drive", "body": "The whole package, live. Also contains a database backups subfolder.", "href": "https://drive.google.com/drive/folders/1H7ahXOrmOcwE9OWiukjAND_1L6hAUsTQ?usp=sharing", "external": true}
       ]
     },
+    "thesis": {
+      "eyebrow": "Bachelor's thesis & defense",
+      "title": "The thesis is defended. Read the whole thing.",
+      "sub": "EduStack IS started as a bachelor's thesis at the Faculty of Education, Charles University. The full text and every defense material are freely available.",
+      "paper": {
+        "kind": "Bachelor's thesis · PDF · Czech",
+        "title": "Information System to Support the Teaching of Computer Science",
+        "meta": [
+          "Petr Vích · Department of Information Technology and Technical Education, Faculty of Education, Charles University",
+          "Supervisor: PhDr. Jakub Mazuch",
+          "Defended in September 2026"
+        ],
+        "abstract": "The thesis presents the design and pilot evaluation of EduStack IS, an educational information system and teaching aid for computer-science education in Czech primary and secondary schools. It defines a distinct category of educational tools separate from operational systems, describes user roles, data domains, key processes and three depth layers tied to the school stage. The methodology was evaluated in a pilot with sixteen lower-secondary pupils: fifteen of them grasped role-based access control and the AI assistant was among the strongest motivators.",
+        "keywords": "information system · CS education · simulation · RVP · sandbox · AI · MCP",
+        "download": "Download the thesis (PDF)",
+        "size": "229 pages · 17 MB · written in Czech"
+      },
+      "defense": {
+        "kind": "Defense · separate site",
+        "title": "Defense presentation & materials",
+        "body": "Everything I prepared for the defense lives on a separate site (in Czech). It works as a fifteen-minute summary of the whole thesis — and as an example of how to put such a defense together.",
+        "url": "obhajoba.is-edustack.org",
+        "items": [
+          {"title": "Web presentation", "body": "11 slides plus one extra for responding to the reviews. Runs in the browser, works offline, keyboard-driven; press N for speaker notes."},
+          {"title": "PDF & PowerPoint", "body": "Slide export as PDF and an editable deck with speaker notes."},
+          {"title": "Cue cards", "body": "16 printable cards for the slides and for reviewer questions: where I'm heading, supporting facts, the transition."},
+          {"title": "Outline & script", "body": "Slide timing, dramaturgy, how to handle the reviews and committee questions, backup plan."}
+        ],
+        "cta": "Open the defense site",
+        "repo": "Source files on GitHub",
+        "repoUrl": "https://github.com/edustack-is/is-edustack-prezentace"
+      }
+    },
     "demo": {
-      "eyebrow": "Live demo",
-      "title": "Click around. Bring it to class.",
-      "sub": "A live testing instance with seed data for every role. Reset every Monday — bring a fresh class without fixtures going stale.",
-      "url": "sandbox-1.is-edustack.org",
+      "eyebrow": "Demo & running it",
+      "title": "Run it yourself. The demo is available on request.",
+      "sub": "The public demo instance has been switched off after the defense. I'm happy to turn it on when asked — for a pilot lesson or a staff-room showcase. But you don't have to wait: EduStack IS is open source and runs on your own computer in minutes, seed data for every role included.",
+      "localBadge": "Recommended",
+      "localTitle": "On your own computer",
+      "localBody": "All you need is Git, Node.js and the manual. The app boots with a sample school and a one-click login panel for every role — just like the demo, only fully under your control and with no internet dependency.",
+      "localCta": "Setup guide",
+      "requestTitle": "Hosted demo on request",
+      "requestBody": "Tell me what you need the demo for and for how long. I'll switch the instance on and send you the address and login details.",
+      "requestCta": "Request the demo",
+      "requestSubject": "Request to switch on the EduStack IS demo instance",
+      "email": "hello@is-edustack.org",
       "feedbackTitle": "Tried it? Share your feedback.",
       "feedbackStudent": "Student feedback form",
       "feedbackStudentUrl": "https://forms.gle/sGXe5hTc8z1ZJqcu5",
@@ -155,7 +197,7 @@
       "repos": [
         {"name": "edustack-is-sandbox", "body": "Backend & domain model", "href": "https://github.com/edustack-is/edustack-is-sandbox"},
         {"name": "edustack-is-web", "body": "Web app · React + TS", "href": "https://github.com/edustack-is/edustack-is-web"},
-        {"name": "edustack-thesis", "body": "Final materials and the bachelor's thesis will be linked here after the defense.", "placeholder": true}
+        {"name": "is-edustack-prezentace", "body": "Defense presentation & materials · static site", "href": "https://github.com/edustack-is/is-edustack-prezentace"}
       ]
     },
     "contact": {

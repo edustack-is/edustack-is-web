@@ -78,10 +78,8 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-wrap items-center gap-3">
-          <a
-            href={`https://${t('demo.url')}`}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/manual#development"
             className="inline-flex items-center gap-2.5 font-body text-[15px] font-semibold px-5 py-3.5 rounded-xl text-white"
             style={{
               background: BRAND_GRADIENT,
@@ -89,13 +87,13 @@ export default function Hero() {
             }}
           >
             {t('hero.ctaPrimary')} <span aria-hidden>→</span>
-          </a>
-          <Link
-            href="/manual"
+          </Link>
+          <a
+            href="#thesis"
             className="inline-flex items-center font-body text-[15px] font-semibold px-5 py-3.5 rounded-xl bg-card/70 text-text border border-line"
           >
             {t('hero.ctaSecondary')}
-          </Link>
+          </a>
         </div>
       </div>
 

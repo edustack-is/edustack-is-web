@@ -8,6 +8,7 @@ import TourSection from '@/components/landing/TourSection';
 import AudienceSection from '@/components/landing/AudienceSection';
 import MethodSection from '@/components/landing/MethodSection';
 import DownloadsSection from '@/components/landing/DownloadsSection';
+import ThesisSection from '@/components/landing/ThesisSection';
 import DemoSection from '@/components/landing/DemoSection';
 import SourceSection from '@/components/landing/SourceSection';
 import ContactSection from '@/components/landing/ContactSection';
@@ -25,6 +26,7 @@ export default function IndexPage() {
         <AudienceSection />
         <MethodSection />
         <DownloadsSection />
+        <ThesisSection />
         <DemoSection />
         <SourceSection />
         <ContactSection />
